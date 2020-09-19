@@ -1,6 +1,7 @@
 package corelib.http
 
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import com.google.gson.GsonBuilder
 import com.sbi.base.mylibrary.BuildConfig
@@ -50,7 +51,7 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
     var finishHandler: (() -> Unit)? = null
     var requestAgainHandler: (() -> Unit)? = null
     var queryItems: MutableList<Pair<String, Any>> = mutableListOf()
-    val handler = Handler()
+    val handler = Handler(Looper.getMainLooper())
 
     var urlSessionTask: Call? = null
 

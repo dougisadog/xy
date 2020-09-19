@@ -9,13 +9,12 @@ import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.service.api.LessonPackagesDetailApi
 import com.shuange.lesson.service.api.base.DownloadApi
 import com.shuange.lesson.service.api.base.suspendExecute
-import com.shuange.lesson.service.response.bean.LessonPackage
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 
 open class LessonViewModel : BaseViewModel() {
 
-    var packageId = ""
+    var moduleId = ""
 
     //命
     val life = MutableLiveData<Int>()
@@ -38,14 +37,14 @@ open class LessonViewModel : BaseViewModel() {
     //课程加载进度
     var targetIndex = 0
 
-    fun initData() {
+    fun loadData() {
         life.value = 8
         getLessons()
     }
 
     fun getLessonsData() {
         startBindLaunch {
-            val result = LessonPackagesDetailApi(packageId).suspendExecute()
+            val result = LessonPackagesDetailApi(moduleId).suspendExecute()
                 null
         }
     }
@@ -102,4 +101,5 @@ open class LessonViewModel : BaseViewModel() {
             null
         }
     }
+    
 }

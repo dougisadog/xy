@@ -1,5 +1,7 @@
 package com.shuange.lesson.modules.course.view
 
+import android.content.Context
+import android.content.Intent
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +17,17 @@ import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
+/**
+ * 课程包列表
+ */
 class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoViewModel>() {
+
+    companion object {
+        fun start(context: Context) {
+            val i = Intent(context, CourseInfoActivity::class.java)
+            context.startActivity(i)
+        }
+    }
 
     override val viewModel: CourseInfoViewModel by viewModels {
         BaseShareModelFactory()
@@ -49,7 +61,7 @@ class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoVie
                 LinearLayoutManager(this@CourseInfoActivity, RecyclerView.VERTICAL, false)
             courseInfoAdapter.setOnItemClickListener { adapter, view, position ->
                 val current = courseInfoAdapter.data[position]
-                ToastUtil.show("item click courseAdapter:${courseInfoAdapter.data[position].title}")
+                CourseListActivity.start(this@CourseInfoActivity, current.courseId, current.title)
             }
             adapter = courseInfoAdapter
         }

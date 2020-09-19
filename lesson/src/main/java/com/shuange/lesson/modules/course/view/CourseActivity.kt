@@ -1,11 +1,14 @@
 package com.shuange.lesson.modules.course.view
 
+import android.content.Context
+import android.content.Intent
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
+import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityCourseBinding
 import com.shuange.lesson.enumeration.CourseState
@@ -15,7 +18,19 @@ import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
+/**
+ * 课程列表 （课程包详情）
+ */
 class CourseActivity : BaseActivity<ActivityCourseBinding, CourseViewModel>() {
+
+    companion object {
+        fun start(context: Context, lessonId: String, title:String) {
+            val i = Intent(context, CourseActivity::class.java)
+            i.putExtra(IntentKey.LESSON_PACKAGE_ID, lessonId)
+            i.putExtra(IntentKey.LESSON_PACKAGE_TITLE, title)
+            context.startActivity(i)
+        }
+    }
 
     override val viewModel: CourseViewModel by viewModels {
         BaseShareModelFactory()
@@ -36,8 +51,15 @@ class CourseActivity : BaseActivity<ActivityCourseBinding, CourseViewModel>() {
         )
     }
 
+    override fun initParams() {
+        super.initParams()
+        viewModel.lessonPackagesId = intent.getStringExtra(IntentKey.LESSON_PACKAGE_ID) ?: return
+        viewModel.title = intent.getStringExtra(IntentKey.LESSON_PACKAGE_TITLE)?:""
+    }
+
     override fun initView() {
-        binding.header.title.text = viewModel.title.value
+        binding.header.title.text = viewModel.title
+        viewModel.loadData()
         initCourses()
         initListener()
     }
@@ -49,7 +71,7 @@ class CourseActivity : BaseActivity<ActivityCourseBinding, CourseViewModel>() {
             courseAdapter.setOnItemClickListener { adapter, view, position ->
                 val current = courseAdapter.data[position]
                 if (current.state == CourseState.LOCKED) return@setOnItemClickListener
-                ToastUtil.show("item click courseAdapter:${courseAdapter.data[position].name}")
+                CourseListActivity.start(this@CourseActivity, current.courseId, current.name)
             }
             adapter = courseAdapter
             isNestedScrollingEnabled = false

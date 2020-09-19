@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
@@ -89,5 +90,8 @@ abstract class BaseLessonFragment<BD : ViewDataBinding, VM : BaseLessonViewModel
     }
 
     override fun initViewObserver() {
+        viewModel.done.observe(this, Observer {
+
+        })
     }
 }

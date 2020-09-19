@@ -1,5 +1,7 @@
 package com.shuange.lesson.modules.lesson.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -8,17 +10,26 @@ import androidx.viewpager2.widget.ViewPager2
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
-import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
 import com.shuange.lesson.base.config.ConfigDef
+import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityLessonBinding
+import com.shuange.lesson.modules.course.view.CourseActivity
 import com.shuange.lesson.modules.lesson.viewmodel.LessonViewModel
 import com.shuange.lesson.utils.ToastUtil
 import corelib.extension.roundInt
 import java.math.BigDecimal
 
 class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
+
+    companion object {
+        fun start(context: Context, moduleId: String) {
+            val i = Intent(context, CourseActivity::class.java)
+            i.putExtra(IntentKey.MODULE_ID, moduleId)
+            context.startActivity(i)
+        }
+    }
 
     override val viewModel: LessonViewModel by viewModels {
         BaseShareModelFactory()
@@ -37,10 +48,15 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
 
     val handler by lazy { Handler() }
 
+    override fun initParams() {
+        super.initParams()
+        viewModel.moduleId = intent.getStringExtra(IntentKey.LESSON_ID) ?: return
+    }
+
     override fun initView() {
         initLessons()
         initListener()
-        viewModel.initData()
+        viewModel.loadData()
     }
 
     private fun initLessons() {

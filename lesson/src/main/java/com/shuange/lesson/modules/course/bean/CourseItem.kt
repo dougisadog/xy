@@ -2,6 +2,9 @@ package com.shuange.lesson.modules.course.bean
 
 import com.chad.library.adapter.base.entity.MultiItemEntity
 import com.shuange.lesson.enumeration.CourseState
+import com.shuange.lesson.enumeration.LessonType
+import com.shuange.lesson.service.response.bean.Lesson
+import com.shuange.lesson.service.response.bean.Module
 
 class CourseItem(private val isTitle: Boolean = false) : MultiItemEntity {
 
@@ -20,6 +23,30 @@ class CourseItem(private val isTitle: Boolean = false) : MultiItemEntity {
     var progress = 0
 
     var state: CourseState? = null
+
+    val lessonType: LessonType?
+        get() {
+            try {
+                return LessonType.valueOf(courseType)
+            } catch (e: Exception) {
+            }
+            return null
+        }
+
+    fun setLesson(lesson: Lesson) {
+        courseId = lesson.id.toString()
+        name = lesson.name
+        courseType = lesson.lessonType
+        progress = lesson.lockedStep
+    }
+
+    fun setModule(module: Module) {
+        courseId = module.id.toString()
+        name = module.name
+        progress = module.lockedStep
+        //TODO
+        //module.important
+    }
 
     override fun getItemType(): Int {
         return if (isTitle) COURSE_TITLE else COURSE_ITEM

@@ -6,7 +6,7 @@ import java.io.File
 import java.io.Serializable
 import kotlin.collections.ArrayList
 
-class LessonBean(var lessonType: LessonType, var id: String) : Serializable {
+class LessonBean(var lessonType: LessonType, var id: String, var lessonId:String? = null) : Serializable {
 
     var text = ""
     var img: SourceData? = null
@@ -16,6 +16,8 @@ class LessonBean(var lessonType: LessonType, var id: String) : Serializable {
     var inputData: InputData? = null
 
     var record: SourceData? = null
+
+    var score: Double? = null
 
     fun setLesson(lesson:Lesson) {
         id = lesson.id.toString()
