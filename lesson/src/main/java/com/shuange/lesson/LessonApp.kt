@@ -34,7 +34,6 @@ open class LessonApp : Application() {
 
         //开启webview chrome调试
         WebView.setWebContentsDebuggingEnabled(true);
-        init()
     }
 
     private fun initRealm() {
@@ -44,12 +43,4 @@ open class LessonApp : Application() {
         Realm.setDefaultConfiguration(config)
     }
 
-    //TODO test
-    fun init() {
-        GlobalScope.launch(Dispatchers.Main) {
-            val request = InitRequest().apply { login = "dougisadog" }
-            val suspendResult = InitApi(request).suspendExecute()
-            LessonDataCache.token = suspendResult.getResponse()?.id_token ?: ""
-        }
-    }
 }

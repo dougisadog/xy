@@ -50,6 +50,7 @@ class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoVie
 
     override fun initView() {
         binding.title.text = viewModel.title.value
+        viewModel.loadData()
         initCourses()
         initListener()
     }
@@ -69,6 +70,8 @@ class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoVie
 
     private fun initListener() {
         binding.back.setOnClickListener(NonDoubleClickListener {
+            //TODO
+            viewModel.loadData()
             finish()
         })
     }

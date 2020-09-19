@@ -5,7 +5,6 @@ import com.shuange.lesson.service.request.InitRequest
 import com.shuange.lesson.service.response.InitResponse
 import com.shuange.lesson.utils.AnnotationParser
 import corelib.http.PostType
-import corelib.util.Log
 import kotlin.reflect.KClass
 
 /**
@@ -25,6 +24,13 @@ class InitApi(val initRequest: InitRequest) : BaseApi<InitResponse>() {
     override fun prepareRequest() {
         super.prepareRequest()
         AnnotationParser.generateParams(this, initRequest)
-        Log.e("ttt", "ttt")
+    }
+
+    override fun parseResponse(data: String): InitResponse {
+        val result = super.parseResponse(data)
+        if (result.id_token.isBlank()) {
+            throw Exception(data)
+        }
+        return result
     }
 }

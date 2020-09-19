@@ -4,7 +4,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.shuange.lesson.EmptyTask
+import com.shuange.lesson.utils.ToastUtil
 import corelib.util.ContextManager
+import corelib.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,8 +34,13 @@ open class BaseViewModel : AndroidViewModel(ContextManager.getContext()) {
                         error = block.invoke(this)
                     }
                     error = error ?: result.exceptionOrNull()
+                    error?.let {
+                        val message = it.message?:""
+                        Log.e("error", message)
+                        ToastUtil.show(message)
+                    }
                     when (error) {
-                        //TODO exception
+
                     }
 
                 }

@@ -2,12 +2,16 @@ package com.shuange.lesson.modules.course.viewmodel
 
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
+import com.shuange.lesson.base.LessonDataCache
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.enumeration.CourseState
 import com.shuange.lesson.modules.course.bean.CourseInfoItem
 import com.shuange.lesson.modules.course.bean.CourseItem
+import com.shuange.lesson.service.api.InitApi
 import com.shuange.lesson.service.api.LessonPackagesApi
 import com.shuange.lesson.service.api.base.suspendExecute
+import com.shuange.lesson.service.request.InitRequest
+import kotlinx.coroutines.delay
 
 class CourseInfoViewModel : BaseViewModel() {
     val title = MutableLiveData<String>()
@@ -30,6 +34,10 @@ class CourseInfoViewModel : BaseViewModel() {
 
     fun loadData() {
         startBindLaunch {
+            val request = InitRequest("dougisadog")
+            val suspendResult = InitApi(request).suspendExecute()
+            LessonDataCache.token = suspendResult.getResponse()?.id_token ?: ""
+
             val result = LessonPackagesApi().suspendExecute()
             result.getResponse()?.body?.let {
                 val arr = it
