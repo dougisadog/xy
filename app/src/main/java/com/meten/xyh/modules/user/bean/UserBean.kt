@@ -18,6 +18,7 @@ class UserBean private constructor(val accountId: String, var userName: String) 
 
     var current = false
     var headerImage: SourceData? = null
+    var introduction: String = ""
 
     private fun buildSourceDataByLink(
         link: String

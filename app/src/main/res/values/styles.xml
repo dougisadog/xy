@@ -30,7 +30,12 @@
         <item name="tabBackground">@color/hex_D8D8D8</item>
     </style>
 
-
-    <color name="hex_00E0A4">#00E0A4</color>
-    <color name="hex_D8D8D8">#D8D8D8</color>
+    <style name="label_me_item">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/hex_2B2E35</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>

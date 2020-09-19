@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 class UserInfoActivity : BaseActivity<ActivityCreateUserBinding, CreateUserViewModel>() {
 
     companion object {
-        fun startUserInfo(context: Context) {
+        fun start(context: Context) {
             val i = Intent(context, UserInfoActivity::class.java)
             context.startActivity(i)
         }

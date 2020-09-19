@@ -21,7 +21,7 @@ import com.shuange.lesson.view.NonDoubleClickListener
 class ChangeUserActivity : BaseActivity<ActivityChangeUserBinding, ChangeUserViewModel>() {
 
     companion object {
-        fun startChangeUser(context: Context) {
+        fun start(context: Context) {
             val i = Intent(context, ChangeUserActivity::class.java)
             context.startActivity(i)
         }

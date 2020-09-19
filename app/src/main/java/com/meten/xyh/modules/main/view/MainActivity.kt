@@ -9,6 +9,7 @@ import com.meten.xyh.databinding.ActivityMainBinding
 import com.meten.xyh.modules.course.view.MyCourseFragment
 import com.meten.xyh.modules.discovery.view.DiscoveryFragment
 import com.meten.xyh.modules.main.viewmodel.MainViewModel
+import com.meten.xyh.modules.user.view.UserAccountFragment
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
@@ -40,7 +41,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val fragments = arrayListOf<BaseFragment<*, *>>()
         fragments.add(DiscoveryFragment())
         fragments.add(MyCourseFragment())
-        fragments.add(DiscoveryFragment())
+        fragments.add(UserAccountFragment())
         mainAdapter = BaseFragmentAdapter(this, fragments)
         with(binding.vp) {
             adapter = mainAdapter

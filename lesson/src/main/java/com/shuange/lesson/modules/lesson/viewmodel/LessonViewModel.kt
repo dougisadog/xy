@@ -6,11 +6,16 @@ import com.shuange.lesson.modules.lesson.bean.InputData
 import com.shuange.lesson.modules.lesson.bean.LessonBean
 import com.shuange.lesson.modules.lesson.bean.Selection
 import com.shuange.lesson.modules.lesson.other.LessonType
+import com.shuange.lesson.service.api.LessonPackagesDetailApi
 import com.shuange.lesson.service.api.base.DownloadApi
+import com.shuange.lesson.service.api.base.suspendExecute
+import com.shuange.lesson.service.response.bean.LessonPackage
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 
 open class LessonViewModel : BaseViewModel() {
+
+    var packageId = ""
 
     //命
     val life = MutableLiveData<Int>()
@@ -38,6 +43,14 @@ open class LessonViewModel : BaseViewModel() {
         getLessons()
     }
 
+    fun getLessonsData() {
+        startBindLaunch {
+            val result = LessonPackagesDetailApi(packageId).suspendExecute()
+                null
+        }
+    }
+
+            //TODO TEST
     fun getLessons() {
         arrayListOf(LessonType.TYPE_02).forEachIndexed { index, lessonType ->
 //        LessonType.values().forEachIndexed { index, lessonType ->

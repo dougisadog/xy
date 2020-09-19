@@ -1,7 +1,8 @@
 package com.shuange.lesson.modules.topquality.view
 
+import android.content.Context
+import android.content.Intent
 import androidx.activity.viewModels
-import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
@@ -12,6 +13,13 @@ import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 class CollectionActivity : BaseActivity<ActivityCollectionBinding, BaseViewModel>() {
+
+    companion object {
+        fun start(context: Context) {
+            val i = Intent(context, CollectionActivity::class.java)
+            context.startActivity(i)
+        }
+    }
 
     override val viewModel: TopQualityViewModel by viewModels {
         BaseShareModelFactory()

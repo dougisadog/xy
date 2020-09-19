@@ -1,6 +1,7 @@
 package com.shuange.lesson.modules.lesson.bean
 
 import com.shuange.lesson.modules.lesson.other.LessonType
+import com.shuange.lesson.service.response.bean.Lesson
 import java.io.File
 import java.io.Serializable
 import kotlin.collections.ArrayList
@@ -16,6 +17,14 @@ class LessonBean(var lessonType: LessonType, var id: String) : Serializable {
 
     var record: SourceData? = null
 
+    fun setLesson(lesson:Lesson) {
+        id = lesson.id.toString()
+        text = lesson.description
+        //TODO  01 Lesson 没有图片地址
+        setImage(lesson.resourceId.toString())
+        setVideo(lesson.resourceVideoUrl)
+        setAudio(lesson.resourceAudioUrl)
+    }
 
     private fun buildSourceDataByLink(
         link: String,
