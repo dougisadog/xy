@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="discoveryViewModel"
+            type="com.meten.xyh.modules.discovery.viewmodel.DiscoveryViewModel" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp">
+
+                <ImageView
+                    android:id="@+id/accountIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon_home_qh" />
+
+                <EditText
+                    android:id="@+id/searchEt"
+                    style="@style/edit_search"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toStartOf="@+id/searchIv"
+                    android:layout_toEndOf="@+id/accountIv"
+                    android:hint="你的名字是什么…"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:id="@+id/searchIv"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/icon_home_fdss" />
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+
+                >
+
+                <com.shuange.lesson.view.CustomRoundAngleImageView
+                    android:id="@+id/contentIv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:scaleType="fitXY"
+                    android:src="@color/hex_3AD08F"
+                    app:layout_constraintDimensionRatio="h,343:140"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:radius="16dp" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/vp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/contentIv" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabTl"
+                    style="@style/menu_tab"
+                    android:layout_width="48dp"
+                    android:layout_height="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/vp" />
+
+                <TextView
+                    android:id="@+id/streamTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="直播课程"
+                    android:textColor="@color/hex_2B2E35"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tabTl" />
+
+                <LinearLayout
+                    android:id="@+id/streamLl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/streamTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/streamTitle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:gravity="center"
+                        android:text="查看全部"
+                        android:textColor="@color/hex_A2A2A2"
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_home_more" />
+                </LinearLayout>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/streamRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/streamTitle"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/layout_stream_lesson_item" />
+
+                <TextView
+                    android:id="@+id/topQualityTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="精品课程"
+                    android:textColor="@color/hex_2B2E35"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/streamRv" />
+
+                <ImageView
+                    android:id="@+id/resetTopQualityIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/icon_home_hyp"
+                    app:layout_constraintBottom_toBottomOf="@+id/topQualityTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/topQualityTitle" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/topQualityRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    app:layout_constraintTop_toBottomOf="@+id/topQualityTitle"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/layout_base_item" />
+
+                <TextView
+                    android:id="@+id/teacherTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="名师推荐"
+                    android:textColor="@color/hex_2B2E35"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topQualityRv" />
+
+                <LinearLayout
+                    android:id="@+id/teacherLl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/teacherTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/teacherTitle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:gravity="center"
+                        android:text="查看全部"
+                        android:textColor="@color/hex_A2A2A2"
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_home_more" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/teacherRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/teacherTitle"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/layout_teacher_item" />
+
+
+                <TextView
+                    android:id="@+id/newsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="英语资讯"
+                    android:textColor="@color/hex_2B2E35"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/teacherRv" />
+
+                <LinearLayout
+                    android:id="@+id/newsLl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/newsTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/newsTitle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:gravity="center"
+                        android:text="查看全部"
+                        android:textColor="@color/hex_A2A2A2"
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_home_more" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/newsRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    app:layout_constraintTop_toBottomOf="@+id/newsTitle"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/layout_base_item" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

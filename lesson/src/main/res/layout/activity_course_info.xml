@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="courseInfoViewModel"
+            type="com.shuange.lesson.modules.course.viewmodel.CourseInfoViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/topBgIv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="fitCenter"
+            app:image="@{courseInfoViewModel.mainImg}"
+            app:layout_constraintDimensionRatio="h,375:293"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/icon_cancel" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="56dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_cancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@{courseInfoViewModel.title}"
+            android:textColor="@color/white"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/rvContainer"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="爽哥课程" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/rvContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="168dp"
+            android:background="@drawable/bg_corner_white"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
+
+            <TextView
+                android:id="@+id/rvTitleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="全部课程"
+                android:textColor="@color/hex_282828"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="22dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvTitleTv"
+                tools:listitem="@layout/layout_course_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

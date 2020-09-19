@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="baseItemBean"
+            type="com.meten.xyh.modules.discovery.bean.BaseItemBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/imageIv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            app:image="@{baseItemBean.image}"
+            app:layout_constraintDimensionRatio="h,128:106"
+            app:layout_constraintEnd_toStartOf="@+id/gl"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:radius="12dp"
+            tools:src="@drawable/icon_cancel" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3566"
+
+            />
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{baseItemBean.title}"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toTopOf="@+id/contentTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Jim Carrey’s Commencement Address" />
+
+        <TextView
+            android:id="@+id/contentTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{baseItemBean.content}"
+            android:textColor="@color/hex_A2A2A2"
+            android:textSize="11dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl"
+            app:layout_constraintTop_toBottomOf="@+id/titleTv"
+            tools:text="你的家课程详情介绍课程详情介绍课程课程详情介绍详情介绍…" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

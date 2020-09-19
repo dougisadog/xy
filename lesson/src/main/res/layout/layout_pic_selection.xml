@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootRl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.shuange.lesson.view.CustomRoundAngleImageView
+        android:id="@+id/picIv"
+        app:radius= "@dimen/selection_radius"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        tools:src="@drawable/icon_cancel" />
+
+    <com.shuange.lesson.view.CustomRoundAngleImageView
+        android:id="@+id/resultIv"
+        app:radius= "@dimen/selection_radius"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="41dp"
+        tools:src="@drawable/icon_cancel"
+        android:scaleType="fitXY"
+        tools:background="@drawable/bg_pic_selection_wrong" />
+
+</FrameLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toosl="http://schemas.android.com/tools"
+    android:id="@+id/topContainerCL"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/titleTv"
+        style="@style/title_label"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        toosl:text="asasd" />
+
+    <ImageView
+        android:id="@+id/audioIv"
+        style="@style/audio_label"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="6dp"
+        android:layout_toEndOf="@+id/titleTv"
+
+        />
+</RelativeLayout>

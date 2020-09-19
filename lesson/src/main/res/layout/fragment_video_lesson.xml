@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="videoLessonViewModel"
+            type="com.shuange.lesson.modules.lesson.viewmodel.VideoLessonViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/topContainer"
+            style="@style/title_container"
+            layout="@layout/layout_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/topContainer">
+
+            <LinearLayout
+                android:id="@+id/selectionsLl"
+                android:layout_width="@dimen/base_image_width"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="140dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            </LinearLayout>
+
+            <com.shuange.lesson.view.CustomRoundAngleImageView
+                android:id="@+id/imageIv"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="20dp"
+                android:maxWidth="@dimen/base_image_width"
+                android:src="@drawable/icon_cancel"
+                app:layout_constraintBottom_toTopOf="@+id/selectionsLl"
+                app:layout_constraintDimensionRatio="h,343:194"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:radius="24dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </RelativeLayout>
+
+</layout>

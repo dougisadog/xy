@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="mProgressBarStyle" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:maxHeight">4dp</item>
+        <item name="android:minHeight">4dp</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/bg_progress</item>
+    </style>
+
+    <style name="bottom_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:background">@drawable/selector_bg_base_btn</item>
+        <item name="android:layout_marginStart">@dimen/base_side_width</item>
+        <item name="android:layout_marginEnd">@dimen/base_side_width</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">22dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="title_label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/hex_464646</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="title_container">
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="audio_label">
+        <item name="android:layout_width">29dp</item>
+        <item name="android:layout_height">29dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:src">@drawable/icon_audio</item>
+    </style>
+
+    <style name="middle_img">
+        <item name="radius">24dp</item>
+        <item name="android:layout_width">@dimen/base_image_width</item>
+        <item name="android:layout_height">@dimen/base_image_width</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintDimensionRatio">h,1:1</item>
+    </style>
+
+    <style name="scale_img">
+        <item name="radius">24dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintDimensionRatio">h,1:1</item>
+    </style>
+
+    <style name="selection_pic">
+        <item name="radius">24dp</item>
+        <item name="android:layout_width">145dp</item>
+        <item name="android:layout_height">145dp</item>
+        <item name="android:scaleType">fitXY</item>
+        <item name="android:layout_marginStart">10dp</item>
+        <item name="android:layout_marginEnd">10dp</item>
+    </style>
+
+
+    <style name="pager_tab" parent="Base.Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/hex_00E0A4</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabSelectedTextColor">@color/hex_2FD393</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/hex_2B2E35</item>
+    </style>
+
+    <style name="edit_search">
+        <item name="android:background">@color/white</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:imeOptions">actionSearch</item>
+        <item name="maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColorHint">@color/hex_A2A2A2</item>
+    </style>
+
+    <style name="CustomDialog" parent="android:style/Theme.Dialog">
+        <!--背景颜色及和透明程度-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+
+        <item name="android:radius">12dp</item>
+
+    </style>
+</resources>

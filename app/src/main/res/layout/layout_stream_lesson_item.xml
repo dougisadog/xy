@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="streamLessonBean"
+            type="com.meten.xyh.modules.discovery.bean.StreamLessonBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menuTitleRl"
+        android:layout_width="221dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="wrap_content">
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/imageIv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:image="@{streamLessonBean.snapshot}"
+            app:layout_constraintDimensionRatio="h,211:140"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:radius="16dp"
+            tools:src="@drawable/icon_cancel" />
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageIv"
+            android:text="@{streamLessonBean.title}"
+            tools:text="夏天的天气炎热，冒险也能轻松" />
+
+        <TextView
+            android:id="@+id/teacherTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/hex_A2A2A2"
+            android:textSize="11dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTv"
+            android:text="@{streamLessonBean.teacher}"
+            tools:text="JENNY老师" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

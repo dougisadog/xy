@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="userBean"
+            type="com.meten.xyh.modules.user.bean.UserBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/bg_step_item"
+        android:layout_marginBottom="12dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <ImageView
+            android:id="@+id/imageIv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:roundImageFile="@{userBean.headerImage}"
+            tools:src="@color/hex_3AD08F" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageIv">
+
+            <TextView
+                android:id="@+id/nameTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical"
+                android:text="@{userBean.userName}"
+                android:textColor="@color/hex_2B2E35"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/currentTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageIv"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="你的名字是什么…" />
+
+            <TextView
+                android:id="@+id/currentTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/bg_current_user_label"
+                android:gravity="center"
+                android:paddingStart="14dp"
+                android:paddingTop="2dp"
+                android:paddingEnd="14dp"
+                android:paddingBottom="2dp"
+                android:text="当前使用"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                app:gone="@{!userBean.current}"
+                app:layout_constraintStart_toEndOf="@+id/imageIv"
+                app:layout_constraintTop_toBottomOf="@+id/gl" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

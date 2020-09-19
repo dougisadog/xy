@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootRl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/selector_bg_text_selection"
+    >
+
+    <TextView
+        android:id="@+id/selectionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/base_side_width"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:textColor="@color/hex_464646"
+        android:textSize="28dp"
+        android:textStyle="bold"
+        android:layout_centerInParent="true"
+        tools:text="Goodbye" />
+
+    <ImageView
+        android:id="@+id/audioIv"
+        style="@style/audio_label"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        />
+
+</RelativeLayout>

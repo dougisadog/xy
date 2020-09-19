@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+    <data>
+
+        <variable
+            name="lessonViewModel"
+            type="com.shuange.lesson.modules.lesson.viewmodel.LessonViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/closeIv"
+            android:layout_width="@dimen/close_width"
+            android:layout_height="@dimen/close_width"
+            android:layout_marginStart="@dimen/base_side_width"
+            android:layout_marginTop="36dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_cancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/heartIv"
+            android:layout_width="@dimen/close_width"
+            android:layout_height="@dimen/close_width"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_heart_on"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintTop_toTopOf="@+id/closeIv"
+            app:layout_constraintBottom_toBottomOf="@+id/closeIv"
+            app:layout_constraintEnd_toStartOf="@+id/lifeTv" />
+
+        <TextView
+            android:id="@+id/lifeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/base_side_width"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_cancel"
+            app:life="@{lessonViewModel.life}"
+            android:textColor="@color/hex_FF5337"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/closeIv"
+            app:layout_constraintBottom_toBottomOf="@+id/closeIv"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="8" />
+
+        <ProgressBar
+            android:id="@+id/progressPb"
+            style="@style/mProgressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/closeIv"
+            android:layout_marginTop="21dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:progress="@{lessonViewModel.progress}"
+            tools:progress="40"
+            />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/progressPb"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

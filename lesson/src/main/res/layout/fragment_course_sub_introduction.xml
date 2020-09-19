@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="courseSubIntroductionViewModel"
+            type="com.shuange.lesson.modules.course.viewmodel.CourseSubIntroductionViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/bg_shadow"
+        android:paddingStart="16dp"
+        android:paddingTop="40dp"
+        android:paddingEnd="16dp">
+
+        <TextView
+            android:id="@+id/introduction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@{courseSubIntroductionViewModel.introduction}"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="16dp"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget" />
+    </FrameLayout>
+</layout>

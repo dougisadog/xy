@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="searchViewModel"
+            type="com.meten.xyh.modules.search.viewmodel.SearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <RelativeLayout
+            android:id="@+id/searchRl"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <EditText
+                android:id="@+id/searchEt"
+                style="@style/edit_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/searchIv"
+                android:hint="搜索课程和词汇"
+                android:text="@={searchViewModel.searchText}" />
+
+            <ImageView
+                android:id="@+id/searchIv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_home_fdss" />
+
+            <TextView
+                android:id="@+id/cancelTv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:background="@color/white"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/hex_7A7A7A"
+                android:textSize="16dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/searchLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="热门搜索"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchRl" />
+
+        <com.meten.xyh.view.LineWrapRadioGroup
+            android:id="@+id/wordsRg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchLabel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

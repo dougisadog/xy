@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="stepViewModel"
+            type="com.meten.xyh.modules.step.viewmodel.StepViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hex_EDEDED"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:gravity="center"
+            android:text="请选择您目前的学习阶段"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/nextTv"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/stepRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:listitem="@layout/layout_step_item"
+                    tools:itemCount="7"
+                    />
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/nextTv"
+            style="@style/bottom_button"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="48dp"
+            android:text="进入希氧"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

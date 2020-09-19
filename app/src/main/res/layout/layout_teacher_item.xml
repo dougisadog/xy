@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="teacherBean"
+            type="com.meten.xyh.modules.discovery.bean.TeacherBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menuTitleRl"
+        android:layout_width="130dp"
+        android:layout_height="168dp"
+        android:layout_marginEnd="20dp">
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/bg_shadow"
+            android:scaleType="fitXY"
+            app:radius="16dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.18" />
+
+        <ImageView
+            android:id="@+id/imageIv"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:roundImage="@{teacherBean.image}"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gl1"
+            android:scaleType="fitXY"
+            tools:src="@color/hex_3AD08F" />
+
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{teacherBean.name}"
+            android:textColor="@color/hex_282828"
+            android:gravity="center"
+            android:textSize="14dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageIv"
+            tools:text="Jim Carrey" />
+
+        <TextView
+            android:id="@+id/teacherTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{teacherBean.introduction}"
+            android:textColor="@color/hex_A4A4A4"
+            android:textSize="10dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleTv"
+            tools:text="教师详情介绍教师详情介绍教师…" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

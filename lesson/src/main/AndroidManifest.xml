@@ -1,0 +1,23 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.shuange.lesson">
+
+    <!-- 录音权限  -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application>
+        <activity android:name="com.shuange.lesson.modules.lesson.view.LessonActivity" />
+        <activity android:name="com.shuange.lesson.modules.video.view.VideoActivity" />
+        <activity android:name="com.shuange.lesson.modules.topquality.view.TopQualityActivity" />
+        <activity android:name="com.shuange.lesson.modules.topquality.view.CollectionActivity" />
+        <activity android:name="com.shuange.lesson.modules.unit.view.UnitActivity" />
+
+        <activity android:name="com.shuange.lesson.modules.course.view.CourseListActivity" />
+        <activity android:name="com.shuange.lesson.modules.course.view.CourseActivity" />
+        <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" />
+        <activity android:name="com.shuange.lesson.modules.course.view.CourseSubActivity" />
+
+
+    </application>
+</manifest>

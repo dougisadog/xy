@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="createUserViewModel"
+            type="com.meten.xyh.modules.user.viewmodel.CreateUserViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hex_EDEDED">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/layout_header" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="12dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/nextTv"
+            app:layout_constraintTop_toBottomOf="@+id/header">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/actionRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    tools:itemCount="7"
+                    tools:listitem="@layout/layout_action_item" />
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/saveTv"
+            style="@style/bottom_button"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="48dp"
+            android:text="保存"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

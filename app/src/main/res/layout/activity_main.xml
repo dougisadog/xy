@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="mainViewModel"
+            type="com.meten.xyh.modules.main.viewmodel.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/tabCl"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/tabCl"
+            android:layout_width="match_parent"
+            android:layout_height="84dp"
+            android:paddingTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/discoveryRl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="38dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/discoveryIv"
+                    style="@style/tab_image_item"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/selector_find" />
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/courseRL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/courseIv"
+                    style="@style/tab_image_item"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/selector_course" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/accountRl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="38dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/accountIv"
+                    style="@style/tab_image_item"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/selector_account" />
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <FrameLayout
+            android:id="@+id/fragmentContainerFl"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/tabCl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

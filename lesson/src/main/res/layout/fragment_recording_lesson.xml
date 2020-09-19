@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="recordingLessonViewModel"
+            type="com.shuange.lesson.modules.lesson.viewmodel.RecordingLessonViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="32dp"
+            android:paddingEnd="32dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:textSize="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="You will need your passport, boarding pass, tax free form and the things you bought.   " />
+
+
+        <ImageView
+            android:id="@+id/recordingIv"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginBottom="33dp"
+            android:src="@drawable/icon_recording_start"
+            app:layout_constraintBottom_toTopOf="@+id/nextTv"
+            app:layout_constraintEnd_toStartOf="@+id/resetIv"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/resetIv"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:layout_marginBottom="33dp"
+            android:src="@drawable/selector_recording_reset"
+            app:visible="@{recordingLessonViewModel.recordDone}"
+            app:layout_constraintBottom_toTopOf="@+id/nextTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/recordingIv" />
+
+        <TextView
+            android:id="@+id/nextTv"
+            style="@style/bottom_button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="58dp"
+            android:text="下一题"
+            android:enabled="@{recordingLessonViewModel.recordDone}"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/imageIv"
+            style="@style/scale_img"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:maxWidth="@dimen/base_image_width"
+            android:src="@drawable/icon_cancel"
+            app:layout_constraintBottom_toTopOf="@+id/recordingIv"
+            app:layout_constraintTop_toBottomOf="@+id/titleTv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

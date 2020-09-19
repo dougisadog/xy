@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="readingLessonViewModel"
+            type="com.shuange.lesson.modules.lesson.viewmodel.ReadingLessonViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <include
+            android:id="@+id/topContainer"
+            style="@style/title_container"
+            layout="@layout/layout_title" />
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/imageIv"
+            style="@style/middle_img"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/icon_cancel"
+            app:layout_constraintTop_toBottomOf="@+id/topContainer" />
+
+        <LinearLayout
+            android:id="@+id/resultLl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/resultTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Great"
+                android:textColor="@color/hex_2FD393"
+                android:textSize="28dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/recordingIv"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="4dp"
+            android:src="@drawable/icon_recording"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/recordingLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/recordingLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="56dp"
+            android:text="点击波纹，结束录音"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

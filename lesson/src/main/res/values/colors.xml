@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="hex_FF5337">#FF5337</color>
+    <color name="hex_E5E5E5">#E5E5E5</color>
+    <color name="hex_3AD08F">#3AD08F</color>
+
+    <color name="hex_2FD393">#2FD393</color>
+    <color name="hex_464646">#464646</color>
+    <color name="hex_EFEFEF">#EFEFEF</color>
+    <color name="hex_FC4848">#FC4848</color>
+    <color name="hex_F3F4F6">#F3F4F6</color>
+    <color name="hex_2B2E35">#2B2E35</color>
+    <color name="hex_A2A2A2">#A2A2A2</color>
+    <color name="hex_00E0A4">#00E0A4</color>
+    <color name="black">#000000</color>
+    <color name="hex_282828">#282828</color>
+    <color name="hex_6F6F6F">#6F6F6F</color>
+    <color name="hex_9B9B9B">#9B9B9B</color>
+    <color name="hex_EDEDED">#EDEDED</color>
+
+
+</resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="galleryItem"
+            type="com.shuange.lesson.modules.topquality.bean.GalleryItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topContainerCL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:scaleType="fitXY"
+            app:image="@{galleryItem.pic}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,176:287"
+            app:layout_constraintTop_toTopOf="parent"
+            app:radius="16dp"
+            tools:src="@drawable/icon_cancel" />
+
+        <ImageView
+            android:id="@+id/heartIv"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="14dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_cancel"
+            app:layout_constraintBottom_toBottomOf="@+id/heartTv"
+            app:layout_constraintStart_toStartOf="@+id/img"
+            app:layout_constraintTop_toTopOf="@+id/heartTv" />
+
+        <TextView
+            android:id="@+id/heartTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@{galleryItem.heartText}"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:layout_marginStart="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/heartIv"
+            tools:text="24W" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

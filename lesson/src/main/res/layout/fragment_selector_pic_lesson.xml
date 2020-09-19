@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="selectorPicLessonViewModel"
+            type="com.shuange.lesson.modules.lesson.viewmodel.SelectorPicLessonViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="32dp"
+        android:paddingEnd="32dp">
+
+        <include
+            android:id="@+id/topContainer"
+            style="@style/title_container"
+            layout="@layout/layout_title" />
+
+
+        <LinearLayout
+            android:id="@+id/row1Ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topContainer">
+
+            <com.shuange.lesson.view.PicSelectionView
+                android:id="@+id/selection1Iv"
+                style="@style/selection_pic" />
+
+            <com.shuange.lesson.view.PicSelectionView
+                android:id="@+id/selection2Iv"
+                style="@style/selection_pic"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row2Ll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/row1Ll">
+
+            <com.shuange.lesson.view.PicSelectionView
+                android:id="@+id/selection3Iv"
+                style="@style/selection_pic"
+                />
+
+            <com.shuange.lesson.view.PicSelectionView
+                android:id="@+id/selection4Iv"
+                style="@style/selection_pic"
+                android:visibility="visible" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
