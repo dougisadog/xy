@@ -1,4 +1,4 @@
-package com.meten.xyh.modules.discovery.bean
+package com.shuange.lesson.modules.topquality.bean
 
 import com.shuange.lesson.base.BaseItemBean
 

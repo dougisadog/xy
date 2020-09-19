@@ -1,8 +1,8 @@
 package com.meten.xyh.modules.discovery.viewmodel
 
 import androidx.databinding.ObservableArrayList
-import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.modules.discovery.bean.*
+import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 
 open class DiscoveryViewModel : BaseViewModel() {

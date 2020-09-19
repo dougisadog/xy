@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="courseInfoItem"
+            type="com.shuange.lesson.modules.course.bean.CourseInfoItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menuTitleRl"
+        android:layout_width="78dp"
+        android:layout_marginEnd="11dp"
+        android:layout_height="wrap_content">
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/imageIv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:image="@{courseInfoItem.image}"
+            app:layout_constraintDimensionRatio="h,78:62"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="fitXY"
+            app:radius="16dp"
+            tools:src="@drawable/icon_cancel" />
+
+
+        <TextView
+            android:id="@+id/courseTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{courseInfoItem.title}"
+            android:textColor="@color/hex_3B3E44"
+            android:textSize="11dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageIv"
+            tools:text="JENNY老师" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

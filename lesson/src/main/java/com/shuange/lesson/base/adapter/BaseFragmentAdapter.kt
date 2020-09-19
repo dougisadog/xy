@@ -7,18 +7,18 @@ import com.shuange.lesson.base.BaseFragment
 
 class BaseFragmentAdapter :
     FragmentStateAdapter {
-    val fragments: MutableList<BaseFragment<*, *>>
+    val fragments: MutableList<Fragment>
 
     constructor(
         fragmentActivity: FragmentActivity,
-        fragments: MutableList<BaseFragment<*, *>>
+        fragments: MutableList<Fragment>
     ) : super(fragmentActivity) {
         this.fragments = fragments
     }
 
     constructor(
         fragment: Fragment,
-        fragments: MutableList<BaseFragment<*, *>>
+        fragments: MutableList<Fragment>
     ) : super(fragment) {
         this.fragments = fragments
     }

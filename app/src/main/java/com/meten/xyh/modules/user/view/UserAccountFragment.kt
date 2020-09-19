@@ -44,7 +44,7 @@ class UserAccountFragment : BaseFragment<FragmentUserAccountBinding, UserAccount
             //TODO
             ToastUtil.show("my order")
         }))
-        binding.changeAccountCl.setOnClickListener((NonDoubleClickListener {
+        binding.accountRemarkCl.setOnClickListener((NonDoubleClickListener {
             CollectionActivity.start(requireContext())
         }))
         binding.accountSupportCl.setOnClickListener((NonDoubleClickListener {

@@ -2,6 +2,7 @@ package com.shuange.lesson.modules.unit.view
 
 import android.os.Handler
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.shuange.lesson.BR
@@ -46,7 +47,7 @@ class UnitActivity : BaseActivity<ActivityUnitBinding, UnitViewModel>() {
     }
 
     private fun initLessons() {
-        val lessonsFragments = arrayListOf<BaseFragment<*, *>>()
+        val lessonsFragments = arrayListOf<Fragment>()
         lessonAdapter = BaseFragmentAdapter(this, lessonsFragments)
         with(binding.vp) {
             adapter = lessonAdapter

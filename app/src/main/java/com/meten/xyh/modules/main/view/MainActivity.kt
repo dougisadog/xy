@@ -2,6 +2,7 @@ package com.meten.xyh.modules.main.view
 
 import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.meten.xyh.BR
 import com.meten.xyh.R
@@ -38,7 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun initViewPager() {
-        val fragments = arrayListOf<BaseFragment<*, *>>()
+        val fragments = arrayListOf<Fragment>()
         fragments.add(DiscoveryFragment())
         fragments.add(MyCourseFragment())
         fragments.add(UserAccountFragment())

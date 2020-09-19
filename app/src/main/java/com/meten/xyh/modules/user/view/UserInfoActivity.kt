@@ -7,19 +7,18 @@ import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.adapter.ActionAdapter
 import com.meten.xyh.base.bean.ActionItem
-import com.meten.xyh.databinding.ActivityCreateUserBinding
-import com.meten.xyh.modules.user.viewmodel.CreateUserViewModel
+import com.meten.xyh.databinding.ActivityUserInfoBinding
+import com.meten.xyh.modules.user.viewmodel.UserInfoViewModel
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.utils.ToastUtil
-import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 
 /**
  * 用户信息
  */
-class UserInfoActivity : BaseActivity<ActivityCreateUserBinding, CreateUserViewModel>() {
+class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel>() {
 
     companion object {
         fun start(context: Context) {
@@ -28,7 +27,7 @@ class UserInfoActivity : BaseActivity<ActivityCreateUserBinding, CreateUserViewM
         }
     }
 
-    override val viewModel: CreateUserViewModel by viewModels {
+    override val viewModel: UserInfoViewModel by viewModels {
         BaseShareModelFactory()
     }
 

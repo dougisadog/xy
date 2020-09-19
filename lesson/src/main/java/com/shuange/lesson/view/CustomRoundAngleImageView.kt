@@ -64,7 +64,6 @@ class CustomRoundAngleImageView :
             R.styleable.Custom_Round_Image_View_left_bottom_radius,
             defaultRadius.toInt()
         ).toFloat()
-        Log.e("radius -->", "$radius")
 
         //如果四个角的值没有设置，那么就使用通用的radius的值。
         if (defaultRadius == leftTopRadius) {

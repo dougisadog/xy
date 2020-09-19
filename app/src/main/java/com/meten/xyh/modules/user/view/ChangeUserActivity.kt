@@ -16,7 +16,7 @@ import com.shuange.lesson.view.NonDoubleClickListener
 
 
 /**
- * 新增用户
+ * 切换用户
  */
 class ChangeUserActivity : BaseActivity<ActivityChangeUserBinding, ChangeUserViewModel>() {
 

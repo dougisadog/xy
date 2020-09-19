@@ -39,9 +39,9 @@
                 <EditText
                     android:id="@+id/searchEt"
                     style="@style/edit_search"
-                    android:layout_marginStart="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
                     android:layout_toStartOf="@+id/searchIv"
                     android:layout_toEndOf="@+id/accountIv"
                     android:hint="你的名字是什么…"

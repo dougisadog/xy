@@ -1,4 +1,4 @@
-package com.meten.xyh.modules.discovery.bean
+package com.shuange.lesson.base
 
 open class BaseItemBean(
     var title: String = "",
