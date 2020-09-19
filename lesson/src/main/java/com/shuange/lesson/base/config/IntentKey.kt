@@ -2,6 +2,8 @@ package com.shuange.lesson.base.config
 
 object IntentKey {
 
+    const val IMAGE_TYPE_KEY = "IMAGE_TYPE_KEY"
+
     const val LESSON_TYPE_KEY = "LESSON_TYPE_KEY"
 
     const val VIDEO_LINK_KEY = "VIDEO_LINK_KEY"

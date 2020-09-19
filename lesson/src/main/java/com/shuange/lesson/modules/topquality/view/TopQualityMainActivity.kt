@@ -53,7 +53,7 @@ class TopQualityMainActivity :
 
     private val courseInfoAdapter: CourseInfoAdapter by lazy {
         CourseInfoAdapter(
-            layout = R.layout.layout_course_info_item,
+            layout = R.layout.layout_top_quality_main_course,
             data = viewModel.courses
         )
     }
@@ -82,7 +82,7 @@ class TopQualityMainActivity :
 
     fun initCourse() {
         with(binding.suggestCourseRv) {
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            layoutManager = LinearLayoutManager(
                 this@TopQualityMainActivity,
                 RecyclerView.HORIZONTAL,
                 false
@@ -98,7 +98,10 @@ class TopQualityMainActivity :
         val fragments = arrayListOf<Fragment>()
         val link =
             "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3844276591,3933131866&fm=26&gp=0.jpg"
-        fragments.add(ImageFragment(link))
+        fragments.add(ImageFragment.newInstance(link))
+        fragments.add(ImageFragment.newInstance(link))
+        fragments.add(ImageFragment.newInstance(link))
+        fragments.add(ImageFragment.newInstance(link))
         fragmentAdapter = BaseFragmentAdapter(this, fragments)
         with(binding.vp) {
             adapter = fragmentAdapter

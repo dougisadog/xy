@@ -7,17 +7,11 @@ import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivityTeacherInfoBinding
-import com.meten.xyh.databinding.ActivityTeacherListBinding
-import com.meten.xyh.modules.discovery.adapter.TeacherAdapter
 import com.meten.xyh.modules.discovery.adapter.TopQualityAdapter
 import com.meten.xyh.modules.teacher.viewmodel.TeacherInfoViewModel
-import com.meten.xyh.modules.teacher.viewmodel.TeacherListViewModel
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.modules.topquality.view.TopQualityActivity
 import com.shuange.lesson.utils.ToastUtil
-import com.shuange.lesson.utils.extension.setOnSearchListener
-import kotlinx.android.synthetic.main.layout_header.view.*
 
 
 /**

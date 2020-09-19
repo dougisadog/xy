@@ -6,22 +6,21 @@
     <data>
 
         <variable
-            name="topQualityBean"
-            type="com.shuange.lesson.modules.topquality.bean.TopQualityBean" />
+            name="topQualityCourseBean"
+            type="com.shuange.lesson.modules.topquality.bean.TopQualityCourseBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        >
+        android:layout_marginBottom="20dp">
 
         <com.shuange.lesson.view.CustomRoundAngleImageView
             android:id="@+id/imageIv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:image="@{topQualityBean.image}"
             android:scaleType="fitXY"
+            app:image="@{topQualityCourseBean.image}"
             app:layout_constraintDimensionRatio="h,128:106"
             app:layout_constraintEnd_toStartOf="@+id/gl"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +32,7 @@
             android:layout_width="57dp"
             android:layout_height="16dp"
             android:scaleType="fitCenter"
-            app:freeType="@{topQualityBean.freeType}"
+            app:freeTypeCourse="@{topQualityCourseBean.freeType}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,7 +52,7 @@
             android:layout_marginStart="16dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{topQualityBean.title}"
+            android:text="@{topQualityCourseBean.title}"
             android:textColor="@color/hex_2B2E35"
             android:textSize="14dp"
             app:layout_constraintBottom_toTopOf="@+id/contentTv"
@@ -69,7 +68,7 @@
             android:layout_marginStart="16dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{topQualityBean.content}"
+            android:text="@{topQualityCourseBean.content}"
             android:textColor="@color/hex_A2A2A2"
             android:textSize="11dp"
             app:layout_constraintBottom_toBottomOf="parent"

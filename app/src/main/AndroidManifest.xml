@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.shuange.lesson.modules.topquality.view.TopQualityMainActivity" >
+<!--        <activity android:name="com.shuange.lesson.modules.topquality.view.TopQualityMainActivity" >-->
+                <activity android:name=".modules.main.view.MainActivity" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

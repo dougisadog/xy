@@ -3,15 +3,14 @@ package com.shuange.lesson.base
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.shuange.lesson.R
 import com.shuange.lesson.enumeration.CourseState
+import com.shuange.lesson.modules.topquality.bean.TopQualityCourseBean
 import com.shuange.lesson.utils.extension.colorValue
 import corelib.util.ContextManager
-import kotlinx.android.synthetic.main.activity_top_quality.view.*
 
 object BindAdapters {
 
@@ -79,6 +78,26 @@ object BindAdapters {
     fun setLife(v: TextView, life: Int?) {
         if (null != life) {
             v.text = life.toString()
+        }
+    }
+
+    @BindingAdapter("freeTypeCourse")
+    @JvmStatic
+    fun setFreeTypeCourse(iv: ImageView, freeType: Int?) {
+        freeType?.let {
+            when (it) {
+                TopQualityCourseBean.FREE_TYPE_GREEN -> {
+                    Glide.with(ContextManager.getContext()).load(R.drawable.icon_home_gr)
+                        .into(iv)
+                }
+                TopQualityCourseBean.FREE_TYPE_ORANGE -> {
+                    Glide.with(ContextManager.getContext()).load(R.drawable.icon_home_or)
+                        .into(iv)
+                }
+                else -> {
+
+                }
+            }
         }
     }
 }

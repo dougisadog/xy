@@ -41,7 +41,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
 
     private val topQualityAdapter: TopQualityAdapter by lazy {
         TopQualityAdapter(
-            layout = R.layout.layout_top_quality_item,
+            layout = R.layout.layout_top_quality_course_item,
             data = viewModel.topQualityItems
         )
     }
