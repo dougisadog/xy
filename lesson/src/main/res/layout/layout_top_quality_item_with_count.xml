@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="topQualityCourseBean"
+            type="com.shuange.lesson.modules.topquality.bean.TopQualityCourseBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/imageIv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            app:image="@{topQualityCourseBean.image}"
+            app:layout_constraintDimensionRatio="h,106:106"
+            app:layout_constraintEnd_toStartOf="@+id/gl"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:radius="16dp"
+            tools:src="@drawable/icon_cancel" />
+
+        <ImageView
+            android:layout_width="57dp"
+            android:layout_height="16dp"
+            android:scaleType="fitCenter"
+            app:freeTypeCourse="@{topQualityCourseBean.freeType}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3566"
+
+            />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gl"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center_vertical"
+            >
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{topQualityCourseBean.title}"
+                android:textColor="@color/hex_2B2E35"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toTopOf="@+id/teacherTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/gl"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="如何化解竞争困局如何化解竞争困局如何化解竞" />
+
+            <TextView
+                android:id="@+id/teacherTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{topQualityCourseBean.teacherText}"
+                android:textColor="@color/hex_2B2E35"
+                android:textSize="11dp"
+                app:layout_constraintBottom_toTopOf="@+id/contentTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/gl"
+                app:layout_constraintTop_toBottomOf="@+id/titleTv"
+                tools:text="主讲老师：郭老师" />
+
+            <TextView
+                android:id="@+id/contentTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="2dp"
+
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{topQualityCourseBean.courseCountText}"
+                android:textColor="@color/hex_A2A2A2"
+                android:textSize="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/gl"
+                app:layout_constraintTop_toBottomOf="@+id/teacherTv"
+                tools:text="课时：8" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

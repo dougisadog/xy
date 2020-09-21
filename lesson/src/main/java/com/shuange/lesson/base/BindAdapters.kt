@@ -94,6 +94,14 @@ object BindAdapters {
                     Glide.with(ContextManager.getContext()).load(R.drawable.icon_home_or)
                         .into(iv)
                 }
+                TopQualityCourseBean.PAY_TYPE_STEAM -> {
+                    Glide.with(ContextManager.getContext()).load(R.drawable.icon_image_zbkc)
+                        .into(iv)
+                }
+                TopQualityCourseBean.PAID_TYPE -> {
+                    Glide.with(ContextManager.getContext()).load(R.drawable.icon_home_or)
+                        .into(iv)
+                }
                 else -> {
 
                 }

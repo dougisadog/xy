@@ -76,6 +76,8 @@ dependencies {
 
     api 'cn.jzvd:jiaozivideoplayer:7.4.2'
 
+    api 'com.tencent.taisdk:taisdk:1.2.0.61'
+
 
 
 }

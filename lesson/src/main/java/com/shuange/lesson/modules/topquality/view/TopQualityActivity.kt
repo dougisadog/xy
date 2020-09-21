@@ -58,8 +58,8 @@ class TopQualityActivity : BaseActivity<ActivityTopQualityBinding, TopQualityVie
         val fragments = arrayListOf<Fragment>()
         fragments.add(GalleryFragment())
         fragments.add(GalleryFragment())
-        fragments.add(GalleryFragment())
-        fragments.add(GalleryFragment())
+        fragments.add(TopQualityCourseFragment())
+        fragments.add(TopQualityCourseFragment())
         fragmentAdapter = BaseFragmentAdapter(this, fragments)
         with(binding.vp) {
             adapter = fragmentAdapter

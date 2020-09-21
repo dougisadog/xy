@@ -8,6 +8,7 @@ import com.meten.xyh.databinding.ActivityLoginBinding
 import com.meten.xyh.modules.login.viewmodel.LoginViewModel
 import com.meten.xyh.BR
 import com.meten.xyh.R
+import com.meten.xyh.modules.step.view.StepActivity
 import com.meten.xyh.utils.StringUtil
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
@@ -45,8 +46,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     private fun initListener() {
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
-            //todo
-            ToastUtil.show("login!")
+            viewModel.login {
+                StepActivity.start(this)
+            }
         })
         binding.verifyCodeTv.setOnClickListener(NonDoubleClickListener {
             if ((StringUtil.checkPhone(viewModel.username.value))) {

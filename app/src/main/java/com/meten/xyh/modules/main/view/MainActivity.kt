@@ -1,5 +1,7 @@
 package com.meten.xyh.modules.main.view
 
+import android.content.Context
+import android.content.Intent
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
@@ -10,6 +12,7 @@ import com.meten.xyh.databinding.ActivityMainBinding
 import com.meten.xyh.modules.course.view.MyCourseFragment
 import com.meten.xyh.modules.discovery.view.DiscoveryFragment
 import com.meten.xyh.modules.main.viewmodel.MainViewModel
+import com.meten.xyh.modules.step.view.StepActivity
 import com.meten.xyh.modules.user.view.UserAccountFragment
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.BaseFragment
@@ -17,6 +20,13 @@ import com.shuange.lesson.base.adapter.BaseFragmentAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+
+    companion object {
+        fun start(context: Context) {
+            val i = Intent(context, MainActivity::class.java)
+            context.startActivity(i)
+        }
+    }
 
     override val viewModel: MainViewModel by viewModels {
         BaseShareModelFactory()

@@ -14,6 +14,7 @@ import com.shuange.lesson.base.adapter.BaseFragmentAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityTopQualityMainBinding
 import com.shuange.lesson.modules.course.adapter.CourseInfoAdapter
+import com.shuange.lesson.modules.course.view.CourseInfoActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityMainViewModel
 import com.shuange.lesson.utils.ToastUtil
@@ -73,7 +74,7 @@ class TopQualityMainActivity :
             layoutManager =
                 LinearLayoutManager(this@TopQualityMainActivity, RecyclerView.VERTICAL, false)
             topQualityAdapter.setOnItemClickListener { adapter, view, position ->
-                ToastUtil.show("item click  topQuality:${topQualityAdapter.data[position].title}")
+                CourseInfoActivity.start(context)
             }
             isNestedScrollingEnabled = false
             adapter = topQualityAdapter

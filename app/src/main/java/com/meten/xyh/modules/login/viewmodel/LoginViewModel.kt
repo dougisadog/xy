@@ -1,6 +1,7 @@
 package com.meten.xyh.modules.login.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 
 open class LoginViewModel : BaseViewModel() {
@@ -14,6 +15,10 @@ open class LoginViewModel : BaseViewModel() {
     var confirmCheck = MutableLiveData<Boolean>()
 
     var remainTime = MutableLiveData<Int>()
+
+    fun login(onSuccess:EmptyTask) {
+        onSuccess?.invoke()
+    }
 
 
 }

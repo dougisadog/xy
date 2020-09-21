@@ -25,7 +25,7 @@
             app:layout_constraintEnd_toStartOf="@+id/gl"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:radius="12dp"
+            app:radius="16dp"
             tools:src="@drawable/icon_cancel" />
 
         <ImageView

@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityStepBinding
+import com.meten.xyh.modules.main.view.MainActivity
 import com.meten.xyh.modules.step.adapter.StepAdapter
 import com.meten.xyh.modules.step.viewmodel.StepViewModel
 import com.shuange.lesson.base.BaseActivity
@@ -20,7 +21,7 @@ import com.shuange.lesson.view.NonDoubleClickListener
 class StepActivity : BaseActivity<ActivityStepBinding, StepViewModel>() {
 
     companion object {
-        fun startStep(context: Context) {
+        fun start(context: Context) {
             val i = Intent(context, StepActivity::class.java)
             context.startActivity(i)
         }
@@ -57,7 +58,10 @@ class StepActivity : BaseActivity<ActivityStepBinding, StepViewModel>() {
                 false
             )
             stepAdapter.setOnItemClickListener { adapter, view, position ->
-                ToastUtil.show("item click  step:${stepAdapter.data[position].title}")
+                stepAdapter.data.forEachIndexed { index, stepBean ->
+                    stepBean.isSelected = position == index
+                }
+                stepAdapter.notifyDataSetChanged()
             }
             isNestedScrollingEnabled = false
             adapter = stepAdapter
@@ -66,7 +70,7 @@ class StepActivity : BaseActivity<ActivityStepBinding, StepViewModel>() {
 
     private fun initListener() {
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
-            ToastUtil.show("next!")
+            MainActivity.start(this)
         })
     }
 
