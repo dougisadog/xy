@@ -28,6 +28,11 @@ class LessonBean(var lessonType: LessonType, var id: String, var lessonId:String
         setAudio(lesson.resourceAudioUrl)
     }
 
+    val defaultDic:String
+    get() {
+        return lessonType.name + File.separator + this.id
+    }
+
     private fun buildSourceDataByLink(
         link: String,
         id: String,

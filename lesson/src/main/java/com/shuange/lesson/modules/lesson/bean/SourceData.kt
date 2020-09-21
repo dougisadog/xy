@@ -8,6 +8,14 @@ class SourceData : Serializable {
 
     var name = ""
     var url = ""
+    set(value) {
+        field = value
+        try {
+            val arr = value.split(".")
+            suffix = if (arr.size > 1) arr[arr.size - 1] else ""
+        } catch (e: Exception) {
+        }
+    }
 
     var dictionary = ""
 
@@ -37,4 +45,6 @@ class SourceData : Serializable {
         }
         return null
     }
+
+
 }

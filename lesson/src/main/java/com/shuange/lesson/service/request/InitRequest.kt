@@ -10,8 +10,8 @@ class InitRequest(var login: String) {
     var base64AvatarUrl: String? = null
     var city: String? = null
     var fromUserId: String = ""
-    var gender: String? = Gender.UNKNOWN.text
-    var name: String? = null
+    var gender: String = Gender.UNKNOWN.toString()
+    var name: String = login
     var phone: String? = null
     var province: String? = null
     var rememberMe: Boolean = true

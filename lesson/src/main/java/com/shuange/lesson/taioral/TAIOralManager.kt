@@ -1,6 +1,7 @@
 package com.shuange.lesson.taioral
 
 import android.content.Context
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.utils.PhraseMatcher
 import com.tencent.taisdk.*
 import java.util.*
@@ -21,7 +22,7 @@ object TAIOralManager {
     fun createParam(context: Context, target: String): TAIOralEvaluationParam {
         return TAIOralEvaluationParam().also { param ->
             param.context = context;
-            param.appId = "";
+            param.appId = ConfigDef.TAI_ORAL_APP_ID;
             param.sessionId = UUID.randomUUID().toString();
             param.workMode = TAIOralEvaluationWorkMode.ONCE;
             param.evalMode = TAIOralEvaluationEvalMode.SENTENCE;
@@ -30,8 +31,8 @@ object TAIOralManager {
             param.fileType = TAIOralEvaluationFileType.MP3;//只支持mp3
             param.scoreCoeff = 1.0;
             param.refText = target;
-            param.secretId = "";
-            param.secretKey = "";
+            param.secretId = ConfigDef.TAI_ORAL__SECRET_ID;
+            param.secretKey = ConfigDef.TAI_ORAL__SECRET_KEY
         }
     }
 
@@ -44,7 +45,10 @@ fun TAIOralEvaluation.startRecord(
 ) {
     setListener { data, result, error ->
         if (data.bEnd) {
-            onResult.invoke(result.pronCompletion, PhraseMatcher(target, result.words.map { it.word }.toMutableList()))
+            onResult.invoke(
+                result.pronCompletion,
+                PhraseMatcher(target, result.words.map { it.word }.toMutableList())
+            )
         }
     }
     startRecordAndEvaluation(

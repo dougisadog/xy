@@ -72,7 +72,7 @@ class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoVie
         binding.back.setOnClickListener(NonDoubleClickListener {
             //TODO
             viewModel.loadData()
-            finish()
+//            finish()
         })
     }
 

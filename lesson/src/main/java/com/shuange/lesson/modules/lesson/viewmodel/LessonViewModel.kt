@@ -2,13 +2,17 @@ package com.shuange.lesson.modules.lesson.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.base.viewmodel.BaseViewModel
+import com.shuange.lesson.enumeration.InputType
+import com.shuange.lesson.enumeration.QuestionResourceType
 import com.shuange.lesson.modules.lesson.bean.InputData
 import com.shuange.lesson.modules.lesson.bean.LessonBean
 import com.shuange.lesson.modules.lesson.bean.Selection
+import com.shuange.lesson.modules.lesson.bean.SourceData
 import com.shuange.lesson.modules.lesson.other.LessonType
-import com.shuange.lesson.service.api.LessonPackagesDetailApi
+import com.shuange.lesson.service.api.ModuleDetailApi
 import com.shuange.lesson.service.api.base.DownloadApi
 import com.shuange.lesson.service.api.base.suspendExecute
+import com.shuange.lesson.service.response.bean.ModuleDetail
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 
@@ -39,17 +43,75 @@ open class LessonViewModel : BaseViewModel() {
 
     fun loadData() {
         life.value = 8
-        getLessons()
+//        getLessons()
+        getLessonsData()
     }
 
     fun getLessonsData() {
         startBindLaunch {
-            val result = LessonPackagesDetailApi(moduleId).suspendExecute()
-                null
+            val result = ModuleDetailApi(moduleId).suspendExecute()
+            result.getResponse()?.body?.let {
+               val lessonBeans =  it.questions.map {
+                    var lesson: LessonBean? = null
+                    var questionResourceType: QuestionResourceType? = null
+                    var inputType: InputType? = null
+
+                    try {
+                        questionResourceType = QuestionResourceType.valueOf(it.questionResourceType)
+                        inputType = InputType.valueOf(it.inputType)
+                        LessonType.getLessonType(
+                            questionResourceType,
+                            inputType
+                        )?.let { type ->
+                            lesson = LessonBean(type, it.id.toString())
+                        }
+                    } catch (e: Exception) {
+                    }
+                    lesson?.run {
+                        id = it.lessonId.toString()
+                        if (it.showText) {
+                            text = it.questionResourceContent
+                        }
+                        if (it.showImage) {
+                            setImage(it.questionResourceImageUrl)
+                        }
+                        if (it.showAudio) {
+                            setAudio(it.questionResourceAudioUrl)
+                        }
+                        if (it.showVideo) {
+                            setVideo(it.questionResourceVideoUrl)
+                        }
+                        it.options.forEach { op ->
+                            val s = Selection()
+                            s.text = op.resourceContent
+                            val imageSource = SourceData()
+                            imageSource.url = op.resourceImageUrl
+                            imageSource.name = op.resourceId.toString()
+                            imageSource.dictionary = defaultDic
+                            s.img = imageSource
+                            val audioSource = SourceData()
+                            audioSource.url = op.resourceImageUrl
+                            audioSource.name = op.resourceId.toString()
+                            audioSource.dictionary = defaultDic
+                            s.audio = audioSource
+                            s.bingo = op.isRight
+                            selections.add(s)
+                        }
+                        score = it.score.toDouble()
+                        if (lessonType == LessonType.TYPE_02 || lessonType == LessonType.TYPE_16) {
+                            initRecord()
+                        }
+                    }
+                    lesson
+                }
+                lessons.addAll(lessonBeans.filterNotNull())
+            }
+            loadLessonSource()
+            result.exception
         }
     }
 
-            //TODO TEST
+    //TODO TEST
     fun getLessons() {
         arrayListOf(LessonType.TYPE_02).forEachIndexed { index, lessonType ->
 //        LessonType.values().forEachIndexed { index, lessonType ->
@@ -67,13 +129,13 @@ open class LessonViewModel : BaseViewModel() {
                     }
                     setVideo("http://vfx.mtime.cn/Video/2019/03/21/mp4/190321153853126488.mp4")
                 }
-                if(lessonType == LessonType.TYPE_02 || lessonType == LessonType.TYPE_16) {
+                if (lessonType == LessonType.TYPE_02 || lessonType == LessonType.TYPE_16) {
                     initRecord()
                 }
 
                 //TODO
-                val size = if (index %2 ==0) 3 else 4
-                for(i in 0  until size) {
+                val size = if (index % 2 == 0) 3 else 4
+                for (i in 0 until size) {
 //                    var audio: SourceData? = null
 //                    var bingo = false
                     selections.add(Selection().also {
@@ -82,7 +144,7 @@ open class LessonViewModel : BaseViewModel() {
                         imgSource?.name = "selection_${index}"
                         it.img = imgSource
                         it.bingo = i == 0
-                    } )
+                    })
                 }
             })
         }
@@ -101,5 +163,5 @@ open class LessonViewModel : BaseViewModel() {
             null
         }
     }
-    
+
 }
