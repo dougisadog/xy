@@ -14,8 +14,10 @@ import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentReadingLessonBinding
 import com.shuange.lesson.modules.lesson.viewmodel.ReadingLessonViewModel
 import com.shuange.lesson.taioral.TAIOralManager
+import com.shuange.lesson.taioral.parser
 import com.shuange.lesson.taioral.startRecord
 import com.shuange.lesson.taioral.stopRecord
+import com.shuange.lesson.utils.Base64Util
 import com.shuange.lesson.utils.BusinessUtil
 import com.shuange.lesson.utils.PhraseMatcher
 import com.shuange.lesson.utils.RecordManager
@@ -101,35 +103,51 @@ open class ReadingLessonFragment :
         } catch (e: Exception) {
         }
         val target = binding.topContainer.titleTv.text.toString()
-        TAIOralManager.oral.startRecord(requireContext(), target) { score, matcher ->
+        TAIOralManager.oral.startRecord(requireContext(), target) { score, words ->
             handler.post {
-                finishParsing(matcher, BusinessUtil.getStartsByScore(score))
+                val errors = words.filter { it.matchTag != 0 }.map { it.word }
+                finishParsing(errors, BusinessUtil.getStartsByScore(score))
             }
         }
-//        RecordManager.getInstance().startMatcherRecord(path, target) {
-//            handler.post {
-//                finishParsing(it)
+//        RecordManager.getInstance().startRecord(path) {
+//            val file = File(path)
+//            if (file.exists()) {
+//                TAIOralManager.oral.parser(requireContext(),target, file) { score, matcher->
+//                    finishParsing(matcher, BusinessUtil.getStartsByScore(score))
+//                }
+//            }
+//            val base64 =
+//                Base64Util.encodeFileToBase64Binary(path)?:return@startRecord
+//            YoudaoParser.parseResult(base64, target) {
+//                matcher.invoke(it)
 //            }
 //        }
     }
 
     /**
+     * 解析结果 by PhraseMatcher
+     */
+    private fun finishParsingByMatcher(matcher: PhraseMatcher, star: Int = 3 - matcher.targetErrorIndexes.size) {
+        val errors = arrayListOf<String>()
+        val results =
+            matcher.targets.filterIndexed { index, s -> matcher.targetErrorIndexes.contains(index) }
+        errors.addAll(results)
+        finishParsing(errors, star)
+    }
+
+    /**
      * 解析结果
      */
-    private fun finishParsing(matcher: PhraseMatcher, star: Int? = null) {
+    private fun finishParsing(errors: List<String>, star: Int) {
         val endText = "Great!"
         binding.resultTv.visibility = View.VISIBLE
         binding.resultTv.text = endText
         BusinessUtil.refreshResult(
             target = binding.resultLl,
-            stars = star ?: 3 - matcher.targetErrorIndexes.size,
+            stars = star,
             width = DeviceUtils.toPx(requireContext(), 34.0),
             offsetIndex = 1
         )
-        val errors = arrayListOf<String>()
-        val results =
-            matcher.targets.filterIndexed { index, s -> matcher.targetErrorIndexes.contains(index) }
-        errors.addAll(results)
         refreshTitle(errors)
         viewModel.done.value = true
     }
@@ -137,7 +155,7 @@ open class ReadingLessonFragment :
     /**
      * 刷新单词对错
      */
-    private fun refreshTitle(errors: ArrayList<String>) {
+    private fun refreshTitle(errors: List<String>) {
         //
         val title = viewModel.lessonBean?.text ?: ""
         val spannableString = SpannableString(title)

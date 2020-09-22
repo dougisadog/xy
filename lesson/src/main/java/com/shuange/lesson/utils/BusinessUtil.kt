@@ -15,6 +15,7 @@ object BusinessUtil {
     ) {
         val params = LinearLayout.LayoutParams(width, width)
         params.setMargins(1, 0, 1, 0)
+        target.removeAllViews()
         for (i in 0 until max) {
             val img = ImageView(target.context)
             img.layoutParams = params

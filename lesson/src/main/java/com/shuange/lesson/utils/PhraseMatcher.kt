@@ -3,8 +3,8 @@ package com.shuange.lesson.utils
 import corelib.extension.lowercased
 
 class PhraseMatcher {
-    val target: String
-    val input: String
+    var target: String
+    var input: String
 
     val targets: MutableList<String>
     val inputs: MutableList<String>
@@ -14,6 +14,13 @@ class PhraseMatcher {
 
     //输入未与目标对应的输入index集合
     var inputErrorIndexes = arrayListOf<Int>()
+
+    constructor() {
+        this.target = ""
+        this.input = ""
+        targets = mutableListOf()
+        inputs = mutableListOf()
+    }
 
     constructor(target: String, input: String) {
         this.target = target

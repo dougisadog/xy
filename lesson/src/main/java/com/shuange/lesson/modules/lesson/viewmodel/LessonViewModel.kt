@@ -12,7 +12,6 @@ import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.service.api.ModuleDetailApi
 import com.shuange.lesson.service.api.base.DownloadApi
 import com.shuange.lesson.service.api.base.suspendExecute
-import com.shuange.lesson.service.response.bean.ModuleDetail
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 
@@ -43,8 +42,8 @@ open class LessonViewModel : BaseViewModel() {
 
     fun loadData() {
         life.value = 8
-//        getLessons()
-        getLessonsData()
+        getLessons()
+//        getLessonsData()
     }
 
     fun getLessonsData() {
