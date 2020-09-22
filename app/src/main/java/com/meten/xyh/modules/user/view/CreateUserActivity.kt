@@ -51,29 +51,6 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
     }
 
     fun initActions() {
-        val actions = arrayListOf<ActionItem>()
-        actions.add(ActionItem().apply {
-            title = "姓名"
-            action = { ToastUtil.show("姓名") }
-        })
-        actions.add(ActionItem().apply {
-            title = "昵称"
-            action = { ToastUtil.show("昵称") }
-        })
-        actions.add(ActionItem().apply {
-            title = "学习阶段"
-            action = { ToastUtil.show("学习阶段") }
-        })
-        actions.add(ActionItem().apply {
-            title = "感兴趣的"
-            action = { ToastUtil.show("感兴趣的") }
-        })
-        actions.add(ActionItem().apply {
-            title = "需提升的"
-            action = { ToastUtil.show("需提升的") }
-        })
-        viewModel.actionItems.addAll(actions)
-
         with(binding.actionRv) {
             layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
                 this@CreateUserActivity,
@@ -90,7 +67,7 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
 
     private fun initListener() {
         binding.saveTv.setOnClickListener(NonDoubleClickListener {
-            ToastUtil.show("save!")
+//            viewModel.save()
         })
     }
 

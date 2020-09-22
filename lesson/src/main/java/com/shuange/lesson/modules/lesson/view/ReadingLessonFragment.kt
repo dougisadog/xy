@@ -61,6 +61,7 @@ open class ReadingLessonFragment :
 
     private fun initListener() {
         binding.recordingIv.setOnClickListener(NonDoubleClickListener {
+            //recording
 //            RecordManager.getInstance().let {
 //                val path = viewModel.lessonBean?.record?.getFullPath()
 //                    ?: return@NonDoubleClickListener
@@ -109,13 +110,15 @@ open class ReadingLessonFragment :
                 finishParsing(errors, BusinessUtil.getStartsByScore(score))
             }
         }
+        //audio parser
 //        RecordManager.getInstance().startRecord(path) {
 //            val file = File(path)
 //            if (file.exists()) {
-//                TAIOralManager.oral.parser(requireContext(),target, file) { score, matcher->
-//                    finishParsing(matcher, BusinessUtil.getStartsByScore(score))
+//                TAIOralManager.oral.parser(requireContext(),target, file) { score, words->
+//                     finishParsing(errors, BusinessUtil.getStartsByScore(score))
 //                }
 //            }
+        //Youdao
 //            val base64 =
 //                Base64Util.encodeFileToBase64Binary(path)?:return@startRecord
 //            YoudaoParser.parseResult(base64, target) {
@@ -173,8 +176,9 @@ open class ReadingLessonFragment :
             )
         );
         spannableString.setSpan(baseSpan, 0, title.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val titleText = title.toLowerCase()
         errors.forEach {
-            val start = title.indexOf(it)
+            val start = titleText.indexOf(it.toLowerCase())
             if (-1 != start) {
                 spannableString.setSpan(
                     errorSpan,

@@ -34,8 +34,9 @@ class UserAccountFragment : BaseFragment<FragmentUserAccountBinding, UserAccount
     }
 
     private fun initListener() {
-        binding.accountInfoCl.setOnClickListener((NonDoubleClickListener {
-            UserInfoActivity.start(requireContext())
+        binding.createUserCl.setOnClickListener((NonDoubleClickListener {
+//            UserInfoActivity.start(requireContext())
+            CreateUserActivity.star(requireContext())
         }))
         binding.changeAccountCl.setOnClickListener((NonDoubleClickListener {
             ChangeUserActivity.start(requireContext())

@@ -8,6 +8,6 @@ data class LessonPackage(
     val lessons: List<Lesson>,
     val name: String,
     val price: Int,
-    val record: RecordX,
+    val record: Record,
     val sortNo: Int
 ): BaseBean()

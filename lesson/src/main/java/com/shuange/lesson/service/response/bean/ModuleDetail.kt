@@ -12,6 +12,6 @@ data class ModuleDetail(
     val lockedStep: Int,
     val name: String,
     val questions: List<Question>,
-    val record: RecordX,
+    val record: Record,
     val sortNo: Int
 )

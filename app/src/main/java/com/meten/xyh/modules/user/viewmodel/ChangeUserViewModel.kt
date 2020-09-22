@@ -4,14 +4,18 @@ import androidx.databinding.ObservableArrayList
 import com.meten.xyh.base.DataCache
 import com.meten.xyh.modules.login.AccountBean
 import com.meten.xyh.modules.user.bean.UserBean
+import com.meten.xyh.service.api.SubUserEditApi
+import com.meten.xyh.service.api.SubUserSetDefaultApi
+import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.viewmodel.BaseViewModel
+import com.shuange.lesson.service.api.base.suspendExecute
 
 class ChangeUserViewModel : BaseViewModel() {
 
     val users = ObservableArrayList<UserBean>()
 
     init {
-        testData()
+//        testData()
         getUser()
     }
 
@@ -37,5 +41,11 @@ class ChangeUserViewModel : BaseViewModel() {
 
     fun saveUser() {
         DataCache.users = users.toMutableList()
+        DataCache.currentUser()?.userId?.let {
+            startBindLaunch {
+                val result = SubUserSetDefaultApi(it).suspendExecute()
+                result.exception
+            }
+        }
     }
 }

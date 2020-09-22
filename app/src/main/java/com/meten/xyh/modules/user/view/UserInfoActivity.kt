@@ -45,47 +45,12 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
 
     override fun initView() {
         binding.header.title.text = "用户信息"
+        viewModel.loadData()
         initActions()
         initListener()
     }
 
     fun initActions() {
-        val actions = arrayListOf<ActionItem>()
-        actions.add(ActionItem().apply {
-            title = "昵称"
-            value = "你的名字是什么"
-            action = { ToastUtil.show("昵称") }
-        })
-        actions.add(ActionItem().apply {
-            title = "个性签名"
-            value = "向阳而生"
-            action = { ToastUtil.show("个性签名") }
-        })
-        actions.add(ActionItem().apply {
-            title = "学习阶段"
-            value = "幼儿"
-            action = { ToastUtil.show("学习阶段") }
-        })
-        actions.add(ActionItem().apply {
-            title = "感兴趣的"
-            action = { ToastUtil.show("感兴趣的") }
-        })
-        actions.add(ActionItem().apply {
-            title = "需提升的"
-            action = { ToastUtil.show("需提升的") }
-        })
-        actions.add(ActionItem().apply {
-            title = "上课提醒手机"
-            value = "18701515190"
-            action = { ToastUtil.show("上课提醒手机") }
-        })
-        actions.add(ActionItem().apply {
-            title = "登录密码"
-            value = "修改"
-            action = { ToastUtil.show("登录密码") }
-        })
-        viewModel.actionItems.addAll(actions)
-
         with(binding.actionRv) {
             layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
                 this@UserInfoActivity,

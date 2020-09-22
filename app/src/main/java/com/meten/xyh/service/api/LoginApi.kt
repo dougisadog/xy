@@ -1,5 +1,8 @@
-package com.shuange.lesson.service.api
+package com.meten.xyh.service.api
 
+import com.meten.xyh.base.DataCache
+import com.meten.xyh.modules.login.AccountBean
+import com.meten.xyh.service.request.LoginRequest
 import com.shuange.lesson.base.LessonDataCache
 import com.shuange.lesson.service.api.base.BaseApi
 import com.shuange.lesson.service.request.InitRequest
@@ -9,22 +12,22 @@ import corelib.http.PostType
 import kotlin.reflect.KClass
 
 /**
- * 用户初始化
+ * 用户登录
  */
-class InitApi(val initRequest: InitRequest) : BaseApi<InitResponse>() {
+class LoginApi(val loginRequest: LoginRequest) : BaseApi<InitResponse>() {
 
     init {
         post(PostType.JSON)
     }
 
     override val path: String
-        get() = "/api/v1.0/authenticate/init"
+        get() = "/api/v1.0/authenticate"
     override val resultClass: KClass<InitResponse>
         get() = InitResponse::class
 
     override fun prepareRequest() {
         super.prepareRequest()
-        AnnotationParser.generateParams(this, initRequest)
+        AnnotationParser.generateParams(this, loginRequest)
     }
 
     override fun parseResponse(data: String): InitResponse {
@@ -33,6 +36,7 @@ class InitApi(val initRequest: InitRequest) : BaseApi<InitResponse>() {
             throw Exception(data)
         }
         LessonDataCache.token = result.id_token
+        DataCache.account = AccountBean().apply { id = loginRequest.username }
         return result
     }
 }
