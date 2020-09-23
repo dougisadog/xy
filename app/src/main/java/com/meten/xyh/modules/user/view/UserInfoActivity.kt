@@ -9,11 +9,13 @@ import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.adapter.ActionAdapter
 import com.meten.xyh.base.bean.ActionItem
 import com.meten.xyh.databinding.ActivityUserInfoBinding
-import com.meten.xyh.modules.usersetting.view.StepActivity
+import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.user.viewmodel.UserInfoViewModel
+import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.utils.ToastUtil
+import kotlinx.android.synthetic.main.layout_header.view.*
 
 
 /**
@@ -82,15 +84,17 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
         actions.add(ActionItem().apply {
             title = "学习阶段"
             value = user?.subUser?.stage ?: ""
-            action = { StepActivity.start(this@UserInfoActivity) }
+            action = { BaseUserSettingActivity.start(this@UserInfoActivity, UserSettingType.STAGE) }
         })
         actions.add(ActionItem().apply {
             title = user?.subUser?.interest ?: ""
-            action = { ToastUtil.show("感兴趣的") }
+            action =
+                { BaseUserSettingActivity.start(this@UserInfoActivity, UserSettingType.INTEREST) }
         })
         actions.add(ActionItem().apply {
             title = "需提升的"
-            action = { ToastUtil.show("需提升的") }
+            action =
+                { BaseUserSettingActivity.start(this@UserInfoActivity, UserSettingType.OBJECTIVE) }
         })
         actions.add(ActionItem().apply {
             title = "上课提醒手机"
