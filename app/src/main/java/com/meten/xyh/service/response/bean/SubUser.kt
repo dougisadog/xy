@@ -4,8 +4,8 @@ import com.shuange.lesson.service.response.bean.BaseBean
 import com.shuange.lesson.utils.RequestClass
 
 @RequestClass
-class SubUser : BaseBean() {
-    override var id: Int = -1
+class SubUser {
+    var id: Int = -1
     var age: Int = 0
     var appInfoId: Int = 0
     var avatarUrl: String = ""

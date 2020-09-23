@@ -42,6 +42,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initView() {
         initListener()
+        //TODO
+        viewModel.username.value = "18341134983"
     }
 
     private fun initListener() {

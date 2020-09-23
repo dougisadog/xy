@@ -179,6 +179,7 @@
             app:layout_constraintTop_toBottomOf="@+id/confirmCheckLl"
             android:layout_marginTop="60dp"
             android:textColor="@color/white"
+            android:enabled="false"
             android:text="进入希氧" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

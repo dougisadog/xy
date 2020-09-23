@@ -32,11 +32,10 @@ class LoginApi(val loginRequest: LoginRequest) : BaseApi<InitResponse>() {
 
     override fun parseResponse(data: String): InitResponse {
         val result = super.parseResponse(data)
-        if (result.id_token.isBlank()) {
-            throw Exception(data)
+        if (!result.id_token.isBlank()) {
+            LessonDataCache.token = result.id_token
+            DataCache.account = AccountBean().apply { id = loginRequest.username }
         }
-        LessonDataCache.token = result.id_token
-        DataCache.account = AccountBean().apply { id = loginRequest.username }
         return result
     }
 }

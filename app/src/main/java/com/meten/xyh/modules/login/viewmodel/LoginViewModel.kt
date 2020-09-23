@@ -27,27 +27,27 @@ open class LoginViewModel : BaseViewModel() {
         startBindLaunch {
             var exception: Exception?
             var suspendLoginResult =
-                LoginApi(LoginRequest(username.value ?: "", "")).suspendExecute()
+                LoginApi(LoginRequest(username.value ?: "")).suspendExecute()
             exception = suspendLoginResult.exception
             //未登录
             if (null != exception) {
                 //注册
                 val suspendRegisterResult =
-                    RegisterApi(RegisterRequest(username.value ?: "", "")).suspendExecute()
+                    RegisterApi(RegisterRequest(username.value ?: "")).suspendExecute()
                 exception = suspendRegisterResult.exception
                 //登录
                 if (null == exception) {
                     suspendRegisterResult.getResponse()?.body?.let {
                         suspendLoginResult =
-                            LoginApi(LoginRequest(username.value ?: "", "")).suspendExecute()
+                            LoginApi(LoginRequest(username.value ?: "")).suspendExecute()
                     }
                     exception = suspendRegisterResult.exception
-                    if (null == exception) {
-                        //用户列表
-                        val suspendSubUsersResult = SubUsersApi().suspendExecute()
-                        exception = suspendSubUsersResult.exception
-                    }
                 }
+            }
+            if (null == exception) {
+                //用户列表
+                val suspendSubUsersResult = SubUsersApi().suspendExecute()
+                exception = suspendSubUsersResult.exception
             }
             onSuccess?.invoke()
             exception
