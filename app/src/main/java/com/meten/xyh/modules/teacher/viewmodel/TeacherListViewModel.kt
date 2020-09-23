@@ -2,11 +2,10 @@ package com.meten.xyh.modules.teacher.viewmodel
 
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
-import com.meten.xyh.base.bean.ActionItem
-import com.meten.xyh.modules.discovery.bean.StreamLessonBean
-import com.meten.xyh.modules.discovery.bean.TeacherBean
+import com.meten.xyh.modules.teacher.bean.TeacherBean
+import com.meten.xyh.service.api.TeachersApi
 import com.shuange.lesson.base.viewmodel.BaseViewModel
-import com.shuange.lesson.modules.lesson.bean.SourceData
+import com.shuange.lesson.service.api.base.suspendExecute
 
 class TeacherListViewModel : BaseViewModel() {
 
@@ -15,6 +14,15 @@ class TeacherListViewModel : BaseViewModel() {
     var searchText = MutableLiveData<String>()
 
     fun loadData() {
+        startBindLaunch {
+            val suspendResult = TeachersApi().suspendExecute()
+            suspendResult.getResponse()?.body?.forEach {
+                teachers.add(TeacherBean().apply {
+                    setTeacher(it)
+                })
+            }
+            suspendResult.exception
+        }
         testData()
     }
 

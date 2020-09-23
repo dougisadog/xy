@@ -73,7 +73,7 @@ class VideoGalleryActivity :
                 false
             )
             videoGalleryAdapter.heartClick = { videoData, selected ->
-                ToastUtil.show("${videoData.text} selected:$selected")
+                viewModel.hit(videoData.id)
             }
             adapter = videoGalleryAdapter
         }
@@ -84,20 +84,16 @@ class VideoGalleryActivity :
 
     fun initListener() {
         binding.rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager?
-                firstVisibleItem = layoutManager!!.findFirstVisibleItemPosition()
-                lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                media?.hide()
-                handler.removeCallbacksAndMessages(null)
-            }
-
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 when (newState) {
-                    RecyclerView.SCROLL_STATE_IDLE ->
-                        /**在这里执行，视频的自动播放与停止 */
+                    RecyclerView.SCROLL_STATE_IDLE -> {
+
+
+                    }
+                    /**在这里执行，视频的自动播放与停止 */
+                    RecyclerView.SCROLL_STATE_DRAGGING -> {
                         autoPlayVideo(recyclerView)
-                    RecyclerView.SCROLL_STATE_DRAGGING -> autoPlayVideo(recyclerView)
+                    }
 //                    RecyclerView.SCROLL_STATE_SETTLING -> Jzvd.releaseAllVideos()
                 }
             }

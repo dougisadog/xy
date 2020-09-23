@@ -10,5 +10,8 @@ object IntentKey {
 
     const val SEARCH_KEY = "SEARCH_KEY"
 
+    const val SETTING_KEY = "SETTING_KEY"
+
+
 
 }

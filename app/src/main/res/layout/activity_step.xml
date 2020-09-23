@@ -9,7 +9,7 @@
 
         <variable
             name="stepViewModel"
-            type="com.meten.xyh.modules.step.viewmodel.StepViewModel" />
+            type="com.meten.xyh.modules.usersetting.viewmodel.StepViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    tools:listitem="@layout/layout_step_item"
+                    tools:listitem="@layout/layout_base_user_setting_item"
                     tools:itemCount="7"
                     />
             </LinearLayout>

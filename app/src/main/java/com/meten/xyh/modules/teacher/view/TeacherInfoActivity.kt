@@ -20,7 +20,7 @@ import com.shuange.lesson.utils.ToastUtil
 class TeacherInfoActivity : BaseActivity<ActivityTeacherInfoBinding, TeacherInfoViewModel>() {
 
     companion object {
-        fun start(context: Context, id:String) {
+        fun start(context: Context, id: String) {
             val i = Intent(context, TeacherInfoActivity::class.java)
             i.putExtra(IntentKey.TEACHER_KEY, id)
             context.startActivity(i)
@@ -45,7 +45,7 @@ class TeacherInfoActivity : BaseActivity<ActivityTeacherInfoBinding, TeacherInfo
 
     override fun initParams() {
         super.initParams()
-        val id = intent.getStringExtra(IntentKey.TEACHER_KEY)
+        viewModel.teacherId = intent.getStringExtra(IntentKey.TEACHER_KEY)
     }
 
     override fun initView() {

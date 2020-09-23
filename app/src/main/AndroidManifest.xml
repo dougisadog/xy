@@ -11,9 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--        <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" >-->
+                <activity android:name="com.shuange.lesson.modules.topquality.view.TopQualityMainActivity" >
 
-        <activity android:name=".modules.login.view.LoginActivity">
+<!--        <activity android:name=".modules.login.view.LoginActivity">-->
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,7 @@
 
         <activity android:name=".modules.search.view.SearchActivity" />
 
-        <activity android:name=".modules.step.view.StepActivity" />
+        <activity android:name=".modules.usersetting.view.StepActivity" />
         <activity android:name=".modules.user.view.CreateUserActivity" />
         <activity android:name=".modules.user.view.ChangeUserActivity" />
         <activity android:name=".modules.user.view.UserInfoActivity" />
@@ -34,6 +34,7 @@
         <activity android:name=".modules.teacher.view.TeacherInfoActivity" />
         <activity android:name=".modules.teacher.view.TeacherListActivity" />
 
+        <activity android:name=".modules.news.view.NewsListActivity" />
 
     </application>
 

@@ -1,4 +1,6 @@
-package com.meten.xyh.modules.discovery.bean
+package com.meten.xyh.modules.teacher.bean
+
+import com.meten.xyh.service.response.bean.Teacher
 
 data class  TeacherBean(
     var name: String = "",
@@ -15,4 +17,10 @@ data class  TeacherBean(
         get() {
             return "主讲老师：$name"
         }
+
+    fun setTeacher(teacher: Teacher) {
+        name = teacher.name
+        subTitle = teacher.description
+        introduction = teacher.info
+    }
 }

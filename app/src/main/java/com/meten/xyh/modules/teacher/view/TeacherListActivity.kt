@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 
 
 /**
- * 用户信息
+ * 名师推荐
  */
 class TeacherListActivity : BaseActivity<ActivityTeacherListBinding, TeacherListViewModel>() {
 
