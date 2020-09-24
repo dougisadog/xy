@@ -66,7 +66,7 @@
         <item name="android:scaleType">fitXY</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintEnd_toEndOf">parent</item>
-        <item name="layout_constraintDimensionRatio">h,1:1</item>
+        <item name="layout_constraintDimensionRatio">w,1:1</item>
     </style>
 
     <style name="selection_pic">
