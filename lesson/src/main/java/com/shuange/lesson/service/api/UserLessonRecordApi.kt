@@ -18,7 +18,7 @@ class UserLessonRecordApi(val request: UserLessonRecordRequest) :
     }
 
     override val path: String
-        get() = "/api/v1.0/lesson/user-lesson-records"
+        get() = "/api/v1.0/user-lesson-records"
 
     override val resultClass: KClass<UserLessonRecordResponse>
         get() = UserLessonRecordResponse::class

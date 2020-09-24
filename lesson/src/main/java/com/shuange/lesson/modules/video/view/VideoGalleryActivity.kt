@@ -2,24 +2,18 @@ package com.shuange.lesson.modules.video.view
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Rect
-import android.os.Handler
-import android.view.View
 import android.widget.MediaController
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cn.jzvd.Jzvd
+import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityVideoGalleryBinding
-import com.shuange.lesson.jzvd.JzvdStdTikTok
 import com.shuange.lesson.modules.video.adapter.VideoGalleryAdapter
 import com.shuange.lesson.modules.video.viewmodel.VideoGalleryViewModel
-import com.shuange.lesson.utils.ToastUtil
-import com.shuange.lesson.utils.VideoUtil
 
 
 /**
@@ -29,7 +23,7 @@ class VideoGalleryActivity :
     BaseActivity<ActivityVideoGalleryBinding, VideoGalleryViewModel>() {
 
     companion object {
-        fun startVideoGallery(context: Context) {
+        fun start(context: Context) {
             val i = Intent(context, VideoGalleryActivity::class.java)
             context.startActivity(i)
         }
@@ -41,8 +35,6 @@ class VideoGalleryActivity :
         BaseShareModelFactory()
 
     }
-
-    var handler = Handler()
 
     override val layoutId: Int
         get() = R.layout.activity_video_gallery
@@ -67,7 +59,7 @@ class VideoGalleryActivity :
 
     fun initVideos() {
         with(binding.rv) {
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
+            layoutManager = LinearLayoutManager(
                 this@VideoGalleryActivity,
                 RecyclerView.VERTICAL,
                 false
@@ -87,72 +79,34 @@ class VideoGalleryActivity :
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 when (newState) {
                     RecyclerView.SCROLL_STATE_IDLE -> {
-
-
+                        (recyclerView.layoutManager as LinearLayoutManager).let {
+                            val offset = recyclerView.computeVerticalScrollOffset()
+                            val itemHeight = recyclerView.getChildAt(0)?.height ?: return
+                            var index = offset / itemHeight
+                            val lastIndex = recyclerView.tag as? Int
+                            if (offset % itemHeight == 0) {
+                                if (lastIndex != index) {
+                                    (recyclerView.getChildAt(0)
+                                        .findViewById(R.id.video) as? StyledPlayerView)?.let {
+                                        it.player?.play()
+                                    }
+                                    recyclerView.tag = index
+                                }
+                            } else {
+                                if (offset % itemHeight > itemHeight / 2) {
+                                    index++
+                                }
+                                recyclerView.smoothScrollToPosition(index)
+                            }
+                        }
                     }
-                    /**在这里执行，视频的自动播放与停止 */
-                    RecyclerView.SCROLL_STATE_DRAGGING -> {
-                        autoPlayVideo(recyclerView)
-                    }
-//                    RecyclerView.SCROLL_STATE_SETTLING -> Jzvd.releaseAllVideos()
                 }
             }
         })
     }
 
-    /**
-     * 自动播放
-     */
-    private fun autoPlayVideo(recyclerView: RecyclerView?) {
-        val firstVisibleItem = firstVisibleItem ?: return
-        val lastVisibleItem = lastVisibleItem ?: return
-
-        for (i in 0..lastVisibleItem) {
-            var current: View? = null
-            try {
-                current = recyclerView?.getChildAt(i)
-            } catch (e: Exception) {
-            }
-            if (null == current) {
-                return
-            }
-            val videoView: JzvdStdTikTok? = current.findViewById(R.id.video)
-            if (videoView != null) {
-                val rect = Rect()
-                //获取视图本身的可见坐标，把值传入到rect对象中
-                videoView.getLocalVisibleRect(rect)
-                //获取视频的高度
-                val videoHeight: Int = videoView.height
-                if (rect.top <= 100 && rect.bottom >= videoHeight) {
-                    startTask = Runnable {
-                        if (videoView.state != Jzvd.STATE_PLAYING) {
-                            videoView.startVideo()
-                        }
-//                        videoView.setMediaController(media)
-//                        videoView.start()
-                    }
-                    handler.postDelayed(startTask!!, VideoUtil.AUTO_PLAY_DELAY)
-                    return
-                } else {
-                    if (videoView.state == Jzvd.STATE_PLAYING) {
-                        videoView.mediaInterface?.pause()
-                        videoView.onStatePause()
-                    }
-//                    videoView.pause()
-                }
-            }
-        }
-    }
-
-    var startTask: Runnable? = null
-
 
     override fun initViewObserver() {
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mediaController = null
-        handler.removeCallbacksAndMessages(null)
-    }
 }

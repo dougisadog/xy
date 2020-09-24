@@ -8,11 +8,6 @@ import corelib.http.ErrorHandlingStatus
 import corelib.http.HttpTask
 import corelib.http.HttpTaskError
 import kotlinx.coroutines.suspendCancellableCoroutine
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.Response
-import java.io.IOException
-import java.lang.Exception
 import kotlin.coroutines.resume
 
 
@@ -34,13 +29,12 @@ suspend fun <DataType : Any> HttpTask<DataType>.suspendExecute(): SuspendRespons
             )
         }
         onError { dataType, responseInfo ->
+            var exception = responseInfo.error ?: Exception("")
             if (responseInfo.type == HttpTaskError.StatusCode) {
-                coroutine.resume(
-                    SuspendResponse(TokenErrorException(""))
-                )
+                exception = TokenErrorException("")
             }
             coroutine.resume(
-                SuspendResponse(responseInfo.error ?: Exception(""))
+                SuspendResponse(exception)
             )
             ErrorHandlingStatus.CONTINUING
         }

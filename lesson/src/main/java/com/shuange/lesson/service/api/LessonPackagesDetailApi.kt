@@ -11,7 +11,7 @@ class LessonPackagesDetailApi(val lessonPackagesId: String) :
     BaseTokenApi<LessonPackagesDetailResponse>() {
 
     override val path: String
-        get() = "/api/v1.0/lesson/lesson-packages/$lessonPackagesId"
+        get() = "/api/v1.0/lesson-packages/$lessonPackagesId"
     override val resultClass: KClass<LessonPackagesDetailResponse>
         get() = LessonPackagesDetailResponse::class
 }

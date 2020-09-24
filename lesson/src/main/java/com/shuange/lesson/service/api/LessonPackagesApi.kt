@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
 class LessonPackagesApi : BaseTokenApi<LessonPackagesResponse>() {
 
     override val path: String
-        get() = "/api/v1.0/lesson/lesson-packages"
+        get() = "/api/v1.0/lesson-packages"
     override val resultClass: KClass<LessonPackagesResponse>
         get() = LessonPackagesResponse::class
 }

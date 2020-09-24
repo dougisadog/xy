@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
 class LessonModuleRecordApi(val lessonModuleId: String) : BaseTokenApi<UserLessonRecordResponse>() {
 
     override val path: String
-        get() = "/api/v1.0/lesson/user-lesson-records/module/$lessonModuleId"
+        get() = "/api/v1.0/user-lesson-records/module/$lessonModuleId"
 
     override val resultClass: KClass<UserLessonRecordResponse>
         get() = UserLessonRecordResponse::class

@@ -11,6 +11,6 @@ class BaseUserSettingAdapter(layout: Int, data: ObservableArrayList<UserSettingB
     BaseListAdapter<UserSettingBean>(layout, data) {
     override fun convert(helper: ListViewHolder?, item: UserSettingBean?) {
         helper?.getView<View>(R.id.contentTv)?.isSelected = item?.isSelected ?: false
-        helper?.binding?.setVariable(BR.stepBean, item)
+        helper?.binding?.setVariable(BR.userSettingBean, item)
     }
 }
