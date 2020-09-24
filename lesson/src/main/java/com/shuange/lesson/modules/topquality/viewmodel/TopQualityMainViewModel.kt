@@ -32,7 +32,7 @@ class TopQualityMainViewModel : BaseViewModel() {
         for (i in 0 until 4) {
             courses.add(CourseInfoItem().apply {
                 title = "初级课程$i"
-                introduction = "4.学问位置》核心课程A"
+                content = "4.学问位置》核心课程A"
                 image =
                     "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3844276591,3933131866&fm=26&gp=0.jpg"
             })

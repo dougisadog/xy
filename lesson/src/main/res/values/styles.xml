@@ -61,6 +61,9 @@
         <item name="radius">24dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">0dp</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:scaleType">fitXY</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layout_constraintDimensionRatio">h,1:1</item>

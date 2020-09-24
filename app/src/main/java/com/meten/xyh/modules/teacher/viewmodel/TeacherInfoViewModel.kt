@@ -27,10 +27,7 @@ class TeacherInfoViewModel : BaseViewModel() {
                     val source = mutableListOf<TopQualityCourseBean>()
                     it.lessonPackages.forEach {
                         source.add(TopQualityCourseBean().apply {
-                            title = it.name
-//                            this.freeType = it.haveBought
-//                            this.image = it.
-                            this.
+                            setLessonPackages(it)
                         })
 
                     }

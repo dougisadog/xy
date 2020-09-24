@@ -22,13 +22,6 @@
             style="@style/title_container"
             layout="@layout/layout_title" />
 
-        <com.shuange.lesson.view.CustomRoundAngleImageView
-            android:id="@+id/imageIv"
-            style="@style/middle_img"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/icon_cancel"
-            app:layout_constraintTop_toBottomOf="@+id/topContainer" />
-
         <LinearLayout
             android:id="@+id/resultLl"
             android:layout_width="match_parent"
@@ -71,6 +64,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/imageIv"
+            style="@style/scale_img"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="120dp"
+            android:maxWidth="@dimen/base_image_width"
+            android:src="@drawable/icon_cancel"
+            app:layout_constraintBottom_toTopOf="@+id/recordingIv"
+            app:layout_constraintTop_toBottomOf="@+id/topContainer" />
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
