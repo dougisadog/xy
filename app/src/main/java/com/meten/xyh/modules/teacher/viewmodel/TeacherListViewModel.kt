@@ -4,6 +4,7 @@ import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.modules.teacher.bean.TeacherBean
 import com.meten.xyh.service.api.TeachersApi
+import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.service.api.base.suspendExecute
 
@@ -14,7 +15,15 @@ class TeacherListViewModel : BaseViewModel() {
     var searchText = MutableLiveData<String>()
 
     fun loadData() {
-        startBindLaunch {
+        loadTeachers("0")
+    }
+
+    fun loadTeachers(
+        startId: String = teachers.lastOrNull()?.id ?: "0",
+        page: Int = 50,
+        onFinished: EmptyTask = null
+    ) {
+        startBindLaunch(onFinish = onFinished) {
             val suspendResult = TeachersApi().suspendExecute()
             suspendResult.getResponse()?.body?.forEach {
                 teachers.add(TeacherBean().apply {

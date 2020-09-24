@@ -61,9 +61,11 @@ dependencies {
     api "androidx.viewpager2:viewpager2:1.0.0"
 
 
-    api 'com.google.android.material:material:1.2.0'
+    api 'com.google.android.material:material:1.2.1'
     api "androidx.recyclerview:recyclerview:1.1.0"
-    api "com.github.bumptech.glide:glide:4.9.0"
+    api "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    api "com.github.bumptech.glide:glide:4.11.0"
     api "com.google.code.gson:gson:2.8.5"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
@@ -71,7 +73,9 @@ dependencies {
     //BaseRecyclerViewAdapterHelper
     api  "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46"
     //pull refresh
-    api "com.scwang.smartrefresh:SmartRefreshLayout:1.1.2"
+    api 'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    api  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
+
     api 'com.azoft.carousellayoutmanager:carousel:1.2.4'
     api 'com.google.android.exoplayer:exoplayer:2.12.0'
 

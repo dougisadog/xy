@@ -5,6 +5,7 @@ open class BaseItemBean(
     var content: String = "",
     var image: String = ""
 ) {
+    var id = ""
     var teacherName = ""
     var courseCount = 0
 

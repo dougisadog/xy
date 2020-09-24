@@ -1,16 +1,22 @@
 package com.meten.xyh.modules.discovery.viewmodel
 
 import androidx.databinding.ObservableArrayList
-import com.meten.xyh.modules.discovery.bean.*
+import com.meten.xyh.modules.discovery.bean.StreamLessonBean
 import com.meten.xyh.modules.news.bean.NewsBean
 import com.meten.xyh.modules.teacher.bean.TeacherBean
 import com.meten.xyh.service.api.ArticlesRecommendApi
-import com.meten.xyh.service.api.TeachersApi
-import com.meten.xyh.service.api.TeachersRecommendApi
+import com.meten.xyh.service.response.ArticlesResponse
+import com.meten.xyh.service.response.TeachersResponse
 import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.viewmodel.BaseViewModel
+import com.shuange.lesson.modules.course.bean.CourseInfoItem
+import com.shuange.lesson.modules.topquality.bean.TopQualityCourseBean
+import com.shuange.lesson.service.api.LessonPackagesRecommendApi
 import com.shuange.lesson.service.api.base.suspendExecute
-import java.lang.Exception
+import com.shuange.lesson.service.response.LessonPackagesResponse
+import com.shuange.lesson.service.response.base.SuspendResponse
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 
 open class DiscoveryViewModel : BaseViewModel() {
 
@@ -18,15 +24,20 @@ open class DiscoveryViewModel : BaseViewModel() {
 
     var teachers = ObservableArrayList<TeacherBean>()
 
-    var topQualityItems = ObservableArrayList<TopQualityBean>()
+    var topQualityItems = ObservableArrayList<TopQualityCourseBean>()
 
     var newsItems = ObservableArrayList<BaseItemBean>()
 
     fun loadData() {
         startBindLaunch {
             var exception: Exception? = null
-            val suspendArticlesResult = ArticlesRecommendApi().suspendExecute()
-            suspendArticlesResult.getResponse()?.body?.forEach {
+            val tasks = arrayListOf(async { ArticlesRecommendApi().suspendExecute() },
+                async { ArticlesRecommendApi().suspendExecute() },
+                async { LessonPackagesRecommendApi().suspendExecute() }
+            )
+            val results = tasks.awaitAll()
+            val suspendArticlesResult = (results[0] as? SuspendResponse<ArticlesResponse>)
+            suspendArticlesResult?.getResponse()?.body?.forEach {
                 newsItems.add(NewsBean().apply {
                     title = it.title
                     content = it.subTitle
@@ -34,10 +45,10 @@ open class DiscoveryViewModel : BaseViewModel() {
                 })
             }
             if (null == exception) {
-                exception = suspendArticlesResult.exception
+                exception = suspendArticlesResult?.exception
             }
-            val suspendTeacherResult = TeachersRecommendApi().suspendExecute()
-            suspendTeacherResult.getResponse()?.body?.forEach {
+            val suspendTeacherResult = (results[1] as? SuspendResponse<TeachersResponse>)
+            suspendTeacherResult?.getResponse()?.body?.forEach {
                 teachers.add(TeacherBean().apply {
                     name = it.name
                     introduction = it.description
@@ -46,7 +57,24 @@ open class DiscoveryViewModel : BaseViewModel() {
                 })
             }
             if (null == exception) {
-                exception = suspendTeacherResult.exception
+                exception = suspendTeacherResult?.exception
+            }
+            val suspendLessonPackagesResult = (results[2] as? SuspendResponse<LessonPackagesResponse>)
+            suspendLessonPackagesResult?.getResponse()?.body?.let {
+                val arr = it
+                arr.sortedBy {
+                    it.sortNo
+                }
+                val converted = arr.map { lp ->
+                    CourseInfoItem().apply {
+                        setLessonPackages(lp)
+                    }
+                }
+                topQualityItems.clear()
+                topQualityItems.addAll(converted)
+            }
+            if (null == exception) {
+                exception = suspendTeacherResult?.exception
             }
             exception
         }
@@ -69,12 +97,12 @@ open class DiscoveryViewModel : BaseViewModel() {
                 image = baseImg
             })
 
-            topQualityItems.add(TopQualityBean().apply {
+            topQualityItems.add(TopQualityCourseBean().apply {
                 title = "topQuality$i"
                 content = "topQuality content$i"
                 image = baseImg
                 freeType =
-                    if (i == 0) null else if (i == 1) TopQualityBean.FREE_TYPE_GREEN else TopQualityBean.FREE_TYPE_ORANGE
+                    if (i == 0) null else if (i == 1) TopQualityCourseBean.FREE_TYPE_GREEN else TopQualityCourseBean.FREE_TYPE_ORANGE
             })
             newsItems.add(NewsBean().apply {
                 title = "news$i"

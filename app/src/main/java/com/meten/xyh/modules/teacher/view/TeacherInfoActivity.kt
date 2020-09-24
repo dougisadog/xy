@@ -7,10 +7,10 @@ import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivityTeacherInfoBinding
-import com.meten.xyh.modules.discovery.adapter.TopQualityAdapter
 import com.meten.xyh.modules.teacher.viewmodel.TeacherInfoViewModel
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.utils.ToastUtil
 
 
@@ -33,7 +33,7 @@ class TeacherInfoActivity : BaseActivity<ActivityTeacherInfoBinding, TeacherInfo
 
     private val topQualityAdapter: TopQualityAdapter by lazy {
         TopQualityAdapter(
-            layout = R.layout.layout_top_quality_item,
+            layout = com.shuange.lesson.R.layout.layout_top_quality_item,
             data = viewModel.courses
         )
     }

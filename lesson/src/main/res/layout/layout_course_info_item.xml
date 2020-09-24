@@ -51,7 +51,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="6dp"
             android:ellipsize="end"
-            android:text="@{courseInfoItem.introduction}"
+            android:text="@{courseInfoItem.content}"
             android:textColor="@color/hex_9B9B9B"
             android:textSize="11dp"
             app:layout_constraintEnd_toEndOf="parent"

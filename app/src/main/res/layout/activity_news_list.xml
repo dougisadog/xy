@@ -8,8 +8,8 @@
     <data>
 
         <variable
-            name="topQualityMainViewModel"
-            type="com.shuange.lesson.modules.topquality.viewmodel.TopQualityMainViewModel" />
+            name="newListViewModel"
+            type="com.meten.xyh.modules.news.viewmodel.NewListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

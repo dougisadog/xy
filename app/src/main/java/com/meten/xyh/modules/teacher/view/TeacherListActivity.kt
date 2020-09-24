@@ -8,6 +8,8 @@ import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityTeacherListBinding
 import com.meten.xyh.modules.discovery.adapter.TeacherAdapter
 import com.meten.xyh.modules.teacher.viewmodel.TeacherListViewModel
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.utils.ToastUtil
@@ -60,7 +62,10 @@ class TeacherListActivity : BaseActivity<ActivityTeacherListBinding, TeacherList
                 false
             )
             teacherAdapter.setOnItemClickListener { adapter, view, position ->
-                TeacherInfoActivity.start(this@TeacherListActivity, teacherAdapter.data[position].id)
+                TeacherInfoActivity.start(
+                    this@TeacherListActivity,
+                    teacherAdapter.data[position].id
+                )
             }
             adapter = teacherAdapter
         }
@@ -73,6 +78,21 @@ class TeacherListActivity : BaseActivity<ActivityTeacherListBinding, TeacherList
         binding.searchEt.setOnSearchListener {
             search(it.trim())
         }
+        binding.srl.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                viewModel.loadTeachers {
+                    binding.srl.finishLoadMore()
+                }
+
+            }
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+                viewModel.loadTeachers("0") {
+                    binding.srl.finishRefresh()
+                }
+
+            }
+
+        })
 
     }
 

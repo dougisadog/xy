@@ -9,13 +9,10 @@ import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.databinding.ActivityCourseBinding
 import com.shuange.lesson.databinding.ActivityCourseInfoBinding
 import com.shuange.lesson.modules.course.adapter.CourseInfoAdapter
 import com.shuange.lesson.modules.course.viewmodel.CourseInfoViewModel
-import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
-import kotlinx.android.synthetic.main.layout_header.view.*
 
 /**
  * 课程包列表
@@ -62,7 +59,7 @@ class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoVie
                 LinearLayoutManager(this@CourseInfoActivity, RecyclerView.VERTICAL, false)
             courseInfoAdapter.setOnItemClickListener { adapter, view, position ->
                 val current = courseInfoAdapter.data[position]
-                CourseListActivity.start(this@CourseInfoActivity, current.courseId, current.title)
+                CourseListActivity.start(this@CourseInfoActivity, current.id, current.title)
             }
             adapter = courseInfoAdapter
         }

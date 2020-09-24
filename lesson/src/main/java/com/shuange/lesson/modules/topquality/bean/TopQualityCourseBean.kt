@@ -1,8 +1,18 @@
 package com.shuange.lesson.modules.topquality.bean
 
 import com.shuange.lesson.base.BaseItemBean
+import com.shuange.lesson.service.response.bean.LessonPackage
 
-class TopQualityCourseBean : BaseItemBean() {
+open class TopQualityCourseBean : BaseItemBean() {
+
+    var courseId = ""
+
+    fun setLessonPackages(lessonPackage: LessonPackage) {
+//        image = lessonPackage
+        courseId = lessonPackage.id.toString()
+        title = lessonPackage.name
+        content = lessonPackage.description
+    }
 
     //0 绿 1 黄 限时免费 2直播付费 3已购
     var freeType: Int? = FREE_TYPE_GREEN

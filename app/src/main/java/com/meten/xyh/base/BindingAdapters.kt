@@ -9,9 +9,9 @@ import androidx.databinding.InverseBindingListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.meten.xyh.R
-import com.meten.xyh.modules.discovery.bean.TopQualityBean
 import com.meten.xyh.view.TestPlusView
 import com.shuange.lesson.modules.lesson.bean.SourceData
+import com.shuange.lesson.modules.topquality.bean.TopQualityCourseBean
 import com.shuange.lesson.view.NonDoubleClickListener
 import corelib.util.ContextManager
 
@@ -51,11 +51,11 @@ object BindingAdapters {
     fun setFreeType(iv: ImageView, freeType: Int?) {
         freeType?.let {
             when (it) {
-                TopQualityBean.FREE_TYPE_GREEN -> {
+                TopQualityCourseBean.FREE_TYPE_GREEN -> {
                     Glide.with(ContextManager.getContext()).load(R.drawable.icon_home_free_green)
                         .into(iv)
                 }
-                TopQualityBean.FREE_TYPE_ORANGE -> {
+                TopQualityCourseBean.FREE_TYPE_ORANGE -> {
                     Glide.with(ContextManager.getContext()).load(R.drawable.icon_home_free_orange)
                         .into(iv)
                 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.meten.xyh.R
+import com.meten.xyh.databinding.ActivityNewsListBinding
 import com.meten.xyh.modules.discovery.adapter.BaseItemAdapter
 import com.meten.xyh.modules.news.viewmodel.NewListViewModel
 import com.shuange.lesson.BR
@@ -17,7 +18,6 @@ import com.shuange.lesson.base.ImageFragment
 import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.databinding.ActivityNewsListBinding
 import com.shuange.lesson.utils.ToastUtil
 import corelib.util.DeviceUtils
 import kotlinx.android.synthetic.main.layout_header.view.*
@@ -42,7 +42,7 @@ class NewsListActivity :
     override val layoutId: Int
         get() = R.layout.activity_news_list
     override val viewModelId: Int
-        get() = BR.topQualityMainViewModel
+        get() = BR.newListViewModel
 
     lateinit var fragmentAdapter: RecyclePagerAdapter<String>
 
@@ -109,6 +109,9 @@ class NewsListActivity :
     }
 
     private fun initListener() {
+        binding.header.back.setOnClickListener {
+            finish()
+        }
     }
 
 

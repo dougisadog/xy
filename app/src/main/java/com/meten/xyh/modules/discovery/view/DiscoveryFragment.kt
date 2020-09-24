@@ -8,14 +8,19 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.FragmentDiscoveryBinding
-import com.meten.xyh.modules.discovery.adapter.*
+import com.meten.xyh.modules.discovery.adapter.BaseItemAdapter
+import com.meten.xyh.modules.discovery.adapter.MenuPageAdapter
+import com.meten.xyh.modules.discovery.adapter.StreamLessonAdapter
+import com.meten.xyh.modules.discovery.adapter.TeacherAdapter
 import com.meten.xyh.modules.discovery.bean.MenuItem
 import com.meten.xyh.modules.discovery.viewmodel.DiscoveryViewModel
+import com.meten.xyh.modules.news.view.NewsListActivity
 import com.meten.xyh.modules.search.view.SearchActivity
 import com.meten.xyh.modules.teacher.view.TeacherInfoActivity
 import com.meten.xyh.modules.teacher.view.TeacherListActivity
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.view.TopQualityActivity
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.setOnSearchListener
@@ -41,7 +46,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
 
     private val topQualityAdapter: TopQualityAdapter by lazy {
         TopQualityAdapter(
-            layout = R.layout.layout_top_quality_course_item,
+            layout = com.shuange.lesson.R.layout.layout_top_quality_item,
             data = viewModel.topQualityItems
         )
     }
@@ -181,7 +186,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
             TeacherListActivity.start(requireActivity())
         })
         binding.newsLl.setOnClickListener(NonDoubleClickListener {
-            ToastUtil.show("英语资讯 List")
+            NewsListActivity.start(requireContext())
         })
         binding.searchEt.setOnSearchListener {
             search(it.trim())
