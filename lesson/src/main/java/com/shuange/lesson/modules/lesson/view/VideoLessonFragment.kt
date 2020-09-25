@@ -1,17 +1,15 @@
 package com.shuange.lesson.modules.lesson.view
 
-import android.media.MediaMetadataRetriever
 import androidx.fragment.app.viewModels
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentVideoLessonBinding
 import com.shuange.lesson.modules.lesson.viewmodel.VideoLessonViewModel
-import com.shuange.lesson.modules.video.view.VideoActivity
+import com.shuange.lesson.modules.media.view.VideoActivity
 import com.shuange.lesson.utils.VideoUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_title.view.*
-import java.math.BigDecimal
 
 
 class VideoLessonFragment :

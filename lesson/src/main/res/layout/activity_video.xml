@@ -7,7 +7,7 @@
 
         <variable
             name="videoViewModel"
-            type="com.shuange.lesson.modules.video.viewmodel.VideoViewModel" />
+            type="com.shuange.lesson.modules.media.viewmodel.VideoViewModel" />
     </data>
 
     <RelativeLayout

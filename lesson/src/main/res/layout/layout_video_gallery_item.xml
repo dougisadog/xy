@@ -9,7 +9,7 @@
 
         <variable
             name="videoData"
-            type="com.shuange.lesson.modules.video.bean.VideoData" />
+            type="com.shuange.lesson.modules.media.bean.VideoData" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

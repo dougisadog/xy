@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 <!--                <activity android:name=".modules.main.view.MainActivity" >-->
-        <activity android:name="com.shuange.lesson.modules.lesson.view.LessonActivity">
+        <activity android:name="com.shuange.lesson.modules.media.view.MediaCourseActivity">
 
             <!--        <activity android:name=".modules.login.view.LoginActivity">-->
 

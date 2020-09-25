@@ -1,4 +1,4 @@
-package com.shuange.lesson.modules.video.bean
+package com.shuange.lesson.modules.media.bean
 
 import com.shuange.lesson.modules.lesson.bean.SourceData
 import com.shuange.lesson.modules.topquality.bean.GalleryItem

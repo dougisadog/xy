@@ -1,4 +1,4 @@
-package com.shuange.lesson.modules.video.view
+package com.shuange.lesson.modules.media.view
 
 import android.content.Context
 import android.content.Intent
@@ -12,8 +12,8 @@ import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityVideoGalleryBinding
-import com.shuange.lesson.modules.video.adapter.VideoGalleryAdapter
-import com.shuange.lesson.modules.video.viewmodel.VideoGalleryViewModel
+import com.shuange.lesson.modules.media.adapter.VideoGalleryAdapter
+import com.shuange.lesson.modules.media.viewmodel.VideoGalleryViewModel
 
 
 /**

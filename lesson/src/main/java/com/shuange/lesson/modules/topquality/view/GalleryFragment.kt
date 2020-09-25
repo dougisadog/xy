@@ -1,13 +1,12 @@
 package com.shuange.lesson.modules.topquality.view
 
-import android.graphics.Rect
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentGalleryBinding
+import com.shuange.lesson.modules.media.view.VideoGalleryActivity
 import com.shuange.lesson.modules.topquality.adapter.GalleryAdapter
 import com.shuange.lesson.modules.topquality.viewmodel.GalleryViewModel
 import com.shuange.lesson.utils.ToastUtil
@@ -40,6 +39,7 @@ class GalleryFragment :
                 2
             )
             galleryAdapter.setOnItemClickListener { adapter, view, position ->
+                VideoGalleryActivity.start(requireContext())
                 ToastUtil.show("item click  gallery:${galleryAdapter.data[position].hearts}")
             }
             isNestedScrollingEnabled = false

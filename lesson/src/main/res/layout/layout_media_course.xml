@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootRl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp">
+
+    <TextView
+        android:id="@+id/titleTv"
+        style="@style/base_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:text="课程列表"
+        android:textSize="16dp" />
+
+    <View style="@style/divided_line" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/layout_media_course_item"
+        />
+
+</LinearLayout>

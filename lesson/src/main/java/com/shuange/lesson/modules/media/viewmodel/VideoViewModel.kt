@@ -1,4 +1,4 @@
-package com.shuange.lesson.modules.video.viewmodel
+package com.shuange.lesson.modules.media.viewmodel
 
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 

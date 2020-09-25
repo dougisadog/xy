@@ -1,4 +1,4 @@
-package com.shuange.lesson.modules.video.view
+package com.shuange.lesson.modules.media.view
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,7 @@ import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityVideoBinding
-import com.shuange.lesson.modules.video.viewmodel.VideoViewModel
+import com.shuange.lesson.modules.media.viewmodel.VideoViewModel
 import java.io.File
 
 

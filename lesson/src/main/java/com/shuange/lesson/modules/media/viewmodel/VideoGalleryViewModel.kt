@@ -1,9 +1,9 @@
-package com.shuange.lesson.modules.video.viewmodel
+package com.shuange.lesson.modules.media.viewmodel
 
 import androidx.databinding.ObservableArrayList
 import com.shuange.lesson.base.viewmodel.BaseViewModel
+import com.shuange.lesson.modules.media.bean.VideoData
 import com.shuange.lesson.modules.topquality.bean.GalleryItem
-import com.shuange.lesson.modules.video.bean.VideoData
 import com.shuange.lesson.service.api.ShortVideoHitApi
 import com.shuange.lesson.service.api.ShortVideosApi
 import com.shuange.lesson.service.api.base.suspendExecute

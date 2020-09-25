@@ -108,4 +108,27 @@ object BindAdapters {
             }
         }
     }
+
+    @BindingAdapter("freeTypeCourseText")
+    @JvmStatic
+    fun setFreeTypeCourseText(tv: TextView, freeType: Int?) {
+         var text = "免费"
+        freeType?.let {
+            when (it) {
+                TopQualityCourseBean.FREE_TYPE_GREEN -> {
+                }
+                TopQualityCourseBean.FREE_TYPE_ORANGE -> {
+                }
+                TopQualityCourseBean.PAY_TYPE_STEAM -> {
+                    text = "付费"
+                }
+                TopQualityCourseBean.PAID_TYPE -> {
+                    text = "付费"
+                }
+                else -> {
+
+                }
+            }
+        }
+    }
 }
