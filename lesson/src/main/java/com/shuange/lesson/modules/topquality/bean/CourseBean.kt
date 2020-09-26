@@ -1,9 +1,10 @@
 package com.shuange.lesson.modules.topquality.bean
 
 import com.shuange.lesson.base.BaseItemBean
+import com.shuange.lesson.base.PagerItem
 import com.shuange.lesson.service.response.bean.LessonPackage
 
-open class TopQualityCourseBean : BaseItemBean() {
+open class CourseBean : BaseItemBean(), PagerItem {
 
     var courseId = ""
 
@@ -24,5 +25,9 @@ open class TopQualityCourseBean : BaseItemBean() {
         const val PAY_TYPE_STEAM = 2
         const val PAID_TYPE = 3
 
+    }
+
+    override fun getItemId(): String {
+        return id
     }
 }

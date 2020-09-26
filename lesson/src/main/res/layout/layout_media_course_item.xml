@@ -7,7 +7,7 @@
 
         <variable
             name="topQualityCourseBean"
-            type="com.shuange.lesson.modules.topquality.bean.TopQualityCourseBean" />
+            type="com.shuange.lesson.modules.topquality.bean.CourseBean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -14,17 +14,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.shuange.lesson.R
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
-import com.shuange.lesson.modules.topquality.bean.TopQualityCourseBean
+import com.shuange.lesson.modules.topquality.bean.CourseBean
 import corelib.util.DeviceUtils
 
 
-class DraggingCourseFragment(val courses: ObservableArrayList<TopQualityCourseBean>) :
+class DraggingCourseFragment(val cours: ObservableArrayList<CourseBean>) :
     BottomSheetDialogFragment() {
 
     private val topQualityAdapter: TopQualityAdapter by lazy {
         TopQualityAdapter(
             layout = R.layout.layout_media_course_item,
-            data = courses
+            data = cours
         )
     }
 

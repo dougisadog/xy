@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.shuange.lesson.R
 import com.shuange.lesson.enumeration.CourseState
-import com.shuange.lesson.modules.topquality.bean.TopQualityCourseBean
+import com.shuange.lesson.modules.topquality.bean.CourseBean
 import com.shuange.lesson.utils.extension.colorValue
 import corelib.util.ContextManager
 
@@ -86,19 +86,19 @@ object BindAdapters {
     fun setFreeTypeCourse(iv: ImageView, freeType: Int?) {
         freeType?.let {
             when (it) {
-                TopQualityCourseBean.FREE_TYPE_GREEN -> {
+                CourseBean.FREE_TYPE_GREEN -> {
                     Glide.with(ContextManager.getContext()).load(R.drawable.icon_home_gr)
                         .into(iv)
                 }
-                TopQualityCourseBean.FREE_TYPE_ORANGE -> {
+                CourseBean.FREE_TYPE_ORANGE -> {
                     Glide.with(ContextManager.getContext()).load(R.drawable.icon_home_or)
                         .into(iv)
                 }
-                TopQualityCourseBean.PAY_TYPE_STEAM -> {
+                CourseBean.PAY_TYPE_STEAM -> {
                     Glide.with(ContextManager.getContext()).load(R.drawable.icon_image_zbkc)
                         .into(iv)
                 }
-                TopQualityCourseBean.PAID_TYPE -> {
+                CourseBean.PAID_TYPE -> {
                     Glide.with(ContextManager.getContext()).load(R.drawable.icon_home_or)
                         .into(iv)
                 }
@@ -115,14 +115,14 @@ object BindAdapters {
          var text = "免费"
         freeType?.let {
             when (it) {
-                TopQualityCourseBean.FREE_TYPE_GREEN -> {
+                CourseBean.FREE_TYPE_GREEN -> {
                 }
-                TopQualityCourseBean.FREE_TYPE_ORANGE -> {
+                CourseBean.FREE_TYPE_ORANGE -> {
                 }
-                TopQualityCourseBean.PAY_TYPE_STEAM -> {
+                CourseBean.PAY_TYPE_STEAM -> {
                     text = "付费"
                 }
-                TopQualityCourseBean.PAID_TYPE -> {
+                CourseBean.PAID_TYPE -> {
                     text = "付费"
                 }
                 else -> {

@@ -10,7 +10,7 @@ import com.meten.xyh.service.response.TeachersResponse
 import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.modules.course.bean.CourseInfoItem
-import com.shuange.lesson.modules.topquality.bean.TopQualityCourseBean
+import com.shuange.lesson.modules.topquality.bean.CourseBean
 import com.shuange.lesson.service.api.LessonPackagesRecommendApi
 import com.shuange.lesson.service.api.base.suspendExecute
 import com.shuange.lesson.service.response.LessonPackagesResponse
@@ -24,7 +24,7 @@ open class DiscoveryViewModel : BaseViewModel() {
 
     var teachers = ObservableArrayList<TeacherBean>()
 
-    var topQualityItems = ObservableArrayList<TopQualityCourseBean>()
+    var topQualityItems = ObservableArrayList<CourseBean>()
 
     var newsItems = ObservableArrayList<BaseItemBean>()
 
@@ -97,12 +97,12 @@ open class DiscoveryViewModel : BaseViewModel() {
                 image = baseImg
             })
 
-            topQualityItems.add(TopQualityCourseBean().apply {
+            topQualityItems.add(CourseBean().apply {
                 title = "topQuality$i"
                 content = "topQuality content$i"
                 image = baseImg
                 freeType =
-                    if (i == 0) null else if (i == 1) TopQualityCourseBean.FREE_TYPE_GREEN else TopQualityCourseBean.FREE_TYPE_ORANGE
+                    if (i == 0) null else if (i == 1) CourseBean.FREE_TYPE_GREEN else CourseBean.FREE_TYPE_ORANGE
             })
             newsItems.add(NewsBean().apply {
                 title = "news$i"

@@ -12,7 +12,6 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.setOnSearchListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
@@ -91,13 +90,12 @@ class TeacherListActivity : BaseActivity<ActivityTeacherListBinding, TeacherList
                 }
 
             }
-
         })
 
     }
 
     fun search(text: String) {
-        ToastUtil.show(text)
+        viewModel.loadTeachers("0")
     }
 
     override fun initViewObserver() {

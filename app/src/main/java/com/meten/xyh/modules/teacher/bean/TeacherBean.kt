@@ -1,6 +1,7 @@
 package com.meten.xyh.modules.teacher.bean
 
 import com.meten.xyh.service.response.bean.Teacher
+import com.shuange.lesson.base.PagerItem
 
 data class  TeacherBean(
     var name: String = "",
@@ -10,7 +11,7 @@ data class  TeacherBean(
     var detailContent: String = "",
     var id: String = ""
 
-) {
+): PagerItem {
 
 
     val nameText: String
@@ -22,5 +23,9 @@ data class  TeacherBean(
         name = teacher.name
         subTitle = teacher.description
         introduction = teacher.info
+    }
+
+    override fun getItemId(): String {
+        return id
     }
 }
