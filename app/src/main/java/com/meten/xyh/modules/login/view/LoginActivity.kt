@@ -4,19 +4,18 @@ import android.content.Context
 import android.content.Intent
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import com.meten.xyh.databinding.ActivityLoginBinding
-import com.meten.xyh.modules.login.viewmodel.LoginViewModel
 import com.meten.xyh.BR
 import com.meten.xyh.R
+import com.meten.xyh.databinding.ActivityLoginBinding
 import com.meten.xyh.enumeration.UserSettingType
+import com.meten.xyh.modules.login.viewmodel.LoginViewModel
 import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
-import com.meten.xyh.modules.usersetting.view.StepActivity
+import com.meten.xyh.utils.BusinessUtil
 import com.meten.xyh.utils.StringUtil
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
-import java.util.*
 
 
 /**
@@ -64,19 +63,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     }
 
     private fun sendVerifyMessage() {
-        var remain = viewModel.maxTime
         binding.verifyCodeTv.isEnabled = false
-        viewModel.remainTime.value = remain
-        //TODO SEND MESSAGE
-        Timer().schedule(object : TimerTask() {
-            override fun run() {
-                remain--
-                if (remain < 0) {
-                    cancel()
-                }
-                viewModel.remainTime.postValue(remain)
-            }
-        }, 1000L, 1000L)
+        viewModel.sendVerifyCode()
     }
 
 
@@ -90,15 +78,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         viewModel.confirmCheck.observe(this, Observer {
             checkLogin()
         })
-        viewModel.remainTime.observe(this, Observer {
-            if (null == it) return@Observer
-            if (it >= 0) {
-                binding.verifyCodeTv.text = "重新发送(${it}S)"
-            } else {
-                binding.verifyCodeTv.text = getString(R.string.get_verify_code)
-                binding.verifyCodeTv.isEnabled = true
-            }
-        })
+        BusinessUtil.addVerifyListener(viewModel.remainTime, this, binding.verifyCodeTv)
     }
 
     private fun checkLogin() {

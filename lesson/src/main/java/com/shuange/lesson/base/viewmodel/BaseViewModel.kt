@@ -11,9 +11,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
-import java.lang.Exception
 
 open class BaseViewModel : AndroidViewModel(ContextManager.getContext()) {
+
+    val error = MutableLiveData<String>()
 
     val showLoading = MutableLiveData<Boolean>()
 

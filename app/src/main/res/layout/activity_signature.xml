@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <data>
+
+        <variable
+            name="signatureViewModel"
+            type="com.meten.xyh.modules.usersetting.viewmodel.SignatureViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/hex_EDEDED"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/layout_header" />
+
+        <EditText
+            android:id="@+id/inputEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:background="@color/transparent"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:hint="请输入昵称"
+            android:maxLines="1"
+            android:text="@{signatureViewModel.signature}"
+            android:inputType="text"
+            android:maxLength="40"
+            android:textColor="@color/hex_B8B8B8"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="轻触头像切换账号"
+            android:textColor="@color/hex_B8B8B8"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inputEt" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

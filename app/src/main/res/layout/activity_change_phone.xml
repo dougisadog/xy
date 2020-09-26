@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    >
+
+    <data>
+
+        <variable
+            name="changePhoneViewModel"
+            type="com.meten.xyh.modules.user.viewmodel.ChangePhoneViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <include
+            android:id="@+id/header"
+            layout="@layout/layout_header" />
+
+        <TextView
+            android:id="@+id/originPwdLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:text="手机号码"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/header" />
+
+
+        <EditText
+            android:id="@+id/originPwdEt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:hint="请输入将要修改的手机号码"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:paddingStart="20dp"
+            android:text="@={changePhoneViewModel.phone}"
+            android:textColor="@color/hex_2D2D2D"
+            android:textColorHint="@color/hex_B8B8B8"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/originPwdLabel"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/originPwdLabel"
+            app:layout_constraintTop_toTopOf="@+id/originPwdLabel"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/verifyCodeLabelTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="43dp"
+            android:text="验证码"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/originPwdLabel" />
+
+        <EditText
+            android:id="@+id/verifyCodeEt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:paddingStart="20dp"
+            android:text="@={changePhoneViewModel.verifyCode}"
+            android:textColor="@color/hex_2D2D2D"
+            android:textColorHint="@color/hex_B8B8B8"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/verifyCodeLabelTv"
+            app:layout_constraintEnd_toStartOf="@+id/verifyCodeTv"
+            app:layout_constraintStart_toEndOf="@+id/verifyCodeLabelTv"
+            app:layout_constraintTop_toTopOf="@+id/verifyCodeLabelTv" />
+
+        <TextView
+            android:id="@+id/verifyCodeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/get_verify_code"
+            android:textColor="@color/hex_2D2D2D"
+            android:textSize="12dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/verifyCodeEt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/verifyCodeEt" />
+
+        <TextView
+            android:id="@+id/nextTv"
+            style="@style/bottom_button"
+            android:layout_marginTop="60dp"
+            android:enabled="false"
+            android:text="确定"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/verifyCodeTv" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

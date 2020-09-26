@@ -3,13 +3,13 @@ package com.shuange.lesson.base
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.Observer
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.utils.AnnotationParser
+import com.shuange.lesson.utils.ToastUtil
 
 abstract class BaseActivity<BD : ViewDataBinding, VM : BaseViewModel> : FragmentActivity() {
 
@@ -45,6 +45,11 @@ abstract class BaseActivity<BD : ViewDataBinding, VM : BaseViewModel> : Fragment
     }
 
     private fun initObserver() {
+        viewModel.error.observe(this, Observer {
+            if (!it.isNullOrBlank()) {
+                ToastUtil.show(it)
+            }
+        })
         viewModel.showLoading.observe(this, Observer {
             if (null != it) {
                 showLoading(it)

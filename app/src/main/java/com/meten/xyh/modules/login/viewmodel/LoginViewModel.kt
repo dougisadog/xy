@@ -1,27 +1,20 @@
 package com.meten.xyh.modules.login.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.meten.xyh.base.viewmodel.VerifyMessageViewModel
 import com.meten.xyh.service.api.LoginApi
 import com.meten.xyh.service.api.RegisterApi
 import com.meten.xyh.service.api.SubUsersApi
 import com.meten.xyh.service.request.LoginRequest
 import com.meten.xyh.service.request.RegisterRequest
 import com.shuange.lesson.EmptyTask
-import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.service.api.base.suspendExecute
-import java.lang.Exception
 
-open class LoginViewModel : BaseViewModel() {
-
-    val maxTime = 60
+open class LoginViewModel : VerifyMessageViewModel() {
 
     var username = MutableLiveData<String>()
 
-    var verifyCode = MutableLiveData<String>()
-
     var confirmCheck = MutableLiveData<Boolean>()
-
-    var remainTime = MutableLiveData<Int>()
 
     fun login(onSuccess: EmptyTask) {
         startBindLaunch {
@@ -53,4 +46,5 @@ open class LoginViewModel : BaseViewModel() {
             exception
         }
     }
+
 }

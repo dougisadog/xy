@@ -12,6 +12,7 @@ import com.meten.xyh.databinding.ActivityUserInfoBinding
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.user.viewmodel.UserInfoViewModel
 import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
+import com.meten.xyh.modules.usersetting.view.SignatureActivity
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.utils.ToastUtil
@@ -79,7 +80,7 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
         actions.add(ActionItem().apply {
             title = "个性签名"
             value = user?.introduction ?: ""
-            action = { ToastUtil.show("个性签名") }
+            action = { SignatureActivity.start(this@UserInfoActivity) }
         })
         actions.add(ActionItem().apply {
             title = "学习阶段"
@@ -104,7 +105,7 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
         actions.add(ActionItem().apply {
             title = "登录密码"
             value = "修改"
-            action = { ToastUtil.show("登录密码") }
+            action = { ChangePasswordActivity.start(this@UserInfoActivity) }
         })
         viewModel.actionItems.clear()
         viewModel.actionItems.addAll(actions)

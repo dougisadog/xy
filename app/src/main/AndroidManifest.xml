@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--                <activity android:name=".modules.main.view.MainActivity" >-->
+        <!--                <activity android:name=".modules.main.view.MainActivity" >-->
         <activity android:name="com.shuange.lesson.modules.media.view.MediaCourseActivity">
 
             <!--        <activity android:name=".modules.login.view.LoginActivity">-->
@@ -30,11 +30,15 @@
         <activity android:name=".modules.usersetting.view.StepActivity" />
         <activity android:name=".modules.usersetting.view.InterestActivity" />
         <activity android:name=".modules.usersetting.view.ObjectiveActivity" />
+        <activity android:name=".modules.usersetting.view.SignatureActivity" />
 
 
         <activity android:name=".modules.user.view.CreateUserActivity" />
         <activity android:name=".modules.user.view.ChangeUserActivity" />
         <activity android:name=".modules.user.view.UserInfoActivity" />
+        <activity android:name=".modules.user.view.ChangePasswordActivity" />
+        <activity android:name=".modules.user.view.ChangePhoneActivity" />
+
 
         <activity android:name=".modules.teacher.view.TeacherInfoActivity" />
         <activity android:name=".modules.teacher.view.TeacherListActivity" />
