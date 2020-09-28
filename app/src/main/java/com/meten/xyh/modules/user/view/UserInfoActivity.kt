@@ -105,7 +105,7 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
         actions.add(ActionItem().apply {
             title = "登录密码"
             value = "修改"
-            action = { ChangePasswordActivity.start(this@UserInfoActivity) }
+            action = { ChangePasswordActivity.start(this@UserInfoActivity, false) }
         })
         viewModel.actionItems.clear()
         viewModel.actionItems.addAll(actions)

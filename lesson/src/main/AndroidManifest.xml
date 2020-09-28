@@ -10,7 +10,6 @@
         <activity android:name="com.shuange.lesson.modules.lesson.view.LessonActivity" />
 
         <activity android:name="com.shuange.lesson.modules.media.view.VideoActivity" />
-        <activity android:name="com.shuange.lesson.modules.media.view.MediaCourseActivity" />
         <activity android:name="com.shuange.lesson.modules.media.view.VideoGalleryActivity" />
 
         <activity android:name="com.shuange.lesson.modules.topquality.view.TopQualityActivity" />

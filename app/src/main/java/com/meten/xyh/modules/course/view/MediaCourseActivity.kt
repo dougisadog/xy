@@ -1,18 +1,22 @@
-package com.shuange.lesson.modules.media.view
+package com.meten.xyh.modules.course.view
 
 import android.content.Context
 import android.content.Intent
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.shuange.lesson.BR
-import com.shuange.lesson.R
+import com.meten.xyh.BR
+import com.meten.xyh.R
+import com.meten.xyh.databinding.ActivityVideoCourseBinding
+import com.meten.xyh.modules.course.viewmodel.VideoCourseViewModel
+import com.meten.xyh.modules.recharge.view.RechargeActivity
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.databinding.ActivityVideoCourseBinding
-import com.shuange.lesson.modules.media.viewmodel.VideoCourseViewModel
+import com.shuange.lesson.modules.media.view.DraggingCourseFragment
 import com.shuange.lesson.view.NonDoubleClickListener
+import com.shuange.lesson.view.dialog.CommonDialog
 
 
 /**
@@ -57,7 +61,10 @@ class MediaCourseActivity : BaseActivity<ActivityVideoCourseBinding, VideoCourse
     }
 
     fun initDraggingCourses() {
-        DraggingCourseFragment(viewModel.courses).show(supportFragmentManager, "dialog")
+        DraggingCourseFragment(viewModel.courses) {
+
+
+        }.show(supportFragmentManager, "dialog")
     }
 
     private fun initVideoView() {
@@ -88,6 +95,16 @@ class MediaCourseActivity : BaseActivity<ActivityVideoCourseBinding, VideoCourse
 
 
     override fun initViewObserver() {
+        viewModel.valueNotEnough.observe(this , Observer {
+            CommonDialog(this).apply {
+                contentText = "确定花费100希氧币购买次课程吗？"
+                cancelButtonText = "残忍拒绝"
+                confirmButtonText = "去充值"
+                onClick = {
+                    RechargeActivity.start(this@MediaCourseActivity)
+                }
+            }.show()
+        })
     }
 
     override fun onDestroy() {

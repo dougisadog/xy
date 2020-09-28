@@ -1,4 +1,4 @@
-package com.shuange.lesson.modules.media.viewmodel
+package com.meten.xyh.modules.course.viewmodel
 
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
@@ -14,8 +14,15 @@ open class VideoCourseViewModel : BaseViewModel() {
 
     var courses = ObservableArrayList<CourseBean>()
 
+    val valueNotEnough = MutableLiveData<Boolean>()
+
     fun loadData() {
         testData()
+    }
+
+    //TODO
+    fun buyCourse() {
+
     }
 
     fun testData() {

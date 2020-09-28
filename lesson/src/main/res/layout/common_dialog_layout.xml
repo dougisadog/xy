@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="270dp"
+    android:layout_width="355dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:paddingTop="18dp"
@@ -14,6 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="提示"
+        android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,25 +28,41 @@
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="14dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title"
         tools:text="请先做完前面的内容，才可以解锁此课程哦！" />
 
     <TextView
+        android:id="@+id/cancelTv"
+        android:layout_width="128dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_base_cancel_btn"
+        android:gravity="center"
+        android:text="残忍拒绝"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/confirmTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <TextView
         android:id="@+id/confirmTv"
         android:layout_width="128dp"
         android:layout_height="40dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="31dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/bg_base_btn"
+        android:background="@drawable/bg_base_confirm_btn"
         android:gravity="center"
         android:text="知道了"
         android:textColor="@color/white"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancelTv"
         app:layout_constraintTop_toBottomOf="@+id/content" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

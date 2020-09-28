@@ -24,17 +24,17 @@ class RechargeViewModel : BaseViewModel() {
         rechargeItems.add(RechargeBean().apply {
             rmbValue = 80
             xyValue = 800
-            isSelected = true
+            isSelected = false
         })
         rechargeItems.add(RechargeBean().apply {
             rmbValue = 120
             xyValue = 1200
-            isSelected = true
+            isSelected = false
         })
         rechargeItems.add(RechargeBean().apply {
             rmbValue = 600
             xyValue = 6000
-            isSelected = true
+            isSelected = false
         })
     }
 }

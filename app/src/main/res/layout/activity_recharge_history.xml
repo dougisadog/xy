@@ -8,8 +8,8 @@
     <data>
 
         <variable
-            name="rechargeViewModel"
-            type="com.meten.xyh.modules.recharge.viewmodel.RechargeViewModel" />
+            name="rechargeHistoryViewModel"
+            type="com.meten.xyh.modules.recharge.viewmodel.RechargeHistoryViewModel" />
     </data>
 
 

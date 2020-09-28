@@ -15,16 +15,20 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.shuange.lesson.R
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.bean.CourseBean
+import com.shuange.lesson.view.dialog.CommonDialog
 import corelib.util.DeviceUtils
 
 
-class DraggingCourseFragment(val cours: ObservableArrayList<CourseBean>) :
+class DraggingCourseFragment(
+    val courses: ObservableArrayList<CourseBean>,
+    val buyTask: (String) -> Unit
+) :
     BottomSheetDialogFragment() {
 
     private val topQualityAdapter: TopQualityAdapter by lazy {
         TopQualityAdapter(
             layout = R.layout.layout_media_course_item,
-            data = cours
+            data = courses
         )
     }
 
@@ -57,7 +61,16 @@ class DraggingCourseFragment(val cours: ObservableArrayList<CourseBean>) :
                 false
             )
             topQualityAdapter.setOnItemClickListener { adapter, view, position ->
+                val id = topQualityAdapter.data[position].courseId
                 com.shuange.lesson.utils.ToastUtil.show("item click  topQuality:${topQualityAdapter.data[position].title}")
+                CommonDialog(requireContext()).apply {
+                    contentText = "确定花费100希氧币购买次课程吗？"
+                    cancelButtonText = "残忍拒绝"
+                    confirmButtonText = "确认购买"
+                    onClick = {
+                        buyTask.invoke(id)
+                    }
+                }.show()
             }
 //            isNestedScrollingEnabled = false
             adapter = topQualityAdapter

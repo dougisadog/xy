@@ -24,22 +24,32 @@
 
         <EditText
             android:id="@+id/inputEt"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
             android:background="@color/transparent"
             android:ellipsize="end"
             android:gravity="center"
             android:hint="@{signatureViewModel.settingChange.hint}"
-            android:maxLines="1"
-            android:text="@{signatureViewModel.signature}"
             android:inputType="text"
             android:maxLength="40"
+            android:maxLines="1"
+            android:text="@{signatureViewModel.signature}"
             android:textColor="@color/hex_B8B8B8"
             android:textSize="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/clearIv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header" />
+
+        <ImageView
+            android:id="@+id/clearIv"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            app:visible="@{signatureViewModel.signature.length() > 0}"
+            android:src="@drawable/icon_cancel"
+            app:layout_constraintBottom_toBottomOf="@+id/inputEt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/inputEt" />
 
         <TextView
             android:layout_width="wrap_content"

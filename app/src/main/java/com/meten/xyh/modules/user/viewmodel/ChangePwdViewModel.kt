@@ -10,7 +10,7 @@ open class ChangePwdViewModel : BaseViewModel() {
 
     var newPwd = MutableLiveData<String>()
 
-    var error = MutableLiveData<String>()
+    var verified = MutableLiveData<Boolean>()
 
     fun changePwd() {
         if (checkPwd()) {

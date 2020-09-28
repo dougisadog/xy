@@ -14,6 +14,9 @@ object IntentKey {
 
     const val SIGNATURE_TYPE_KEY = "SIGNATURE_TYPE_KEY"
 
+    const val CHANGE_PWD_VERIFIED_KEY = "CHANGE_PWD_VERIFIED_KEY"
+
+
 
 
 

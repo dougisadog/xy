@@ -37,7 +37,7 @@ class RechargeHistoryViewModel : BaseViewModel() {
             rechargeHistoryItems.add(RechargeHistoryBean().apply {
                 id = i.toString()
                 xyValue = i * 10
-                date = "2020-10-${i}"
+                dateTime = "2020-10-${i}"
                 payType = if (i % 2 == 0) PayType.ALIPAY else PayType.WX
             })
         }

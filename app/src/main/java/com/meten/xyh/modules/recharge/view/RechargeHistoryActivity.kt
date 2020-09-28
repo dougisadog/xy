@@ -42,7 +42,7 @@ class RechargeHistoryActivity :
     override val layoutId: Int
         get() = R.layout.activity_recharge_history
     override val viewModelId: Int
-        get() = BR.loginViewModel
+        get() = BR.rechargeHistoryViewModel
 
 
     override fun initView() {

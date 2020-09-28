@@ -9,7 +9,7 @@
 
         <variable
             name="videoCourseViewModel"
-            type="com.shuange.lesson.modules.media.viewmodel.VideoCourseViewModel" />
+            type="com.meten.xyh.modules.course.viewmodel.VideoCourseViewModel" />
     </data>
 
 

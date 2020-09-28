@@ -33,7 +33,7 @@ class RechargePayTypeFragment :
     override val layoutId: Int
         get() = R.layout.fragment_recharge_pay_type
     override val viewModelId: Int
-        get() = BR.loginViewModel
+        get() = BR.rechargePayTypeViewModel
 
 
     override fun initView() {

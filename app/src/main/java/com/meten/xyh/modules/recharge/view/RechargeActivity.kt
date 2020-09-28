@@ -11,7 +11,6 @@ import com.meten.xyh.modules.recharge.adapter.RechargeAdapter
 import com.meten.xyh.modules.recharge.viewmodel.RechargeViewModel
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
@@ -44,6 +43,8 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
     override val viewModelId: Int
         get() = BR.loginViewModel
 
+    override var fragmentContainerId: Int? = com.shuange.lesson.R.id.fragmentContainerFl
+
 
     override fun initView() {
         binding.header.title.text = "我的账户"
@@ -54,7 +55,7 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
     private fun initListener() {
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
             when (viewModel.payType.value) {
-                PayType.WX-> {
+                PayType.WX -> {
 
                 }
                 PayType.ALIPAY -> {
@@ -66,6 +67,9 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
         binding.changePageTypeLl.setOnClickListener(NonDoubleClickListener {
             showFragment(RechargePayTypeFragment())
         })
+        binding.header.back.setOnClickListener {
+            finish()
+        }
     }
 
     fun initRechargeItem() {
@@ -75,8 +79,10 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
                 2
             )
             rechargeAdapter.setOnItemClickListener { adapter, view, position ->
-                val rmbValue = rechargeAdapter.data[position].rmbValue
-                ToastUtil.show("item click  rmbValue:${rmbValue}")
+                rechargeAdapter.data.forEachIndexed { index, rechargeBean ->
+                    rechargeBean.isSelected = index == position
+                }
+                rechargeAdapter.notifyDataSetChanged()
             }
             isNestedScrollingEnabled = false
             adapter = rechargeAdapter

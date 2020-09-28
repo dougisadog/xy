@@ -10,6 +10,7 @@ import com.meten.xyh.modules.recharge.viewmodel.RechargeHistoryViewModel
 import com.meten.xyh.utils.BusinessUtil
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.utils.Cancelable
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 /**
  * 账单详情
  */
+@Cancelable
 class RechargeHistoryDetailFragment(val id: String) :
     BaseFragment<FragmentRechargeHistoryDetailBinding, RechargeHistoryDetailViewModel>() {
 
@@ -32,7 +34,7 @@ class RechargeHistoryDetailFragment(val id: String) :
     override val layoutId: Int
         get() = R.layout.fragment_recharge_history_detail
     override val viewModelId: Int
-        get() = BR.loginViewModel
+        get() = BR.rechargeHistoryDetailViewModel
 
 
     override fun initView() {

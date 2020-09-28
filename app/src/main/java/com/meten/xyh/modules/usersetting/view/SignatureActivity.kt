@@ -2,6 +2,7 @@ package com.meten.xyh.modules.usersetting.view
 
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
@@ -47,6 +48,8 @@ class SignatureActivity : BaseActivity<ActivitySignatureBinding, SignatureViewMo
 
     override fun initView() {
         binding.header.title.text = viewModel.settingChange?.title
+        binding.header.rightBtn.text = "保存"
+        binding.header.rightBtn.visibility = View.VISIBLE
         initListener()
     }
 
@@ -55,14 +58,17 @@ class SignatureActivity : BaseActivity<ActivitySignatureBinding, SignatureViewMo
         binding.header.back.setOnClickListener {
             finish()
         }
+        binding.header.rightBtn.setOnClickListener {
+            viewModel.saveSetting()
+        }
+        binding.clearIv.rightBtn.setOnClickListener {
+            viewModel.signature.value = ""
+        }
+
     }
 
 
     override fun initViewObserver() {
     }
 
-    override fun finish() {
-        super.finish()
-        viewModel.saveSetting()
-    }
 }

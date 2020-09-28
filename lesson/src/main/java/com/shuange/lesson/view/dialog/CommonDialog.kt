@@ -3,6 +3,7 @@ package com.shuange.lesson.view.dialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.R
 import kotlinx.android.synthetic.main.common_dialog_layout.*
@@ -14,9 +15,14 @@ class CommonDialog(context: Context) : Dialog(context, R.style.CustomDialog) {
 
     var contentText: String? = null
 
-    var buttonText: String? = null
+    var confirmButtonText: String? = null
+
+    var cancelButtonText: String? = null
+
 
     var onClick: EmptyTask = null
+
+    var onCancel: EmptyTask = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,12 +51,23 @@ class CommonDialog(context: Context) : Dialog(context, R.style.CustomDialog) {
         contentText?.let {
             content.text = it
         }
-        buttonText?.let {
+        confirmButtonText?.let {
             confirmTv.text = it
         }
+
         confirmTv.setOnClickListener {
             onClick?.invoke()
             dismiss()
+        }
+        cancelButtonText?.let {
+            cancelTv.text = it
+            cancelTv.visibility = View.VISIBLE
+            onCancel?.let {
+                cancelTv.setOnClickListener {
+                    onCancel?.invoke()
+                    dismiss()
+                }
+            }
         }
 
     }
