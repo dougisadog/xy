@@ -1,13 +1,12 @@
 package com.meten.xyh.modules.user.view
 
-import android.content.Intent
-import android.net.Uri
 import androidx.fragment.app.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.FragmentUserAccountBinding
 import com.meten.xyh.modules.recharge.view.RechargeActivity
 import com.meten.xyh.modules.user.viewmodel.UserAccountViewModel
+import com.meten.xyh.utils.BusinessUtil
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.modules.topquality.view.CollectionActivity
@@ -50,7 +49,7 @@ class UserAccountFragment : BaseFragment<FragmentUserAccountBinding, UserAccount
             CollectionActivity.start(requireContext())
         }))
         binding.accountSupportCl.setOnClickListener((NonDoubleClickListener {
-            callPhone()
+            BusinessUtil.callPhone(requireContext())
         }))
         binding.rechargeIv.setOnClickListener(NonDoubleClickListener {
             RechargeActivity.start(requireContext())
@@ -58,18 +57,6 @@ class UserAccountFragment : BaseFragment<FragmentUserAccountBinding, UserAccount
     }
 
     override fun initViewObserver() {
-    }
-
-
-    /**
-     * 拨打电话（直接拨打电话）
-     * @param phoneNum 电话号码
-     */
-    fun callPhone(phoneNum: String = getString(R.string.support_tel)) {
-        val intent = Intent(Intent.ACTION_CALL)
-        val data: Uri = Uri.parse("tel:$phoneNum")
-        intent.data = data
-        startActivity(intent)
     }
 
 }

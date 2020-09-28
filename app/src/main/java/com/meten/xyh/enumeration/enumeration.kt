@@ -16,3 +16,7 @@ enum class PayType(val text: String) {
     WX("微信支付"), ALIPAY("支付宝")
 }
 
+enum class PayStateType(val text: String) {
+    SUCCESS("支付成功"), FAILED("支付失败")
+}
+

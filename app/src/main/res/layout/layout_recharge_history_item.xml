@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rechargeHistoryBean"
+            type="com.meten.xyh.modules.recharge.bean.RechargeHistoryBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_recharge_item"
+        android:paddingTop="22dp"
+        android:paddingBottom="22dp">
+
+        <TextView
+            android:id="@+id/rechargeContentTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{rechargeHistoryBean.contentText}"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/rechargeTimeTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="充值600希氧币成功" />
+
+        <TextView
+            android:id="@+id/rechargeTimeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{rechargeHistoryBean.date}"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/payTypeTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/payTypeTv"
+            tools:text="2020-09-28" />
+
+        <TextView
+            android:id="@+id/unitTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="¥"
+            android:textColor="@color/hex_FF4C4C"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/valueTv"
+            app:layout_constraintEnd_toStartOf="@+id/valueTv"
+            app:layout_constraintTop_toTopOf="@+id/valueTv" />
+
+        <TextView
+            android:id="@+id/valueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{rechargeHistoryBean.xyValue}"
+            android:textColor="@color/hex_FF4C4C"
+            android:textSize="32dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rechargeContentTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rechargeContentTv"
+            tools:text="60" />
+
+        <TextView
+            android:id="@+id/payTypeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{rechargeHistoryBean.payType.text}"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/valueTv"
+            tools:text="微信支付" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

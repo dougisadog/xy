@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    >
+
+    <data>
+
+        <variable
+            name="rechargeHistoryDetailViewModel"
+            type="com.meten.xyh.modules.recharge.viewmodel.RechargeHistoryDetailViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/header"
+                layout="@layout/layout_header" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/xyValueCl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/header">
+
+                <TextView
+                    android:id="@+id/xyValueTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@{rechargeHistoryDetailViewModel.item.xyValue}"
+                    android:textColor="@color/hex_1A1A1A"
+                    android:textSize="42dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/xyValueUnitTv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="600" />
+
+                <TextView
+                    android:id="@+id/xyValueUnitTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="希氧币"
+                    android:textColor="@color/hex_1A1A1A"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/xyValueTv"
+                    app:layout_constraintStart_toEndOf="@+id/xyValueTv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/unitTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="¥"
+                android:textColor="@color/hex_FF4C4C"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="@+id/valueTv"
+                app:layout_constraintEnd_toStartOf="@+id/valueTv"
+                app:layout_constraintTop_toTopOf="@+id/valueTv" />
+
+            <TextView
+                android:id="@+id/valueTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="@{rechargeHistoryDetailViewModel.item.xyValue}"
+                android:textColor="@color/hex_FF4C4C"
+                android:textSize="32dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rechargeContentTv"
+                app:layout_constraintEnd_toEndOf="@+id/xyValueCl"
+                app:layout_constraintStart_toStartOf="@+id/xyValueCl"
+                app:layout_constraintTop_toBottomOf="@+id/xyValueCl"
+                tools:text="60" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:orientation="vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/valueTv">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/recharge_detail_text"
+                        android:text="当前状态：" />
+
+                    <TextView
+                        android:id="@+id/stateTv"
+                        style="@style/recharge_detail_text"
+                        android:text="@{rechargeHistoryDetailViewModel.item.state.text}"
+                        tools:text="支付成功" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/recharge_detail_text"
+                        android:text="支付商品：" />
+
+                    <TextView
+                        android:id="@+id/xyTextTv"
+                        style="@style/recharge_detail_text"
+                        android:text="@{rechargeHistoryDetailViewModel.item.xyText}"
+                        tools:text="600希氧币" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/recharge_detail_text"
+                        android:text="支付时间：" />
+
+                    <TextView
+                        android:id="@+id/payDateTv"
+                        style="@style/recharge_detail_text"
+                        android:text="@{rechargeHistoryDetailViewModel.item.dateTime}"
+                        tools:text="2020-09-28 12:36:15" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/recharge_detail_text"
+                        android:text="支付方式：" />
+
+                    <TextView
+                        android:id="@+id/payTypeTv"
+                        style="@style/recharge_detail_text"
+                        android:text="@{rechargeHistoryDetailViewModel.item.payType.text}"
+                        tools:text="支付宝" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/recharge_detail_text"
+                        android:text="交易订单：" />
+
+                    <TextView
+                        android:id="@+id/payOrderNoTv"
+                        style="@style/recharge_detail_text"
+                        android:text="@{rechargeHistoryDetailViewModel.item.orderNo}"
+                        tools:text="202007142133333333333333" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="46dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/recharge_detail_text"
+                        android:text="对此订单有疑惑，请拨打客服热线" />
+
+                    <TextView
+                        android:id="@+id/supportPhoneTv"
+                        style="@style/recharge_detail_text"
+                        android:text="@string/support_tel"
+                        android:textColor="@color/hex_2FD393" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

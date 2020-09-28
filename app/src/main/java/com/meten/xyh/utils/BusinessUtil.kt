@@ -1,5 +1,8 @@
 package com.meten.xyh.utils
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
@@ -50,6 +53,20 @@ object BusinessUtil {
                 verifyCodeTv.isEnabled = true
             }
         })
+    }
+
+    /**
+     * 拨打电话（直接拨打电话）
+     * @param phoneNum 电话号码
+     */
+    fun callPhone(
+        context: Context,
+        phoneNum: String = ContextManager.getContext().getString(R.string.support_tel)
+    ) {
+        val intent = Intent(Intent.ACTION_CALL)
+        val data: Uri = Uri.parse("tel:$phoneNum")
+        intent.data = data
+        context.startActivity(intent)
     }
 }
 
