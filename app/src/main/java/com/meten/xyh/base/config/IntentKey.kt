@@ -12,6 +12,9 @@ object IntentKey {
 
     const val SETTING_KEY = "SETTING_KEY"
 
+    const val SIGNATURE_TYPE_KEY = "SIGNATURE_TYPE_KEY"
+
+
 
 
 }

@@ -9,13 +9,13 @@ import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.adapter.ActionAdapter
 import com.meten.xyh.base.bean.ActionItem
 import com.meten.xyh.databinding.ActivityUserInfoBinding
+import com.meten.xyh.enumeration.SignatureType
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.user.viewmodel.UserInfoViewModel
 import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
 import com.meten.xyh.modules.usersetting.view.SignatureActivity
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.utils.ToastUtil
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 
@@ -75,12 +75,12 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
         actions.add(ActionItem().apply {
             title = "昵称"
             value = user?.userName ?: ""
-            action = { ToastUtil.show("昵称") }
+            action = { SignatureActivity.start(this@UserInfoActivity, SignatureType.NICKNAME) }
         })
         actions.add(ActionItem().apply {
             title = "个性签名"
             value = user?.introduction ?: ""
-            action = { SignatureActivity.start(this@UserInfoActivity) }
+            action = { SignatureActivity.start(this@UserInfoActivity, SignatureType.SIGNATURE) }
         })
         actions.add(ActionItem().apply {
             title = "学习阶段"
@@ -100,7 +100,7 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
         actions.add(ActionItem().apply {
             title = "上课提醒手机"
             value = user?.subUser?.phone ?: ""
-            action = { ToastUtil.show("上课提醒手机") }
+            action = { ChangePhoneActivity.start(this@UserInfoActivity) }
         })
         actions.add(ActionItem().apply {
             title = "登录密码"

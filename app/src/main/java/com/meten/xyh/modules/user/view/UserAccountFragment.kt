@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.FragmentUserAccountBinding
+import com.meten.xyh.modules.recharge.view.RechargeActivity
 import com.meten.xyh.modules.user.viewmodel.UserAccountViewModel
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
@@ -51,6 +52,9 @@ class UserAccountFragment : BaseFragment<FragmentUserAccountBinding, UserAccount
         binding.accountSupportCl.setOnClickListener((NonDoubleClickListener {
             callPhone()
         }))
+        binding.rechargeIv.setOnClickListener(NonDoubleClickListener {
+            RechargeActivity.start(requireContext())
+        })
     }
 
     override fun initViewObserver() {

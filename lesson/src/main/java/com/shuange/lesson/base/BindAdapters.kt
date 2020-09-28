@@ -1,5 +1,6 @@
 package com.shuange.lesson.base
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -11,8 +12,27 @@ import com.shuange.lesson.enumeration.CourseState
 import com.shuange.lesson.modules.topquality.bean.CourseBean
 import com.shuange.lesson.utils.extension.colorValue
 import corelib.util.ContextManager
+import java.math.BigDecimal
 
 object BindAdapters {
+
+    @SuppressLint("SetTextI18n")
+    @BindingAdapter("scale2Price")
+    @JvmStatic
+    fun setScale2Price(tv: TextView, price: Double?) {
+        price?.let {
+            tv.text = BigDecimal(price).setScale(2).toString()
+        }
+
+    }
+
+    @BindingAdapter("selected")
+    @JvmStatic
+    fun setSelected(v: View, selected: Boolean?) {
+        selected?.let {
+            v.isSelected = it
+        }
+    }
 
     @BindingAdapter("image")
     @JvmStatic
@@ -112,7 +132,7 @@ object BindAdapters {
     @BindingAdapter("freeTypeCourseText")
     @JvmStatic
     fun setFreeTypeCourseText(tv: TextView, freeType: Int?) {
-         var text = "免费"
+        var text = "免费"
         freeType?.let {
             when (it) {
                 CourseBean.FREE_TYPE_GREEN -> {

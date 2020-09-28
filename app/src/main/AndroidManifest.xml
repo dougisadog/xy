@@ -39,6 +39,7 @@
         <activity android:name=".modules.user.view.ChangePasswordActivity" />
         <activity android:name=".modules.user.view.ChangePhoneActivity" />
 
+        <activity android:name=".modules.recharge.view.RechargeActivity" />
 
         <activity android:name=".modules.teacher.view.TeacherInfoActivity" />
         <activity android:name=".modules.teacher.view.TeacherListActivity" />

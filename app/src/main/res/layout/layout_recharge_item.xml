@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rechargeBean"
+            type="com.meten.xyh.modules.recharge.bean.RechargeBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="158dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/selector_recharge_item"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        app:selected="@{rechargeBean.isSelected}">
+
+        <TextView
+            android:id="@+id/xyValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{rechargeBean.xyText}"
+            android:textColor="@color/selector_recharge_text_xy"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/rmbValueTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:selected="@{rechargeBean.isSelected}"
+            tools:text="600希氧币" />
+
+        <TextView
+            android:id="@+id/rmbValueTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{rechargeBean.rmbText}"
+            android:textColor="@color/selector_recharge_text_rmb"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/xyValueTv"
+            app:selected="@{rechargeBean.isSelected}"
+            tools:text="60元" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
