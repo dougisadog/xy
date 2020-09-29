@@ -43,4 +43,15 @@
         <item name="android:textSize">15dp</item>
         <item name="android:textColorHint">@color/hex_A2A2A2</item>
     </style>
+
+    <style name="order_base_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+        <item name="maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/hex_555555</item>
+        <item name="android:textSize">12dp</item>
+    </style>
 </resources>

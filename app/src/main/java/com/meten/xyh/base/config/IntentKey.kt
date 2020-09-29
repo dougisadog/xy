@@ -16,6 +16,7 @@ object IntentKey {
 
     const val CHANGE_PWD_VERIFIED_KEY = "CHANGE_PWD_VERIFIED_KEY"
 
+    const val ORDER_STATE = "ORDER_STATE"
 
 
 

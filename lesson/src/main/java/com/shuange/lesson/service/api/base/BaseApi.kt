@@ -7,6 +7,7 @@ import com.shuange.lesson.service.response.base.SuspendResponse
 import corelib.http.ErrorHandlingStatus
 import corelib.http.HttpTask
 import corelib.http.HttpTaskError
+import corelib.util.Log
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
@@ -16,6 +17,7 @@ abstract class BaseApi<DataType : Any> : HttpTask<DataType>() {
     override val baseURL: String = ConfigDef.LESSON_BASE_URL
 
     override fun parseResponse(data: String): DataType {
+        Log.d("response", data)
         val result = Gson().fromJson(data, resultClass.java)
         return result
     }

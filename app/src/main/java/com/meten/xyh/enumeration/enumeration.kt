@@ -20,3 +20,8 @@ enum class PayStateType(val text: String) {
     SUCCESS("支付成功"), FAILED("支付失败")
 }
 
+enum class OrderState(val text: String) {
+    ALL("全部"), PENDING("待支付"), FINISHED("已完成")
+}
+
+

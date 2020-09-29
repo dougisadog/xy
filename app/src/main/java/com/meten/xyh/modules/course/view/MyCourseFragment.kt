@@ -1,21 +1,16 @@
 package com.meten.xyh.modules.course.view
 
-import android.view.Gravity
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import com.meten.xyh.R
 import com.meten.xyh.BR
+import com.meten.xyh.R
 import com.meten.xyh.databinding.FragmentMyCourseBinding
 import com.meten.xyh.modules.course.viewmodel.MyCourseViewModel
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.utils.extension.bind
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 /**
@@ -55,35 +50,9 @@ class MyCourseFragment : BaseFragment<FragmentMyCourseBinding, MyCourseViewModel
     }
 
     private fun initTabIndicator() {
-        binding.tabTl.tabMode = TabLayout.MODE_FIXED
-        binding.tabTl.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if (null == tab) return
-                val tv = TextView(requireContext())
-                tv.layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-                tv.gravity = Gravity.CENTER
-                tv.text = tab.text
-                tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.hex_2FD393))
-                tv.textSize = 18f
-                tab.customView = tv
-            }
+//        binding.tabTl.init(binding.vp, viewModel.pager)
+        binding.indicators.bind(binding.vp, viewModel.pager)
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-                tab?.customView = null
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-
-        })
-        TabLayoutMediator(
-            binding.tabTl, binding.vp
-        ) { tab, position ->
-            tab.text = viewModel.pager[position]
-        }.attach()
     }
 
     private fun initListener() {

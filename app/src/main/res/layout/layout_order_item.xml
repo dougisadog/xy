@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="orderBean"
+            type="com.meten.xyh.modules.order.bean.OrderBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_order_item_shadow">
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="46dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{orderBean.title}"
+            android:textColor="@color/hex_2B2E35"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/stateTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="XXXXXXXXXXXXXXXX课程....." />
+
+        <TextView
+            android:id="@+id/stateTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{orderBean.state.text}"
+            android:textColor="@color/hex_2FD393"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/titleTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/titleTv"
+            tools:text="已完成" />
+
+        <TextView
+            android:id="@+id/countTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="46dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{orderBean.countText}"
+            android:textColor="@color/hex_6E6E6E"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toStartOf="@+id/stateTv"
+            app:layout_constraintStart_toStartOf="@+id/titleTv"
+            app:layout_constraintTop_toBottomOf="@+id/titleTv"
+            tools:text="数量X1" />
+
+        <TextView
+            android:id="@+id/priceTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{orderBean.priceText}"
+            android:textColor="@color/hex_6E6E6E"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/countTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/countTv"
+            tools:text="应付金额：298元" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="14dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/stateTv"
+            app:layout_constraintStart_toStartOf="@+id/titleTv"
+            app:layout_constraintTop_toBottomOf="@+id/countTv">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/order_base_text"
+                    tools:text="订单编号：" />
+
+                <TextView
+                    style="@style/order_base_text"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{orderBean.orderNo}"
+                    tools:text="202007142133333333333333" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/order_base_text"
+                    tools:text="下单时间：" />
+
+                <TextView
+                    style="@style/order_base_text"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{orderBean.orderDate}"
+                    tools:text="2020-07-10 18:29:10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/order_base_text"
+                    tools:text="支付时间：" />
+
+                <TextView
+                    style="@style/order_base_text"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{orderBean.payDate}"
+                    tools:text="2020-07-10 18:29:10" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/order_base_text"
+                    tools:text="页面：" />
+
+                <TextView
+                    style="@style/order_base_text"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{orderBean.pageText}"
+                    tools:text="订单-已完成" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/order_base_text"
+                    tools:text="运单号：" />
+
+                <TextView
+                    style="@style/order_base_text"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{orderBean.expressNo}"
+                    tools:text="11111111111111111111" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
