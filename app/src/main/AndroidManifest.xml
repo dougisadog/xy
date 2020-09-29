@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 <!--                        <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" >-->
-                            <activity android:name=".modules.order.view.OrderActivity" >
+                            <activity android:name=".modules.usersetting.view.InterestActivity" >
 
             <!--        <activity android:name=".modules.login.view.LoginActivity">-->
 
@@ -28,7 +28,7 @@
         <activity android:name=".modules.search.view.SearchActivity" />
 
         <activity android:name=".modules.usersetting.view.StepActivity" />
-        <activity android:name=".modules.usersetting.view.InterestActivity" />
+<!--        <activity android:name=".modules.usersetting.view.InterestActivity" />-->
         <activity android:name=".modules.usersetting.view.ObjectiveActivity" />
         <activity android:name=".modules.usersetting.view.SignatureActivity" />
 

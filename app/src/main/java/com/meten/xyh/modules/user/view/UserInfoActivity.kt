@@ -13,6 +13,7 @@ import com.meten.xyh.enumeration.SignatureType
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.user.viewmodel.UserInfoViewModel
 import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
+import com.meten.xyh.modules.usersetting.view.InterestActivity
 import com.meten.xyh.modules.usersetting.view.SignatureActivity
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
@@ -88,9 +89,10 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
             action = { BaseUserSettingActivity.start(this@UserInfoActivity, UserSettingType.STAGE) }
         })
         actions.add(ActionItem().apply {
+            title = "兴趣"
             title = user?.subUser?.interest ?: ""
             action =
-                { BaseUserSettingActivity.start(this@UserInfoActivity, UserSettingType.INTEREST) }
+                { InterestActivity.start(this@UserInfoActivity) }
         })
         actions.add(ActionItem().apply {
             title = "需提升的"

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="interestBean"
+            type="com.meten.xyh.modules.usersetting.bean.InterestBean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/selector_recharge_item"
+        app:selected="@{interestBean.isSelected}">
+
+        <TextView
+            android:id="@+id/xyValueTv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@{interestBean.text}"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/selector_recharge_text_xy"
+            android:textSize="14dp"
+            app:layout_constraintDimensionRatio="h,105:66"
+            app:selected="@{interestBean.isSelected}"
+            tools:text="旅游英语" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
