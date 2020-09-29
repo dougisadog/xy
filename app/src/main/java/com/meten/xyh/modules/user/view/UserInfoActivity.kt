@@ -89,8 +89,8 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
             action = { BaseUserSettingActivity.start(this@UserInfoActivity, UserSettingType.STAGE) }
         })
         actions.add(ActionItem().apply {
-            title = "兴趣"
-            title = user?.subUser?.interest ?: ""
+            title = "感兴趣的"
+            value = user?.subUser?.interest ?: ""
             action =
                 { InterestActivity.start(this@UserInfoActivity) }
         })

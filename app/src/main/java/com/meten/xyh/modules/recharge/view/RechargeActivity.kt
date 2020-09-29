@@ -12,6 +12,7 @@ import com.meten.xyh.modules.recharge.viewmodel.RechargeViewModel
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
+import com.shuange.lesson.view.dialog.CommonDialog
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 
@@ -89,6 +90,19 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
         }
     }
 
+    fun showSuccessDialog() {
+        CommonDialog(this).apply {
+            contentText = "充值成功"
+            confirmButtonText = "确定"
+        }.show()
+    }
+
+    fun showFailedDialog() {
+        CommonDialog(this).apply {
+            contentText = "充值失败,若您已经付款,请联系客服"
+            confirmButtonText = "确定"
+        }.show()
+    }
 
     override fun initViewObserver() {
     }
