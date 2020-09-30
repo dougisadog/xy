@@ -3,6 +3,7 @@ package com.meten.xyh.modules.recharge.view
 import android.content.Context
 import android.content.Intent
 import androidx.activity.viewModels
+import com.doug.paylib.util.*
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityRechargeBinding
@@ -55,12 +56,23 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
 
     private fun initListener() {
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
+            val callback = object : PayCallback {
+                override fun onSuccess() {
+                }
+
+                override fun onFailed(error: String) {
+                }
+            }
             when (viewModel.payType.value) {
                 PayType.WX -> {
-
+                    //TODO
+                    val request = WepayRequest()
+                    WepayManager.getInstance().pay(request, callback)
                 }
                 PayType.ALIPAY -> {
-
+                    //TODO
+                    val request = AlipayRequest()
+                    AlipayManager.getInstance().pay(this, request, callback)
                 }
             }
 

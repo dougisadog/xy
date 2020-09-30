@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--                        <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" >-->
-                            <activity android:name=".modules.usersetting.view.InterestActivity" >
+                        <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" >
+<!--                            <activity android:name=".modules.usersetting.view.InterestActivity" >-->
 
             <!--        <activity android:name=".modules.login.view.LoginActivity">-->
 
@@ -48,6 +48,11 @@
         <activity android:name=".modules.teacher.view.TeacherListActivity" />
 
         <activity android:name=".modules.news.view.NewsListActivity" />
+
+        <activity
+            android:name="com.meten.xyh.wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
 
 <!--        <activity android:name=".modules.order.view.OrderActivity" />-->
 

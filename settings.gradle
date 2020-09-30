@@ -1,2 +1,3 @@
+include ':paylib'
 include ':app', ':lesson', "mylibrary"
 rootProject.name = "Sample"

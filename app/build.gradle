@@ -42,6 +42,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ':paylib')
     implementation project(path: ':mylibrary')
     implementation project(path: ':lesson')
 

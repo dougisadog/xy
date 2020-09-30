@@ -33,7 +33,7 @@ suspend fun <DataType : Any> HttpTask<DataType>.suspendExecute(): SuspendRespons
         onError { dataType, responseInfo ->
             var exception = responseInfo.error ?: Exception("")
             if (responseInfo.type == HttpTaskError.StatusCode) {
-                exception = TokenErrorException("")
+                exception = TokenErrorException("status error code:${responseInfo.response?.code}")
             }
             coroutine.resume(
                 SuspendResponse(exception)
