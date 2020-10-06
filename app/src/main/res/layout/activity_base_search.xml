@@ -35,27 +35,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@+id/searchIv"
-                android:hint="搜索课程和词汇" />
+                android:hint="搜索课程和词汇"
+                android:text="@{baseSearchViewModel.searchText}" />
 
             <ImageView
                 android:id="@+id/searchIv"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_centerVertical="true"
-                android:scaleType="fitCenter"
-                android:src="@drawable/icon_cancel" />
+                style="@style/edit_search_ic" />
         </RelativeLayout>
 
 
-<!--        <com.google.android.material.tabs.TabLayout-->
-<!--            android:id="@+id/tabTl"-->
-<!--            style="@style/pager_tab"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="35dp"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/searchRl" />-->
+        <!--        <com.google.android.material.tabs.TabLayout-->
+        <!--            android:id="@+id/tabTl"-->
+        <!--            style="@style/pager_tab"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="35dp"-->
+        <!--            android:layout_marginTop="20dp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/searchRl" />-->
 
         <net.lucode.hackware.magicindicator.MagicIndicator
             android:id="@+id/indicators"

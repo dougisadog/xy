@@ -15,4 +15,9 @@ object ConfigDef {
 
     const val MIN_LOADED_SIZE = 3
 
+    const val COURSE_TYPE_STREAM = 10000
+
+    const val DEFAULT_PAGE_SIZE = 50
+
+
 }

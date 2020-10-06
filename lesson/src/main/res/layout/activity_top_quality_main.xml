@@ -51,11 +51,8 @@
 
                     <ImageView
                         android:id="@+id/searchIv"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_centerVertical="true"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/icon_cancel" />
+                        style="@style/edit_search_ic"
+                        />
                 </RelativeLayout>
 
 

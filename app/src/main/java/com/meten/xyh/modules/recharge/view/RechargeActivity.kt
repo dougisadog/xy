@@ -49,7 +49,7 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
 
 
     override fun initView() {
-        binding.header.title.text = "我的账户"
+        binding.header.title.text = "账户充值"
         initListener()
         initRechargeItem()
     }

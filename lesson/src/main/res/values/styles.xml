@@ -111,6 +111,13 @@
         <item name="android:textSize">14dp</item>
         <item name="android:textColorHint">@color/hex_A2A2A2</item>
     </style>
+    <style name="edit_search_ic">
+        <item name="android:layout_width">25dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@drawable/icon_cancel</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
 
     <style name="CustomDialog" parent="android:style/Theme.Dialog">
         <!--背景颜色及和透明程度-->

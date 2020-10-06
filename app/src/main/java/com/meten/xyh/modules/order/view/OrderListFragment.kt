@@ -21,7 +21,7 @@ import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 class OrderListFragment : BaseFragment<FragmentOrderListBinding, OrderListViewModel>() {
 
     companion object {
-        fun newInstance(state: OrderState?): OrderListFragment {
+        fun newInstance(state: OrderState? = null): OrderListFragment {
             val f = OrderListFragment()
             Bundle().apply {
                 state?.let {

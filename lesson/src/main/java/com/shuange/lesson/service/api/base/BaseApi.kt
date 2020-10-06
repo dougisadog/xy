@@ -21,6 +21,12 @@ abstract class BaseApi<DataType : Any> : HttpTask<DataType>() {
         val result = Gson().fromJson(data, resultClass.java)
         return result
     }
+
+    fun addPageParam(startId: String = "0", page: Int, size: Int = ConfigDef.DEFAULT_PAGE_SIZE) {
+        addQuery("id.greaterThan", startId)
+        addQuery("page", page)
+        addQuery("size", size)
+    }
 }
 
 suspend fun <DataType : Any> HttpTask<DataType>.suspendExecute(): SuspendResponse<DataType> {

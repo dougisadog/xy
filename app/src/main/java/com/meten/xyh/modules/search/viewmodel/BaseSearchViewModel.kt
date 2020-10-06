@@ -1,8 +1,12 @@
 package com.meten.xyh.modules.search.viewmodel
 
+import androidx.lifecycle.MutableLiveData
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 
 class BaseSearchViewModel : BaseViewModel() {
+
+    var searchText = MutableLiveData<String>()
 
     var defaultTypeId: Int? = null
 
@@ -10,7 +14,7 @@ class BaseSearchViewModel : BaseViewModel() {
 
     init {
         pager.add(Pair(0, "课程"))
-        pager.add(Pair(1, "直播课程"))
+        pager.add(Pair(ConfigDef.COURSE_TYPE_STREAM, "直播课程"))
         pager.add(Pair(2, "资讯"))
         pager.add(Pair(3, "老师"))
     }

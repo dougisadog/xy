@@ -1,22 +1,32 @@
 package com.meten.xyh.modules.news.viewmodel
 
 import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.modules.news.bean.NewsBean
 import com.meten.xyh.service.api.ArticlesApi
 import com.meten.xyh.service.api.ArticlesWheelsApi
+import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.service.api.base.suspendExecute
-import java.lang.Exception
 
 class NewListViewModel : BaseViewModel() {
+
+    var searchText = MutableLiveData<String>()
 
     var newsItems = ObservableArrayList<BaseItemBean>()
 
     var wheels = mutableListOf<String>()
 
-
     fun loadData() {
+
+    }
+
+    fun loadNews(
+        startId: String = newsItems.lastOrNull()?.id ?: "0",
+        page: Int = 50,
+        onFinished: EmptyTask = null
+    ) {
         startBindLaunch {
             val exception: Exception? = null
             val suspendResult = ArticlesApi().suspendExecute()

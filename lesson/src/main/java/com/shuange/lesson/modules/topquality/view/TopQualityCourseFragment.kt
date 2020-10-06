@@ -7,6 +7,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseFragment
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentTopQualityCourseBinding
@@ -85,6 +86,15 @@ class TopQualityCourseFragment :
             }
             adapter = topQualityAdapter
         }
+    }
+
+    fun search(text: String) {
+        //TODO 直播课程不参与查询
+        if (viewModel.courseType == ConfigDef.COURSE_TYPE_STREAM) {
+            return
+        }
+        viewModel.searchText.value = text
+        viewModel.loadCourses("0")
     }
 
 

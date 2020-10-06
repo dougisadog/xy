@@ -12,6 +12,8 @@ import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityNewsListBinding
 import com.meten.xyh.modules.discovery.adapter.BaseItemAdapter
 import com.meten.xyh.modules.news.viewmodel.NewListViewModel
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.shuange.lesson.BR
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.ImageFragment
@@ -55,7 +57,7 @@ class NewsListActivity :
 
     override fun initView() {
         binding.header.title.text = "英语资讯"
-        viewModel.loadData()
+        viewModel.loadNews("0")
         initListener()
         initViewPager()
         initNews()
@@ -112,6 +114,21 @@ class NewsListActivity :
         binding.header.back.setOnClickListener {
             finish()
         }
+        binding.srl.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                viewModel.loadNews {
+                    binding.srl.finishLoadMore()
+                }
+
+            }
+
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+                viewModel.loadNews("0") {
+                    binding.srl.finishRefresh()
+                }
+
+            }
+        })
     }
 
 

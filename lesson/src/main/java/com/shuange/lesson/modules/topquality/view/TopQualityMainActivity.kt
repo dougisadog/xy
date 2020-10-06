@@ -20,10 +20,12 @@ import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityTopQualityMainBinding
 import com.shuange.lesson.modules.course.adapter.CourseInfoAdapter
 import com.shuange.lesson.modules.course.view.CourseInfoActivity
+import com.shuange.lesson.modules.course.view.CourseListActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityMainViewModel
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.setOnSearchListener
+import com.shuange.lesson.view.NonDoubleClickListener
 import corelib.util.DeviceUtils
 import kotlinx.android.synthetic.main.layout_header.view.*
 
@@ -102,14 +104,19 @@ class TopQualityMainActivity :
     }
 
     private fun initViewPager() {
-        val link =
-            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3844276591,3933131866&fm=26&gp=0.jpg"
-        fragmentAdapter = RecyclePagerAdapter(this, arrayListOf(link, link, link, link)) {
-            ImageFragment.newInstance(link)
+        fragmentAdapter = RecyclePagerAdapter(this, viewModel.pagerData.map {
+            it.image
+        }.toMutableList()) {
+            ImageFragment.newInstance(it)
         }
         with(binding.vp) {
             setRecycleAdapter(fragmentAdapter)
             starAuto()
+            setOnClickListener(NonDoubleClickListener {
+                val id = viewModel.pagerData[currentItem].id
+                val title = viewModel.pagerData[currentItem].title
+                CourseListActivity.start(context, id, title)
+            })
         }
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
     }

@@ -3,7 +3,7 @@ package com.meten.xyh.modules.order.viewmodel
 import androidx.databinding.ObservableArrayList
 import com.meten.xyh.enumeration.OrderState
 import com.meten.xyh.modules.order.bean.OrderBean
-import com.meten.xyh.service.api.TeachersApi
+import com.meten.xyh.service.api.OrdersApi
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.service.api.base.suspendExecute
@@ -24,11 +24,12 @@ class OrderListViewModel : BaseViewModel() {
         onFinished: EmptyTask = null
     ) {
         startBindLaunch(onFinish = onFinished) {
-            val suspendResult = TeachersApi().suspendExecute()
+            val suspendResult = OrdersApi().apply {
+                addPageParam(startId, page) } .suspendExecute()
             suspendResult.getResponse()?.body?.forEach {
-//                teachers.add(TeacherBean().apply {
-//                    setTeacher(it)
-//                })
+                orders.add(OrderBean().apply {
+                    setOrder(it)
+                })
             }
             suspendResult.exception
         }
@@ -41,7 +42,7 @@ class OrderListViewModel : BaseViewModel() {
         for (i in 0 until 6) {
             orders.add(OrderBean().apply {
                 title = "XXXXXXXXXXXXXXXX课程.....$i"
-                state = if (i % 2 == 0) OrderState.PENDING else OrderState.FINISHED
+                state = if (i % 2 == 0) OrderState.NEED_PAID else OrderState.PAID
                 count = i
                 price = i * i
                 orderNo = "20200714213333333333333$i"

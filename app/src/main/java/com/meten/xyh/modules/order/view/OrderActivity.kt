@@ -55,9 +55,9 @@ class OrderActivity : BaseActivity<ActivityOrderBinding, OrderViewModel>() {
 
     private fun initViewPager() {
         val fragments = arrayListOf<Fragment>()
-        fragments.add(OrderListFragment.newInstance(OrderState.ALL))
-        fragments.add(OrderListFragment.newInstance(OrderState.PENDING))
-        fragments.add(OrderListFragment.newInstance(OrderState.FINISHED))
+        fragments.add(OrderListFragment.newInstance())
+        fragments.add(OrderListFragment.newInstance(OrderState.NEED_PAID))
+        fragments.add(OrderListFragment.newInstance(OrderState.PAID))
         mainAdapter = BaseFragmentAdapter(this, fragments)
         with(binding.vp) {
             adapter = mainAdapter

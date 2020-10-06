@@ -8,7 +8,9 @@ import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivityBaseSearchBinding
+import com.meten.xyh.modules.news.view.NewsListFragment
 import com.meten.xyh.modules.search.viewmodel.BaseSearchViewModel
+import com.meten.xyh.modules.teacher.view.TeacherListFragment
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
@@ -71,6 +73,9 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
 //            pager.add(Pair(3, "老师"))
             fragments.add(TopQualityCourseFragment.newInstance(it.first))
             fragments.add(TopQualityCourseFragment.newInstance(it.first))
+            fragments.add(TeacherListFragment.newInstance())
+            fragments.add(NewsListFragment.newInstance())
+
 
         }
         fragmentAdapter = BaseFragmentAdapter(this, fragments)
@@ -95,6 +100,20 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
     }
 
     fun search(text: String) {
+        val currentFragment = fragmentAdapter.fragments[binding.vp.currentItem]
+        val searchText = viewModel.searchText.value ?: ""
+        when (currentFragment) {
+            is TopQualityCourseFragment -> {
+                currentFragment.search(searchText)
+            }
+            is NewsListFragment -> {
+                currentFragment.search(searchText)
+            }
+            is TeacherListFragment -> {
+                currentFragment.search(searchText)
+            }
+        }
+
         ToastUtil.show(text)
     }
 

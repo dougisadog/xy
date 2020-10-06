@@ -2,7 +2,6 @@ package com.shuange.lesson.modules.course.viewmodel
 
 import androidx.databinding.ObservableArrayList
 import com.shuange.lesson.base.viewmodel.BaseViewModel
-import com.shuange.lesson.enumeration.CourseState
 import com.shuange.lesson.modules.course.bean.CourseItem
 import com.shuange.lesson.service.api.LessonDetailApi
 import com.shuange.lesson.service.api.base.suspendExecute

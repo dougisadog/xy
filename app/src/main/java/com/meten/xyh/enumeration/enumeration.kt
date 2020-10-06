@@ -21,7 +21,13 @@ enum class PayStateType(val text: String) {
 }
 
 enum class OrderState(val text: String) {
-    ALL("全部"), PENDING("待支付"), FINISHED("已完成")
+    ALL("全部"), NEED_PAID("待支付"), PAID("已完成"), CANCEL("已取消");
+
+    companion object {
+        fun buildByText(text: String): OrderState {
+            return values().firstOrNull { it.name == text } ?: ALL
+        }
+    }
 }
 
 

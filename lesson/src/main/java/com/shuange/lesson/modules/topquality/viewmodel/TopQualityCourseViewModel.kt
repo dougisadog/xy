@@ -1,11 +1,14 @@
 package com.shuange.lesson.modules.topquality.viewmodel
 
 import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.modules.topquality.bean.CourseBean
 
 class TopQualityCourseViewModel : BaseViewModel() {
+
+    var searchText = MutableLiveData<String>()
 
     var courseType:Int? = null
 
