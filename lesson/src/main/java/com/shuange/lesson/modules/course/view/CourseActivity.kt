@@ -14,7 +14,8 @@ import com.shuange.lesson.databinding.ActivityCourseBinding
 import com.shuange.lesson.enumeration.CourseState
 import com.shuange.lesson.modules.course.adapter.CourseAdapter
 import com.shuange.lesson.modules.course.viewmodel.CourseViewModel
-import com.shuange.lesson.utils.ToastUtil
+import com.shuange.lesson.modules.lesson.view.LessonActivity
+import com.shuange.lesson.modules.topquality.bean.CourseBean
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
@@ -24,10 +25,9 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 class CourseActivity : BaseActivity<ActivityCourseBinding, CourseViewModel>() {
 
     companion object {
-        fun start(context: Context, lessonId: String, title:String) {
+        fun start(bean: CourseBean, context: Context) {
             val i = Intent(context, CourseActivity::class.java)
-            i.putExtra(IntentKey.LESSON_PACKAGE_ID, lessonId)
-            i.putExtra(IntentKey.LESSON_PACKAGE_TITLE, title)
+            i.putExtra(IntentKey.LESSON_PACKAGE_ITEM, bean)
             context.startActivity(i)
         }
     }
@@ -53,12 +53,12 @@ class CourseActivity : BaseActivity<ActivityCourseBinding, CourseViewModel>() {
 
     override fun initParams() {
         super.initParams()
-        viewModel.lessonPackagesId = intent.getStringExtra(IntentKey.LESSON_PACKAGE_ID) ?: return
-        viewModel.title = intent.getStringExtra(IntentKey.LESSON_PACKAGE_TITLE)?:""
+        viewModel.courseBean = intent?.getSerializableExtra(IntentKey.LESSON_PACKAGE_ITEM) as? CourseBean
+            ?: return
     }
 
     override fun initView() {
-        binding.header.title.text = viewModel.title
+        binding.header.title.text = viewModel.courseBean?.title
         viewModel.loadData()
         initCourses()
         initListener()
@@ -83,7 +83,9 @@ class CourseActivity : BaseActivity<ActivityCourseBinding, CourseViewModel>() {
             finish()
         })
         binding.straightCourseCl.setOnClickListener(NonDoubleClickListener {
-            ToastUtil.show("上次学到：4.学问位置》核心课程A")
+            viewModel.courseBean?.record?.let {
+                LessonActivity.start(this, it.lessonModuleId.toString(), it.questionId.toString())
+            }
         })
     }
 

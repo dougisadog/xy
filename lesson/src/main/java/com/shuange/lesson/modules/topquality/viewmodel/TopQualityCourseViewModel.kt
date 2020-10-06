@@ -1,14 +1,38 @@
 package com.shuange.lesson.modules.topquality.viewmodel
 
 import androidx.databinding.ObservableArrayList
+import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.modules.topquality.bean.CourseBean
 
 class TopQualityCourseViewModel : BaseViewModel() {
 
+    var courseType:Int? = null
+
     var topQualityItems = ObservableArrayList<CourseBean>()
 
+
     fun loadData() {
+        loadCourses("0")
+    }
+
+    /**
+     * TODO
+     */
+    fun loadCourses(
+        startId: String = topQualityItems.lastOrNull()?.getItemId() ?: "0",
+        page: Int = 50,
+        onFinished: EmptyTask = null
+    ) {
+//        startBindLaunch(onFinish = onFinished) {
+//            val suspendResult = TeachersApi().suspendExecute()
+//            suspendResult.getResponse()?.body?.forEach {
+////                teachers.add(TeacherBean().apply {
+////                    setTeacher(it)
+////                })
+//            }
+//            suspendResult.exception
+//        }
         initTestData()
     }
 

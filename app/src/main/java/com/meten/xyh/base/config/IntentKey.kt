@@ -18,6 +18,9 @@ object IntentKey {
 
     const val ORDER_STATE = "ORDER_STATE"
 
+    const val SEARCH_TYPE = "SEARCH_TYPE"
+
+
 
 
 

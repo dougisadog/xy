@@ -7,6 +7,10 @@ object DataCache {
 
     var account: AccountBean? = null
 
+    fun accountData(): AccountBean {
+        return requireNotNull(account)
+    }
+
     var users = mutableListOf<UserBean>()
 
     fun currentUser(): UserBean? {

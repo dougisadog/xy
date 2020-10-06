@@ -11,8 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-                        <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" >
-<!--                            <activity android:name=".modules.usersetting.view.InterestActivity" >-->
+<!--                        <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" >-->
+                <activity android:name=".modules.main.view.MainActivity" >
+
 
             <!--        <activity android:name=".modules.login.view.LoginActivity">-->
 

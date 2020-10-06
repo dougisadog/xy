@@ -6,6 +6,9 @@ import com.shuange.lesson.enumeration.LessonType
 import com.shuange.lesson.service.response.bean.Lesson
 import com.shuange.lesson.service.response.bean.Module
 
+/**
+ * lesson UI
+ */
 class CourseItem(private val isTitle: Boolean = false) : MultiItemEntity {
 
     companion object {
@@ -22,7 +25,10 @@ class CourseItem(private val isTitle: Boolean = false) : MultiItemEntity {
 
     var progress = 0
 
+    //TODO
     var state: CourseState? = null
+
+    var sourceUrl:String? = null
 
     val lessonType: LessonType?
         get() {
@@ -37,7 +43,13 @@ class CourseItem(private val isTitle: Boolean = false) : MultiItemEntity {
         courseId = lesson.id.toString()
         name = lesson.name
         courseType = lesson.lessonType
+        //TODO
         progress = lesson.lockedStep
+        when(lessonType) {
+            LessonType.VIDEO -> {
+                sourceUrl = lesson.resourceVideoUrl
+            }
+        }
     }
 
     fun setModule(module: Module) {

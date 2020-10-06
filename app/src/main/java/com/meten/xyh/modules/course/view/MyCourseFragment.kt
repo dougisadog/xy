@@ -10,6 +10,7 @@ import com.meten.xyh.modules.course.viewmodel.MyCourseViewModel
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.modules.topquality.view.TopQualityCourseFragment
 import com.shuange.lesson.utils.extension.bind
 import kotlinx.android.synthetic.main.layout_header.view.*
 
@@ -41,8 +42,8 @@ class MyCourseFragment : BaseFragment<FragmentMyCourseBinding, MyCourseViewModel
 
     private fun initViewPager() {
         val fragments = arrayListOf<Fragment>()
+        fragments.add(TopQualityCourseFragment())
         fragments.add(StreamCourseListFragment())
-        fragments.add(OnlineCourseListFragment())
         fragmentAdapter = BaseFragmentAdapter(this, fragments)
         with(binding.vp) {
             adapter = fragmentAdapter

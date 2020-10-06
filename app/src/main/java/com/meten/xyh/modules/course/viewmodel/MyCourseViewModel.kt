@@ -28,8 +28,8 @@ class MyCourseViewModel : BaseViewModel() {
     }
 
     init {
-        pager.add("直播课程")
         pager.add("线上课程")
+        pager.add("直播课程")
     }
 
     fun loadData() {

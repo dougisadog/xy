@@ -5,7 +5,6 @@ import android.content.Intent
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.viewModels
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -13,7 +12,10 @@ import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.ImageFragment
-import com.shuange.lesson.base.adapter.*
+import com.shuange.lesson.base.adapter.RecyclePagerAdapter
+import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
+import com.shuange.lesson.base.adapter.setRecycleAdapter
+import com.shuange.lesson.base.adapter.starAuto
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityTopQualityMainBinding
 import com.shuange.lesson.modules.course.adapter.CourseInfoAdapter
@@ -112,7 +114,7 @@ class TopQualityMainActivity :
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
     }
 
-    fun bindIndicatorToViewPager(
+    private fun bindIndicatorToViewPager(
         indicatorContainer: LinearLayout,
         viewPager2: ViewPager2,
         selectorRes: Int = R.drawable.selector_indicator

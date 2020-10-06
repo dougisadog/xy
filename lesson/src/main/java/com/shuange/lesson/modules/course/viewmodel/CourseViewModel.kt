@@ -3,14 +3,13 @@ package com.shuange.lesson.modules.course.viewmodel
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.base.viewmodel.BaseViewModel
-import com.shuange.lesson.enumeration.CourseState
 import com.shuange.lesson.modules.course.bean.CourseItem
+import com.shuange.lesson.modules.topquality.bean.CourseBean
 import com.shuange.lesson.service.api.LessonPackagesDetailApi
 import com.shuange.lesson.service.api.base.suspendExecute
 
 class CourseViewModel : BaseViewModel() {
-    var lessonPackagesId:String = ""
-    var title = ""
+    var courseBean:CourseBean? = null
     val lastProcess = MutableLiveData<String>()
 
 
@@ -19,6 +18,8 @@ class CourseViewModel : BaseViewModel() {
 
 
     fun loadData() {
+        val courseBean = courseBean?:return
+        val lessonPackagesId = courseBean.courseId
         testData()
         startBindLaunch {
             val suspendResult = LessonPackagesDetailApi(lessonPackagesId).suspendExecute()
@@ -38,7 +39,6 @@ class CourseViewModel : BaseViewModel() {
     }
 
     fun testData() {
-        title = "title1"
         mainImg.value = "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3844276591,3933131866&fm=26&gp=0.jpg"
         lastProcess.value = "上次学到：4.学问位置》核心课程A"
 //        courses.add(CourseItem().apply {

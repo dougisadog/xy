@@ -4,8 +4,10 @@ import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.service.response.bean.Lesson
 import java.io.File
 import java.io.Serializable
-import kotlin.collections.ArrayList
 
+/**
+ * question 结构
+ */
 class LessonBean(var lessonType: LessonType, var id: String, var lessonId:String? = null) : Serializable {
 
     var text = ""

@@ -59,7 +59,7 @@ class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoVie
                 LinearLayoutManager(this@CourseInfoActivity, RecyclerView.VERTICAL, false)
             courseInfoAdapter.setOnItemClickListener { adapter, view, position ->
                 val current = courseInfoAdapter.data[position]
-                CourseListActivity.start(this@CourseInfoActivity, current.id, current.title)
+                CourseActivity.start(current, this@CourseInfoActivity)
             }
             adapter = courseInfoAdapter
         }

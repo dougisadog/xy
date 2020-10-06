@@ -151,4 +151,14 @@ object BindAdapters {
             }
         }
     }
+
+    @BindingAdapter("lessonFree")
+    @JvmStatic
+    fun setLessonFree(tv: TextView, isFree: Boolean?) {
+        if (null == isFree) {
+            tv.text = ""
+        } else if (isFree) {
+            tv.text = "付费"
+        }
+    }
 }

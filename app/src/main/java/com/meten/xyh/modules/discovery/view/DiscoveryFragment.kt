@@ -1,8 +1,12 @@
 package com.meten.xyh.modules.discovery.view
 
+import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.meten.xyh.BR
@@ -19,12 +23,21 @@ import com.meten.xyh.modules.search.view.SearchActivity
 import com.meten.xyh.modules.teacher.view.TeacherInfoActivity
 import com.meten.xyh.modules.teacher.view.TeacherListActivity
 import com.shuange.lesson.base.BaseFragment
+import com.shuange.lesson.base.ImageFragment
+import com.shuange.lesson.base.adapter.RecyclePagerAdapter
+import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
+import com.shuange.lesson.base.adapter.setRecycleAdapter
+import com.shuange.lesson.base.adapter.starAuto
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.modules.course.view.CourseAllActivity
+import com.shuange.lesson.modules.course.view.CourseListActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.view.TopQualityActivity
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.setOnSearchListener
 import com.shuange.lesson.view.NonDoubleClickListener
+import corelib.util.ContextManager
+import corelib.util.DeviceUtils
 
 class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewModel>() {
 
@@ -36,6 +49,8 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
         get() = R.layout.fragment_discovery
     override val viewModelId: Int
         get() = BR.discoveryViewModel
+
+    lateinit var fragmentAdapter: RecyclePagerAdapter<String>
 
     private val streamLessonAdapter: StreamLessonAdapter by lazy {
         StreamLessonAdapter(
@@ -68,12 +83,57 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
     override fun initView() {
         viewModel.loadData()
         initListener()
-        initViewPage()
+        initViewPager()
+        initMenu()
         initTabIndicator()
         initStreamLessons()
         initTopQuality()
         initTeachers()
         initNews()
+    }
+
+    private fun initViewPager() {
+        fragmentAdapter = RecyclePagerAdapter(this, viewModel.pagerData.map {
+            it.image
+        }.toMutableList()) {
+            ImageFragment.newInstance(it)
+        }
+        with(binding.vp) {
+            setRecycleAdapter(fragmentAdapter)
+            starAuto()
+            setOnClickListener(NonDoubleClickListener {
+                val id = viewModel.pagerData[currentItem].id
+                val title = viewModel.pagerData[currentItem].title
+                CourseListActivity.start(context, id, title)
+            })
+        }
+        bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
+    }
+
+    private fun bindIndicatorToViewPager(
+        indicatorContainer: LinearLayout,
+        viewPager2: ViewPager2,
+        selectorRes: Int = com.shuange.lesson.R.drawable.selector_indicator
+    ) {
+        val a = viewPager2.adapter as? RecyclePagerAdapter<*> ?: return
+        val size = a.data.size
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        val margin = DeviceUtils.toPx(requireContext(), 4)
+        params.setMargins(margin, 0, margin, 0)
+        for (i in 0 until size) {
+            val indicator = ImageView(requireContext())
+            indicator.setImageResource(selectorRes)
+            indicator.layoutParams = params
+            indicatorContainer.addView(indicator)
+        }
+        viewPager2.registerRecycleOnPageChangeCallback { position ->
+            for (i in 0 until size) {
+                indicatorContainer.getChildAt(i).isSelected = i == position
+            }
+        }
     }
 
     fun initStreamLessons() {
@@ -118,48 +178,42 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
         }
     }
 
-    private fun initViewPage() {
-        with(binding.vp) {
+    private fun initMenu() {
+        with(binding.menuVp) {
             val itemsR1 = mutableListOf<MenuItem>()
             itemsR1.add(MenuItem("直播课程", R.drawable.icon_home_zb) {
-                ToastUtil.show("直播课程")
+                ToastUtil.show(ContextManager.getContext().getString(R.string.not_support))
             })
-            itemsR1.add(MenuItem("按主题学", R.drawable.icon_home_fl) {
-                ToastUtil.show("按主题学")
+            itemsR1.add(MenuItem("每日一句", R.drawable.icon_home_mryj) {
+                TopQualityActivity.start(requireActivity())
             })
-            itemsR1.add(MenuItem("按等级学", R.drawable.icon_home_lv) {
-                ToastUtil.show("按等级学")
+            itemsR1.add(MenuItem("赛培课程", R.drawable.icon_home_lv) {
+                CourseAllActivity.start(requireActivity(), 0)
             })
-            itemsR1.add(MenuItem("定制课程", R.drawable.icon_home_dz) {
-                ToastUtil.show("定制课程")
-            })
-            itemsR1.add(MenuItem("免费专区", R.drawable.icon_home_lw) {
-                ToastUtil.show("免费专区")
+            itemsR1.add(MenuItem("教师中心", R.drawable.icon_home_dz) {
+                TeacherListActivity.start(requireActivity())
             })
 
 
             val itemsR2 = mutableListOf<MenuItem>()
-            itemsR2.add(MenuItem("每日一句", R.drawable.icon_home_mryj) {
-                TopQualityActivity.start(requireActivity())
+            itemsR2.add(MenuItem("幼儿课程", R.drawable.icon_home_mryj) {
+                CourseAllActivity.start(requireActivity(), 1)
             })
-            itemsR2.add(MenuItem("赛事主题", R.drawable.icon_home_ss) {
-                ToastUtil.show("赛事主题")
+            itemsR2.add(MenuItem("小学课程", R.drawable.icon_home_ss) {
+                CourseAllActivity.start(requireActivity(), 2)
             })
-            itemsR2.add(MenuItem("有道翻译", R.drawable.icon_home_fy) {
-                ToastUtil.show("有道翻译")
+            itemsR2.add(MenuItem("高中大学", R.drawable.icon_home_fy) {
+                CourseAllActivity.start(requireActivity(), 3)
             })
-            itemsR2.add(MenuItem("发音训练", R.drawable.icon_home_fyxl) {
-                ToastUtil.show("发音训练")
-            })
-            itemsR2.add(MenuItem("出国旅游", R.drawable.icon_home_cgly) {
-                ToastUtil.show("出国旅游")
+            itemsR2.add(MenuItem("大学课程", R.drawable.icon_home_fyxl) {
+                CourseAllActivity.start(requireActivity(), 4)
             })
             val page1 = mutableListOf<MenuItem>()
             page1.addAll(itemsR1)
             page1.addAll(itemsR2)
-            val page2 = mutableListOf<MenuItem>()
-            page2.addAll(itemsR1)
-            adapter = MenuPageAdapter(requireContext(), mutableListOf(page1, page2))
+//            val page2 = mutableListOf<MenuItem>()
+//            page2.addAll(itemsR1)
+            adapter = MenuPageAdapter(requireContext(), mutableListOf(page1))
         }
     }
 
@@ -169,18 +223,15 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
             binding.tabTl, binding.vp
         ) { tab, position ->
         }.attach()
+        binding.tabTl.visibility = View.INVISIBLE
     }
 
     private fun initListener() {
         binding.streamLl.setOnClickListener(NonDoubleClickListener {
-            ToastUtil.show("直播课程 List")
+            ToastUtil.show(ContextManager.getContext().getString(R.string.not_support))
         })
-        binding.resetTopQualityIv.setOnClickListener(NonDoubleClickListener {
-            val source = viewModel.topQualityItems.toMutableList()
-            source.shuffle()
-            viewModel.topQualityItems.clear()
-            viewModel.topQualityItems.addAll(source)
-            ToastUtil.show("精品课程 换一批")
+        binding.topQualityLl.setOnClickListener(NonDoubleClickListener {
+            CourseAllActivity.start(requireActivity())
         })
         binding.teacherLl.setOnClickListener(NonDoubleClickListener {
             TeacherListActivity.start(requireActivity())

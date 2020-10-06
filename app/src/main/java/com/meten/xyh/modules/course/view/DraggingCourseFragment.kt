@@ -1,4 +1,4 @@
-package com.shuange.lesson.modules.media.view
+package com.meten.xyh.modules.course.view
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,28 +8,33 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.databinding.ObservableArrayList
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.shuange.lesson.R
-import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
-import com.shuange.lesson.modules.topquality.bean.CourseBean
-import com.shuange.lesson.view.dialog.CommonDialog
+import com.meten.xyh.R
+import com.meten.xyh.modules.course.adapter.DraggingCourseListAdapter
+import com.meten.xyh.modules.course.bean.DraggingCourseBean
+import com.meten.xyh.modules.course.viewmodel.VideoCourseViewModel
+import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import corelib.util.DeviceUtils
 
 
 class DraggingCourseFragment(
-    val courses: ObservableArrayList<CourseBean>,
-    val buyTask: (String) -> Unit
+    val courses: ObservableArrayList<DraggingCourseBean>
 ) :
     BottomSheetDialogFragment() {
 
-    private val topQualityAdapter: TopQualityAdapter by lazy {
-        TopQualityAdapter(
+    private val draggingCourseListAdapter: DraggingCourseListAdapter by lazy {
+        DraggingCourseListAdapter(
             layout = R.layout.layout_media_course_item,
             data = courses
         )
+    }
+
+    private val videoCourseViewModel: VideoCourseViewModel by activityViewModels {
+        BaseShareModelFactory()
     }
 
     override fun onCreateView(
@@ -60,20 +65,18 @@ class DraggingCourseFragment(
                 RecyclerView.VERTICAL,
                 false
             )
-            topQualityAdapter.setOnItemClickListener { adapter, view, position ->
-                val id = topQualityAdapter.data[position].courseId
-                com.shuange.lesson.utils.ToastUtil.show("item click  topQuality:${topQualityAdapter.data[position].title}")
-                CommonDialog(requireContext()).apply {
-                    contentText = "确定花费100希氧币购买次课程吗？"
-                    cancelButtonText = "残忍拒绝"
-                    confirmButtonText = "确认购买"
-                    onClick = {
-                        buyTask.invoke(id)
-                    }
-                }.show()
+            draggingCourseListAdapter.setOnItemClickListener { adapter, view, position ->
+                val isFree = draggingCourseListAdapter.data[position].isFree
+//                com.shuange.lesson.utils.ToastUtil.show("item click  topQuality:${topQualityAdapter.data[position].title}")
+                if (isFree == true) {
+                    videoCourseViewModel.resetMedia(position)
+                }
+                else {
+                    videoCourseViewModel.buyCourse()
+                }
             }
 //            isNestedScrollingEnabled = false
-            adapter = topQualityAdapter
+            adapter = draggingCourseListAdapter
         }
     }
 

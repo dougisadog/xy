@@ -6,7 +6,7 @@ class Article : BaseBean() {
     var appId: String = ""
     var appInfoId: Int = -1
     var appInfoName: String = ""
-    var content: String = ""
+    var content: String = ""     //TODO html 片段
     var enabled: Boolean = true
     var hits: Int = 0
     var imageUrl: String = ""

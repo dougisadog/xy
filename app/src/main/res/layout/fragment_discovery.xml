@@ -65,24 +65,34 @@
 
                 >
 
-                <com.shuange.lesson.view.CustomRoundAngleImageView
-                    android:id="@+id/contentIv"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:scaleType="fitXY"
-                    android:src="@color/hex_3AD08F"
-                    app:layout_constraintDimensionRatio="h,343:140"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:radius="16dp" />
-
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/vp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/hex_3AD08F"
+                    app:layout_constraintDimensionRatio="h,343:140"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/indicatorContainerLl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@+id/vp"
+                    app:layout_constraintEnd_toEndOf="@+id/vp"
+                    app:layout_constraintBottom_toBottomOf="@+id/vp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    />
+
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/menuVp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="26dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/contentIv" />
+                    app:layout_constraintTop_toBottomOf="@+id/vp" />
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabTl"
@@ -144,15 +154,29 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/streamRv" />
 
-                <ImageView
-                    android:id="@+id/resetTopQualityIv"
+                <LinearLayout
+                    android:id="@+id/topQualityLl"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/icon_home_hyp"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
                     app:layout_constraintBottom_toBottomOf="@+id/topQualityTitle"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/topQualityTitle" />
+                    app:layout_constraintTop_toTopOf="@+id/topQualityTitle">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="2dp"
+                        android:gravity="center"
+                        android:text="查看全部"
+                        android:textColor="@color/hex_A2A2A2"
+                        android:textSize="14dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_home_more" />
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/topQualityRv"

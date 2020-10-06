@@ -8,6 +8,10 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.meten.xyh.R
+import com.meten.xyh.modules.course.view.MediaCourseActivity
+import com.shuange.lesson.enumeration.LessonPackageType
+import com.shuange.lesson.modules.course.view.CourseActivity
+import com.shuange.lesson.modules.topquality.bean.CourseBean
 import corelib.util.ContextManager
 
 object BusinessUtil {
@@ -67,6 +71,17 @@ object BusinessUtil {
         val data: Uri = Uri.parse("tel:$phoneNum")
         intent.data = data
         context.startActivity(intent)
+    }
+
+    fun startCourse(context: Context, courseBean: CourseBean) {
+        when (courseBean.packageType) {
+            LessonPackageType.BASE-> {
+                CourseActivity.start(courseBean, context)
+            }
+            LessonPackageType.VIDEO-> {
+                MediaCourseActivity.start(courseBean, context)
+            }
+        }
     }
 }
 

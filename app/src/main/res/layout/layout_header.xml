@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="新增用户 "
+        android:text="新增用户"
         android:textColor="@color/hex_2B2E35"
         android:textSize="20dp"
         android:textStyle="bold"

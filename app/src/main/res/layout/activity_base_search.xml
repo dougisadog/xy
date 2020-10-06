@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="topQualityViewModel"
-            type="com.shuange.lesson.modules.topquality.viewmodel.TopQualityViewModel" />
+            name="baseSearchViewModel"
+            type="com.meten.xyh.modules.search.viewmodel.BaseSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +45,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/icon_cancel" />
         </RelativeLayout>
+
 
 <!--        <com.google.android.material.tabs.TabLayout-->
 <!--            android:id="@+id/tabTl"-->

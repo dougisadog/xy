@@ -4,13 +4,13 @@ import androidx.fragment.app.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.FragmentUserAccountBinding
+import com.meten.xyh.modules.order.view.OrderActivity
 import com.meten.xyh.modules.recharge.view.RechargeActivity
 import com.meten.xyh.modules.user.viewmodel.UserAccountViewModel
 import com.meten.xyh.utils.BusinessUtil
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.modules.topquality.view.CollectionActivity
-import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 
 
@@ -42,8 +42,7 @@ class UserAccountFragment : BaseFragment<FragmentUserAccountBinding, UserAccount
             ChangeUserActivity.start(requireContext())
         }))
         binding.accountOrderCl.setOnClickListener((NonDoubleClickListener {
-            //TODO
-            ToastUtil.show("my order")
+            OrderActivity.start(requireContext())
         }))
         binding.accountRemarkCl.setOnClickListener((NonDoubleClickListener {
             CollectionActivity.start(requireContext())
@@ -53,6 +52,9 @@ class UserAccountFragment : BaseFragment<FragmentUserAccountBinding, UserAccount
         }))
         binding.rechargeIv.setOnClickListener(NonDoubleClickListener {
             RechargeActivity.start(requireContext())
+        })
+        binding.accountBg.setOnClickListener(NonDoubleClickListener {
+            UserInfoActivity.start(requireContext())
         })
     }
 

@@ -5,6 +5,7 @@ import com.meten.xyh.modules.discovery.bean.StreamLessonBean
 import com.meten.xyh.modules.news.bean.NewsBean
 import com.meten.xyh.modules.teacher.bean.TeacherBean
 import com.meten.xyh.service.api.ArticlesRecommendApi
+import com.meten.xyh.service.api.TeachersRecommendApi
 import com.meten.xyh.service.response.ArticlesResponse
 import com.meten.xyh.service.response.TeachersResponse
 import com.shuange.lesson.base.BaseItemBean
@@ -20,6 +21,8 @@ import kotlinx.coroutines.awaitAll
 
 open class DiscoveryViewModel : BaseViewModel() {
 
+    val pagerData = mutableListOf<CourseBean>()
+
     var streamLessons = ObservableArrayList<StreamLessonBean>()
 
     var teachers = ObservableArrayList<TeacherBean>()
@@ -32,7 +35,7 @@ open class DiscoveryViewModel : BaseViewModel() {
         startBindLaunch {
             var exception: Exception? = null
             val tasks = arrayListOf(async { ArticlesRecommendApi().suspendExecute() },
-                async { ArticlesRecommendApi().suspendExecute() },
+                async { TeachersRecommendApi().suspendExecute() },
                 async { LessonPackagesRecommendApi().suspendExecute() }
             )
             val results = tasks.awaitAll()
@@ -105,6 +108,12 @@ open class DiscoveryViewModel : BaseViewModel() {
                     if (i == 0) null else if (i == 1) CourseBean.FREE_TYPE_GREEN else CourseBean.FREE_TYPE_ORANGE
             })
             newsItems.add(NewsBean().apply {
+                title = "news$i"
+                content = "news content$i"
+                image = baseImg
+            })
+
+            pagerData.add(CourseBean().apply {
                 title = "news$i"
                 content = "news content$i"
                 image = baseImg

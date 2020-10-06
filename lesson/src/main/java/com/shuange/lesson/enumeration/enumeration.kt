@@ -4,8 +4,13 @@ enum class CourseState(val text: String) {
     START("尚未开始"), IN_PROGRESS("进行中"), FINISHED("已完成"), LOCKED("未解锁")
 }
 
-enum class LessonType(val text: String) {
+enum class LessonPackageType(val text: String) {
     BASE("BASE"), VIDEO("VIDEO")
+}
+
+//TODO
+enum class LessonType(val text: String) {
+    BASE("BASE"), VIDEO("VIDEO"), AUDIO("AUDIO")
 }
 
 enum class Gender(val text: String) {

@@ -24,9 +24,13 @@ import java.math.BigDecimal
 class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
 
     companion object {
-        fun start(context: Context, moduleId: String) {
+        fun start(context: Context, moduleId: String, lastQuestionId:String? = null) {
             val i = Intent(context, CourseActivity::class.java)
             i.putExtra(IntentKey.MODULE_ID, moduleId)
+            lastQuestionId?.let {
+                i.putExtra(IntentKey.LAST_QUESTION_ID, it)
+
+            }
             context.startActivity(i)
         }
     }
@@ -83,6 +87,11 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
         viewModel.loaded.observe(this, Observer {
             if (null != it) {
                 val index = viewModel.targetIndex
+                val lastIndex = viewModel.getLastIndex()
+                //预先额外加载3个index跳转
+                if (index - lastIndex>= ConfigDef.MIN_LOADED_SIZE) {
+                    binding.vp.currentItem = lastIndex
+                }
                 val lessonBean = viewModel.lessons[index]
                 viewModel.targetIndex++
                 BaseLessonFragment.newInstance(lessonBean)?.let { f ->
@@ -91,6 +100,13 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
                     viewModel.loaded.value = null
                 }
                 viewModel.loadLessonSource()
+            }
+            else {
+                val lastIndex = viewModel.getLastIndex()
+                //最后3个index 在所有资源加载后跳转
+                if (lastIndex + ConfigDef.MIN_LOADED_SIZE >= viewModel.lessons.size) {
+                    binding.vp.currentItem = lastIndex
+                }
             }
         })
         viewModel.next.observe(this, Observer {

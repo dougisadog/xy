@@ -19,6 +19,8 @@ open class LessonViewModel : BaseViewModel() {
 
     var moduleId = ""
 
+    var lastQuestionId: String? = null
+
     //命
     val life = MutableLiveData<Int>()
 
@@ -46,11 +48,27 @@ open class LessonViewModel : BaseViewModel() {
 //        getLessonsData()
     }
 
+    /**
+     * 上次进度
+     */
+    fun getLastIndex(): Int {
+        val targetIndex = lessons.indexOfFirst {
+            it.id == lastQuestionId
+        }
+        if (-1 == targetIndex) {
+            return 0
+        }
+        return targetIndex
+    }
+
+    /**
+     * 获取所有module下的数据
+     */
     fun getLessonsData() {
         startBindLaunch {
             val result = ModuleDetailApi(moduleId).suspendExecute()
             result.getResponse()?.body?.let {
-               val lessonBeans =  it.questions.map {
+                val lessonBeans = it.questions.map {
                     var lesson: LessonBean? = null
                     var questionResourceType: QuestionResourceType? = null
                     var inputType: InputType? = null
@@ -150,6 +168,9 @@ open class LessonViewModel : BaseViewModel() {
         loadLessonSource()
     }
 
+    /**
+     * 下载指定index的question数据
+     */
     fun loadLessonSource() {
         startBindLaunch {
             val lessonData = lessons[targetIndex]
