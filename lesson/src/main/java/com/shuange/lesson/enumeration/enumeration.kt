@@ -5,7 +5,7 @@ enum class CourseState(val text: String) {
 }
 
 enum class LessonPackageType(val text: String) {
-    BASE("BASE"), VIDEO("VIDEO")
+    BASE("BASE"), LIVE("LIVE"), VIDEO("VIDEO")
 }
 
 //TODO

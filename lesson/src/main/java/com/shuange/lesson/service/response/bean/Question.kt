@@ -1,19 +1,14 @@
 package com.shuange.lesson.service.response.bean
 
 data class Question(
-    val createdBy: String,
-    val createdDate: String,
-    val id: Int,
     val inputType: String,
-    val lastModifiedBy: String,
-    val lastModifiedDate: String,
-    val lessonId: Int,
-    val lessonModuleId: Int,
-    val lessonPackageId: Int,
+    val lessonId: Long,
+    val lessonModuleId: Long,
+    val lessonPackageId: Long,
     val options: List<Option>,
     val questionResourceType: String,
     val questionResourceContent: String,
-    val questionResourceId: Int,
+    val questionResourceId: Long,
     val record: Record,
     val score: Int,
     val showAudio: Boolean,
@@ -21,7 +16,7 @@ data class Question(
     val showText: Boolean,
     val showVideo: Boolean,
     val sortNo: Int
-) {
+):BaseBean() {
     var questionResourceImageUrl: String? = null
     var questionResourceAudioUrl: String? = null
     var questionResourceVideoUrl: String? = null

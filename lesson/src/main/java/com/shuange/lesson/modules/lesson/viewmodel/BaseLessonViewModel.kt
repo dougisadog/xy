@@ -26,6 +26,7 @@ open class BaseLessonViewModel : BaseViewModel() {
             }
             lessonId ?: return@startBindLaunch null
             val request = UserLessonRecordRequest(
+//                id = DataCachec
                 lessonId = lessonId,
                 questionId = questionId,
                 score = lessonBean.score

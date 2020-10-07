@@ -47,6 +47,7 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
 
     lateinit var lessonAdapter: BaseFragmentAdapter
 
+
     var isChangingPage = false
 
     val handler by lazy { Handler() }
@@ -76,6 +77,7 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
             override fun onPageSelected(position: Int) {
                 viewModel.progress.value =
                     BigDecimal(100.0 * (position + 1) / viewModel.lessons.size).roundInt()
+                isChangingPage = false
             }
         })
         binding.closeIv.setOnClickListener {
@@ -116,7 +118,7 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
                 handler.postDelayed({
                     next()
                     viewModel.next.value = false
-                }, ConfigDef.pagerDelay)
+                }, 0)
             }
         })
 

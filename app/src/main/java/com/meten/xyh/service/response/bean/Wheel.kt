@@ -4,7 +4,7 @@ import com.shuange.lesson.service.response.bean.BaseBean
 
 class Wheel : BaseBean() {
     var appId: String = ""
-    var appInfoId: Int = 0
+    var appInfoId: Long = 0
     var appInfoName: String = ""
     var content: String = ""
     var enabled: Boolean = true

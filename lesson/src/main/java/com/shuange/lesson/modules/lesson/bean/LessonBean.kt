@@ -26,10 +26,10 @@ class LessonBean(var lessonType: LessonType, var id: String, var lessonId:String
     fun setLesson(lesson:Lesson) {
         id = lesson.id.toString()
         text = lesson.description
-        //TODO  01 Lesson 没有图片地址
         setImage(lesson.resourceId.toString())
-        setVideo(lesson.resourceVideoUrl)
-        setAudio(lesson.resourceAudioUrl)
+        lesson.resourceVideoUrl?.let { setVideo(it) }
+        lesson.resourceAudioUrl?.let { setAudio(it) }
+        lesson.resourceImageUrl?.let { setImage(it) }
     }
 
     val defaultDic:String

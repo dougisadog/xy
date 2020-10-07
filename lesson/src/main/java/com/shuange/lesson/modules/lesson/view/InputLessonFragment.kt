@@ -9,6 +9,7 @@ import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentInputLessonBinding
+import com.shuange.lesson.modules.lesson.bean.InputData
 import com.shuange.lesson.modules.lesson.viewmodel.InputLessonViewModel
 import com.shuange.lesson.utils.extension.setCenterImage
 import com.shuange.lesson.view.Keyboard8View
@@ -31,6 +32,11 @@ class InputLessonFragment :
 
     private fun initContent() {
         viewModel.lessonBean?.let {
+            it.inputData = InputData().apply {
+                text = it.text
+                words = it.selections.filter { selection -> selection.bingo }
+                    .map { selection -> selection.text }.toMutableList()
+            }
             binding.imageIv.setCenterImage(it)
             refreshTitle()
         }

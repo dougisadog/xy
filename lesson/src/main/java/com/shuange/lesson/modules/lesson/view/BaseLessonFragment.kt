@@ -97,7 +97,7 @@ abstract class BaseLessonFragment<BD : ViewDataBinding, VM : BaseLessonViewModel
     fun next(isDelay: Boolean = false) {
         val task = {
             lessonViewModel.next.value = true
-            viewModel.saveLessonProcess()
+//            viewModel.saveLessonProcess()
         }
         if (isDelay) {
             android.os.Handler().postDelayed({

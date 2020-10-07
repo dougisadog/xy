@@ -13,5 +13,5 @@ class Recharge : BaseBean() {
     var refundStatus: String = ""
     var tradeNo: String = ""
     var transactionId: String = ""
-    var userId: Int = 0
+    var userId: Long = 0
 }

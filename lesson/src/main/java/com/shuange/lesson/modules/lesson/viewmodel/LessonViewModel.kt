@@ -63,6 +63,7 @@ open class LessonViewModel : BaseViewModel() {
      * 获取所有module下的数据
      */
     fun getLessonsData() {
+        //TODO test
         GlobalScope.launch(Dispatchers.Main) {
 //        startBindLaunch {
             val result = ModuleDetailApi(moduleId).suspendExecute()
@@ -103,18 +104,20 @@ open class LessonViewModel : BaseViewModel() {
                             val s = Selection()
                             s.text = op.resourceContent
                             val imageSource = SourceData()
-                            imageSource.url = op.resourceImageUrl
+                            imageSource.url = op.resourceImageUrl?:""
                             imageSource.name = op.resourceId.toString()
                             imageSource.dictionary = defaultDic
                             s.img = imageSource
                             val audioSource = SourceData()
-                            audioSource.url = op.resourceImageUrl
+                            audioSource.url = op.resourceAudioUrl?:""
                             audioSource.name = op.resourceId.toString()
                             audioSource.dictionary = defaultDic
                             s.audio = audioSource
                             s.bingo = op.isRight
                             selections.add(s)
                         }
+                        //选项随机
+                        selections.shuffle()
                         score = it.score.toDouble()
                         if (lessonType == LessonType.TYPE_02 || lessonType == LessonType.TYPE_16) {
                             initRecord()

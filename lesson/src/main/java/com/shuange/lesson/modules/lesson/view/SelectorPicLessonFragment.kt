@@ -29,6 +29,9 @@ class SelectorPicLessonFragment :
     private fun initContent() {
         viewModel.lessonBean?.let {
             binding.topContainer.titleTv.text = it.text
+            if (null == it.audio) {
+                binding.topContainer.audioIv.visibility = View.GONE
+            }
         }
     }
 
@@ -47,9 +50,11 @@ class SelectorPicLessonFragment :
     }
 
     private fun initListener() {
-        binding.topContainer.audioIv.setOnClickListener(NonDoubleClickListener {
-            playAudio()
-        })
+        if (null !=  viewModel.lessonBean?.audio) {
+            binding.topContainer.audioIv.setOnClickListener(NonDoubleClickListener {
+                playAudio()
+            })
+        }
     }
 
     override fun initViewObserver() {

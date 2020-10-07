@@ -1,13 +1,12 @@
 package com.meten.xyh.service.response.bean
 
-import com.shuange.lesson.service.response.bean.BaseBean
 import com.shuange.lesson.utils.RequestClass
 
 @RequestClass
 class SubUser {
-    var id: Int = -1
+    var id: Long = -1
     var age: Int = 0
-    var appInfoId: Int = 0
+    var appInfoId: Long = 0
     var avatarUrl: String = ""
     var city: String = ""
     var gender: String = ""
@@ -18,7 +17,7 @@ class SubUser {
     var phone: String = ""
     var province: String = ""
     var stage: String = ""
-    var userId: Int = -1
+    var userId: Long = -1
 }
 //description:
 //用户

@@ -19,5 +19,8 @@ object ConfigDef {
 
     const val DEFAULT_PAGE_SIZE = 50
 
+    const val TYPE_07_UNDERLINE = "____"
+
+
 
 }

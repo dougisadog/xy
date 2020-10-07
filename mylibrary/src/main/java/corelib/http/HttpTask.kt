@@ -10,6 +10,7 @@ import corelib.VoidFunction
 import corelib.extension.append
 import corelib.extension.intTag
 import corelib.extension.lowercased
+import corelib.extension.removeFirst
 import corelib.util.Log
 import corelib.util.QueryUtils
 import okhttp3.*
@@ -21,7 +22,6 @@ import java.nio.charset.Charset
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLContext
 import kotlin.reflect.KClass
-import corelib.extension.removeFirst
 
 
 /**

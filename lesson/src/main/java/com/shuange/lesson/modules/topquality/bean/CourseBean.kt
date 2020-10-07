@@ -34,7 +34,8 @@ open class CourseBean : BaseItemBean(), PagerItem, Serializable {
             freeType = null
         }
         try {
-            packageType = LessonPackageType.valueOf(lessonPackage.lessonType)
+            // lessonPackage.lessonType 暂时无用
+            packageType = LessonPackageType.valueOf(lessonPackage.lessonMode)
         } catch (e: Exception) {
             Log.e("courseBean", "lesson package type 转换错误 ${e.message}")
         }

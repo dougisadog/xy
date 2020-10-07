@@ -17,45 +17,10 @@ enum class LessonType {
     TYPE_16;
 
     companion object {
-        //        enum class QuestionResourceType(val text: String) {
-//            ALL("ALL"), TEXT("TEXT"), VIDEO("VIDEO"), AUDIO("AUDIO")
-//        }
-//
-//        enum class InputType(val text: String) {
-//            OPTION_TEXT("OPTION_TEXT"),
-//            OPTION_TEXT_AUDIO("OPTION_TEXT_AUDIO"),
-//            OPTION_AUDIO("OPTION_AUDIO"),
-//            OPTION_IMAGE("OPTION_IMAGE"),
-//            FILL_IN("FILL_IN"),
-//            SPEECH("SPEECH")
-//        }
-//        LessonType.TYPE_01 -> {
-//            f = NormalLessonFragment()
-//        }
-//        LessonType.TYPE_02 -> {
-//            f = ReadingLessonFragment()
-//        }
-//        LessonType.TYPE_03, LessonType.TYPE_07 -> {
-//            f = SelectorLessonFragment()
-//        }
-//        LessonType.TYPE_05, LessonType.TYPE_06, LessonType.TYPE_08, LessonType.TYPE_13, LessonType.TYPE_14 -> {
-//            f = SelectorPicLessonFragment()
-//        }
-//        LessonType.TYPE_10 -> {
-//            f = InputLessonFragment()
-//        }
-//        LessonType.TYPE_15 -> {
-//            f = VideoLessonFragment()
-//        }
-//        LessonType.TYPE_16 -> {
-//            f = RecordingLessonFragment()
-//        }
 
         fun getLessonType(
-//            questionResourceType: QuestionResourceType?,
             inputType: InputType?
         ): LessonType? {
-//            questionResourceType?:return null
             inputType ?: return null
             val selectorTypes = arrayListOf(
                 InputType.OPTION_TEXT,

@@ -4,7 +4,7 @@ import com.shuange.lesson.service.response.bean.BaseBean
 
 class Article : BaseBean() {
     var appId: String = ""
-    var appInfoId: Int = -1
+    var appInfoId: Long = -1
     var appInfoName: String = ""
     var content: String = ""     //TODO html 片段
     var enabled: Boolean = true

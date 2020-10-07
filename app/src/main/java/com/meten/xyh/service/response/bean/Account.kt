@@ -5,7 +5,7 @@ import com.shuange.lesson.service.response.bean.BaseBean
 class Account : BaseBean() {
     val activated: Boolean = false
     val appId: String = ""
-    val appInfoId: Int = 0
+    val appInfoId: Long = 0
     val appInfoName: String = ""
     val authorities: List<String> = arrayListOf()
     val avatarUrl: String = ""

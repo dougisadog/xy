@@ -9,13 +9,16 @@
 
     <TextView
         android:id="@+id/selectionTv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/base_side_width"
+        android:layout_marginStart="20dp"
         android:gravity="center"
         android:scaleType="fitXY"
         android:textColor="@color/hex_464646"
         android:textSize="28dp"
+        android:autoSizeMaxTextSize="28dp"
+        android:autoSizeMinTextSize="8dp"
         android:textStyle="bold"
         android:layout_centerInParent="true"
         tools:text="Goodbye" />

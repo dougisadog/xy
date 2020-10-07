@@ -1,11 +1,14 @@
 package com.shuange.lesson.modules.lesson.view
 
+import android.view.View
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentSelectorLessonBinding
+import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.modules.lesson.viewmodel.SelectorLessonViewModel
 import com.shuange.lesson.utils.extension.setCenterImage
 import com.shuange.lesson.view.NonDoubleClickListener
@@ -27,11 +30,27 @@ class SelectorLessonFragment :
     private fun initContent() {
         viewModel.lessonBean?.let {
             binding.imageIv.setCenterImage(it)
-            binding.topContainer.titleTv.text = it.text
+            if (null == it.audio) {
+                binding.topContainer.audioIv.visibility = View.GONE
+            }
+            val targetText = it.text
+            //07题型使用下划线代替文本对应答案内容
+            if (it.lessonType == LessonType.TYPE_07) {
+                val answer = it.selections.firstOrNull { it.bingo }?.text
+                if (null != answer) {
+                    targetText.replace(answer, ConfigDef.TYPE_07_UNDERLINE)
+                }
+            }
+            binding.topContainer.titleTv.text = targetText
         }
     }
 
     private fun initListener() {
+        if (null != viewModel.lessonBean?.audio) {
+            binding.topContainer.audioIv.setOnClickListener(NonDoubleClickListener {
+                playAudio()
+            })
+        }
     }
 
     override fun initViewObserver() {

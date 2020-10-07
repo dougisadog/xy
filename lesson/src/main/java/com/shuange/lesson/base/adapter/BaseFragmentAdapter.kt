@@ -3,9 +3,8 @@ package com.shuange.lesson.base.adapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.shuange.lesson.base.BaseFragment
 
-class BaseFragmentAdapter :
+open class BaseFragmentAdapter :
     FragmentStateAdapter {
     val fragments: MutableList<Fragment>
 
