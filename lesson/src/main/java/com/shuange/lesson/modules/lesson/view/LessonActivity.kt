@@ -15,7 +15,6 @@ import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityLessonBinding
-import com.shuange.lesson.modules.course.view.CourseActivity
 import com.shuange.lesson.modules.lesson.viewmodel.LessonViewModel
 import com.shuange.lesson.utils.ToastUtil
 import corelib.extension.roundInt
@@ -25,7 +24,7 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
 
     companion object {
         fun start(context: Context, moduleId: String, lastQuestionId:String? = null) {
-            val i = Intent(context, CourseActivity::class.java)
+            val i = Intent(context, LessonActivity::class.java)
             i.putExtra(IntentKey.MODULE_ID, moduleId)
             lastQuestionId?.let {
                 i.putExtra(IntentKey.LAST_QUESTION_ID, it)
@@ -54,7 +53,8 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
 
     override fun initParams() {
         super.initParams()
-        viewModel.moduleId = intent.getStringExtra(IntentKey.LESSON_ID) ?: return
+        viewModel.moduleId = intent.getStringExtra(IntentKey.MODULE_ID) ?: return
+        viewModel.lastQuestionId = intent.getStringExtra(IntentKey.LAST_QUESTION_ID)
     }
 
     override fun initView() {

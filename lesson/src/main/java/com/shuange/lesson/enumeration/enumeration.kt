@@ -22,10 +22,13 @@ enum class QuestionResourceType(val text: String) {
 }
 
 enum class InputType(val text: String) {
+    NONE("NONE"),
     OPTION_TEXT("OPTION_TEXT"),
     OPTION_TEXT_AUDIO("OPTION_TEXT_AUDIO"),
     OPTION_AUDIO("OPTION_AUDIO"),
     OPTION_IMAGE("OPTION_IMAGE"),
+    OPTION_VIDEO("OPTION_VIDEO"),
     FILL_IN("FILL_IN"),
-    SPEECH("SPEECH")
+    SPEECH("SPEECH"),
+    WRITE("WRITE")
 }

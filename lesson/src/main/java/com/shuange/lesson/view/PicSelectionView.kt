@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import com.bumptech.glide.Glide
 import com.shuange.lesson.R
 import com.shuange.lesson.modules.lesson.bean.Selection
 import com.shuange.lesson.utils.extension.setSelectionImage
@@ -51,12 +50,13 @@ class PicSelectionView : FrameLayout {
         resultIv.visibility = VISIBLE
         if (selection.bingo) {
             resultIv.setBackgroundResource(R.drawable.bg_pic_selection_right)
+            resultIv.setImageResource(R.drawable.icon_selection_right)
         } else {
             resultIv.setBackgroundResource(R.drawable.bg_pic_selection_wrong)
+            resultIv.setImageResource(R.drawable.icon_selection_wrong)
         }
         resultIv.background.mutate().alpha = (0.85 * 255).toInt()
-        //TODO
-        resultIv.setImageResource(R.drawable.icon_cancel)
+
         return selection.bingo
     }
 }

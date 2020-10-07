@@ -1,8 +1,6 @@
 package com.shuange.lesson.modules.lesson.other
 
 import com.shuange.lesson.enumeration.InputType
-import com.shuange.lesson.enumeration.QuestionResourceType
-import com.shuange.lesson.modules.lesson.view.*
 
 enum class LessonType {
     TYPE_01,
@@ -52,31 +50,42 @@ enum class LessonType {
 //        LessonType.TYPE_16 -> {
 //            f = RecordingLessonFragment()
 //        }
+
         fun getLessonType(
-            questionResourceType: QuestionResourceType?,
+//            questionResourceType: QuestionResourceType?,
             inputType: InputType?
         ): LessonType? {
-            questionResourceType?:return null
-            inputType?:return null
+//            questionResourceType?:return null
+            inputType ?: return null
             val selectorTypes = arrayListOf(
                 InputType.OPTION_TEXT,
                 InputType.OPTION_AUDIO,
                 InputType.OPTION_TEXT_AUDIO
             )
+            val normalTypes = arrayListOf(InputType.NONE)
             val selectorImageTypes = arrayListOf(InputType.OPTION_IMAGE)
             val inputTypes = arrayListOf(InputType.FILL_IN)
             val recordingTypes = arrayListOf(InputType.SPEECH)
 
+            val writeTypes = arrayListOf(InputType.WRITE)
 
-            if (selectorTypes.contains(inputType)) {
+
+            if (normalTypes.contains(inputType)) {
+                return TYPE_01
+            } else if (recordingTypes.contains(inputType)) {
+                return TYPE_02
+            } else if (selectorTypes.contains(inputType)) {
                 return TYPE_03
             } else if (selectorImageTypes.contains(inputType)) {
                 return TYPE_05
             } else if (inputTypes.contains(inputType)) {
+                return TYPE_07
+            } else if (writeTypes.contains(inputType)) {
                 return TYPE_10
-            } else if (recordingTypes.contains(inputType)) {
-                return TYPE_16
             }
+//            else if (writeTypes.contains(inputType)) {
+//                return TYPE_16
+//            }
             return null
         }
     }

@@ -16,11 +16,19 @@ open class InterestViewModel : BaseViewModel() {
         return interests.filter { it.isSelected }.toMutableList()
     }
 
-    fun saveSetting(text: String = getResults().firstOrNull()?.text ?: "") {
+    fun saveSetting() {
+
+        val target = StringBuilder()
+        getResults().forEachIndexed { index, interestBean ->
+            if (index != 0) {
+                target.append(",")
+            }
+            target.append(interestBean.text)
+        }
         DataCache.users.first {
             it.current
         }.let {
-            it.subUser?.interest = text
+            it.subUser?.interest = target.toString()
         }
     }
 

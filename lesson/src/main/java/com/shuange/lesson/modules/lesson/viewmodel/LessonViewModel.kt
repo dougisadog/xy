@@ -3,7 +3,6 @@ package com.shuange.lesson.modules.lesson.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.enumeration.InputType
-import com.shuange.lesson.enumeration.QuestionResourceType
 import com.shuange.lesson.modules.lesson.bean.InputData
 import com.shuange.lesson.modules.lesson.bean.LessonBean
 import com.shuange.lesson.modules.lesson.bean.Selection
@@ -12,8 +11,7 @@ import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.service.api.ModuleDetailApi
 import com.shuange.lesson.service.api.base.DownloadApi
 import com.shuange.lesson.service.api.base.suspendExecute
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.*
 
 open class LessonViewModel : BaseViewModel() {
 
@@ -44,8 +42,8 @@ open class LessonViewModel : BaseViewModel() {
 
     fun loadData() {
         life.value = 8
-        getLessons()
-//        getLessonsData()
+//        getLessons()
+        getLessonsData()
     }
 
     /**
@@ -65,21 +63,24 @@ open class LessonViewModel : BaseViewModel() {
      * 获取所有module下的数据
      */
     fun getLessonsData() {
-        startBindLaunch {
+        GlobalScope.launch(Dispatchers.Main) {
+//        startBindLaunch {
             val result = ModuleDetailApi(moduleId).suspendExecute()
             result.getResponse()?.body?.let {
                 val lessonBeans = it.questions.map {
                     var lesson: LessonBean? = null
-                    var questionResourceType: QuestionResourceType? = null
                     var inputType: InputType? = null
 
                     try {
-                        questionResourceType = QuestionResourceType.valueOf(it.questionResourceType)
                         inputType = InputType.valueOf(it.inputType)
-                        LessonType.getLessonType(
-                            questionResourceType,
-                            inputType
-                        )?.let { type ->
+                        val lessonType = if (it.showVideo) {
+                            LessonType.TYPE_15
+                        } else {
+                            LessonType.getLessonType(
+                                inputType
+                            )
+                        }
+                        lessonType?.let { type ->
                             lesson = LessonBean(type, it.id.toString(), moduleId)
                         }
                     } catch (e: Exception) {
@@ -90,13 +91,13 @@ open class LessonViewModel : BaseViewModel() {
                             text = it.questionResourceContent
                         }
                         if (it.showImage) {
-                            setImage(it.questionResourceImageUrl)
+                            it.questionResourceImageUrl?.let { it1 -> setImage(it1) }
                         }
                         if (it.showAudio) {
-                            setAudio(it.questionResourceAudioUrl)
+                            it.questionResourceAudioUrl?.let { it1 -> setAudio(it1) }
                         }
                         if (it.showVideo) {
-                            setVideo(it.questionResourceVideoUrl)
+                            it.questionResourceVideoUrl?.let { it1 -> setVideo(it1) }
                         }
                         it.options.forEach { op ->
                             val s = Selection()
@@ -182,14 +183,6 @@ open class LessonViewModel : BaseViewModel() {
             loaded.value = true
             null
         }
-    }
-
-    /**
-     * 记录进度
-     */
-    fun saveRecord() {
-
-
     }
 
 }

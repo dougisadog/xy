@@ -15,7 +15,6 @@ import com.shuange.lesson.enumeration.CourseState
 import com.shuange.lesson.modules.course.adapter.CourseListAdapter
 import com.shuange.lesson.modules.course.viewmodel.CourseListViewModel
 import com.shuange.lesson.modules.lesson.view.LessonActivity
-import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 import com.shuange.lesson.view.dialog.CommonDialog
 import kotlinx.android.synthetic.main.layout_header.view.*
@@ -27,7 +26,7 @@ class CourseListActivity : BaseActivity<ActivityCourseListBinding, CourseListVie
 
     companion object {
         fun start(context: Context, lessonId: String, title: String) {
-            val i = Intent(context, CourseActivity::class.java)
+            val i = Intent(context, CourseListActivity::class.java)
             i.putExtra(IntentKey.LESSON_ID, lessonId)
             i.putExtra(IntentKey.LESSON_TITLE, title)
             context.startActivity(i)

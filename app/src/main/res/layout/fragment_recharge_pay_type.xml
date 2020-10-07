@@ -48,7 +48,7 @@
                         android:layout_height="46dp"
                         android:layout_centerVertical="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/icon_cancel" />
+                        android:src="@drawable/icon_alipay" />
 
                     <ImageView
                         android:id="@+id/alipayCheck"
@@ -57,7 +57,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/icon_cancel" />
+                        android:src="@drawable/selector_pay_type" />
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -73,7 +73,7 @@
                         android:layout_height="46dp"
                         android:layout_centerVertical="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/icon_cancel" />
+                        android:src="@drawable/icon_wepay" />
 
                     <ImageView
                         android:id="@+id/wepayCheck"
@@ -82,7 +82,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
                         android:scaleType="fitXY"
-                        android:src="@drawable/icon_cancel" />
+                        android:src="@drawable/selector_pay_type" />
                 </RelativeLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
