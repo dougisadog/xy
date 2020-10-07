@@ -21,13 +21,8 @@
             android:id="@+id/topContainer"
             style="@style/title_container"
             layout="@layout/layout_title" />
+        <!--        <item name="layout_constraintDimensionRatio">h,1:1</item>-->
 
-        <com.shuange.lesson.view.CustomRoundAngleImageView
-            android:id="@+id/imageIv"
-            style="@style/middle_img"
-            android:layout_marginTop="40dp"
-            app:layout_constraintTop_toBottomOf="@+id/topContainer"
-            tools:src="@drawable/icon_cancel" />
 
         <TextView
             android:id="@+id/nextTv"
@@ -35,6 +30,16 @@
             android:layout_marginBottom="58dp"
             android:text="下一题"
             app:layout_constraintBottom_toBottomOf="parent" />
+
+        <com.shuange.lesson.view.CustomRoundAngleImageView
+            android:id="@+id/imageIv"
+            style="@style/scale_img"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintTop_toBottomOf="@+id/topContainer"
+            app:layout_constraintBottom_toTopOf="@+id/nextTv"
+            tools:src="@drawable/icon_cancel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@ object BusinessUtil {
     ) {
         val params = LinearLayout.LayoutParams(width, width)
         params.setMargins(1, 0, 1, 0)
-        target.removeAllViews()
+//        target.removeAllViews()
         for (i in 0 until max) {
             val img = ImageView(target.context)
             img.layoutParams = params
@@ -30,13 +30,13 @@ object BusinessUtil {
 
     fun getStartsByScore(score: Double): Int {
         return when {
-            score > 80.0 -> {
+            score > 0.8 -> {
                 3
             }
-            score > 60.0 -> {
+            score > 0.6 -> {
                 2
             }
-            score > 40.0 -> {
+            score > 0.4 -> {
                 1
             }
             else -> {

@@ -89,7 +89,7 @@ class Keyboard8View : LinearLayout {
     fun initSourceData(arr: MutableList<String>) {
         process = 0
         source.clear()
-        source.addAll(arr)
+        source.addAll(arr.map { it.toLowerCase() })
 
         fullWords = ""
         source.forEach {

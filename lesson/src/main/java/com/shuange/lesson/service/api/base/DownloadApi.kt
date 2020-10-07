@@ -3,6 +3,7 @@ package com.shuange.lesson.service.api.base
 import com.shuange.lesson.modules.lesson.bean.SourceData
 import corelib.http.DownLoadHttpTask
 import corelib.http.TaskState
+import corelib.util.Log
 import kotlinx.coroutines.suspendCancellableCoroutine
 import okhttp3.Call
 import okhttp3.Callback
@@ -21,6 +22,10 @@ class DownloadApi(
 
 
     suspend fun suspendDownload(): Long {
+        if (sourceData.url.isBlank()) {
+            Log.e("DownloadApi", "not valid source ${sourceData.name}")
+            return 0
+        }
         if (state == TaskState.RUNNING) {
             return 0
         }

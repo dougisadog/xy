@@ -1,8 +1,8 @@
 package com.shuange.lesson.service.request
 
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.enumeration.Gender
 import com.shuange.lesson.utils.RequestClass
-import com.shuange.lesson.base.config.ConfigDef
 
 @RequestClass
 class InitRequest(var login: String) {
@@ -16,4 +16,5 @@ class InitRequest(var login: String) {
     var province: String? = null
     var rememberMe: Boolean = true
     val secret: String = ConfigDef.APP_SECRET
+    var age = 0
 }

@@ -33,12 +33,12 @@ class SelectorLessonFragment :
             if (null == it.audio) {
                 binding.topContainer.audioIv.visibility = View.GONE
             }
-            val targetText = it.text
+            var targetText = it.text
             //07题型使用下划线代替文本对应答案内容
             if (it.lessonType == LessonType.TYPE_07) {
                 val answer = it.selections.firstOrNull { it.bingo }?.text
                 if (null != answer) {
-                    targetText.replace(answer, ConfigDef.TYPE_07_UNDERLINE)
+                    targetText = targetText.replace(answer, ConfigDef.TYPE_07_UNDERLINE)
                 }
             }
             binding.topContainer.titleTv.text = targetText

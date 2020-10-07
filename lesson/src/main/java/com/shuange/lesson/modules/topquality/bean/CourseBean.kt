@@ -26,6 +26,7 @@ open class CourseBean : BaseItemBean(), PagerItem, Serializable {
         courseId = lessonPackage.id.toString()
         title = lessonPackage.name
         content = lessonPackage.description
+        image = lessonPackage.imageUrl?:""
         price = lessonPackage.price
         //TODO 已购/免费 类型解析
         if (lessonPackage.haveBought) {

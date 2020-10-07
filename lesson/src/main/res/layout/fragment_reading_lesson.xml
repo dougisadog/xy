@@ -37,7 +37,6 @@
                 android:id="@+id/resultIv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/hex_2FD393"
                  />
         </LinearLayout>
 
@@ -67,7 +66,6 @@
             android:id="@+id/imageIv"
             style="@style/scale_img"
             android:layout_marginTop="60dp"
-            android:layout_marginBottom="120dp"
             android:maxWidth="@dimen/base_image_width"
             tools:src="@drawable/icon_cancel"
             app:layout_constraintBottom_toTopOf="@+id/recordingIv"

@@ -82,6 +82,8 @@ dependencies {
     api 'com.tencent.taisdk:taisdk:1.2.0.61'
 
     api 'com.github.hackware1993:MagicIndicator:1.7.0' // for androidx
+    api 'me.grantland:autofittextview:0.2.+'
+
 
 
 

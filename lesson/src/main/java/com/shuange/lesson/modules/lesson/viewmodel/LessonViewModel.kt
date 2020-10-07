@@ -1,6 +1,7 @@
 package com.shuange.lesson.modules.lesson.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.enumeration.InputType
 import com.shuange.lesson.modules.lesson.bean.InputData
@@ -25,8 +26,8 @@ open class LessonViewModel : BaseViewModel() {
     //进程
     val progress = MutableLiveData<Int>()
 
-    //下一页
-    val next = MutableLiveData<Boolean>()
+    //指定跳转页
+    val next = MutableLiveData<Int>()
 
     //回答错误
     val wrong = MutableLiveData<Boolean>()
@@ -43,18 +44,17 @@ open class LessonViewModel : BaseViewModel() {
     fun loadData() {
         life.value = 8
 //        getLessons()
-        getLessonsData()
     }
 
     /**
      * 上次进度
      */
-    fun getLastIndex(): Int {
+    fun getLastIndex(): Int? {
         val targetIndex = lessons.indexOfFirst {
             it.id == lastQuestionId
         }
         if (-1 == targetIndex) {
-            return 0
+            return null
         }
         return targetIndex
     }
@@ -62,7 +62,7 @@ open class LessonViewModel : BaseViewModel() {
     /**
      * 获取所有module下的数据
      */
-    fun getLessonsData() {
+    fun getLessonsData(onSuccess:EmptyTask) {
         //TODO test
         GlobalScope.launch(Dispatchers.Main) {
 //        startBindLaunch {
@@ -103,16 +103,20 @@ open class LessonViewModel : BaseViewModel() {
                         it.options.forEach { op ->
                             val s = Selection()
                             s.text = op.resourceContent
-                            val imageSource = SourceData()
-                            imageSource.url = op.resourceImageUrl?:""
-                            imageSource.name = op.resourceId.toString()
-                            imageSource.dictionary = defaultDic
-                            s.img = imageSource
-                            val audioSource = SourceData()
-                            audioSource.url = op.resourceAudioUrl?:""
-                            audioSource.name = op.resourceId.toString()
-                            audioSource.dictionary = defaultDic
-                            s.audio = audioSource
+                            op.resourceImageUrl?.let {
+                                val imageSource = SourceData()
+                                imageSource.url = it
+                                imageSource.name = op.resourceId.toString()
+                                imageSource.dictionary = defaultDic
+                                s.img = imageSource
+                            }
+                            op.resourceAudioUrl?.let {
+                                val audioSource = SourceData()
+                                audioSource.url = it
+                                audioSource.name = op.resourceId.toString()
+                                audioSource.dictionary = defaultDic
+                                s.audio = audioSource
+                            }
                             s.bingo = op.isRight
                             selections.add(s)
                         }
@@ -127,6 +131,7 @@ open class LessonViewModel : BaseViewModel() {
                 }
                 lessons.addAll(lessonBeans.filterNotNull())
             }
+            onSuccess?.invoke()
             loadLessonSource()
             result.exception
         }

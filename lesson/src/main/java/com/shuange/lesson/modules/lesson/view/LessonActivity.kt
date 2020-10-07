@@ -17,8 +17,6 @@ import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityLessonBinding
 import com.shuange.lesson.modules.lesson.viewmodel.LessonViewModel
 import com.shuange.lesson.utils.ToastUtil
-import corelib.extension.roundInt
-import java.math.BigDecimal
 
 class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
 
@@ -59,9 +57,11 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
     }
 
     override fun initView() {
-        initLessons()
-        initListener()
         viewModel.loadData()
+        viewModel.getLessonsData {
+            initLessons()
+            initListener()
+        }
     }
 
     private fun initLessons() {
@@ -69,16 +69,19 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
         lessonAdapter = BaseFragmentAdapter(this, lessonsFragments)
         with(binding.vp) {
             adapter = lessonAdapter
+            offscreenPageLimit = viewModel.lessons.size
         }
     }
 
     private fun initListener() {
+        binding.progressPb.max = viewModel.lessons.size
         binding.vp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                viewModel.progress.value =
-                    BigDecimal(100.0 * (position + 1) / viewModel.lessons.size).roundInt()
+                viewModel.progress.value = position + 1
+//                    BigDecimal(100.0 * (position + 1) / viewModel.lessons.size).roundInt()
                 isChangingPage = false
             }
+
         })
         binding.closeIv.setOnClickListener {
             finish()
@@ -91,8 +94,9 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
                 val index = viewModel.targetIndex
                 val lastIndex = viewModel.getLastIndex()
                 //预先额外加载3个index跳转
-                if (index - lastIndex>= ConfigDef.MIN_LOADED_SIZE) {
+                if (null != lastIndex && index - lastIndex>= ConfigDef.MIN_LOADED_SIZE) {
                     binding.vp.currentItem = lastIndex
+                    viewModel.lastQuestionId = null
                 }
                 val lessonBean = viewModel.lessons[index]
                 viewModel.targetIndex++
@@ -106,20 +110,18 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
             else {
                 val lastIndex = viewModel.getLastIndex()
                 //最后3个index 在所有资源加载后跳转
-                if (lastIndex + ConfigDef.MIN_LOADED_SIZE >= viewModel.lessons.size) {
+                if (null != lastIndex && lastIndex + ConfigDef.MIN_LOADED_SIZE >= viewModel.lessons.size) {
                     binding.vp.currentItem = lastIndex
+                    viewModel.lastQuestionId = null
                 }
             }
         })
         viewModel.next.observe(this, Observer {
             if (isChangingPage) return@Observer
-            if (it == true) {
                 isChangingPage = true
                 handler.postDelayed({
-                    next()
-                    viewModel.next.value = false
+                    next(it)
                 }, 0)
-            }
         })
 
         viewModel.wrong.observe(this, Observer {
@@ -133,11 +135,11 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
         })
     }
 
-    fun next() {
+    fun next(index:Int) {
         if (viewModel.targetIndex <= ConfigDef.MIN_LOADED_SIZE) return
-        val current = binding.vp.currentItem
-        if (current < lessonAdapter.itemCount - 1) {
-            binding.vp.setCurrentItem(current + 1, true)
+        val current = index
+        if (current < lessonAdapter.itemCount) {
+            binding.vp.setCurrentItem(current, true)
         }
     }
 

@@ -18,7 +18,6 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.logging.HttpLoggingInterceptor
 import java.io.IOException
 import java.net.SocketException
-import java.nio.charset.Charset
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.SSLContext
 import kotlin.reflect.KClass
@@ -483,7 +482,7 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
         get() {
             return mapOf()
         }
-    open val requestEncoding: Charset = Charsets.UTF_8
+    open val requestEncoding: String = Charsets.UTF_8.displayName()
 
     /**
      * request params init et..

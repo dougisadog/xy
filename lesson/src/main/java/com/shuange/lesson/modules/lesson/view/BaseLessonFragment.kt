@@ -95,8 +95,10 @@ abstract class BaseLessonFragment<BD : ViewDataBinding, VM : BaseLessonViewModel
     }
 
     fun next(isDelay: Boolean = false) {
+        val currentIndex = lessonViewModel.lessons.indexOf(viewModel.lessonBean)
+        if (-1 == currentIndex) return
         val task = {
-            lessonViewModel.next.value = true
+            lessonViewModel.next.value = currentIndex + 1
 //            viewModel.saveLessonProcess()
         }
         if (isDelay) {

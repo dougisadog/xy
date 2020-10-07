@@ -70,6 +70,8 @@ open class ReadingLessonFragment :
             TAIOralManager.oral.let {
                 if (it.isRecording) {
                     it.stopRecord()
+                    binding.recordingIv.visibility = View.INVISIBLE
+                    binding.recordingLabel.visibility = View.INVISIBLE
                 } else {
                     val path = viewModel.lessonBean?.record?.getFullPath() ?: ""
                     startRecordingWithPermissionCheck(path)

@@ -44,7 +44,7 @@ class CourseItem(private val isTitle: Boolean = false) : MultiItemEntity {
         name = lesson.name
         courseType = lesson.lessonType
         //TODO
-        progress = lesson.lockedStep
+        progress = lesson.starNum
         when(lessonType) {
             LessonType.VIDEO -> {
                 sourceUrl = lesson.resourceVideoUrl

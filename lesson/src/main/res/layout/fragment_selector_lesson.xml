@@ -27,7 +27,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="140dp"
+            android:layout_marginBottom="40dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,12 +38,15 @@
         <com.shuange.lesson.view.CustomRoundAngleImageView
             android:id="@+id/imageIv"
             style="@style/scale_img"
+            android:scaleType="fitCenter"
             android:layout_marginTop="60dp"
             android:layout_marginBottom="20dp"
             android:maxWidth="@dimen/base_image_width"
-            tools:src="@drawable/icon_cancel"
             app:layout_constraintBottom_toTopOf="@+id/selectionsLl"
-            app:layout_constraintTop_toBottomOf="@+id/topContainer" />
+            app:layout_constraintTop_toBottomOf="@+id/topContainer"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="32dp"
+            tools:src="@drawable/icon_cancel" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

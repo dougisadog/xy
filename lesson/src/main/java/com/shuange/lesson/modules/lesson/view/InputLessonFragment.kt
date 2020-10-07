@@ -24,8 +24,8 @@ class InputLessonFragment :
 
     override fun initView() {
         super.initView()
-        initKeyboard()
         initContent()
+        initKeyboard()
         initListener()
         viewModel.done.value = true
     }

@@ -26,7 +26,6 @@ class CourseActivity : BaseActivity<ActivityCourseBinding, CourseViewModel>() {
 
     companion object {
         fun start(bean: CourseBean, context: Context) {
-            bean.id = "41"
             val i = Intent(context, CourseActivity::class.java)
             i.putExtra(IntentKey.LESSON_PACKAGE_ITEM, bean)
             context.startActivity(i)

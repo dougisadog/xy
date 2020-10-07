@@ -14,6 +14,7 @@ class CourseAdapter(layout: Int, data: ObservableArrayList<CourseItem>?) :
     override fun convert(helper: ListViewHolder?, item: CourseItem?) {
         helper?.binding?.setVariable(BR.courseItem, item)
         (helper?.binding as? LayoutCourseItemBinding)?.let {
+            it.startsContainer.removeAllViews()
             BusinessUtil.refreshResult(
                 target = it.startsContainer,
                 stars = item?.progress ?: 0,
