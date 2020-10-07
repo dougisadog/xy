@@ -33,14 +33,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <TextView
-                android:id="@+id/resultTv"
+            <ImageView
+                android:id="@+id/resultIv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="Great"
                 android:textColor="@color/hex_2FD393"
-                android:textSize="28dp"
-                android:textStyle="bold" />
+                 />
         </LinearLayout>
 
         <ImageView
@@ -71,7 +69,7 @@
             android:layout_marginTop="60dp"
             android:layout_marginBottom="120dp"
             android:maxWidth="@dimen/base_image_width"
-            android:src="@drawable/icon_cancel"
+            tools:src="@drawable/icon_cancel"
             app:layout_constraintBottom_toTopOf="@+id/recordingIv"
             app:layout_constraintTop_toBottomOf="@+id/topContainer" />
 

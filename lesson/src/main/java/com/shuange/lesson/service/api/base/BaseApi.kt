@@ -22,7 +22,7 @@ abstract class BaseApi<DataType : Any> : HttpTask<DataType>() {
         return result
     }
 
-    fun addPageParam(startId: String = "0", page: Int, size: Int = ConfigDef.DEFAULT_PAGE_SIZE) {
+    fun addPageParam(startId: String = "0", page: Int = 0, size: Int = ConfigDef.DEFAULT_PAGE_SIZE) {
         addQuery("id.greaterThan", startId)
         addQuery("page", page)
         addQuery("size", size)

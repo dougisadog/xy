@@ -49,7 +49,7 @@
                 android:layout_marginTop="60dp"
                 android:layout_marginBottom="20dp"
                 android:maxWidth="@dimen/base_image_width"
-                android:src="@drawable/icon_cancel"
+                tools:src="@drawable/icon_cancel"
                 app:layout_constraintBottom_toTopOf="@+id/selectionsLl"
                 app:layout_constraintDimensionRatio="h,343:194"
                 app:layout_constraintEnd_toEndOf="parent"

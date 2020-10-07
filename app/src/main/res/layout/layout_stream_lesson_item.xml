@@ -13,8 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/menuTitleRl"
         android:layout_width="221dp"
-        android:layout_marginEnd="10dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp">
 
         <com.shuange.lesson.view.CustomRoundAngleImageView
             android:id="@+id/imageIv"
@@ -27,17 +27,27 @@
             app:radius="16dp"
             tools:src="@drawable/icon_cancel" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:image="@{streamLessonBean.snapshot}"
+            app:layout_constraintBottom_toTopOf="@+id/titleTv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/icon_play" />
+
         <TextView
             android:id="@+id/titleTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:text="@{streamLessonBean.title}"
             android:textColor="@color/hex_2B2E35"
             android:textSize="14dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageIv"
-            android:text="@{streamLessonBean.title}"
             tools:text="夏天的天气炎热，冒险也能轻松" />
 
         <TextView
@@ -45,11 +55,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
+            android:text="@{streamLessonBean.teacher}"
             android:textColor="@color/hex_A2A2A2"
             android:textSize="11dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleTv"
-            android:text="@{streamLessonBean.teacher}"
             tools:text="JENNY老师" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

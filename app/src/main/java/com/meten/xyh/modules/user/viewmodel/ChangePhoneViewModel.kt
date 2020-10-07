@@ -2,6 +2,8 @@ package com.meten.xyh.modules.user.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.base.viewmodel.VerifyMessageViewModel
+import com.meten.xyh.service.api.ChangeRemindApi
+import com.meten.xyh.service.api.SendVerifyCodeForRemindApi
 import com.meten.xyh.utils.BusinessUtil
 
 open class ChangePhoneViewModel : VerifyMessageViewModel() {
@@ -10,9 +12,8 @@ open class ChangePhoneViewModel : VerifyMessageViewModel() {
 
     fun changePhone() {
         if (checkPhone()) {
-            sendVerifyCode()
+            ChangeRemindApi(phone.value ?: return).execute()
         }
-        //TODO
     }
 
     fun sendVerifyMessage() {
@@ -24,7 +25,7 @@ open class ChangePhoneViewModel : VerifyMessageViewModel() {
     fun checkPhone(): Boolean {
         val phoneText = phone.value
         if (phoneText.isNullOrBlank()) {
-            error.value = "原密码不能为空"
+            error.value = "手机号不能为空"
             return false
         }
         val p = BusinessUtil.checkValidPhone(phoneText)
@@ -34,5 +35,10 @@ open class ChangePhoneViewModel : VerifyMessageViewModel() {
             error.value = p.second
             false
         }
+    }
+
+    override fun sendMessage() {
+        val phone = phone.value ?: return
+        SendVerifyCodeForRemindApi(phone).execute()
     }
 }

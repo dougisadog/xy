@@ -13,4 +13,8 @@ class LessonPackagesApi : BaseTokenApi<LessonPackagesResponse>() {
         get() = "/api/v1.0/lesson-packages"
     override val resultClass: KClass<LessonPackagesResponse>
         get() = LessonPackagesResponse::class
+
+    fun search(text: String) {
+        addQuery("lessonPackageName.like", text)
+    }
 }

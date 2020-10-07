@@ -48,7 +48,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:radius="16dp"
-                        tools:src="@drawable/icon_cancel" />
+                        tools:src="@drawable/icon_cancel"
+                        android:visibility="gone"
+                        />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv"
@@ -86,7 +88,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_cancel"
+                android:src="@drawable/icon_next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

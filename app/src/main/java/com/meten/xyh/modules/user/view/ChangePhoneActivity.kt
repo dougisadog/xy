@@ -49,6 +49,10 @@ class ChangePhoneActivity : BaseActivity<ActivityChangePhoneBinding, ChangePhone
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
             viewModel.changePhone()
         })
+        binding.verifyCodeTv.setOnClickListener(NonDoubleClickListener {
+            viewModel.sendVerifyMessage()
+        })
+
     }
 
     override fun initViewObserver() {

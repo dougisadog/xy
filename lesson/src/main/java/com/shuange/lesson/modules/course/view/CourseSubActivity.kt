@@ -11,13 +11,15 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
-import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityCourseSubBinding
 import com.shuange.lesson.modules.course.viewmodel.CourseSubViewModel
 import kotlinx.android.synthetic.main.layout_header.view.*
 
+/**
+ * todo 未知？
+ */
 class CourseSubActivity : BaseActivity<ActivityCourseSubBinding, CourseSubViewModel>() {
 
     override val viewModel: CourseSubViewModel by viewModels {

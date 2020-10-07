@@ -37,7 +37,7 @@
             android:layout_height="12dp"
             android:layout_marginStart="14dp"
             android:scaleType="fitXY"
-            android:src="@drawable/icon_cancel"
+            android:src="@drawable/selector_heart"
             app:layout_constraintBottom_toBottomOf="@+id/heartTv"
             app:layout_constraintStart_toStartOf="@+id/img"
             app:layout_constraintTop_toTopOf="@+id/heartTv" />

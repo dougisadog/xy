@@ -13,7 +13,7 @@ class RechargeViewModel : BaseViewModel() {
     val balance = MutableLiveData<Double>(0.0)
 
 
-    val payType = MutableLiveData<PayType>(PayType.WX)
+    val payType = MutableLiveData<PayType>(PayType.WECHAT)
 
     init {
         rechargeItems.add(RechargeBean().apply {
@@ -36,5 +36,9 @@ class RechargeViewModel : BaseViewModel() {
             xyValue = 6000
             isSelected = false
         })
+    }
+
+    fun createOrder() {
+
     }
 }

@@ -4,9 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.base.viewmodel.VerifyMessageViewModel
 import com.meten.xyh.service.api.LoginApi
 import com.meten.xyh.service.api.RegisterApi
+import com.meten.xyh.service.api.SendVerifyCodeApi
 import com.meten.xyh.service.api.SubUsersApi
 import com.meten.xyh.service.request.LoginRequest
 import com.meten.xyh.service.request.RegisterRequest
+import com.meten.xyh.utils.BusinessUtil
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.service.api.base.suspendExecute
 
@@ -44,6 +46,26 @@ open class LoginViewModel : VerifyMessageViewModel() {
             }
             onSuccess?.invoke()
             exception
+        }
+    }
+
+    override fun sendMessage() {
+        val phone = username.value ?: return
+        SendVerifyCodeApi(phone).execute()
+    }
+
+    fun checkPhone(): Boolean {
+        val phoneText = username.value
+        if (phoneText.isNullOrBlank()) {
+            error.value = "手机号不能为空"
+            return false
+        }
+        val p = BusinessUtil.checkValidPhone(phoneText)
+        return if (p.first) {
+            true
+        } else {
+            error.value = p.second
+            false
         }
     }
 

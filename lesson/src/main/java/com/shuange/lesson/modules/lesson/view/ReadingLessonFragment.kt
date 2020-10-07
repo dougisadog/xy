@@ -14,16 +14,12 @@ import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentReadingLessonBinding
 import com.shuange.lesson.modules.lesson.viewmodel.ReadingLessonViewModel
 import com.shuange.lesson.taioral.TAIOralManager
-import com.shuange.lesson.taioral.parser
 import com.shuange.lesson.taioral.startRecord
 import com.shuange.lesson.taioral.stopRecord
-import com.shuange.lesson.utils.Base64Util
 import com.shuange.lesson.utils.BusinessUtil
 import com.shuange.lesson.utils.PhraseMatcher
-import com.shuange.lesson.utils.RecordManager
 import com.shuange.lesson.utils.extension.setCenterImage
 import com.shuange.lesson.view.NonDoubleClickListener
-import com.shuange.lesson.youdao.YoudaoParser
 import corelib.util.DeviceUtils
 import kotlinx.android.synthetic.main.layout_title.view.*
 import permissions.dispatcher.NeedsPermission
@@ -143,8 +139,20 @@ open class ReadingLessonFragment :
      */
     private fun finishParsing(errors: List<String>, star: Int) {
         val endText = "Great!"
-        binding.resultTv.visibility = View.VISIBLE
-        binding.resultTv.text = endText
+        binding.resultIv.visibility = View.VISIBLE
+        var source:Int = 0
+        when (star) {
+            0,1 -> {
+                source = R.drawable.icon_try_again
+            }
+            2 -> {
+                source = R.drawable.icon_great
+            }
+            3 -> {
+                source = R.drawable.icon_perfect
+            }
+        }
+        binding.resultIv.setImageResource(source)
         BusinessUtil.refreshResult(
             target = binding.resultLl,
             stars = star,

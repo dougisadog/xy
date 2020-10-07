@@ -64,7 +64,7 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
                 }
             }
             when (viewModel.payType.value) {
-                PayType.WX -> {
+                PayType.WECHAT -> {
                     //TODO
                     val request = WepayRequest()
                     WepayManager.getInstance().pay(request, callback)

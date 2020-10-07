@@ -35,7 +35,7 @@
             android:layout_height="@dimen/close_width"
             android:layout_marginEnd="4dp"
             android:scaleType="fitXY"
-            android:src="@drawable/icon_cancel"
+            android:src="@drawable/icon_heart_on"
             app:layout_constraintBottom_toBottomOf="@+id/closeIv"
             app:layout_constraintEnd_toStartOf="@+id/lifeTv"
             app:layout_constraintTop_toTopOf="@+id/closeIv" />
@@ -47,7 +47,6 @@
             android:layout_marginEnd="@dimen/base_side_width"
             android:gravity="center"
             android:scaleType="fitXY"
-            android:src="@drawable/icon_cancel"
             android:textColor="@color/hex_FF5337"
             android:textSize="24dp"
             android:textStyle="bold"

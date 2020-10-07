@@ -3,7 +3,7 @@ package com.meten.xyh.modules.recharge.viewmodel
 import androidx.databinding.ObservableArrayList
 import com.meten.xyh.enumeration.PayType
 import com.meten.xyh.modules.recharge.bean.RechargeHistoryBean
-import com.meten.xyh.service.api.TeachersApi
+import com.meten.xyh.service.api.RechargeHistoryApi
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.service.api.base.suspendExecute
@@ -19,12 +19,12 @@ class RechargeHistoryViewModel : BaseViewModel() {
         onFinished: EmptyTask = null
     ) {
         startBindLaunch(onFinish = onFinished) {
-            val suspendResult = TeachersApi().suspendExecute()
-//            suspendResult.getResponse()?.body?.forEach {
-//                teachers.add(TeacherBean().apply {
-//                    setTeacher(it)
-//                })
-//            }
+            val suspendResult = RechargeHistoryApi().apply { addPageParam(startId) } .suspendExecute()
+            suspendResult.getResponse()?.body?.forEach {
+                rechargeHistoryItems.add(RechargeHistoryBean().apply {
+                    setRecharge(it)
+                })
+            }
             suspendResult.exception
         }
         testData()
@@ -38,7 +38,7 @@ class RechargeHistoryViewModel : BaseViewModel() {
                 id = i.toString()
                 xyValue = i * 10
                 dateTime = "2020-10-${i}"
-                payType = if (i % 2 == 0) PayType.ALIPAY else PayType.WX
+                payType = if (i % 2 == 0) PayType.ALIPAY else PayType.WECHAT
             })
         }
     }

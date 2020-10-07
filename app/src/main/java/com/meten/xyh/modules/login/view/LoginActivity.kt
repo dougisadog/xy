@@ -63,8 +63,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     }
 
     private fun sendVerifyMessage() {
-        binding.verifyCodeTv.isEnabled = false
-        viewModel.sendVerifyCode()
+        if (viewModel.checkPhone()) {
+            binding.verifyCodeTv.isEnabled = false
+            viewModel.sendVerifyCode()
+        }
     }
 
 

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import java.util.*
 
-open class VerifyMessageViewModel : BaseViewModel() {
+abstract class VerifyMessageViewModel : BaseViewModel() {
 
     val maxTime = 60
 
@@ -28,8 +28,5 @@ open class VerifyMessageViewModel : BaseViewModel() {
         }, 1000L, 1000L)
     }
 
-    //TODO SEND MESSAGE
-    fun sendMessage() {
-
-    }
+    abstract fun sendMessage()
 }

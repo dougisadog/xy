@@ -14,4 +14,7 @@ class ArticlesApi() : BaseTokenApi<ArticlesResponse>() {
     override val resultClass: KClass<ArticlesResponse>
         get() = ArticlesResponse::class
 
+    fun search(text: String) {
+        addQuery("title.like", text)
+    }
 }

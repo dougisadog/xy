@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.modules.topquality.bean.CourseBean
+import com.shuange.lesson.service.api.LessonPackagesApi
+import com.shuange.lesson.service.api.base.suspendExecute
 
 class TopQualityCourseViewModel : BaseViewModel() {
 
@@ -27,15 +29,15 @@ class TopQualityCourseViewModel : BaseViewModel() {
         page: Int = 50,
         onFinished: EmptyTask = null
     ) {
-//        startBindLaunch(onFinish = onFinished) {
-//            val suspendResult = TeachersApi().suspendExecute()
-//            suspendResult.getResponse()?.body?.forEach {
-////                teachers.add(TeacherBean().apply {
-////                    setTeacher(it)
-////                })
-//            }
-//            suspendResult.exception
-//        }
+        startBindLaunch(onFinish = onFinished) {
+            val suspendResult = LessonPackagesApi().apply { addPageParam(startId) } .suspendExecute()
+            suspendResult.getResponse()?.body?.forEach {
+                topQualityItems.add(CourseBean().apply {
+                    setLessonPackages(it)
+                })
+            }
+            suspendResult.exception
+        }
         initTestData()
     }
 

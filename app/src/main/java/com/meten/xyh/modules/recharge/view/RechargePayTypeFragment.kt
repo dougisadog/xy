@@ -51,7 +51,7 @@ class RechargePayTypeFragment :
             viewModel.payType.value = PayType.ALIPAY
         }
         binding.wepay.setOnClickListener {
-            viewModel.payType.value = PayType.WX
+            viewModel.payType.value = PayType.WECHAT
         }
     }
 
@@ -63,7 +63,7 @@ class RechargePayTypeFragment :
                     binding.alipayCheck.isSelected = true
                     binding.wepayCheck.isSelected = false
                 }
-                PayType.WX -> {
+                PayType.WECHAT -> {
                     binding.alipayCheck.isSelected = false
                     binding.wepayCheck.isSelected = true
                 }
