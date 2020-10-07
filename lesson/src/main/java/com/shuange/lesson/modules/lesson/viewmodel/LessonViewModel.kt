@@ -80,7 +80,7 @@ open class LessonViewModel : BaseViewModel() {
                             questionResourceType,
                             inputType
                         )?.let { type ->
-                            lesson = LessonBean(type, it.id.toString())
+                            lesson = LessonBean(type, it.id.toString(), moduleId)
                         }
                     } catch (e: Exception) {
                     }
@@ -182,6 +182,14 @@ open class LessonViewModel : BaseViewModel() {
             loaded.value = true
             null
         }
+    }
+
+    /**
+     * 记录进度
+     */
+    fun saveRecord() {
+
+
     }
 
 }

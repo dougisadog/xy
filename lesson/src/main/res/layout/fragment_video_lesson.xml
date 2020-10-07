@@ -34,13 +34,20 @@
                 android:id="@+id/selectionsLl"
                 android:layout_width="@dimen/base_image_width"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="140dp"
                 android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/nextTv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/nextTv"
+                style="@style/bottom_button"
+                android:layout_marginBottom="58dp"
+                android:text="下一题"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
             <com.shuange.lesson.view.CustomRoundAngleImageView
                 android:id="@+id/imageIv"

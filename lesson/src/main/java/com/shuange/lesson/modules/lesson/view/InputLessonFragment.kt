@@ -50,7 +50,7 @@ class InputLessonFragment :
 
             override fun onFinish(result: Boolean) {
                 super.onFinish(result)
-                lessonViewModel.next.value = true
+                next()
                 if (!result) {
                     lessonViewModel.wrong.value = true
                 }

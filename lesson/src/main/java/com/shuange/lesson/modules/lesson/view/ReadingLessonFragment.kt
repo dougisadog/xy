@@ -160,7 +160,7 @@ open class ReadingLessonFragment :
             offsetIndex = 1
         )
         refreshTitle(errors)
-        viewModel.done.value = true
+        next(isDelay = true)
     }
 
     /**

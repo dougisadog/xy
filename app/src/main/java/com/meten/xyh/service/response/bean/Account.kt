@@ -17,4 +17,5 @@ class Account : BaseBean() {
     val phone: String = ""
     val province: String = ""
     val roleType: String = ""
+    val money: Int = 0
 }

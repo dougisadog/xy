@@ -55,6 +55,7 @@ class SelectorLessonFragment :
                 }
                 isFinished = true
                 viewModel.done.value = true
+                next(isDelay = true)
             })
             binding.selectionsLl.addView(textSelectionView)
         }

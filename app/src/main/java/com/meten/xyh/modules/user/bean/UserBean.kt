@@ -2,6 +2,7 @@ package com.meten.xyh.modules.user.bean
 
 import com.meten.xyh.base.DataCache
 import com.meten.xyh.service.response.bean.SubUser
+import com.meten.xyh.service.response.bean.UserForAccount
 import com.shuange.lesson.modules.lesson.bean.SourceData
 import java.io.File
 
@@ -37,6 +38,7 @@ class UserBean private constructor(val accountId: String) {
     }
 
     var subUser: SubUser? = null
+    var userRecord: UserForAccount? = null
     var userName: String = ""
 
     var userId: String = ""

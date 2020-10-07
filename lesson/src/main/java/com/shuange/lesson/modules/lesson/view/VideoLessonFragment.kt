@@ -43,6 +43,9 @@ class VideoLessonFragment :
                 VideoActivity.startVideo(it, requireContext())
             }
         })
+        binding.nextTv.setOnClickListener(NonDoubleClickListener {
+            next()
+        })
     }
 
     override fun initViewObserver() {

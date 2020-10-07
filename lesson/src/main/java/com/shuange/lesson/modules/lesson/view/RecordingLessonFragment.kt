@@ -3,13 +3,7 @@ package com.shuange.lesson.modules.lesson.view
 import android.Manifest
 import android.annotation.SuppressLint
 import android.os.Handler
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import android.view.MotionEvent
-import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
@@ -18,14 +12,10 @@ import com.shuange.lesson.R
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentRecordingLessonBinding
 import com.shuange.lesson.modules.lesson.viewmodel.RecordingLessonViewModel
-import com.shuange.lesson.utils.Base64Util
 import com.shuange.lesson.utils.MediaPlayerMgr
-import com.shuange.lesson.utils.PhraseMatcher
 import com.shuange.lesson.utils.RecordManager
 import com.shuange.lesson.utils.extension.setCenterImage
 import com.shuange.lesson.view.NonDoubleClickListener
-import com.shuange.lesson.youdao.YoudaoParser
-import corelib.util.DeviceUtils
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.RuntimePermissions
 
@@ -72,6 +62,9 @@ open class RecordingLessonFragment :
         }
         binding.resetIv.setOnClickListener(NonDoubleClickListener {
             MediaPlayerMgr.getInstance().playMp(path)
+        })
+        binding.nextTv.setOnClickListener(NonDoubleClickListener {
+            next()
         })
     }
 

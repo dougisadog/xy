@@ -7,6 +7,8 @@ import java.io.Serializable
 
 /**
  * question 结构
+ * @param id  question id
+ * @param lessonId module Id
  */
 class LessonBean(var lessonType: LessonType, var id: String, var lessonId:String? = null) : Serializable {
 

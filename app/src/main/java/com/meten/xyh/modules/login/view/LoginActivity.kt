@@ -11,10 +11,8 @@ import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.login.viewmodel.LoginViewModel
 import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
 import com.meten.xyh.utils.BusinessUtil
-import com.meten.xyh.utils.StringUtil
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 
 
@@ -49,16 +47,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     private fun initListener() {
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
+            viewModel
             viewModel.login {
                 BaseUserSettingActivity.start(this, UserSettingType.STAGE, false)
             }
         })
         binding.verifyCodeTv.setOnClickListener(NonDoubleClickListener {
-            if ((StringUtil.checkPhone(viewModel.username.value))) {
-                sendVerifyMessage()
-            } else {
-                ToastUtil.show("no valid phone number")
-            }
+            sendVerifyMessage()
         })
     }
 

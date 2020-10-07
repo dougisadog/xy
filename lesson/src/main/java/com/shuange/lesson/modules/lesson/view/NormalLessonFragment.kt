@@ -1,8 +1,8 @@
 package com.shuange.lesson.modules.lesson.view
 
 import androidx.fragment.app.viewModels
-import com.shuange.lesson.R
 import com.shuange.lesson.BR
+import com.shuange.lesson.R
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentNormalLessonBinding
 import com.shuange.lesson.modules.lesson.viewmodel.NormalLessonViewModel
@@ -37,7 +37,7 @@ class NormalLessonFragment :
             playAudio()
         })
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
-            (requireActivity() as LessonActivity).next()
+            next()
         })
     }
 

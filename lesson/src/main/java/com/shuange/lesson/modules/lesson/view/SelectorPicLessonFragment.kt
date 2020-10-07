@@ -79,6 +79,7 @@ class SelectorPicLessonFragment :
                         lessonViewModel.wrong.value = true
                     }
                     viewModel.done.value = true
+                    next(isDelay = true)
 
                 })
             }

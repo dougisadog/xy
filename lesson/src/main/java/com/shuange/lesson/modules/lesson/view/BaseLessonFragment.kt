@@ -11,12 +11,11 @@ import androidx.lifecycle.Observer
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.modules.lesson.bean.LessonBean
+import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.modules.lesson.viewmodel.BaseLessonViewModel
 import com.shuange.lesson.modules.lesson.viewmodel.LessonViewModel
 import com.shuange.lesson.utils.Cancelable
-import com.shuange.lesson.view.NonDoubleClickListener
-import com.shuange.lesson.modules.lesson.bean.LessonBean
-import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.utils.MediaPlayerMgr
 
 
@@ -93,5 +92,19 @@ abstract class BaseLessonFragment<BD : ViewDataBinding, VM : BaseLessonViewModel
         viewModel.done.observe(this, Observer {
 
         })
+    }
+
+    fun next(isDelay: Boolean = false) {
+        val task = {
+            lessonViewModel.next.value = true
+            viewModel.saveLessonProcess()
+        }
+        if (isDelay) {
+            android.os.Handler().postDelayed({
+                task.invoke()
+            }, 3000L)
+        } else {
+            task.invoke()
+        }
     }
 }
