@@ -18,22 +18,22 @@ import com.meten.xyh.modules.discovery.adapter.StreamLessonAdapter
 import com.meten.xyh.modules.discovery.adapter.TeacherAdapter
 import com.meten.xyh.modules.discovery.bean.MenuItem
 import com.meten.xyh.modules.discovery.viewmodel.DiscoveryViewModel
+import com.meten.xyh.modules.news.view.NewsDetailActivity
 import com.meten.xyh.modules.news.view.NewsListActivity
 import com.meten.xyh.modules.search.view.SearchActivity
 import com.meten.xyh.modules.teacher.view.TeacherInfoActivity
 import com.meten.xyh.modules.teacher.view.TeacherListActivity
+import com.meten.xyh.utils.BusinessUtil
 import com.shuange.lesson.base.BaseFragment
-import com.shuange.lesson.base.ImageFragment
 import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
-import com.shuange.lesson.base.adapter.setRecycleAdapter
-import com.shuange.lesson.base.adapter.starAuto
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.modules.course.view.CourseAllActivity
 import com.shuange.lesson.modules.course.view.CourseListActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.view.TopQualityActivity
 import com.shuange.lesson.utils.ToastUtil
+import com.shuange.lesson.utils.extension.initAdapter
 import com.shuange.lesson.utils.extension.setOnSearchListener
 import com.shuange.lesson.view.NonDoubleClickListener
 import corelib.util.ContextManager
@@ -50,8 +50,6 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
     override val viewModelId: Int
         get() = BR.discoveryViewModel
 
-    lateinit var fragmentAdapter: RecyclePagerAdapter<String>
-
     private val streamLessonAdapter: StreamLessonAdapter by lazy {
         StreamLessonAdapter(
             layout = R.layout.layout_stream_lesson_item,
@@ -61,7 +59,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
 
     private val topQualityAdapter: TopQualityAdapter by lazy {
         TopQualityAdapter(
-            layout = com.shuange.lesson.R.layout.layout_top_quality_item,
+            layout = R.layout.layout_top_quality_item,
             data = viewModel.topQualityItems
         )
     }
@@ -93,27 +91,20 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
     }
 
     private fun initViewPager() {
-        fragmentAdapter = RecyclePagerAdapter(this, viewModel.pagerData.map {
-            it.image
-        }.toMutableList()) {
-            ImageFragment.newInstance(it)
-        }
-        with(binding.vp) {
-            setRecycleAdapter(fragmentAdapter)
-            starAuto()
-            setOnClickListener(NonDoubleClickListener {
-                val id = viewModel.pagerData[currentItem].id
-                val title = viewModel.pagerData[currentItem].title
-                CourseListActivity.start(context, id, title)
-            })
-        }
+        binding.vp.initAdapter(this, viewModel.pagerData)
+        val currentItem = binding.vp.currentItem
+        binding.vp.setOnClickListener(NonDoubleClickListener {
+            val id = viewModel.pagerData[currentItem].id
+            val title = viewModel.pagerData[currentItem].title
+            CourseListActivity.start(requireContext(), id, title)
+        })
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
     }
 
     private fun bindIndicatorToViewPager(
         indicatorContainer: LinearLayout,
         viewPager2: ViewPager2,
-        selectorRes: Int = com.shuange.lesson.R.drawable.selector_indicator
+        selectorRes: Int = R.drawable.selector_indicator
     ) {
         val a = viewPager2.adapter as? RecyclePagerAdapter<*> ?: return
         val size = a.data.size
@@ -150,7 +141,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
         with(binding.topQualityRv) {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             topQualityAdapter.setOnItemClickListener { adapter, view, position ->
-                ToastUtil.show("item click  topQuality:${topQualityAdapter.data[position].title}")
+                BusinessUtil.startCourse(requireContext(), topQualityAdapter.data[position])
             }
             isNestedScrollingEnabled = false
             adapter = topQualityAdapter
@@ -171,7 +162,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
         with(binding.newsRv) {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             newsAdapter.setOnItemClickListener { adapter, view, position ->
-                ToastUtil.show("item click  teacher:${newsAdapter.data[position].title}")
+                NewsDetailActivity.start(requireContext(), newsAdapter.data[position])
             }
             isNestedScrollingEnabled = false
             adapter = newsAdapter

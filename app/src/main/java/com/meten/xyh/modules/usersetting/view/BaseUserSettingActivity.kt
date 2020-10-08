@@ -2,17 +2,17 @@ package com.meten.xyh.modules.usersetting.view
 
 import android.content.Context
 import android.content.Intent
-import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
+import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivityStepBinding
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.main.view.MainActivity
 import com.meten.xyh.modules.usersetting.adapter.BaseUserSettingAdapter
 import com.meten.xyh.modules.usersetting.viewmodel.BaseUserSettingViewModel
+import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.BaseActivity
-import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlin.reflect.KClass
 
@@ -20,7 +20,7 @@ import kotlin.reflect.KClass
 /**
  * 设定
  */
-abstract class BaseUserSettingActivity<T : BaseUserSettingViewModel> :
+abstract class BaseUserSettingActivity<T : BaseUserSettingViewModel>(val user:SubUser? = DataCache.newSubUser) :
     BaseActivity<ActivityStepBinding, T>() {
 
     companion object {
@@ -89,7 +89,7 @@ abstract class BaseUserSettingActivity<T : BaseUserSettingViewModel> :
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
             if (isSetting) {
                 viewModel.userSettingItems.firstOrNull { it.isSelected }?.let {
-                    viewModel.saveSetting(it.title)
+                    viewModel.saveSetting(it.title, user)
                     finish()
                 }
 

@@ -3,6 +3,7 @@ package com.meten.xyh.modules.usersetting.viewmodel
 import com.meten.xyh.base.DataCache
 import com.meten.xyh.modules.usersetting.bean.UserSettingBean
 import com.meten.xyh.service.api.ObjectiveApi
+import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.service.api.base.suspendExecute
 
 open class ObjectiveViewModel : BaseUserSettingViewModel() {
@@ -16,12 +17,11 @@ open class ObjectiveViewModel : BaseUserSettingViewModel() {
         }
     }
 
-    override fun saveSetting(text: String) {
-        DataCache.users.first {
+    override fun saveSetting(text: String, user: SubUser?) {
+        val targetUser = user ?: DataCache.users.firstOrNull {
             it.current
-        }.let {
-            it.subUser?.objective = text
-        }
+        }?.subUser
+        targetUser?.objective = text
     }
 
 }

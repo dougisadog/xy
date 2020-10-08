@@ -2,6 +2,7 @@ package com.meten.xyh.base
 
 import com.meten.xyh.modules.login.AccountBean
 import com.meten.xyh.modules.user.bean.UserBean
+import com.meten.xyh.service.response.bean.SubUser
 
 object DataCache {
 
@@ -16,4 +17,7 @@ object DataCache {
     fun currentUser(): UserBean? {
         return users.firstOrNull { it.current }
     }
+
+    //创建新对象
+    var newSubUser: SubUser? = null
 }

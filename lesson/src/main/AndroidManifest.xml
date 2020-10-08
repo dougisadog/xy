@@ -20,8 +20,7 @@
         <activity android:name="com.shuange.lesson.modules.course.view.CourseActivity" />
         <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" />
         <activity android:name="com.shuange.lesson.modules.course.view.CourseSubActivity" />
-
-
+        <activity android:name="com.shuange.lesson.modules.course.view.CourseAllActivity" />
 
     </application>
 </manifest>

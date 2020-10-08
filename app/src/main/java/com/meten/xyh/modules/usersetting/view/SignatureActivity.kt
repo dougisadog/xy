@@ -6,10 +6,12 @@ import android.view.View
 import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
+import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivitySignatureBinding
-import com.meten.xyh.enumeration.SignatureType
+import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.usersetting.viewmodel.SignatureViewModel
+import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import kotlinx.android.synthetic.main.layout_header.view.*
@@ -18,10 +20,10 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 /**
  * 个性签名/昵称
  */
-class SignatureActivity : BaseActivity<ActivitySignatureBinding, SignatureViewModel>() {
+class SignatureActivity(val subUser: SubUser? = DataCache.newSubUser) : BaseActivity<ActivitySignatureBinding, SignatureViewModel>() {
 
     companion object {
-        fun start(context: Context, type: SignatureType) {
+        fun start(context: Context, type: UserSettingType) {
             val i = Intent(context, SignatureActivity::class.java)
             i.putExtra(IntentKey.SIGNATURE_TYPE_KEY, type.ordinal)
             context.startActivity(i)
@@ -40,8 +42,8 @@ class SignatureActivity : BaseActivity<ActivitySignatureBinding, SignatureViewMo
     override fun initParams() {
         super.initParams()
         intent.getIntExtra(IntentKey.SIGNATURE_TYPE_KEY, 0).let {
-            viewModel.settingChange = SignatureViewModel.SettingChange().apply {
-                setSignatureType(SignatureType.values()[it])
+            viewModel.settingChange = SignatureViewModel.SettingChange(subUser).apply {
+                setUserSettingType(UserSettingType.values()[it])
             }
         }
     }

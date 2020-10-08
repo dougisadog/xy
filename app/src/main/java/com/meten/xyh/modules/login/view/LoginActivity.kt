@@ -22,7 +22,7 @@ import com.shuange.lesson.view.NonDoubleClickListener
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     companion object {
-        fun startLogin(context: Context) {
+        fun start(context: Context) {
             val i = Intent(context, LoginActivity::class.java)
             context.startActivity(i)
         }
@@ -41,14 +41,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initView() {
         initListener()
-        //TODO
-        viewModel.username.value = "18341134983"
     }
 
     private fun initListener() {
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
-            viewModel
-            viewModel.login {
+            viewModel.testLogin {
+//            viewModel.login {
                 BaseUserSettingActivity.start(this, UserSettingType.STAGE, false)
             }
         })

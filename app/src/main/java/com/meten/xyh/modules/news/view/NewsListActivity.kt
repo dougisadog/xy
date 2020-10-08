@@ -16,11 +16,11 @@ import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.shuange.lesson.BR
 import com.shuange.lesson.base.BaseActivity
-import com.shuange.lesson.base.ImageFragment
 import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.utils.ToastUtil
+import com.shuange.lesson.utils.extension.initAdapter
+import com.shuange.lesson.view.NonDoubleClickListener
 import corelib.util.DeviceUtils
 import kotlinx.android.synthetic.main.layout_header.view.*
 
@@ -46,8 +46,6 @@ class NewsListActivity :
     override val viewModelId: Int
         get() = BR.newListViewModel
 
-    lateinit var fragmentAdapter: RecyclePagerAdapter<String>
-
     private val newsAdapter: BaseItemAdapter by lazy {
         BaseItemAdapter(
             layout = R.layout.layout_base_item,
@@ -67,7 +65,7 @@ class NewsListActivity :
         with(binding.newsRv) {
             layoutManager = LinearLayoutManager(this@NewsListActivity, RecyclerView.VERTICAL, false)
             newsAdapter.setOnItemClickListener { adapter, view, position ->
-                ToastUtil.show("item click  teacher:${newsAdapter.data[position].title}")
+                NewsDetailActivity.start(this@NewsListActivity, newsAdapter.data[position])
             }
             isNestedScrollingEnabled = false
             adapter = newsAdapter
@@ -75,12 +73,11 @@ class NewsListActivity :
     }
 
     private fun initViewPager() {
-        fragmentAdapter = RecyclePagerAdapter(this, viewModel.wheels) {
-            ImageFragment.newInstance(it)
-        }
-        with(binding.vp) {
-            adapter = fragmentAdapter
-        }
+        binding.vp.initAdapter(this, viewModel.wheels)
+        binding.vp.setOnClickListener(NonDoubleClickListener {
+            val news = viewModel.wheels[binding.vp.currentItem]
+            NewsDetailActivity.start(this, news)
+        })
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
     }
 

@@ -19,7 +19,7 @@ class MenuPageAdapter(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            columnCount = 5
+            columnCount = 4
             rowCount = 2
         })
     }

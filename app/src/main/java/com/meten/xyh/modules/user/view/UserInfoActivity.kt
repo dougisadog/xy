@@ -9,7 +9,6 @@ import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.adapter.ActionAdapter
 import com.meten.xyh.base.bean.ActionItem
 import com.meten.xyh.databinding.ActivityUserInfoBinding
-import com.meten.xyh.enumeration.SignatureType
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.user.viewmodel.UserInfoViewModel
 import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
@@ -76,12 +75,12 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
         actions.add(ActionItem().apply {
             title = "昵称"
             value = user?.userName ?: ""
-            action = { SignatureActivity.start(this@UserInfoActivity, SignatureType.NICKNAME) }
+            action = { SignatureActivity.start(this@UserInfoActivity, UserSettingType.NICKNAME) }
         })
         actions.add(ActionItem().apply {
             title = "个性签名"
             value = user?.introduction ?: ""
-            action = { SignatureActivity.start(this@UserInfoActivity, SignatureType.SIGNATURE) }
+            action = { SignatureActivity.start(this@UserInfoActivity, UserSettingType.SIGNATURE) }
         })
         actions.add(ActionItem().apply {
             title = "学习阶段"

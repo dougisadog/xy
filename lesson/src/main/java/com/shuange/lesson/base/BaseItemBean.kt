@@ -1,10 +1,12 @@
 package com.shuange.lesson.base
 
+import java.io.Serializable
+
 open class BaseItemBean(
     var title: String = "",
     var content: String = "",
     var image: String = ""
-):PagerItem {
+):PagerItem ,Serializable {
     var id = ""
     var teacherName = ""
     var courseCount = 0

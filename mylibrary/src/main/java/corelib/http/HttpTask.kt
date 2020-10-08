@@ -144,6 +144,8 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
         if (userAgent != null && !headers.keys.map { it.lowercased() }.contains("user-agent")) {
             requestBuilder.addHeader("User-Agent", userAgent)
         }
+        //java.io.IOException: unexpected end of stream
+        requestBuilder.addHeader("Connection", "close")
         for ((key, value) in headers) {
             requestBuilder.addHeader(key, value)
         }
@@ -243,6 +245,7 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
             }
             responseInfo.response = response
             if (!checkStatusCode(response.code)) {
+                responseInfo.error = IOException(data?.string() ?: "")
                 handleError(HttpTaskError.StatusCode, result = null, response = responseInfo)
                 return
             }
@@ -287,7 +290,7 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
         }
     }
 
-    open fun parseResponseHeader(response: Response){
+    open fun parseResponseHeader(response: Response) {
 
     }
 
@@ -508,7 +511,7 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
         return parseResponse(data.string())
     }
 
-    open fun  parseResponse(data: String): DataType {
+    open fun parseResponse(data: String): DataType {
         throw HttpTaskError.Parse
     }
 
@@ -542,15 +545,6 @@ sealed class HttpTaskError : Exception() {
     object Parse : HttpTaskError()
     object InvalidResponse : HttpTaskError()
 
-    val stringValue: String
-        get() {
-            return when (this) {
-                Network -> "オフライン、タイムアウトなどの通信エラー"
-                StatusCode -> "HTTPステータスコードが既定ではないエラー"
-                Parse -> "レスポンスデータのパースに失敗"
-                InvalidResponse -> "レスポンスデータの内容が不正"
-            }
-        }
 }
 
 enum class ErrorHandlingStatus {

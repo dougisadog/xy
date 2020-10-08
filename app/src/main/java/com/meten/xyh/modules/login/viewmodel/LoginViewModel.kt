@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.viewmodel.VerifyMessageViewModel
 import com.meten.xyh.modules.login.AccountBean
-import com.meten.xyh.modules.user.bean.UserBean
 import com.meten.xyh.service.api.*
 import com.meten.xyh.service.request.LoginRequest
 import com.meten.xyh.service.request.RegisterRequest
@@ -21,35 +20,52 @@ open class LoginViewModel : VerifyMessageViewModel() {
 
     var username = MutableLiveData<String>()
 
+    var password = MutableLiveData<String>()
+
     var confirmCheck = MutableLiveData<Boolean>()
+
+    init {
+        username.value = "18341134983"
+        password.value = "888888"
+
+    }
+
+    fun testLogin(onSuccess: EmptyTask) {
+//        startBindLaunch {
+//            val request = InitRequest("dougisadog")
+//            val suspendResult = InitApi(request).suspendExecute()
+//            LessonDataCache.token = suspendResult.getResponse()?.id_token ?: ""
+//            onSuccess?.invoke()
+//            suspendResult.exception
+//        }
+        login(onSuccess)
+    }
 
     fun login(onSuccess: EmptyTask) {
         startBindLaunch {
             var exception: Exception?
             val username = username.value ?: ""
-            var suspendLoginResult =
-                LoginApi(LoginRequest(username)).suspendExecute()
-            exception = suspendLoginResult.exception
+            val password = password.value ?: ""
+
+//            var suspendLoginResult =
+//                LoginApi(LoginRequest(username, password)).suspendExecute()
+//            exception = suspendLoginResult.exception
             //未登录
+            exception = java.lang.Exception("")
             if (null != exception) {
                 //注册
                 val suspendRegisterResult =
-                    RegisterApi(RegisterRequest(username)).suspendExecute()
+                    RegisterApi(RegisterRequest(username, password)).suspendExecute()
                 exception = suspendRegisterResult.exception
                 //登录
                 if (null == exception) {
                     suspendRegisterResult.getResponse()?.body?.let {
-                        suspendLoginResult =
-                            LoginApi(LoginRequest(username)).suspendExecute()
+                        val suspendLoginResult =
+                            LoginApi(LoginRequest(username, password)).suspendExecute()
                     }
                     exception = suspendRegisterResult.exception
                 }
             }
-//            if (null == exception) {
-//                //用户列表
-//                val suspendSubUsersResult = SubUsersApi().suspendExecute()
-//                exception = suspendSubUsersResult.exception
-//            }
             loadUserData(onSuccess)
 //            onSuccess?.invoke()
             exception
@@ -74,8 +90,8 @@ open class LoginViewModel : VerifyMessageViewModel() {
                 exception = it.exception
                 it.getResponse()?.body?.let { acocunt ->
                     DataCache.account = AccountBean().apply {
-                        id = acocunt.phone
-                        phone = acocunt.phone
+                        id = acocunt.id.toString()
+                        phone = acocunt.phone?:""
                         xyBalance = acocunt.money
                     }
                     accountValid = true
@@ -85,17 +101,9 @@ open class LoginViewModel : VerifyMessageViewModel() {
                 if (null == exception) {
                     exception = it.exception
                 }
-                it.getResponse()?.body?.let { user ->
-                    DataCache.users.clear()
-                    //TODO 没有头像信息
-                    DataCache.users.add(UserBean.createUserInfo(user.subUserName, "")!!.apply {
-                        userRecord = user
-                        current = true
-                    })
-                    currentUserValid = true
-                }
+                currentUserValid = true
             }
-            if (accountValid && currentUserValid) {
+            if (accountValid && currentUserValid && null == exception) {
                 onSuccess?.invoke()
             }
             exception

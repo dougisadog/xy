@@ -56,6 +56,6 @@ open class CourseBean : BaseItemBean(), PagerItem, Serializable {
     }
 
     override fun getItemId(): String {
-        return id
+        return courseId
     }
 }

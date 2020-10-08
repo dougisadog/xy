@@ -2,7 +2,8 @@ package com.meten.xyh.modules.usersetting.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.base.DataCache
-import com.meten.xyh.enumeration.SignatureType
+import com.meten.xyh.enumeration.UserSettingType
+import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 
 class SignatureViewModel : BaseViewModel() {
@@ -24,36 +25,37 @@ class SignatureViewModel : BaseViewModel() {
         }
     }
 
-    class SettingChange {
+    class SettingChange(val user: SubUser?) {
         var title = ""
         var hint = ""
         var saveTask: ((String) -> Unit)? = null
-        var type: SignatureType? = null
+        var type: UserSettingType? = null
 
-        fun setSignatureType(type: SignatureType) {
+        private fun getTargetUser(): SubUser? {
+            return user ?: DataCache.users.first {
+                it.current
+            }.subUser
+        }
+
+        fun setUserSettingType(type: UserSettingType) {
             this.type = type
+            val targetUser = user ?: DataCache.users.firstOrNull {
+                it.current
+            }?.subUser
             when (type) {
-                SignatureType.SIGNATURE -> {
+                UserSettingType.SIGNATURE -> {
                     title = "个性签名"
                     hint = "请输入个性签名"
                     saveTask = { input ->
-                        DataCache.users.first {
-                            it.current
-                        }.let {
-                            it.subUser?.objective = input
-                        }
+                        getTargetUser()?.objective = input
                     }
                 }
-                SignatureType.NICKNAME -> {
+                UserSettingType.NICKNAME -> {
                     title = "修改昵称"
                     hint = "请输入昵称"
                     saveTask = { input ->
-                        DataCache.users.first {
-                            it.current
-                        }.let {
-                            //todo 昵称保存
-                            it.subUser?.objective = input
-                        }
+                        //todo 昵称保存
+                        getTargetUser()?.objective = input
                     }
                 }
             }

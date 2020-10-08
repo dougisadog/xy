@@ -5,13 +5,17 @@ import android.content.Intent
 import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
+import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.adapter.ActionAdapter
 import com.meten.xyh.base.bean.ActionItem
 import com.meten.xyh.databinding.ActivityCreateUserBinding
+import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.user.viewmodel.CreateUserViewModel
+import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
+import com.meten.xyh.modules.usersetting.view.InterestActivity
+import com.meten.xyh.modules.usersetting.view.SignatureActivity
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
@@ -46,11 +50,36 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
 
     override fun initView() {
         binding.header.title.text = "新增用户"
+        viewModel.loadData()
         initActions()
         initListener()
     }
 
     fun initActions() {
+        val actions = arrayListOf<ActionItem>()
+        actions.add(ActionItem().apply {
+            title = "昵称"
+            action = { SignatureActivity.start(this@CreateUserActivity, UserSettingType.NICKNAME) }
+        })
+        actions.add(ActionItem().apply {
+            title = "个性签名"
+            action = { SignatureActivity.start(this@CreateUserActivity, UserSettingType.SIGNATURE) }
+        })
+        actions.add(ActionItem().apply {
+            title = "学习阶段"
+            action = { BaseUserSettingActivity.start(this@CreateUserActivity, UserSettingType.STAGE) }
+        })
+        actions.add(ActionItem().apply {
+            title = "感兴趣的"
+            action =
+                { InterestActivity.start(this@CreateUserActivity) }
+        })
+        actions.add(ActionItem().apply {
+            title = "需提升的"
+            action =
+                { BaseUserSettingActivity.start(this@CreateUserActivity, UserSettingType.OBJECTIVE) }
+        })
+        viewModel.actionItems.addAll(actions)
         with(binding.actionRv) {
             layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
                 this@CreateUserActivity,
@@ -66,8 +95,11 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
     }
 
     private fun initListener() {
+        binding.header.back.setOnClickListener {
+            finish()
+        }
         binding.saveTv.setOnClickListener(NonDoubleClickListener {
-//            viewModel.save()
+            viewModel.save()
         })
     }
 
@@ -76,4 +108,8 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
     }
 
 
+    override fun onDestroy() {
+        super.onDestroy()
+        DataCache.newSubUser = null
+    }
 }

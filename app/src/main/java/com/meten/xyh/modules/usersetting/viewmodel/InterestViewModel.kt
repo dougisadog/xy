@@ -3,6 +3,7 @@ package com.meten.xyh.modules.usersetting.viewmodel
 import androidx.databinding.ObservableArrayList
 import com.meten.xyh.base.DataCache
 import com.meten.xyh.modules.usersetting.bean.InterestBean
+import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 
 open class InterestViewModel : BaseViewModel() {
@@ -16,8 +17,16 @@ open class InterestViewModel : BaseViewModel() {
         return interests.filter { it.isSelected }.toMutableList()
     }
 
-    fun saveSetting() {
+    fun saveSetting(
+        user: SubUser?
+    ) {
+        val targetUser = user ?: DataCache.users.firstOrNull {
+            it.current
+        }?.subUser
+        targetUser?.interest = getInterest()
+    }
 
+    fun getInterest(): String {
         val target = StringBuilder()
         getResults().forEachIndexed { index, interestBean ->
             if (index != 0) {
@@ -25,11 +34,7 @@ open class InterestViewModel : BaseViewModel() {
             }
             target.append(interestBean.text)
         }
-        DataCache.users.first {
-            it.current
-        }.let {
-            it.subUser?.interest = target.toString()
-        }
+        return target.toString()
     }
 
     //TODO

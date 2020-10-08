@@ -1,13 +1,12 @@
 package com.meten.xyh.modules.recharge.view
 
+//import com.doug.paylib.util.*
 import android.content.Context
 import android.content.Intent
 import androidx.activity.viewModels
-import com.doug.paylib.util.*
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityRechargeBinding
-import com.meten.xyh.enumeration.PayType
 import com.meten.xyh.modules.recharge.adapter.RechargeAdapter
 import com.meten.xyh.modules.recharge.viewmodel.RechargeViewModel
 import com.shuange.lesson.base.BaseActivity
@@ -45,7 +44,7 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
     override val viewModelId: Int
         get() = BR.loginViewModel
 
-    override var fragmentContainerId: Int? = com.shuange.lesson.R.id.fragmentContainerFl
+    override var fragmentContainerId: Int? = R.id.fragmentContainerFl
 
 
     override fun initView() {
@@ -56,25 +55,25 @@ class RechargeActivity : BaseActivity<ActivityRechargeBinding, RechargeViewModel
 
     private fun initListener() {
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
-            val callback = object : PayCallback {
-                override fun onSuccess() {
-                }
-
-                override fun onFailed(error: String) {
-                }
-            }
-            when (viewModel.payType.value) {
-                PayType.WECHAT -> {
-                    //TODO
-                    val request = WepayRequest()
-                    WepayManager.getInstance().pay(request, callback)
-                }
-                PayType.ALIPAY -> {
-                    //TODO
-                    val request = AlipayRequest()
-                    AlipayManager.getInstance().pay(this, request, callback)
-                }
-            }
+//            val callback = object : PayCallback {
+//                override fun onSuccess() {
+//                }
+//
+//                override fun onFailed(error: String) {
+//                }
+//            }
+//            when (viewModel.payType.value) {
+//                PayType.WECHAT -> {
+//                    //TODO
+//                    val request = WepayRequest()
+//                    WepayManager.getInstance().pay(request, callback)
+//                }
+//                PayType.ALIPAY -> {
+//                    //TODO
+//                    val request = AlipayRequest()
+//                    AlipayManager.getInstance().pay(this, request, callback)
+//                }
+//            }
 
         })
         binding.changePageTypeLl.setOnClickListener(NonDoubleClickListener {

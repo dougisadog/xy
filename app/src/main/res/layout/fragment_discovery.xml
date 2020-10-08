@@ -67,7 +67,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginTop="20dp"
-                    android:background="@color/hex_3AD08F"
                     app:layout_constraintDimensionRatio="h,343:140"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -106,7 +105,7 @@
                     android:layout_marginTop="20dp"
                     android:text="直播课程"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tabTl" />
+                    app:layout_constraintTop_toBottomOf="@+id/menuVp" />
 
                 <LinearLayout
                     android:id="@+id/streamLl"

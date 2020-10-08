@@ -23,6 +23,7 @@ data class  TeacherBean(
         name = teacher.name
         subTitle = teacher.description
         introduction = teacher.info
+        image = teacher.imageUrl
     }
 
     override fun getItemId(): String {

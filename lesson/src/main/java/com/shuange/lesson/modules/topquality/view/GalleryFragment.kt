@@ -1,6 +1,8 @@
 package com.shuange.lesson.modules.topquality.view
 
 import androidx.fragment.app.viewModels
+import com.scwang.smart.refresh.layout.api.RefreshLayout
+import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseFragment
@@ -26,6 +28,25 @@ class GalleryFragment :
     override fun initView() {
         viewModel.loadData()
         initGallery()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.srl.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                viewModel.loadGalleries {
+                    binding.srl.finishLoadMore()
+                }
+
+            }
+
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+                viewModel.loadGalleries("0") {
+                    binding.srl.finishRefresh()
+                }
+
+            }
+        })
     }
 
 

@@ -12,7 +12,8 @@ import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.service.api.ModuleDetailApi
 import com.shuange.lesson.service.api.base.DownloadApi
 import com.shuange.lesson.service.api.base.suspendExecute
-import kotlinx.coroutines.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 
 open class LessonViewModel : BaseViewModel() {
 
@@ -63,9 +64,7 @@ open class LessonViewModel : BaseViewModel() {
      * 获取所有module下的数据
      */
     fun getLessonsData(onSuccess:EmptyTask) {
-        //TODO test
-        GlobalScope.launch(Dispatchers.Main) {
-//        startBindLaunch {
+        startBindLaunch {
             val result = ModuleDetailApi(moduleId).suspendExecute()
             result.getResponse()?.body?.let {
                 val lessonBeans = it.questions.map {
@@ -131,8 +130,10 @@ open class LessonViewModel : BaseViewModel() {
                 }
                 lessons.addAll(lessonBeans.filterNotNull())
             }
-            onSuccess?.invoke()
-            loadLessonSource()
+            if (null == result.exception) {
+                onSuccess?.invoke()
+                loadLessonSource()
+            }
             result.exception
         }
     }

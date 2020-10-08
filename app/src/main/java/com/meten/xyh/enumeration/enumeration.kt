@@ -1,15 +1,11 @@
 package com.meten.xyh.enumeration
 
 enum class UserSettingType {
-    STAGE, INTEREST, OBJECTIVE
+    STAGE, INTEREST, OBJECTIVE, SIGNATURE, NICKNAME
 }
 
 enum class SearchType {
     TEACHER, COURSE, NEWS
-}
-
-enum class SignatureType {
-    SIGNATURE, NICKNAME
 }
 
 enum class PayType(val text: String) {

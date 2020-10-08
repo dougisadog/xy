@@ -14,4 +14,5 @@ class RegisterRequest(var login: String, var password: String = "888888") {
     var phone: String? = null
     var province: String? = null
     val secret: String = ConfigDef.APP_SECRET
+    var age = 0
 }

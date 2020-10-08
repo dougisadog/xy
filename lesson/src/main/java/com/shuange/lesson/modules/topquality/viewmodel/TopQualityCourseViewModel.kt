@@ -38,7 +38,7 @@ class TopQualityCourseViewModel : BaseViewModel() {
             }
             suspendResult.exception
         }
-        initTestData()
+//        initTestData()
     }
 
     fun initTestData() {

@@ -24,7 +24,7 @@ class RecyclePagerAdapter<T> :
     }
 
     override fun getItemCount(): Int {
-        return data.size + 2
+        return if (data.size > 1) data.size + 2 else 0
     }
 
     fun getDataCount(): Int {
@@ -41,6 +41,8 @@ class RecyclePagerAdapter<T> :
                 realTarget = itemCount - 3
             }
         }
+        realTarget = Math.max(0 , realTarget)
+        realTarget = Math.min(data.size - 1 , realTarget)
         return fragmentCreator.invoke(data[realTarget])
     }
 

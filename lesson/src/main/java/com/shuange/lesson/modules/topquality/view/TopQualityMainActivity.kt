@@ -11,11 +11,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
-import com.shuange.lesson.base.ImageFragment
 import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
-import com.shuange.lesson.base.adapter.setRecycleAdapter
-import com.shuange.lesson.base.adapter.starAuto
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityTopQualityMainBinding
 import com.shuange.lesson.modules.course.adapter.CourseInfoAdapter
@@ -24,6 +21,7 @@ import com.shuange.lesson.modules.course.view.CourseListActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityMainViewModel
 import com.shuange.lesson.utils.ToastUtil
+import com.shuange.lesson.utils.extension.initAdapter
 import com.shuange.lesson.utils.extension.setOnSearchListener
 import com.shuange.lesson.view.NonDoubleClickListener
 import corelib.util.DeviceUtils
@@ -50,8 +48,6 @@ class TopQualityMainActivity :
         get() = R.layout.activity_top_quality_main
     override val viewModelId: Int
         get() = BR.topQualityMainViewModel
-
-    lateinit var fragmentAdapter: RecyclePagerAdapter<String>
 
     private val topQualityAdapter: TopQualityAdapter by lazy {
         TopQualityAdapter(
@@ -104,20 +100,13 @@ class TopQualityMainActivity :
     }
 
     private fun initViewPager() {
-        fragmentAdapter = RecyclePagerAdapter(this, viewModel.pagerData.map {
-            it.image
-        }.toMutableList()) {
-            ImageFragment.newInstance(it)
-        }
-        with(binding.vp) {
-            setRecycleAdapter(fragmentAdapter)
-            starAuto()
-            setOnClickListener(NonDoubleClickListener {
-                val id = viewModel.pagerData[currentItem].id
-                val title = viewModel.pagerData[currentItem].title
-                CourseListActivity.start(context, id, title)
-            })
-        }
+        binding.vp.initAdapter(this, viewModel.pagerData)
+        val currentItem = binding.vp.currentItem
+        binding.vp.setOnClickListener(NonDoubleClickListener {
+            val id = viewModel.pagerData[currentItem].id
+            val title = viewModel.pagerData[currentItem].title
+            CourseListActivity.start(this, id, title)
+        })
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
     }
 

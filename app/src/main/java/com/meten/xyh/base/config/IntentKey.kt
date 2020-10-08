@@ -20,6 +20,9 @@ object IntentKey {
 
     const val SEARCH_TYPE = "SEARCH_TYPE"
 
+    const val NEWS_KEY = "NEWS_KEY"
+
+
 
 
 

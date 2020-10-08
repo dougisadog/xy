@@ -11,11 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-                        <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" >
+<!--                        <activity android:name="com.shuange.lesson.modules.course.view.CourseInfoActivity" >-->
 <!--                <activity android:name=".modules.main.view.MainActivity" >-->
 
 
-            <!--        <activity android:name=".modules.login.view.LoginActivity">-->
+                    <activity android:name=".modules.login.view.LoginActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +24,12 @@
             </intent-filter>
         </activity>
 
-        <!--        <activity android:name=".modules.main.view.MainActivity" >-->
+                <activity android:name=".modules.main.view.MainActivity" />
 
         <activity android:name=".modules.search.view.SearchActivity" />
 
         <activity android:name=".modules.usersetting.view.StepActivity" />
-<!--        <activity android:name=".modules.usersetting.view.InterestActivity" />-->
+        <activity android:name=".modules.usersetting.view.InterestActivity" />
         <activity android:name=".modules.usersetting.view.ObjectiveActivity" />
         <activity android:name=".modules.usersetting.view.SignatureActivity" />
 
@@ -49,6 +49,9 @@
         <activity android:name=".modules.teacher.view.TeacherListActivity" />
 
         <activity android:name=".modules.news.view.NewsListActivity" />
+        <activity android:name=".modules.news.view.NewsDetailActivity" />
+
+        <activity android:name=".modules.order.view.OrderActivity" />
 
         <activity
             android:name="com.meten.xyh.wxapi.WXPayEntryActivity"

@@ -48,7 +48,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tabTl" />
+            app:layout_constraintTop_toBottomOf="@+id/header" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

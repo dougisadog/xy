@@ -35,7 +35,7 @@ class TeacherInfoViewModel : BaseViewModel() {
                 suspendResult.exception
             }
         }
-        testData()
+//        testData()
     }
 
     fun testData() {

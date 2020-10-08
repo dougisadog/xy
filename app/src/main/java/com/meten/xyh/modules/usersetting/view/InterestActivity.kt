@@ -8,6 +8,7 @@ import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityInterestBinding
 import com.meten.xyh.modules.usersetting.adapter.InterestAdapter
 import com.meten.xyh.modules.usersetting.viewmodel.InterestViewModel
+import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
@@ -17,7 +18,8 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 /**
  * 请选择您的兴趣爱好
  */
-class InterestActivity : BaseActivity<ActivityInterestBinding, InterestViewModel>() {
+class InterestActivity(val user: SubUser? = null) :
+    BaseActivity<ActivityInterestBinding, InterestViewModel>() {
 
     companion object {
         fun start(context: Context) {
@@ -74,7 +76,7 @@ class InterestActivity : BaseActivity<ActivityInterestBinding, InterestViewModel
             finish()
         }
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
-            viewModel.saveSetting()
+            viewModel.saveSetting(user)
         })
 
     }

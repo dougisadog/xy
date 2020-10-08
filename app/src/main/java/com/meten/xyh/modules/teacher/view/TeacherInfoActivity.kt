@@ -8,6 +8,7 @@ import com.meten.xyh.R
 import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivityTeacherInfoBinding
 import com.meten.xyh.modules.teacher.viewmodel.TeacherInfoViewModel
+import com.meten.xyh.utils.BusinessUtil
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
@@ -33,7 +34,7 @@ class TeacherInfoActivity : BaseActivity<ActivityTeacherInfoBinding, TeacherInfo
 
     private val topQualityAdapter: TopQualityAdapter by lazy {
         TopQualityAdapter(
-            layout = com.shuange.lesson.R.layout.layout_top_quality_item,
+            layout = R.layout.layout_top_quality_item,
             data = viewModel.courses
         )
     }
@@ -62,7 +63,7 @@ class TeacherInfoActivity : BaseActivity<ActivityTeacherInfoBinding, TeacherInfo
                 false
             )
             topQualityAdapter.setOnItemClickListener { adapter, view, position ->
-                ToastUtil.show("item click  topQuality:${topQualityAdapter.data[position].title}")
+                BusinessUtil.startCourse(this@TeacherInfoActivity, topQualityAdapter.data[position])
             }
             isNestedScrollingEnabled = false
             adapter = topQualityAdapter

@@ -81,7 +81,7 @@ open class DiscoveryViewModel : BaseViewModel() {
             }
             exception
         }
-        initTestData()
+//        initTestData()
     }
 
     fun initTestData() {

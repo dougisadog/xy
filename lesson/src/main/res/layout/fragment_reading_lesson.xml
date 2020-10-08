@@ -66,6 +66,7 @@
             android:id="@+id/imageIv"
             style="@style/scale_img"
             android:layout_marginTop="60dp"
+            android:layout_marginBottom="20dp"
             android:maxWidth="@dimen/base_image_width"
             tools:src="@drawable/icon_cancel"
             app:layout_constraintBottom_toTopOf="@+id/recordingIv"

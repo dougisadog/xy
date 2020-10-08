@@ -28,7 +28,8 @@ open class BaseViewModel : AndroidViewModel(ContextManager.getContext()) {
             viewModel.showLoading.value = true
         }
         viewModelScope.launch(Dispatchers.Main) {
-            kotlin.runCatching {
+            //TODO 测试不catch
+//            kotlin.runCatching {
                 supervisorScope {
                     var error: Throwable? = null
                     val result = kotlin.runCatching {
@@ -36,8 +37,11 @@ open class BaseViewModel : AndroidViewModel(ContextManager.getContext()) {
                     }
                     error = error ?: result.exceptionOrNull()
                     error?.let {
-                        val message = it.message?:""
+                        var message = it.message?:""
                         Log.e("error", message)
+                        if (message.isBlank()) {
+                            message = "未知错误"
+                        }
                         ToastUtil.show(message)
                     }
                     when (error) {
@@ -45,7 +49,7 @@ open class BaseViewModel : AndroidViewModel(ContextManager.getContext()) {
                     }
 
                 }
-            }
+//            }
             if (showLoading) {
                 viewModel.showLoading.value = true
             }
