@@ -11,7 +11,7 @@ import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentTopQualityCourseBinding
-import com.shuange.lesson.modules.course.view.CourseInfoActivity
+import com.shuange.lesson.modules.course.view.CoursePackagesActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityCourseViewModel
 
@@ -82,7 +82,7 @@ class TopQualityCourseFragment :
         with(binding.rv) {
             layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
             topQualityAdapter.setOnItemClickListener { adapter, view, position ->
-                CourseInfoActivity.start(requireContext())
+                CoursePackagesActivity.start(requireContext())
             }
             adapter = topQualityAdapter
         }

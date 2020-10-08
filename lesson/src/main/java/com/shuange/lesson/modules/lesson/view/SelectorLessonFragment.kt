@@ -28,7 +28,7 @@ class SelectorLessonFragment :
     }
 
     private fun initContent() {
-        viewModel.lessonBean?.let {
+        viewModel.questionBean?.let {
             binding.imageIv.setCenterImage(it)
             if (null == it.audio) {
                 binding.topContainer.audioIv.visibility = View.GONE
@@ -46,7 +46,7 @@ class SelectorLessonFragment :
     }
 
     private fun initListener() {
-        if (null != viewModel.lessonBean?.audio) {
+        if (null != viewModel.questionBean?.audio) {
             binding.topContainer.audioIv.setOnClickListener(NonDoubleClickListener {
                 playAudio()
             })
@@ -61,7 +61,7 @@ class SelectorLessonFragment :
         val bottomMargin = DeviceUtils.toPx(requireContext(), 12.0)
         val params = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height)
         params.bottomMargin = bottomMargin
-        val selections = viewModel.lessonBean?.selections
+        val selections = viewModel.questionBean?.selections
         selections?.forEach {
             val textSelectionView = TextSelectionView(requireContext())
             textSelectionView.layoutParams = params
@@ -69,12 +69,14 @@ class SelectorLessonFragment :
             textSelectionView.setOnClickListener(NonDoubleClickListener {
                 if (isFinished) return@NonDoubleClickListener
                 textSelectionView.refreshState()
+                var score = 100
                 if (!it.bingo) {
                     lessonViewModel.wrong.value = true
+                    score = 0
                 }
                 isFinished = true
                 viewModel.done.value = true
-                next(isDelay = true)
+                next(isDelay = true, answer = it.text, score = score)
             })
             binding.selectionsLl.addView(textSelectionView)
         }

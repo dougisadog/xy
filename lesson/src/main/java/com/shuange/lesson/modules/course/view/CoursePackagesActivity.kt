@@ -10,18 +10,18 @@ import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityCourseInfoBinding
-import com.shuange.lesson.modules.course.adapter.CourseInfoAdapter
+import com.shuange.lesson.modules.course.adapter.CoursePackageAdapter
 import com.shuange.lesson.modules.course.viewmodel.CourseInfoViewModel
 import com.shuange.lesson.view.NonDoubleClickListener
 
 /**
  * 课程包列表
  */
-class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoViewModel>() {
+class CoursePackagesActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoViewModel>() {
 
     companion object {
         fun start(context: Context) {
-            val i = Intent(context, CourseInfoActivity::class.java)
+            val i = Intent(context, CoursePackagesActivity::class.java)
             context.startActivity(i)
         }
     }
@@ -38,8 +38,8 @@ class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoVie
 
     override var fragmentContainerId: Int? = R.id.fragmentContainerFl
 
-    private val courseInfoAdapter: CourseInfoAdapter by lazy {
-        CourseInfoAdapter(
+    private val coursePackageAdapter: CoursePackageAdapter by lazy {
+        CoursePackageAdapter(
             layout = R.layout.layout_course_info_item,
             data = viewModel.courses
         )
@@ -56,12 +56,12 @@ class CourseInfoActivity : BaseActivity<ActivityCourseInfoBinding, CourseInfoVie
     fun initCourses() {
         with(binding.rv) {
             layoutManager =
-                LinearLayoutManager(this@CourseInfoActivity, RecyclerView.VERTICAL, false)
-            courseInfoAdapter.setOnItemClickListener { adapter, view, position ->
-                val current = courseInfoAdapter.data[position]
-                CourseActivity.start(current, this@CourseInfoActivity)
+                LinearLayoutManager(this@CoursePackagesActivity, RecyclerView.VERTICAL, false)
+            coursePackageAdapter.setOnItemClickListener { adapter, view, position ->
+                val current = coursePackageAdapter.data[position]
+                CourseLessonsActivity.start(current, this@CoursePackagesActivity)
             }
-            adapter = courseInfoAdapter
+            adapter = coursePackageAdapter
         }
     }
 

@@ -4,7 +4,7 @@ import androidx.databinding.ObservableArrayList
 import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.enumeration.WheelType
-import com.shuange.lesson.modules.course.bean.CourseInfoItem
+import com.shuange.lesson.modules.course.bean.CoursePackageItem
 import com.shuange.lesson.modules.course.bean.StreamLessonBean
 import com.shuange.lesson.modules.news.bean.NewsBean
 import com.shuange.lesson.modules.teacher.bean.TeacherBean
@@ -51,7 +51,7 @@ open class DiscoveryViewModel : BaseViewModel() {
                     it.sortNo
                 }
                 val converted = arr.map { lp ->
-                    CourseInfoItem().apply {
+                    CoursePackageItem().apply {
                         setLessonPackages(lp)
                     }
                 }

@@ -2,16 +2,13 @@ package com.shuange.lesson.utils.extension
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.shuange.lesson.R
-import com.shuange.lesson.modules.lesson.bean.LessonBean
+import com.shuange.lesson.modules.lesson.bean.QuestionBean
 import com.shuange.lesson.modules.lesson.bean.Selection
 import com.shuange.lesson.modules.lesson.bean.SourceData
-import com.shuange.lesson.utils.GlideUtil
 import corelib.util.ContextManager
-import corelib.util.DeviceUtils
 
-fun ImageView.setCenterImage(lessonBean: LessonBean) {
-    setSource(lessonBean.img)
+fun ImageView.setCenterImage(questionBean: QuestionBean) {
+    setSource(questionBean.img)
 }
 
 fun ImageView.setSource(sourceData: SourceData?) {

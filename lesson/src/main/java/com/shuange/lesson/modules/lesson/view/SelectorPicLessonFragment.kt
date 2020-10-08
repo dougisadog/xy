@@ -27,7 +27,7 @@ class SelectorPicLessonFragment :
     }
 
     private fun initContent() {
-        viewModel.lessonBean?.let {
+        viewModel.questionBean?.let {
             binding.topContainer.titleTv.text = it.text
             if (null == it.audio) {
                 binding.topContainer.audioIv.visibility = View.GONE
@@ -50,7 +50,7 @@ class SelectorPicLessonFragment :
     }
 
     private fun initListener() {
-        if (null !=  viewModel.lessonBean?.audio) {
+        if (null !=  viewModel.questionBean?.audio) {
             binding.topContainer.audioIv.setOnClickListener(NonDoubleClickListener {
                 playAudio()
             })
@@ -62,7 +62,7 @@ class SelectorPicLessonFragment :
 
     private fun initSelections() {
         val finalSelections = arrayListOf<Selection?>()
-        val selections = viewModel.lessonBean?.selections ?: return
+        val selections = viewModel.questionBean?.selections ?: return
         if (selections.size == 2) {
             finalSelections.add(selections[0])
             finalSelections.add(null)
@@ -80,11 +80,13 @@ class SelectorPicLessonFragment :
                     if (isFinished) return@NonDoubleClickListener
                     refreshSelections(selectionView)
                     isFinished = true
+                    var score = 100
                     if (!selection.bingo) {
                         lessonViewModel.wrong.value = true
+                        score = 0
                     }
                     viewModel.done.value = true
-                    next(isDelay = true)
+                    next(isDelay = true, answer = selection.img?.url ?: "", score = score)
 
                 })
             }

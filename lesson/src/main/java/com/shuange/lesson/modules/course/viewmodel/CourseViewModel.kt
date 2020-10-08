@@ -3,43 +3,54 @@ package com.shuange.lesson.modules.course.viewmodel
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.base.viewmodel.BaseViewModel
-import com.shuange.lesson.modules.course.bean.CourseItem
+import com.shuange.lesson.modules.course.bean.CourseLessonItem
 import com.shuange.lesson.modules.topquality.bean.CourseBean
 import com.shuange.lesson.service.api.LessonPackagesDetailApi
 import com.shuange.lesson.service.api.base.suspendExecute
 
 class CourseViewModel : BaseViewModel() {
-    var courseBean:CourseBean? = null
+    var courseBean: CourseBean? = null
     val lastProcess = MutableLiveData<String>()
 
 
     val mainImg = MutableLiveData<String>()
-    val courses = ObservableArrayList<CourseItem>()
+    val courses = ObservableArrayList<CourseLessonItem>()
+
+    var lastLessonId: Long = 0
+    var lastModuleId: Long = 0
+    var lastQuestionIndex: Int = 0
+
+
 
 
     fun loadData() {
-        val courseBean = courseBean?:return
+        val courseBean = courseBean ?: return
         val lessonPackagesId = courseBean.courseId
-        testData()
+//        testData()
         startBindLaunch {
             val suspendResult = LessonPackagesDetailApi(lessonPackagesId).suspendExecute()
             suspendResult.getResponse()?.body?.let {
-               val source =  it.lessons
+                val source = it.lessons
                 source.sortedBy { it.sortNo }
                 val converted = source.map {
-                    CourseItem().apply {
+                    CourseLessonItem().apply {
                         setLesson(it)
                     }
                 }
                 courses.clear()
                 courses.addAll(converted)
+                lastLessonId = it.record.lessonId
+                lastModuleId = it.record.lessonModuleId
+                lastQuestionIndex = it.moduleRecord?.progressIndex ?: 0
+                lastProcess.value = "上次学到：${it.record.lessonName}》${it.record.lessonModuleName}"
             }
             suspendResult.exception
         }
     }
 
     fun testData() {
-        mainImg.value = "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3844276591,3933131866&fm=26&gp=0.jpg"
+        mainImg.value =
+            "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3844276591,3933131866&fm=26&gp=0.jpg"
         lastProcess.value = "上次学到：4.学问位置》核心课程A"
 //        courses.add(CourseItem().apply {
 //            name = "核心课程A"

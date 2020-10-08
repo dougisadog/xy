@@ -17,6 +17,8 @@ data class Lesson(
     val resourceContent: String = "" //资源内容
     val starNum: Int = 0
     val unitNo: String = "" //单元编号
+
+    val moduleRecord: ModuleRecord? = null
 }
 
 

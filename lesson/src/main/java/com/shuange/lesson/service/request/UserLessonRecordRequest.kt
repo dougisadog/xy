@@ -1,14 +1,15 @@
 package com.shuange.lesson.service.request
 
-import com.shuange.lesson.utils.RequestParam
+import com.shuange.lesson.utils.RequestClass
 
+
+@RequestClass
 class UserLessonRecordRequest(
-    @RequestParam
-    var id: Int? = null,
-    @RequestParam
-    var lessonId: Int = 0,
-    @RequestParam
-    var questionId: Int? = null,
-    @RequestParam
-    var score: Double? = null
+    val answer: String,
+    val lessonModuleId: Long,
+    val lessonId: Long,
+    val progressIndex: Int,
+    val progressTime: Int,
+    val questionId: Long,
+    val score: Int
 )

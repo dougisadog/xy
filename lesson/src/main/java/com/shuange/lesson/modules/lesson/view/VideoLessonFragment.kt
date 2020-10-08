@@ -11,7 +11,9 @@ import com.shuange.lesson.utils.VideoUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_title.view.*
 
-
+/**
+ * TODO 未知视频
+ */
 class VideoLessonFragment :
     BaseLessonFragment<FragmentVideoLessonBinding, VideoLessonViewModel>() {
 
@@ -27,7 +29,7 @@ class VideoLessonFragment :
     }
 
     private fun initContent() {
-        viewModel.lessonBean?.let {
+        viewModel.questionBean?.let {
             setVideoThumbnail(it.video?.getFullPath() ?: "")
             binding.topContainer.titleTv.text = it.text
         }
@@ -38,7 +40,7 @@ class VideoLessonFragment :
             playAudio()
         })
         binding.imageIv.setOnClickListener(NonDoubleClickListener {
-            viewModel.lessonBean?.video?.getFullPath()?.let {
+            viewModel.questionBean?.video?.getFullPath()?.let {
 //                VideoWebActivity.startVideoWeb(it, requireContext())
                 VideoActivity.startVideo(it, requireContext())
             }

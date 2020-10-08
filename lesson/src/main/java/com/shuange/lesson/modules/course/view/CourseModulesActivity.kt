@@ -11,22 +11,20 @@ import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityCourseListBinding
-import com.shuange.lesson.enumeration.CourseState
-import com.shuange.lesson.modules.course.adapter.CourseListAdapter
+import com.shuange.lesson.modules.course.adapter.CourseModuleAdapter
 import com.shuange.lesson.modules.course.viewmodel.CourseListViewModel
 import com.shuange.lesson.modules.lesson.view.LessonActivity
 import com.shuange.lesson.view.NonDoubleClickListener
-import com.shuange.lesson.view.dialog.CommonDialog
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 /**
  * 模块列表（课程详情）
  */
-class CourseListActivity : BaseActivity<ActivityCourseListBinding, CourseListViewModel>() {
+class CourseModulesActivity : BaseActivity<ActivityCourseListBinding, CourseListViewModel>() {
 
     companion object {
-        fun start(context: Context, lessonId: String, title: String) {
-            val i = Intent(context, CourseListActivity::class.java)
+        fun start(context: Context, lessonId: Long, title: String) {
+            val i = Intent(context, CourseModulesActivity::class.java)
             i.putExtra(IntentKey.LESSON_ID, lessonId)
             i.putExtra(IntentKey.LESSON_TITLE, title)
             context.startActivity(i)
@@ -45,15 +43,15 @@ class CourseListActivity : BaseActivity<ActivityCourseListBinding, CourseListVie
 
     override var fragmentContainerId: Int? = R.id.fragmentContainerFl
 
-    private val courseListAdapter: CourseListAdapter by lazy {
-        CourseListAdapter(
-            data = viewModel.courses
+    private val courseModuleAdapter: CourseModuleAdapter by lazy {
+        CourseModuleAdapter(
+            data = viewModel.modules
         )
     }
 
     override fun initParams() {
         super.initParams()
-        viewModel.lessonId = intent.getStringExtra(IntentKey.LESSON_ID) ?: return
+        viewModel.lessonId = intent.getLongExtra(IntentKey.LESSON_ID, 0).toString()
         viewModel.title = intent.getStringExtra(IntentKey.LESSON_TITLE) ?: ""
     }
 
@@ -68,18 +66,12 @@ class CourseListActivity : BaseActivity<ActivityCourseListBinding, CourseListVie
     fun initCourses() {
         with(binding.rv) {
             layoutManager =
-                LinearLayoutManager(this@CourseListActivity, RecyclerView.VERTICAL, false)
-            courseListAdapter.setOnItemClickListener { adapter, view, position ->
-                val current = courseListAdapter.data[position]
-                if (current.state == CourseState.LOCKED) {
-                    CommonDialog(this@CourseListActivity).apply {
-                        contentText = "请先做完前面的内容，才可以解锁此课程哦！"
-                    }.show()
-                } else {
-                    LessonActivity.start(this@CourseListActivity, current.courseId)
-                }
+                LinearLayoutManager(this@CourseModulesActivity, RecyclerView.VERTICAL, false)
+            courseModuleAdapter.setOnItemClickListener { adapter, view, position ->
+                val current = courseModuleAdapter.data[position]
+                LessonActivity.start(this@CourseModulesActivity, current.moduleId, current.record?.progressIndex?:0)
             }
-            adapter = courseListAdapter
+            adapter = courseModuleAdapter
         }
     }
 
@@ -87,9 +79,17 @@ class CourseListActivity : BaseActivity<ActivityCourseListBinding, CourseListVie
         binding.header.back.setOnClickListener(NonDoubleClickListener {
             finish()
         })
+        binding.straightCourseCl.setOnClickListener(NonDoubleClickListener {
+            LessonActivity.start(this, viewModel.lastModuleId, viewModel.lastQuestionIndex)
+        })
     }
 
     override fun initViewObserver() {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadData()
     }
 
 

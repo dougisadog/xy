@@ -3,7 +3,7 @@ package com.shuange.lesson.modules.unit.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.modules.lesson.bean.InputData
-import com.shuange.lesson.modules.lesson.bean.LessonBean
+import com.shuange.lesson.modules.lesson.bean.QuestionBean
 import com.shuange.lesson.modules.lesson.bean.Selection
 import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.service.api.base.DownloadApi
@@ -25,7 +25,7 @@ open class UnitViewModel : BaseViewModel() {
     val wrong = MutableLiveData<Boolean>()
 
     //课程数据
-    val lessons = mutableListOf<LessonBean>()
+    val lessons = mutableListOf<QuestionBean>()
 
     //当前课程加载完成
     val loaded = MutableLiveData<Boolean>()
@@ -41,7 +41,7 @@ open class UnitViewModel : BaseViewModel() {
     fun getLessons() {
         arrayListOf(LessonType.TYPE_02,LessonType.TYPE_02,LessonType.TYPE_02,LessonType.TYPE_02).forEachIndexed { index, lessonType ->
 //        LessonType.values().forEachIndexed { index, lessonType ->
-            lessons.add(LessonBean(lessonType, index.toString() + "_id").apply {
+            lessons.add(QuestionBean(lessonType, index.toLong()).apply {
                 text = "My name is Barbara ${lessonType.name}"
                 setImage("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3844276591,3933131866&fm=26&gp=0.jpg")
                 setAudio("http://downsc.chinaz.net/Files/DownLoad/sound1/202004/12800.mp3")

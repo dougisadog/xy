@@ -5,7 +5,7 @@ import com.shuange.lesson.modules.topquality.bean.CourseBean
 /**
  * lesson package UI
  */
-class CourseInfoItem:CourseBean() {
+class CoursePackageItem:CourseBean() {
 
 
 }

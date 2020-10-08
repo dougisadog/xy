@@ -1,8 +1,9 @@
 package com.shuange.lesson.modules.course.viewmodel
 
 import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.base.viewmodel.BaseViewModel
-import com.shuange.lesson.modules.course.bean.CourseItem
+import com.shuange.lesson.modules.course.bean.CourseModuleItem
 import com.shuange.lesson.service.api.LessonDetailApi
 import com.shuange.lesson.service.api.base.suspendExecute
 
@@ -11,7 +12,36 @@ class CourseListViewModel : BaseViewModel() {
     var title: String = ""
     var lessonId = ""
 
-    val courses = ObservableArrayList<CourseItem>()
+    val modules = ObservableArrayList<CourseModuleItem>()
+
+    val lastProcess = MutableLiveData<String>()
+
+    var lastModuleId: Long = 0
+    var lastQuestionIndex: Int = 0
+
+    fun loadData() {
+        startBindLaunch {
+            val suspendResult = LessonDetailApi(lessonId).suspendExecute()
+            suspendResult.getResponse()?.body?.let {
+                //TODO 没有分组
+                val source = it.modules
+                source.sortedBy {
+                    it.sortNo
+                }
+                val converted = source.map {
+                    CourseModuleItem().apply {
+                        setModule(it)
+                    }
+                }
+                modules.clear()
+                modules.addAll(converted)
+                lastModuleId = it.record.lessonModuleId
+                lastQuestionIndex = it.moduleRecord?.progressIndex ?: 0
+                lastProcess.value = "上次学到：${it.record.lessonModuleName}"
+            }
+            suspendResult.exception
+        }
+    }
 
     init {
 //        courses.add(CourseItem(true).apply { name = "核心课程" })
@@ -47,26 +77,5 @@ class CourseListViewModel : BaseViewModel() {
 //            progress = 2
 //            state = CourseState.LOCKED
 //        })
-    }
-
-    fun loadData() {
-        startBindLaunch {
-            val suspendResult = LessonDetailApi(lessonId).suspendExecute()
-            suspendResult.getResponse()?.body?.let {
-                //TODO 没有分组
-                val source = it.modules
-                source.sortedBy {
-                    it.sortNo
-                }
-                val converted = source.map {
-                    CourseItem().apply {
-                        setModule(it)
-                    }
-                }
-                courses.clear()
-                courses.addAll(converted)
-            }
-            suspendResult.exception
-        }
     }
 }

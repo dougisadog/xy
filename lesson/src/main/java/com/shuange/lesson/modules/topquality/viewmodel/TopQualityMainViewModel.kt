@@ -4,7 +4,7 @@ import androidx.databinding.ObservableArrayList
 import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.enumeration.WheelType
-import com.shuange.lesson.modules.course.bean.CourseInfoItem
+import com.shuange.lesson.modules.course.bean.CoursePackageItem
 import com.shuange.lesson.modules.topquality.bean.CourseBean
 import com.shuange.lesson.service.api.LessonPackagesApi
 import com.shuange.lesson.service.api.LessonPackagesRecommendApi
@@ -16,7 +16,7 @@ class TopQualityMainViewModel : BaseViewModel() {
     //精品课程 和主页相同不截取
     var topQualityItems = ObservableArrayList<CourseBean>()
 
-    val courses = ObservableArrayList<CourseInfoItem>()
+    val courses = ObservableArrayList<CoursePackageItem>()
 
     val wheels = mutableListOf<BaseItemBean>()
 
@@ -53,7 +53,7 @@ class TopQualityMainViewModel : BaseViewModel() {
                     it.sortNo
                 }
                 val converted = arr.map { lp ->
-                    CourseInfoItem().apply {
+                    CoursePackageItem().apply {
                         setLessonPackages(lp)
                     }
                 }
@@ -76,7 +76,7 @@ class TopQualityMainViewModel : BaseViewModel() {
                     it.sortNo
                 }
                 val converted = arr.map { lp ->
-                    CourseInfoItem().apply {
+                    CoursePackageItem().apply {
                         setLessonPackages(lp)
                     }
                 }
@@ -107,7 +107,7 @@ class TopQualityMainViewModel : BaseViewModel() {
         }
 
         for (i in 0 until 4) {
-            courses.add(CourseInfoItem().apply {
+            courses.add(CoursePackageItem().apply {
                 title = "初级课程$i"
                 content = "4.学问位置》核心课程A"
                 image =

@@ -7,10 +7,16 @@ import java.io.Serializable
 
 /**
  * question 结构
- * @param id  question id
- * @param lessonId module Id
+ * @param questionsId  question id
+ * @param moduleId module Id
  */
-class LessonBean(var lessonType: LessonType, var id: String, var lessonId:String? = null) : Serializable {
+class QuestionBean(
+    var lessonType: LessonType,
+    var questionsId: Long = 0,
+    var moduleId: Long = 0,
+    var lessonId: Long = 0,
+    var lessonPackageId: Long = 0
+) : Serializable {
 
     var text = ""
     var img: SourceData? = null
@@ -23,8 +29,8 @@ class LessonBean(var lessonType: LessonType, var id: String, var lessonId:String
 
     var score: Double? = null
 
-    fun setLesson(lesson:Lesson) {
-        id = lesson.id.toString()
+    fun setLesson(lesson: Lesson) {
+        questionsId = lesson.id
         text = lesson.description
         setImage(lesson.resourceId.toString())
         lesson.resourceVideoUrl?.let { setVideo(it) }
@@ -32,15 +38,15 @@ class LessonBean(var lessonType: LessonType, var id: String, var lessonId:String
         lesson.resourceImageUrl?.let { setImage(it) }
     }
 
-    val defaultDic:String
-    get() {
-        return lessonType.name + File.separator + this.id
-    }
+    val defaultDic: String
+        get() {
+            return lessonType.name + File.separator + this.questionsId
+        }
 
     private fun buildSourceDataByLink(
         link: String,
         id: String,
-        dic: String = lessonType.name + File.separator + this.id
+        dic: String = lessonType.name + File.separator + this.questionsId
     ): SourceData {
         return SourceData().apply {
             name = id
@@ -53,21 +59,21 @@ class LessonBean(var lessonType: LessonType, var id: String, var lessonId:String
     }
 
     fun setImage(link: String) {
-        img = buildSourceDataByLink(link, "img_$id")
+        img = buildSourceDataByLink(link, "img_$questionsId")
     }
 
     fun setAudio(link: String) {
-        audio = buildSourceDataByLink(link, "audio_$id")
+        audio = buildSourceDataByLink(link, "audio_$questionsId")
     }
 
     fun setVideo(link: String) {
-        video = buildSourceDataByLink(link, "video_$id")
+        video = buildSourceDataByLink(link, "video_$questionsId")
     }
 
     fun initRecord() {
-        record =  SourceData().apply {
-            name =  "record_$id"
-            dictionary = lessonType.name + File.separator + id
+        record = SourceData().apply {
+            name = "record_$questionsId"
+            dictionary = lessonType.name + File.separator + questionsId
             suffix = "wav"
         }
     }

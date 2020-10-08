@@ -5,7 +5,7 @@ import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.enumeration.InputType
 import com.shuange.lesson.modules.lesson.bean.InputData
-import com.shuange.lesson.modules.lesson.bean.LessonBean
+import com.shuange.lesson.modules.lesson.bean.QuestionBean
 import com.shuange.lesson.modules.lesson.bean.Selection
 import com.shuange.lesson.modules.lesson.bean.SourceData
 import com.shuange.lesson.modules.lesson.other.LessonType
@@ -19,7 +19,7 @@ open class LessonViewModel : BaseViewModel() {
 
     var moduleId = ""
 
-    var lastQuestionId: String? = null
+    var lastQuestionIndex: Int? = null
 
     //命
     val life = MutableLiveData<Int>()
@@ -34,7 +34,7 @@ open class LessonViewModel : BaseViewModel() {
     val wrong = MutableLiveData<Boolean>()
 
     //课程数据
-    val lessons = mutableListOf<LessonBean>()
+    val lessons = mutableListOf<QuestionBean>()
 
     //当前课程加载完成
     val loaded = MutableLiveData<Boolean>()
@@ -51,24 +51,18 @@ open class LessonViewModel : BaseViewModel() {
      * 上次进度
      */
     fun getLastIndex(): Int? {
-        val targetIndex = lessons.indexOfFirst {
-            it.id == lastQuestionId
-        }
-        if (-1 == targetIndex) {
-            return null
-        }
-        return targetIndex
+        return lastQuestionIndex
     }
 
     /**
      * 获取所有module下的数据
      */
-    fun getLessonsData(onSuccess:EmptyTask) {
+    fun getLessonsData(onSuccess: EmptyTask) {
         startBindLaunch {
             val result = ModuleDetailApi(moduleId).suspendExecute()
             result.getResponse()?.body?.let {
                 val lessonBeans = it.questions.map {
-                    var lesson: LessonBean? = null
+                    var question: QuestionBean? = null
                     var inputType: InputType? = null
 
                     try {
@@ -81,12 +75,18 @@ open class LessonViewModel : BaseViewModel() {
                             )
                         }
                         lessonType?.let { type ->
-                            lesson = LessonBean(type, it.id.toString(), moduleId)
+                            question = QuestionBean(
+                                type,
+                                it.id,
+                                it.lessonModuleId,
+                                it.lessonId,
+                                it.lessonPackageId
+                            )
                         }
                     } catch (e: Exception) {
                     }
-                    lesson?.run {
-                        id = it.lessonId.toString()
+                    question?.run {
+                        questionsId = it.id
                         if (it.showText) {
                             text = it.questionResourceContent
                         }
@@ -126,7 +126,7 @@ open class LessonViewModel : BaseViewModel() {
                             initRecord()
                         }
                     }
-                    lesson
+                    question
                 }
                 lessons.addAll(lessonBeans.filterNotNull())
             }
@@ -142,7 +142,7 @@ open class LessonViewModel : BaseViewModel() {
     fun getLessons() {
         arrayListOf(LessonType.TYPE_02).forEachIndexed { index, lessonType ->
 //        LessonType.values().forEachIndexed { index, lessonType ->
-            lessons.add(LessonBean(lessonType, index.toString() + "_id").apply {
+            lessons.add(QuestionBean(lessonType, index.toLong()).apply {
                 text = "My name is Barbara ${lessonType.name}"
                 setImage("https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3844276591,3933131866&fm=26&gp=0.jpg")
                 setAudio("http://downsc.chinaz.net/Files/DownLoad/sound1/202004/12800.mp3")

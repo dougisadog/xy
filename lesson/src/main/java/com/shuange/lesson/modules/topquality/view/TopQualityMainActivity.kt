@@ -15,12 +15,13 @@ import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityTopQualityMainBinding
-import com.shuange.lesson.modules.course.adapter.CourseInfoAdapter
-import com.shuange.lesson.modules.course.view.CourseInfoActivity
-import com.shuange.lesson.modules.course.view.CourseListActivity
+import com.shuange.lesson.modules.course.adapter.CoursePackageAdapter
+import com.shuange.lesson.modules.course.view.CourseModulesActivity
+import com.shuange.lesson.modules.course.view.CoursePackagesActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityMainViewModel
 import com.shuange.lesson.utils.ToastUtil
+import com.shuange.lesson.utils.extension.force2Long
 import com.shuange.lesson.utils.extension.initAdapter
 import com.shuange.lesson.utils.extension.setOnSearchListener
 import com.shuange.lesson.view.NonDoubleClickListener
@@ -56,8 +57,8 @@ class TopQualityMainActivity :
         )
     }
 
-    private val courseInfoAdapter: CourseInfoAdapter by lazy {
-        CourseInfoAdapter(
+    private val coursePackageAdapter: CoursePackageAdapter by lazy {
+        CoursePackageAdapter(
             layout = R.layout.layout_top_quality_main_course,
             data = viewModel.courses
         )
@@ -78,7 +79,7 @@ class TopQualityMainActivity :
             layoutManager =
                 LinearLayoutManager(this@TopQualityMainActivity, RecyclerView.VERTICAL, false)
             topQualityAdapter.setOnItemClickListener { adapter, view, position ->
-                CourseInfoActivity.start(context)
+                CoursePackagesActivity.start(context)
             }
             isNestedScrollingEnabled = false
             adapter = topQualityAdapter
@@ -92,10 +93,10 @@ class TopQualityMainActivity :
                 RecyclerView.HORIZONTAL,
                 false
             )
-            courseInfoAdapter.setOnItemClickListener { adapter, view, position ->
+            coursePackageAdapter.setOnItemClickListener { adapter, view, position ->
                 TopQualityActivity.start(this@TopQualityMainActivity)
             }
-            adapter = courseInfoAdapter
+            adapter = coursePackageAdapter
         }
     }
 
@@ -105,7 +106,7 @@ class TopQualityMainActivity :
         binding.vp.setOnClickListener(NonDoubleClickListener {
             val id = viewModel.wheels[currentItem].id
             val title = viewModel.wheels[currentItem].title
-            CourseListActivity.start(this, id, title)
+            CourseModulesActivity.start(this, id.force2Long(), title)
         })
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
     }

@@ -16,9 +16,9 @@
         <activity android:name=".modules.topquality.view.CollectionActivity" />
         <activity android:name=".modules.unit.view.UnitActivity" />
 
-        <activity android:name=".modules.course.view.CourseListActivity" />
-        <activity android:name=".modules.course.view.CourseActivity" />
-        <activity android:name=".modules.course.view.CourseInfoActivity" />
+        <activity android:name=".modules.course.view.CourseModulesActivity" />
+        <activity android:name=".modules.course.view.CourseLessonsActivity" />
+        <activity android:name=".modules.course.view.CoursePackagesActivity" />
         <activity android:name=".modules.course.view.CourseSubActivity" />
         <activity android:name=".modules.course.view.CourseAllActivity" />
         <activity android:name=".modules.course.view.MediaCourseActivity" />

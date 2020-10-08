@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import com.shuange.lesson.R
 import com.shuange.lesson.enumeration.LessonPackageType
-import com.shuange.lesson.modules.course.view.CourseActivity
+import com.shuange.lesson.modules.course.view.CourseLessonsActivity
 import com.shuange.lesson.modules.topquality.bean.CourseBean
 
 object BusinessUtil {
@@ -34,27 +34,24 @@ object BusinessUtil {
 
     fun getStartsByScore(score: Double): Int {
         return when {
-            score > 0.8 -> {
+            score > 0.6 -> {
                 3
             }
-            score > 0.6 -> {
+            score > 0.4 -> {
                 2
             }
-            score > 0.4 -> {
-                1
-            }
             else -> {
-                0
+                1
             }
         }
     }
 
     fun startCourse(context: Context, courseBean: CourseBean) {
         when (courseBean.packageType) {
-            LessonPackageType.BASE-> {
-                CourseActivity.start(courseBean, context)
+            LessonPackageType.BASE -> {
+                CourseLessonsActivity.start(courseBean, context)
             }
-            LessonPackageType.VIDEO-> {
+            LessonPackageType.VIDEO -> {
 //                MediaCourseActivity.start(courseBean, context)
             }
         }

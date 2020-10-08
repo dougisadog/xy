@@ -21,10 +21,10 @@ import com.shuange.lesson.utils.ToastUtil
 class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
 
     companion object {
-        fun start(context: Context, moduleId: String, lastQuestionId:String? = null) {
+        fun start(context: Context, moduleId: Long, lastQuestionIndex:Int) {
             val i = Intent(context, LessonActivity::class.java)
             i.putExtra(IntentKey.MODULE_ID, moduleId)
-            lastQuestionId?.let {
+            lastQuestionIndex.let {
                 i.putExtra(IntentKey.LAST_QUESTION_ID, it)
 
             }
@@ -52,8 +52,8 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
 
     override fun initParams() {
         super.initParams()
-        viewModel.moduleId = intent.getStringExtra(IntentKey.MODULE_ID) ?: return
-        viewModel.lastQuestionId = intent.getStringExtra(IntentKey.LAST_QUESTION_ID)
+        viewModel.moduleId = intent.getLongExtra(IntentKey.MODULE_ID, 0).toString()
+        viewModel.lastQuestionIndex = intent.getIntExtra(IntentKey.LAST_QUESTION_ID, 0)
     }
 
     override fun initView() {
@@ -96,7 +96,7 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
                 //预先额外加载3个index跳转
                 if (null != lastIndex && index - lastIndex>= ConfigDef.MIN_LOADED_SIZE) {
                     binding.vp.currentItem = lastIndex
-                    viewModel.lastQuestionId = null
+                    viewModel.lastQuestionIndex = null
                 }
                 val lessonBean = viewModel.lessons[index]
                 viewModel.targetIndex++
@@ -112,7 +112,7 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
                 //最后3个index 在所有资源加载后跳转
                 if (null != lastIndex && lastIndex + ConfigDef.MIN_LOADED_SIZE >= viewModel.lessons.size) {
                     binding.vp.currentItem = lastIndex
-                    viewModel.lastQuestionId = null
+                    viewModel.lastQuestionIndex = null
                 }
             }
         })

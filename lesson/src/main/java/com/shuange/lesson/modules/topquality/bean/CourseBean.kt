@@ -4,7 +4,7 @@ import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.PagerItem
 import com.shuange.lesson.enumeration.LessonPackageType
 import com.shuange.lesson.service.response.bean.LessonPackage
-import com.shuange.lesson.service.response.bean.Record
+import com.shuange.lesson.service.response.bean.ModuleRecord
 import corelib.util.Log
 import java.io.Serializable
 
@@ -19,7 +19,7 @@ open class CourseBean : BaseItemBean(), PagerItem, Serializable {
 
     var packageType: LessonPackageType? = null
 
-    var record:Record?= null
+    var record:ModuleRecord?= null
 
     fun setLessonPackages(lessonPackage: LessonPackage) {
 //        image = lessonPackage
@@ -40,7 +40,7 @@ open class CourseBean : BaseItemBean(), PagerItem, Serializable {
         } catch (e: Exception) {
             Log.e("courseBean", "lesson package type 转换错误 ${e.message}")
         }
-        record = lessonPackage.record
+        record = lessonPackage.moduleRecord
     }
 
     //0 绿 1 黄 限时免费 2直播付费 3已购

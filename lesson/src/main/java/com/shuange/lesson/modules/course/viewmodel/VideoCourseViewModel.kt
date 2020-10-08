@@ -4,7 +4,7 @@ import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.base.LessonDataCache
 import com.shuange.lesson.base.viewmodel.BaseViewModel
-import com.shuange.lesson.modules.course.bean.CourseItem
+import com.shuange.lesson.modules.course.bean.CourseLessonItem
 import com.shuange.lesson.modules.course.bean.DraggingCourseBean
 import com.shuange.lesson.modules.media.bean.VideoData
 import com.shuange.lesson.modules.topquality.bean.CourseBean
@@ -18,7 +18,7 @@ open class VideoCourseViewModel : BaseViewModel() {
     var mediaData= MutableLiveData<VideoData>()
 
     var content = MutableLiveData<String>()
-    var courses = mutableListOf<CourseItem>()
+    var courses = mutableListOf<CourseLessonItem>()
     var draggingCourses = ObservableArrayList<DraggingCourseBean>()
 
 
@@ -42,7 +42,7 @@ open class VideoCourseViewModel : BaseViewModel() {
                 val source = it.lessons
                 source.sortedBy { it.sortNo }
                 source.forEachIndexed { index, lesson ->
-                    courses.add(CourseItem().apply {
+                    courses.add(CourseLessonItem().apply {
                         setLesson(lesson)
                     })
                     draggingCourses.add(DraggingCourseBean().apply {
@@ -80,7 +80,7 @@ open class VideoCourseViewModel : BaseViewModel() {
             VideoData().apply { setVideo(url) }
         content.value = "adasdasd123asdasdasdasd123sasd"
         for (i in 0 until 6) {
-            courses.add(CourseItem(false).apply {
+            courses.add(CourseLessonItem().apply {
                 name = "topQuality$i"
                 this.sourceUrl = url
             })

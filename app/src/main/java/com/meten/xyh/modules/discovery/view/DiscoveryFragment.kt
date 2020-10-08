@@ -23,7 +23,7 @@ import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.modules.course.view.CourseAllActivity
-import com.shuange.lesson.modules.course.view.CourseListActivity
+import com.shuange.lesson.modules.course.view.CourseModulesActivity
 import com.shuange.lesson.modules.news.view.NewsDetailActivity
 import com.shuange.lesson.modules.news.view.NewsListActivity
 import com.shuange.lesson.modules.teacher.adapter.TeacherAdapter
@@ -33,6 +33,7 @@ import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.view.TopQualityActivity
 import com.shuange.lesson.utils.BusinessUtil
 import com.shuange.lesson.utils.ToastUtil
+import com.shuange.lesson.utils.extension.force2Long
 import com.shuange.lesson.utils.extension.initAdapter
 import com.shuange.lesson.utils.extension.setOnSearchListener
 import com.shuange.lesson.view.NonDoubleClickListener
@@ -96,7 +97,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
         binding.vp.setOnClickListener(NonDoubleClickListener {
             val id = viewModel.wheels[currentItem].id
             val title = viewModel.wheels[currentItem].title
-            CourseListActivity.start(requireContext(), id, title)
+            CourseModulesActivity.start(requireContext(), id.force2Long(), title)
         })
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
     }

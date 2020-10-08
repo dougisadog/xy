@@ -49,7 +49,7 @@ open class ReadingLessonFragment :
     }
 
     private fun initContent() {
-        viewModel.lessonBean?.let {
+        viewModel.questionBean?.let {
             binding.imageIv.setCenterImage(it)
             binding.topContainer.titleTv.text = it.text
         }
@@ -73,7 +73,7 @@ open class ReadingLessonFragment :
                     binding.recordingIv.visibility = View.INVISIBLE
                     binding.recordingLabel.visibility = View.INVISIBLE
                 } else {
-                    val path = viewModel.lessonBean?.record?.getFullPath() ?: ""
+                    val path = viewModel.questionBean?.record?.getFullPath() ?: ""
                     startRecordingWithPermissionCheck(path)
                 }
             }
@@ -162,7 +162,7 @@ open class ReadingLessonFragment :
             offsetIndex = 1
         )
         refreshTitle(errors)
-        next(isDelay = true)
+        next(isDelay = true, answer = "", score = if (star >= 2) 100 else 0)
     }
 
     /**
@@ -170,7 +170,7 @@ open class ReadingLessonFragment :
      */
     private fun refreshTitle(errors: List<String>) {
         //
-        val title = viewModel.lessonBean?.text ?: ""
+        val title = viewModel.questionBean?.text ?: ""
         val spannableString = SpannableString(title)
 
         val errorSpan = ForegroundColorSpan(

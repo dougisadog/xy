@@ -1,7 +1,6 @@
 package com.shuange.lesson.service.response
 
 import com.shuange.lesson.service.response.base.BaseApiResponse
-import com.shuange.lesson.service.response.bean.ModuleDetail
-import com.shuange.lesson.service.response.bean.Record
+import com.shuange.lesson.service.response.bean.Module
 
-class ModuleDetailResponse : BaseApiResponse<ModuleDetail>()
+class ModuleDetailResponse : BaseApiResponse<Module>()

@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.modules.lesson.bean.LessonBean
+import com.shuange.lesson.modules.lesson.bean.QuestionBean
 import com.shuange.lesson.modules.lesson.other.LessonType
 import com.shuange.lesson.modules.lesson.viewmodel.BaseLessonViewModel
 import com.shuange.lesson.modules.lesson.viewmodel.LessonViewModel
@@ -26,9 +26,9 @@ abstract class BaseLessonFragment<BD : ViewDataBinding, VM : BaseLessonViewModel
     var isFinished = false
 
     companion object {
-        fun newInstance(lessonBean: LessonBean): BaseLessonFragment<*, *>? {
+        fun newInstance(questionBean: QuestionBean): BaseLessonFragment<*, *>? {
             var f: BaseLessonFragment<*, *>? = null
-            when (lessonBean.lessonType) {
+            when (questionBean.lessonType) {
                 LessonType.TYPE_01 -> {
                     f = NormalLessonFragment()
                 }
@@ -52,7 +52,7 @@ abstract class BaseLessonFragment<BD : ViewDataBinding, VM : BaseLessonViewModel
                 }
             }
             Bundle().apply {
-                putSerializable(IntentKey.LESSON_TYPE_KEY, lessonBean)
+                putSerializable(IntentKey.LESSON_TYPE_KEY, questionBean)
                 f.arguments = this
             }
             return f
@@ -75,8 +75,8 @@ abstract class BaseLessonFragment<BD : ViewDataBinding, VM : BaseLessonViewModel
 
     override fun initParams() {
         super.initParams()
-        (arguments?.getSerializable(IntentKey.LESSON_TYPE_KEY) as? LessonBean)?.let {
-            viewModel.lessonBean = it
+        (arguments?.getSerializable(IntentKey.LESSON_TYPE_KEY) as? QuestionBean)?.let {
+            viewModel.questionBean = it
         }
     }
 
@@ -84,7 +84,7 @@ abstract class BaseLessonFragment<BD : ViewDataBinding, VM : BaseLessonViewModel
     }
 
     fun playAudio() {
-        val path = viewModel.lessonBean?.audio?.getFullPath()
+        val path = viewModel.questionBean?.audio?.getFullPath()
         MediaPlayerMgr.getInstance().playMp(path)
     }
 
@@ -94,12 +94,12 @@ abstract class BaseLessonFragment<BD : ViewDataBinding, VM : BaseLessonViewModel
         })
     }
 
-    fun next(isDelay: Boolean = false) {
-        val currentIndex = lessonViewModel.lessons.indexOf(viewModel.lessonBean)
+    fun next(isDelay: Boolean = false, answer: String = "", score: Int = 100) {
+        val currentIndex = lessonViewModel.lessons.indexOf(viewModel.questionBean)
         if (-1 == currentIndex) return
         val task = {
             lessonViewModel.next.value = currentIndex + 1
-//            viewModel.saveLessonProcess()
+            viewModel.saveLessonProcess(currentIndex, answer, score)
         }
         if (isDelay) {
             android.os.Handler().postDelayed({

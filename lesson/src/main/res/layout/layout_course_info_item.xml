@@ -7,7 +7,7 @@
 
         <variable
             name="courseInfoItem"
-            type="com.shuange.lesson.modules.course.bean.CourseInfoItem" />
+            type="com.shuange.lesson.modules.course.bean.CoursePackageItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

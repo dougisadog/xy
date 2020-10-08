@@ -31,7 +31,7 @@ class InputLessonFragment :
     }
 
     private fun initContent() {
-        viewModel.lessonBean?.let {
+        viewModel.questionBean?.let {
             it.inputData = InputData().apply {
                 text = it.text
                 words = it.selections.filter { selection -> selection.bingo }
@@ -43,7 +43,7 @@ class InputLessonFragment :
     }
 
     private fun initKeyboard() {
-        viewModel.lessonBean?.inputData?.words?.let {
+        viewModel.questionBean?.inputData?.words?.let {
             binding.keyboard.initSourceData(it)
         }
     }
@@ -56,16 +56,18 @@ class InputLessonFragment :
 
             override fun onFinish(result: Boolean) {
                 super.onFinish(result)
-                next()
+                var score = 100
                 if (!result) {
                     lessonViewModel.wrong.value = true
+                    score = 0
                 }
+                next(answer = viewModel.currentInput.value ?: "", score = score)
             }
         }
     }
 
     private fun refreshTitle(text: String = "") {
-        val inputData = viewModel.lessonBean?.inputData ?: return
+        val inputData = viewModel.questionBean?.inputData ?: return
 
 
         val originText = inputData.text

@@ -37,7 +37,7 @@ open class RecordingLessonFragment :
     }
 
     private fun initContent() {
-        viewModel.lessonBean?.let {
+        viewModel.questionBean?.let {
             binding.imageIv.setCenterImage(it)
             binding.titleTv.text = it.text
         }
@@ -46,7 +46,7 @@ open class RecordingLessonFragment :
 
     @SuppressLint("ClickableViewAccessibility")
     private fun initListener() {
-        val path = viewModel.lessonBean?.record?.getFullPath() ?: return
+        val path = viewModel.questionBean?.record?.getFullPath() ?: return
         binding.recordingIv.setOnTouchListener { v, event ->
             RecordManager.getInstance().let {
                 if (event.action == MotionEvent.ACTION_DOWN) {
@@ -64,6 +64,7 @@ open class RecordingLessonFragment :
             MediaPlayerMgr.getInstance().playMp(path)
         })
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
+            //TODO
             next()
         })
     }

@@ -26,7 +26,7 @@ class NormalLessonFragment :
     }
 
     private fun initContent() {
-        viewModel.lessonBean?.let {
+        viewModel.questionBean?.let {
             binding.imageIv.setCenterImage(it)
             binding.topContainer.titleTv.text = it.text
         }

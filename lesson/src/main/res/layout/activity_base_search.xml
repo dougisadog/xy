@@ -8,7 +8,7 @@
 
         <variable
             name="baseSearchViewModel"
-            type="com.meten.xyh.modules.search.viewmodel.BaseSearchViewModel" />
+            type="com.shuange.lesson.modules.search.viewmodel.BaseSearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

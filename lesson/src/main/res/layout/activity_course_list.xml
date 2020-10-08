@@ -25,11 +25,42 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/straightCourseCl"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header"
             tools:listitem="@layout/layout_course_item" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/straightCourseCl"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@drawable/bg_straight_course"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@{courseListViewModel.lastProcess}"
+                tools:text="上次学到：4.学问位置》核心课程A" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

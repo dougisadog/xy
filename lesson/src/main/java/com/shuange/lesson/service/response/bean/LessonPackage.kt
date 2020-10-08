@@ -18,4 +18,6 @@ data class LessonPackage(
     val recommend: Boolean = false
     val teacherId: Long = 0
     val teacherName: String = ""
+    var hits: Int = 0
+    val moduleRecord: ModuleRecord? = null
 }

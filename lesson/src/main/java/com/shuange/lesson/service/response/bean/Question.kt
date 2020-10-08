@@ -16,8 +16,9 @@ data class Question(
     val showText: Boolean,
     val showVideo: Boolean,
     val sortNo: Int
-):BaseBean() {
+) : BaseBean() {
     var questionResourceImageUrl: String? = null
     var questionResourceAudioUrl: String? = null
     var questionResourceVideoUrl: String? = null
+    val userAnswer: UserAnswer? = null
 }
