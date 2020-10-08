@@ -1,27 +1,23 @@
 package com.meten.xyh.modules.discovery.viewmodel
 
 import androidx.databinding.ObservableArrayList
-import com.meten.xyh.modules.discovery.bean.StreamLessonBean
-import com.meten.xyh.modules.news.bean.NewsBean
-import com.meten.xyh.modules.teacher.bean.TeacherBean
-import com.meten.xyh.service.api.ArticlesRecommendApi
-import com.meten.xyh.service.api.TeachersRecommendApi
-import com.meten.xyh.service.response.ArticlesResponse
-import com.meten.xyh.service.response.TeachersResponse
 import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.viewmodel.BaseViewModel
+import com.shuange.lesson.enumeration.WheelType
 import com.shuange.lesson.modules.course.bean.CourseInfoItem
+import com.shuange.lesson.modules.course.bean.StreamLessonBean
+import com.shuange.lesson.modules.news.bean.NewsBean
+import com.shuange.lesson.modules.teacher.bean.TeacherBean
 import com.shuange.lesson.modules.topquality.bean.CourseBean
+import com.shuange.lesson.service.api.ArticlesRecommendApi
 import com.shuange.lesson.service.api.LessonPackagesRecommendApi
+import com.shuange.lesson.service.api.TeachersRecommendApi
+import com.shuange.lesson.service.api.WheelsApi
 import com.shuange.lesson.service.api.base.suspendExecute
-import com.shuange.lesson.service.response.LessonPackagesResponse
-import com.shuange.lesson.service.response.base.SuspendResponse
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 
 open class DiscoveryViewModel : BaseViewModel() {
 
-    val pagerData = mutableListOf<CourseBean>()
+    val wheels = mutableListOf<BaseItemBean>()
 
     var streamLessons = ObservableArrayList<StreamLessonBean>()
 
@@ -31,15 +27,10 @@ open class DiscoveryViewModel : BaseViewModel() {
 
     var newsItems = ObservableArrayList<BaseItemBean>()
 
-    fun loadData() {
+
+    fun loadArticles() {
         startBindLaunch {
-            var exception: Exception? = null
-            val tasks = arrayListOf(async { ArticlesRecommendApi().suspendExecute() },
-                async { TeachersRecommendApi().suspendExecute() },
-                async { LessonPackagesRecommendApi().suspendExecute() }
-            )
-            val results = tasks.awaitAll()
-            val suspendArticlesResult = (results[0] as? SuspendResponse<ArticlesResponse>)
+            val suspendArticlesResult = ArticlesRecommendApi().suspendExecute()
             suspendArticlesResult?.getResponse()?.body?.forEach {
                 newsItems.add(NewsBean().apply {
                     title = it.title
@@ -47,23 +38,14 @@ open class DiscoveryViewModel : BaseViewModel() {
                     image = it.imageUrl
                 })
             }
-            if (null == exception) {
-                exception = suspendArticlesResult?.exception
-            }
-            val suspendTeacherResult = (results[1] as? SuspendResponse<TeachersResponse>)
-            suspendTeacherResult?.getResponse()?.body?.forEach {
-                teachers.add(TeacherBean().apply {
-                    name = it.name
-                    introduction = it.description
-                    image = it.imageUrl
-                    subTitle = it.info
-                })
-            }
-            if (null == exception) {
-                exception = suspendTeacherResult?.exception
-            }
-            val suspendLessonPackagesResult = (results[2] as? SuspendResponse<LessonPackagesResponse>)
-            suspendLessonPackagesResult?.getResponse()?.body?.let {
+            suspendArticlesResult.exception
+        }
+    }
+
+    fun loadCourses() {
+        startBindLaunch {
+            val suspendLessonPackagesResult = LessonPackagesRecommendApi().suspendExecute()
+            suspendLessonPackagesResult.getResponse()?.body?.let {
                 val arr = it
                 arr.sortedBy {
                     it.sortNo
@@ -76,12 +58,47 @@ open class DiscoveryViewModel : BaseViewModel() {
                 topQualityItems.clear()
                 topQualityItems.addAll(converted)
             }
-            if (null == exception) {
-                exception = suspendTeacherResult?.exception
-            }
-            exception
+            suspendLessonPackagesResult.exception
         }
-//        initTestData()
+    }
+
+    fun loadTeachers() {
+        startBindLaunch {
+            val suspendTeacherResult = TeachersRecommendApi().suspendExecute()
+            suspendTeacherResult.getResponse()?.body?.forEach {
+                teachers.add(TeacherBean().apply {
+                    name = it.name
+                    introduction = it.description
+                    image = it.imageUrl
+                    subTitle = it.info
+                })
+            }
+            suspendTeacherResult.exception
+        }
+    }
+
+
+    /**
+     *轮播
+     */
+    fun loadWheels() {
+        startBindLaunch {
+            val suspendResult = WheelsApi(WheelType.LESSON).suspendExecute()
+            suspendResult.let {
+                it.getResponse()?.body?.forEach {
+                    wheels.add(
+                        BaseItemBean().apply { setWheel(it) })
+                }
+            }
+            suspendResult.exception
+        }
+    }
+
+    fun loadData() {
+        loadArticles()
+        loadCourses()
+        loadTeachers()
+        loadWheels()
     }
 
     fun initTestData() {
@@ -113,7 +130,7 @@ open class DiscoveryViewModel : BaseViewModel() {
                 image = baseImg
             })
 
-            pagerData.add(CourseBean().apply {
+            wheels.add(CourseBean().apply {
                 title = "news$i"
                 content = "news content$i"
                 image = baseImg

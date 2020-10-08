@@ -32,3 +32,7 @@ enum class InputType(val text: String) {
     SPEECH("SPEECH"),
     WRITE("WRITE")
 }
+
+enum class WheelType(val text: String) {
+    ARTICLE("ARTICLE"), LESSON("LESSON"), TEACHER("TEACHER"), SHORT_VIDEO("SHORT_VIDEO"), LIVE("LIVE")
+}

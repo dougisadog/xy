@@ -1,9 +1,7 @@
 package com.meten.xyh.modules.login.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.viewmodel.VerifyMessageViewModel
-import com.meten.xyh.modules.login.AccountBean
 import com.meten.xyh.service.api.*
 import com.meten.xyh.service.request.LoginRequest
 import com.meten.xyh.service.request.RegisterRequest
@@ -11,6 +9,8 @@ import com.meten.xyh.service.response.AccountResponse
 import com.meten.xyh.service.response.UserResponse
 import com.meten.xyh.utils.BusinessUtil
 import com.shuange.lesson.EmptyTask
+import com.shuange.lesson.base.LessonDataCache
+import com.shuange.lesson.base.bean.AccountBean
 import com.shuange.lesson.service.api.base.suspendExecute
 import com.shuange.lesson.service.response.base.SuspendResponse
 import kotlinx.coroutines.async
@@ -89,7 +89,7 @@ open class LoginViewModel : VerifyMessageViewModel() {
             (results[0] as? SuspendResponse<AccountResponse>)?.let {
                 exception = it.exception
                 it.getResponse()?.body?.let { acocunt ->
-                    DataCache.account = AccountBean().apply {
+                    LessonDataCache.account = AccountBean().apply {
                         id = acocunt.id.toString()
                         phone = acocunt.phone?:""
                         xyBalance = acocunt.money

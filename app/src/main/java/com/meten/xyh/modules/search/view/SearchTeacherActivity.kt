@@ -2,11 +2,11 @@ package com.meten.xyh.modules.search.view
 
 import androidx.activity.viewModels
 import com.meten.xyh.R
-import com.meten.xyh.modules.discovery.adapter.TeacherAdapter
 import com.meten.xyh.modules.search.viewmodel.SearchTeacherViewModel
-import com.meten.xyh.modules.teacher.view.TeacherInfoActivity
 import com.shuange.lesson.base.adapter.BaseListAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.modules.teacher.adapter.TeacherAdapter
+import com.shuange.lesson.modules.teacher.view.TeacherInfoActivity
 
 
 /**

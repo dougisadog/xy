@@ -1,10 +1,10 @@
 package com.meten.xyh.modules.search.viewmodel
 
 import androidx.databinding.ObservableArrayList
-import com.meten.xyh.modules.teacher.bean.TeacherBean
-import com.meten.xyh.service.api.TeachersApi
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.PagerItem
+import com.shuange.lesson.modules.teacher.bean.TeacherBean
+import com.shuange.lesson.service.api.TeachersApi
 import com.shuange.lesson.service.api.base.suspendExecute
 
 class SearchTeacherViewModel : SearchBaseViewModel() {

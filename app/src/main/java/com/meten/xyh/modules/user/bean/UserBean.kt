@@ -1,18 +1,18 @@
 package com.meten.xyh.modules.user.bean
 
-import com.meten.xyh.base.DataCache
 import com.meten.xyh.service.response.bean.SubUser
 import com.meten.xyh.service.response.bean.UserForAccount
+import com.shuange.lesson.base.LessonDataCache
 import com.shuange.lesson.modules.lesson.bean.SourceData
 import java.io.File
 
 class UserBean private constructor(val accountId: String) {
 
     companion object {
-        fun createUserInfo(name: String, header: String? = null): UserBean? {
-            val accountId = DataCache.account?.id
-            if (name.isBlank() || accountId.isNullOrBlank()) return null
-            return UserBean(accountId).apply {
+        fun createUserInfo(name: String, header: String? = null): UserBean {
+            val accountId = LessonDataCache.account?.id
+            return UserBean(accountId!!).apply {
+                userName = name
                 headerImage = header?.let { buildSourceDataByLink(it) }
             }
         }

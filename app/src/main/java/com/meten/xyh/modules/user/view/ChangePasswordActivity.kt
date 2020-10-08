@@ -6,11 +6,11 @@ import android.view.View
 import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
-import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivityChangePasswordBinding
 import com.meten.xyh.modules.user.viewmodel.ChangePwdViewModel
 import com.shuange.lesson.base.BaseActivity
+import com.shuange.lesson.base.LessonDataCache
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
 import com.shuange.lesson.view.dialog.CommonDialog
@@ -67,7 +67,7 @@ class ChangePasswordActivity : BaseActivity<ActivityChangePasswordBinding, Chang
         }
         binding.forgetPwdTv.setOnClickListener(NonDoubleClickListener {
             CommonDialog(this).apply {
-                contentText = "您的账号现在已经绑定手机号，可以通过短信验证码重置微信密码，是否发送短信到${DataCache.account?.phone}？"
+                contentText = "您的账号现在已经绑定手机号，可以通过短信验证码重置微信密码，是否发送短信到${LessonDataCache.account?.phone}？"
                 cancelButtonText = "取消"
                 confirmButtonText = "确认"
                 onClick = {

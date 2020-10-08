@@ -1,5 +1,6 @@
 package com.shuange.lesson.base
 
+import com.shuange.lesson.service.response.bean.Wheel
 import java.io.Serializable
 
 open class BaseItemBean(
@@ -38,5 +39,12 @@ open class BaseItemBean(
 
     override fun getItemId(): String {
         return id
+    }
+
+    fun setWheel(wheel: Wheel) {
+        id = wheel.redirectToId.toString()
+        title = wheel.redirectToTitle ?: ""
+        content = wheel.content ?: ""
+        image = wheel.imageUrl ?: ""
     }
 }

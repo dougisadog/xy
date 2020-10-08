@@ -1,16 +1,15 @@
 package com.shuange.lesson.modules.topquality.viewmodel
 
 import androidx.databinding.ObservableArrayList
+import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.viewmodel.BaseViewModel
+import com.shuange.lesson.enumeration.WheelType
 import com.shuange.lesson.modules.course.bean.CourseInfoItem
 import com.shuange.lesson.modules.topquality.bean.CourseBean
 import com.shuange.lesson.service.api.LessonPackagesApi
 import com.shuange.lesson.service.api.LessonPackagesRecommendApi
+import com.shuange.lesson.service.api.WheelsApi
 import com.shuange.lesson.service.api.base.suspendExecute
-import com.shuange.lesson.service.response.LessonPackagesResponse
-import com.shuange.lesson.service.response.base.SuspendResponse
-import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 
 class TopQualityMainViewModel : BaseViewModel() {
 
@@ -19,24 +18,36 @@ class TopQualityMainViewModel : BaseViewModel() {
 
     val courses = ObservableArrayList<CourseInfoItem>()
 
-    val pagerData = mutableListOf<CourseBean>()
+    val wheels = mutableListOf<BaseItemBean>()
 
     fun loadData() {
-        startBindLaunch {
-            var exception: Exception? = null
-            val tasks = arrayListOf(
-                async { LessonPackagesRecommendApi().suspendExecute() },
-                async {
-                    LessonPackagesApi().apply {
-                        addPageParam("0",  page = 1, size = 10)
-                    }.suspendExecute()
-                }
+        loadLessonPackagesRecommend()
+        loadLessonPackages()
+        loadWheels()
+//        initTestData()
+    }
 
-            )
-            val results = tasks.awaitAll()
+    /**
+     *轮播
+     */
+    fun loadWheels() {
+        startBindLaunch {
+            val suspendResult = WheelsApi(WheelType.LESSON).suspendExecute()
+            suspendResult.let {
+                it.getResponse()?.body?.forEach {
+                    wheels.add(
+                        BaseItemBean().apply { setWheel(it) })
+                }
+            }
+            suspendResult.exception
+        }
+    }
+
+    fun loadLessonPackagesRecommend() {
+        startBindLaunch {
             val suspendLessonPackagesRecommendResult =
-                (results[0] as? SuspendResponse<LessonPackagesResponse>)
-            suspendLessonPackagesRecommendResult?.getResponse()?.body?.let {
+                LessonPackagesRecommendApi().suspendExecute()
+            suspendLessonPackagesRecommendResult.getResponse()?.body?.let {
                 val arr = it
                 arr.sortedBy {
                     it.sortNo
@@ -49,8 +60,16 @@ class TopQualityMainViewModel : BaseViewModel() {
                 topQualityItems.clear()
                 topQualityItems.addAll(converted)
             }
+            suspendLessonPackagesRecommendResult.exception
+        }
+    }
+
+    fun loadLessonPackages() {
+        startBindLaunch {
             val suspendLessonPackagesResult =
-                (results[0] as? SuspendResponse<LessonPackagesResponse>)
+                LessonPackagesApi().apply {
+                    addPageParam("0", page = 1, size = 10)
+                }.suspendExecute()
             suspendLessonPackagesResult?.getResponse()?.body?.let {
                 val arr = it
                 arr.sortedBy {
@@ -64,9 +83,8 @@ class TopQualityMainViewModel : BaseViewModel() {
                 courses.clear()
                 courses.addAll(converted)
             }
-            exception
+            suspendLessonPackagesResult.exception
         }
-        initTestData()
     }
 
     fun initTestData() {
@@ -81,7 +99,7 @@ class TopQualityMainViewModel : BaseViewModel() {
                 freeType =
                     if (i == 0) null else if (i == 1) CourseBean.FREE_TYPE_GREEN else CourseBean.FREE_TYPE_ORANGE
             })
-            pagerData.add(CourseBean().apply {
+            wheels.add(CourseBean().apply {
                 title = "news$i"
                 content = "news content$i"
                 image = baseImg

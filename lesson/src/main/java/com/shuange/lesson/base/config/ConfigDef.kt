@@ -22,5 +22,7 @@ object ConfigDef {
     const val TYPE_07_UNDERLINE = "____"
 
 
+    var RECHARGE_CLASS = "RechargeActivity"
+
 
 }

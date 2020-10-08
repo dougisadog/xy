@@ -100,11 +100,11 @@ class TopQualityMainActivity :
     }
 
     private fun initViewPager() {
-        binding.vp.initAdapter(this, viewModel.pagerData)
+        binding.vp.initAdapter(this, viewModel.wheels)
         val currentItem = binding.vp.currentItem
         binding.vp.setOnClickListener(NonDoubleClickListener {
-            val id = viewModel.pagerData[currentItem].id
-            val title = viewModel.pagerData[currentItem].title
+            val id = viewModel.wheels[currentItem].id
+            val title = viewModel.wheels[currentItem].title
             CourseListActivity.start(this, id, title)
         })
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)

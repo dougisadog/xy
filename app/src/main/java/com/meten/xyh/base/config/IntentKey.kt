@@ -6,8 +6,6 @@ object IntentKey {
 
     const val TEST_COLOR = "TEST_COLOR"
 
-    const val TEACHER_KEY = "TEACHER_KEY"
-
     const val SEARCH_KEY = "SEARCH_KEY"
 
     const val SETTING_KEY = "SETTING_KEY"
@@ -18,9 +16,6 @@ object IntentKey {
 
     const val ORDER_STATE = "ORDER_STATE"
 
-    const val SEARCH_TYPE = "SEARCH_TYPE"
-
-    const val NEWS_KEY = "NEWS_KEY"
 
 
 

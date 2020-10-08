@@ -32,4 +32,3 @@ enum class OrderState(val text: String) {
     }
 }
 
-

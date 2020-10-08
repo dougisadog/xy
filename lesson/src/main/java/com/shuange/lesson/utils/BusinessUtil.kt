@@ -1,8 +1,12 @@
 package com.shuange.lesson.utils
 
+import android.content.Context
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.shuange.lesson.R
+import com.shuange.lesson.enumeration.LessonPackageType
+import com.shuange.lesson.modules.course.view.CourseActivity
+import com.shuange.lesson.modules.topquality.bean.CourseBean
 
 object BusinessUtil {
 
@@ -41,6 +45,17 @@ object BusinessUtil {
             }
             else -> {
                 0
+            }
+        }
+    }
+
+    fun startCourse(context: Context, courseBean: CourseBean) {
+        when (courseBean.packageType) {
+            LessonPackageType.BASE-> {
+                CourseActivity.start(courseBean, context)
+            }
+            LessonPackageType.VIDEO-> {
+//                MediaCourseActivity.start(courseBean, context)
             }
         }
     }

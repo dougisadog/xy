@@ -12,9 +12,9 @@ import com.meten.xyh.R
 import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivitySearchBinding
 import com.meten.xyh.modules.search.viewmodel.SearchViewModel
-import com.meten.xyh.modules.teacher.view.TeacherInfoActivity
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.modules.teacher.view.TeacherInfoActivity
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.setOnSearchListener
 import corelib.util.DeviceUtils

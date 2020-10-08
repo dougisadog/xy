@@ -23,6 +23,11 @@ object IntentKey {
 
     const val COURSE_TYPE = "COURSE_TYPE"
 
+    const val SEARCH_TYPE = "SEARCH_TYPE"
+
+    const val TEACHER_KEY = "TEACHER_KEY"
+    const val NEWS_KEY = "NEWS_KEY"
+
 
 
 }

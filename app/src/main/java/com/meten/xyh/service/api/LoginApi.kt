@@ -1,9 +1,8 @@
 package com.meten.xyh.service.api
 
-import com.meten.xyh.base.DataCache
-import com.meten.xyh.modules.login.AccountBean
 import com.meten.xyh.service.request.LoginRequest
 import com.shuange.lesson.base.LessonDataCache
+import com.shuange.lesson.base.bean.AccountBean
 import com.shuange.lesson.service.api.base.BaseApi
 import com.shuange.lesson.service.response.InitResponse
 import com.shuange.lesson.utils.AnnotationParser
@@ -35,7 +34,7 @@ class LoginApi(val loginRequest: LoginRequest) : BaseApi<InitResponse>() {
         val result = super.parseResponse(data)
         if (!result.id_token.isBlank()) {
             LessonDataCache.token = result.id_token
-            DataCache.account = AccountBean().apply { id = loginRequest.login }
+            LessonDataCache.account = AccountBean().apply { id = loginRequest.login }
         }
         return result
     }

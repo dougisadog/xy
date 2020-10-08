@@ -33,8 +33,6 @@
         <activity android:name=".modules.usersetting.view.ObjectiveActivity" />
         <activity android:name=".modules.usersetting.view.SignatureActivity" />
 
-        <activity android:name=".modules.course.view.MediaCourseActivity" />
-
         <activity android:name=".modules.user.view.CreateUserActivity" />
         <activity android:name=".modules.user.view.ChangeUserActivity" />
         <activity android:name=".modules.user.view.UserInfoActivity" />
@@ -43,13 +41,6 @@
 
         <activity android:name=".modules.recharge.view.RechargeActivity" />
         <activity android:name=".modules.recharge.view.RechargeHistoryActivity" />
-
-
-        <activity android:name=".modules.teacher.view.TeacherInfoActivity" />
-        <activity android:name=".modules.teacher.view.TeacherListActivity" />
-
-        <activity android:name=".modules.news.view.NewsListActivity" />
-        <activity android:name=".modules.news.view.NewsDetailActivity" />
 
         <activity android:name=".modules.order.view.OrderActivity" />
 

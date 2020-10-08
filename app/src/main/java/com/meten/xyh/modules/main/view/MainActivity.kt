@@ -9,13 +9,13 @@ import androidx.viewpager2.widget.ViewPager2
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityMainBinding
-import com.meten.xyh.modules.course.view.MyCourseFragment
 import com.meten.xyh.modules.discovery.view.DiscoveryFragment
 import com.meten.xyh.modules.main.viewmodel.MainViewModel
 import com.meten.xyh.modules.user.view.UserAccountFragment
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.modules.course.view.MyCourseFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 

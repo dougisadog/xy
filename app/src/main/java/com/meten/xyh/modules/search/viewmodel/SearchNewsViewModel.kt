@@ -1,11 +1,11 @@
 package com.meten.xyh.modules.search.viewmodel
 
 import androidx.databinding.ObservableArrayList
-import com.meten.xyh.modules.news.bean.NewsBean
-import com.meten.xyh.service.api.ArticlesApi
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.PagerItem
+import com.shuange.lesson.modules.news.bean.NewsBean
+import com.shuange.lesson.service.api.ArticlesApi
 import com.shuange.lesson.service.api.base.suspendExecute
 
 class SearchNewsViewModel : SearchBaseViewModel() {

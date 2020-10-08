@@ -17,6 +17,7 @@ import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.bind
 import kotlinx.android.synthetic.main.layout_header.view.*
 
+
 /**
  * 全部课程
  */
@@ -82,6 +83,9 @@ class CourseAllActivity : BaseActivity<ActivityCourseAllBinding, CourseAllViewMo
     }
 
     private fun initListener() {
+        binding.header.back.setOnClickListener {
+            finish()
+        }
     }
 
     fun search(text: String) {

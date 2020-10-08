@@ -2,8 +2,8 @@ package com.meten.xyh.modules.search.view
 
 import androidx.activity.viewModels
 import com.meten.xyh.R
-import com.meten.xyh.modules.discovery.adapter.BaseItemAdapter
 import com.meten.xyh.modules.search.viewmodel.SearchNewsViewModel
+import com.shuange.lesson.base.adapter.BaseItemAdapter
 import com.shuange.lesson.base.adapter.BaseListAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 

@@ -1,0 +1,15 @@
+package com.shuange.lesson.service.response.bean
+
+class Article : BaseBean() {
+    var appId: String = ""
+    var appInfoId: Long = -1
+    var appInfoName: String = ""
+    var content: String = ""     //TODO html 片段
+    var enabled: Boolean = true
+    var hits: Int = 0
+    var imageUrl: String = ""
+    var recommend: Boolean = false
+    var sortNo: Int = 0
+    var subTitle: String = ""
+    var title: String = ""
+}

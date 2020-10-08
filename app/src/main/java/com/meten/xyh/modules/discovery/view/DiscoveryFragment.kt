@@ -12,26 +12,26 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.FragmentDiscoveryBinding
-import com.meten.xyh.modules.discovery.adapter.BaseItemAdapter
 import com.meten.xyh.modules.discovery.adapter.MenuPageAdapter
 import com.meten.xyh.modules.discovery.adapter.StreamLessonAdapter
-import com.meten.xyh.modules.discovery.adapter.TeacherAdapter
 import com.meten.xyh.modules.discovery.bean.MenuItem
 import com.meten.xyh.modules.discovery.viewmodel.DiscoveryViewModel
-import com.meten.xyh.modules.news.view.NewsDetailActivity
-import com.meten.xyh.modules.news.view.NewsListActivity
 import com.meten.xyh.modules.search.view.SearchActivity
-import com.meten.xyh.modules.teacher.view.TeacherInfoActivity
-import com.meten.xyh.modules.teacher.view.TeacherListActivity
-import com.meten.xyh.utils.BusinessUtil
 import com.shuange.lesson.base.BaseFragment
+import com.shuange.lesson.base.adapter.BaseItemAdapter
 import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.modules.course.view.CourseAllActivity
 import com.shuange.lesson.modules.course.view.CourseListActivity
+import com.shuange.lesson.modules.news.view.NewsDetailActivity
+import com.shuange.lesson.modules.news.view.NewsListActivity
+import com.shuange.lesson.modules.teacher.adapter.TeacherAdapter
+import com.shuange.lesson.modules.teacher.view.TeacherInfoActivity
+import com.shuange.lesson.modules.teacher.view.TeacherListActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.view.TopQualityActivity
+import com.shuange.lesson.utils.BusinessUtil
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.initAdapter
 import com.shuange.lesson.utils.extension.setOnSearchListener
@@ -91,11 +91,11 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
     }
 
     private fun initViewPager() {
-        binding.vp.initAdapter(this, viewModel.pagerData)
+        binding.vp.initAdapter(this, viewModel.wheels)
         val currentItem = binding.vp.currentItem
         binding.vp.setOnClickListener(NonDoubleClickListener {
-            val id = viewModel.pagerData[currentItem].id
-            val title = viewModel.pagerData[currentItem].title
+            val id = viewModel.wheels[currentItem].id
+            val title = viewModel.wheels[currentItem].title
             CourseListActivity.start(requireContext(), id, title)
         })
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
