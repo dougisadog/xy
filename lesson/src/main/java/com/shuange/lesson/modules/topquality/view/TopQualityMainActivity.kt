@@ -13,17 +13,18 @@ import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityTopQualityMainBinding
 import com.shuange.lesson.modules.course.adapter.CoursePackageAdapter
 import com.shuange.lesson.modules.course.view.CourseModulesActivity
 import com.shuange.lesson.modules.course.view.CoursePackagesActivity
+import com.shuange.lesson.modules.search.view.BaseSearchActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityMainViewModel
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.force2Long
 import com.shuange.lesson.utils.extension.initAdapter
-import com.shuange.lesson.utils.extension.setOnSearchListener
 import com.shuange.lesson.view.NonDoubleClickListener
 import corelib.util.DeviceUtils
 import kotlinx.android.synthetic.main.layout_header.view.*
@@ -138,9 +139,12 @@ class TopQualityMainActivity :
     }
 
     private fun initListener() {
-        binding.searchEt.setOnSearchListener {
-            search(it.trim())
-        }
+//        binding.searchEt.setOnSearchListener {
+//            search(it.trim())
+//        }
+        binding.searchRl.setOnClickListener(NonDoubleClickListener {
+            BaseSearchActivity.start(this, ConfigDef.TYPE_COURSE)
+        })
     }
 
     fun search(text: String) {

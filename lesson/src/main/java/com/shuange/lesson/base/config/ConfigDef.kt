@@ -15,14 +15,20 @@ object ConfigDef {
 
     const val MIN_LOADED_SIZE = 3
 
-    const val COURSE_TYPE_STREAM = 10000
-
     const val DEFAULT_PAGE_SIZE = 50
 
     const val TYPE_07_UNDERLINE = "____"
 
 
     var RECHARGE_CLASS = "RechargeActivity"
+
+
+    const val TYPE_TEACHER = 10000
+    const val TYPE_ARTICLE = 10001
+    const val TYPE_COURSE = 10002
+    const val TYPE_STREAM = 10003
+
+
 
 
 }

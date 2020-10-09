@@ -13,10 +13,10 @@ class BaseSearchViewModel : BaseViewModel() {
     val pager = mutableListOf<Pair<Int, String>>()
 
     init {
-        pager.add(Pair(0, "课程"))
-        pager.add(Pair(ConfigDef.COURSE_TYPE_STREAM, "直播课程"))
-        pager.add(Pair(2, "资讯"))
-        pager.add(Pair(3, "老师"))
+        pager.add(Pair(ConfigDef.TYPE_COURSE, "课程"))
+        pager.add(Pair(ConfigDef.TYPE_STREAM, "直播课程"))
+        pager.add(Pair(ConfigDef.TYPE_ARTICLE, "资讯"))
+        pager.add(Pair(ConfigDef.TYPE_TEACHER, "老师"))
     }
 
     fun getDefaultPageIndex(): Int {

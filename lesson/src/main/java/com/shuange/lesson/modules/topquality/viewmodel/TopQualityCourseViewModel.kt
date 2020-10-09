@@ -3,6 +3,7 @@ package com.shuange.lesson.modules.topquality.viewmodel
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.EmptyTask
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.modules.topquality.bean.CourseBean
 import com.shuange.lesson.service.api.LessonPackagesApi
@@ -21,14 +22,13 @@ class TopQualityCourseViewModel : BaseViewModel() {
         loadCourses("0")
     }
 
-    /**
-     * TODO
-     */
     fun loadCourses(
         startId: String = topQualityItems.lastOrNull()?.getItemId() ?: "0",
         page: Int = 50,
         onFinished: EmptyTask = null
     ) {
+        //TODO 直播课程不参与查询
+        if (courseType == ConfigDef.TYPE_STREAM) return
         startBindLaunch(onFinish = onFinished) {
             val suspendResult = LessonPackagesApi().apply { addPageParam(startId) } .suspendExecute()
             suspendResult.getResponse()?.body?.forEach {

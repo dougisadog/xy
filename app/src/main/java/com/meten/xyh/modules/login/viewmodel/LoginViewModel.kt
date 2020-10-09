@@ -11,6 +11,7 @@ import com.meten.xyh.utils.BusinessUtil
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.LessonDataCache
 import com.shuange.lesson.base.bean.AccountBean
+import com.shuange.lesson.service.api.LessonTypesApi
 import com.shuange.lesson.service.api.base.suspendExecute
 import com.shuange.lesson.service.response.base.SuspendResponse
 import kotlinx.coroutines.async
@@ -42,6 +43,7 @@ open class LoginViewModel : VerifyMessageViewModel() {
     }
 
     fun login(onSuccess: EmptyTask) {
+        showLoading.value = true
         startBindLaunch {
             var exception: Exception?
             val username = username.value ?: ""
@@ -76,10 +78,11 @@ open class LoginViewModel : VerifyMessageViewModel() {
      * 获取账户信息和当期用户
      */
     fun loadUserData(onSuccess: EmptyTask) {
-        startBindLaunch {
+        startBindLaunch(onFinish = {showLoading.value = false}) {
             val tasks = arrayListOf(
                 async { CurrentAccountInfoApi().suspendExecute() },
-                async { CurrentUserApi().suspendExecute() }
+                async { CurrentUserApi().suspendExecute() },
+                async { LessonTypesApi().suspendExecute() }
             )
             val results = tasks.awaitAll()
             var exception: Exception? = null

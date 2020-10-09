@@ -11,4 +11,6 @@ object LessonDataCache {
     fun accountData(): AccountBean {
         return requireNotNull(account)
     }
+
+    var types = mutableListOf<String>()
 }

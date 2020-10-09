@@ -29,9 +29,10 @@
             app:layout_constraintTop_toBottomOf="@+id/header">
 
 
-            <EditText
+            <TextView
                 android:id="@+id/searchEt"
                 style="@style/edit_search"
+                android:enabled="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@+id/searchIv"

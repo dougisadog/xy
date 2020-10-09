@@ -8,11 +8,13 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityTeacherListBinding
+import com.shuange.lesson.modules.search.view.BaseSearchActivity
 import com.shuange.lesson.modules.teacher.adapter.TeacherAdapter
 import com.shuange.lesson.modules.teacher.viewmodel.TeacherListViewModel
-import com.shuange.lesson.utils.extension.setOnSearchListener
+import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 
@@ -74,9 +76,12 @@ class TeacherListActivity : BaseActivity<ActivityTeacherListBinding, TeacherList
         binding.header.back.setOnClickListener {
             finish()
         }
-        binding.searchEt.setOnSearchListener {
-            search(it.trim())
-        }
+//        binding.searchEt.setOnSearchListener {
+//            search(it.trim())
+//        }
+        binding.searchRl.setOnClickListener(NonDoubleClickListener {
+            BaseSearchActivity.start(this, ConfigDef.TYPE_TEACHER)
+        })
         binding.srl.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
                 viewModel.loadTeachers {

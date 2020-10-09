@@ -106,10 +106,13 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:imeOptions">actionSearch</item>
         <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:inputType">text</item>
         <item name="android:ellipsize">end</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">14dp</item>
         <item name="android:textColorHint">@color/hex_A2A2A2</item>
+
     </style>
     <style name="edit_search_ic">
         <item name="android:layout_width">25dp</item>

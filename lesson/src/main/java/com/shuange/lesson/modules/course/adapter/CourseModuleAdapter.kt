@@ -85,12 +85,12 @@ class CourseModuleAdapter : BaseMultiItemQuickAdapter<CourseModuleItem, BaseList
         return view
     }
 
-    override fun convert(helper: BaseListAdapter.ListViewHolder?, lessonItem: CourseModuleItem?) {
-        helper?.binding?.setVariable(BR.courseItem, lessonItem)
+    override fun convert(helper: BaseListAdapter.ListViewHolder?, moduleItem: CourseModuleItem?) {
+        helper?.binding?.setVariable(BR.courseItem, moduleItem)
         (helper?.binding as? LayoutCourseItemBinding)?.let {
             BusinessUtil.refreshResult(
                 target = it.startsContainer,
-                stars = lessonItem?.stars ?: 0,
+                stars = moduleItem?.stars ?: 0,
                 width = DeviceUtils.toPx(ContextManager.getContext(), 12.0)
             )
         }

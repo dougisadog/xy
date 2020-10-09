@@ -9,7 +9,6 @@ data class LessonPackage(
     val lessons: List<Lesson>,
     val name: String,
     val price: Int,
-    val record: Record,
     val sortNo: Int
 ) : BaseBean() {
     val duration: Int = 0
@@ -19,5 +18,6 @@ data class LessonPackage(
     val teacherId: Long = 0
     val teacherName: String = ""
     var hits: Int = 0
+    var record: Record? = null
     val moduleRecord: ModuleRecord? = null
 }

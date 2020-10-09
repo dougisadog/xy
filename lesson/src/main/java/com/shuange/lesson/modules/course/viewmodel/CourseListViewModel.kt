@@ -35,9 +35,9 @@ class CourseListViewModel : BaseViewModel() {
                 }
                 modules.clear()
                 modules.addAll(converted)
-                lastModuleId = it.record.lessonModuleId
+                lastModuleId = it.record?.lessonModuleId?:0
                 lastQuestionIndex = it.moduleRecord?.progressIndex ?: 0
-                lastProcess.value = "上次学到：${it.record.lessonModuleName}"
+                lastProcess.value = "上次学到：${it.record?.lessonModuleName?:""}"
             }
             suspendResult.exception
         }

@@ -9,6 +9,7 @@ import com.meten.xyh.databinding.ActivityInterestBinding
 import com.meten.xyh.modules.usersetting.adapter.InterestAdapter
 import com.meten.xyh.modules.usersetting.viewmodel.InterestViewModel
 import com.meten.xyh.service.response.bean.SubUser
+import com.meten.xyh.utils.extension.setCustomEnable
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
@@ -60,12 +61,10 @@ class InterestActivity(val user: SubUser? = null) :
                 3
             )
             interestAdapter.setOnItemClickListener { adapter, view, position ->
-                val target = !interestAdapter.data[position].isSelected
-                interestAdapter.data[position].isSelected = target
-                interestAdapter.notifyDataSetChanged()
+                val source = interestAdapter.data[position].apply { isSelected = !isSelected }
+                interestAdapter.data[position] = source
+                binding.nextTv.setCustomEnable(interestAdapter.data.any { it.isSelected })
 
-                binding.nextTv.isEnabled =
-                    interestAdapter.data.any { it.isSelected }
             }
             adapter = interestAdapter
         }
@@ -77,6 +76,7 @@ class InterestActivity(val user: SubUser? = null) :
         }
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
             viewModel.saveSetting(user)
+            finish()
         })
 
     }

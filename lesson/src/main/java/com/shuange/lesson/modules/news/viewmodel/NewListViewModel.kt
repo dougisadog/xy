@@ -23,6 +23,8 @@ class NewListViewModel : BaseViewModel() {
 
     var wheels = mutableListOf<BaseItemBean>()
 
+    var wheelsLoaded = MutableLiveData<Boolean>()
+
     fun loadData() {
         loadWheels()
         loadNews()
@@ -35,11 +37,13 @@ class NewListViewModel : BaseViewModel() {
         startBindLaunch {
             val suspendResult = WheelsApi(WheelType.ARTICLE).suspendExecute()
             suspendResult.let {
+                wheels.clear()
                 it.getResponse()?.body?.forEach {
                     wheels.add(
                         BaseItemBean().apply { setWheel(it) })
                 }
             }
+            wheelsLoaded.value = true
             suspendResult.exception
         }
     }

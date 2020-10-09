@@ -11,6 +11,7 @@ import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.login.viewmodel.LoginViewModel
 import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
 import com.meten.xyh.utils.BusinessUtil
+import com.meten.xyh.utils.extension.setCustomEnable
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
@@ -48,6 +49,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
             viewModel.testLogin {
 //            viewModel.login {
                 BaseUserSettingActivity.start(this, UserSettingType.STAGE, false)
+                finish()
             }
         })
         binding.verifyCodeTv.setOnClickListener(NonDoubleClickListener {
@@ -79,10 +81,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
     private fun checkLogin() {
         val isEnable =
             !viewModel.username.value.isNullOrBlank() && !viewModel.verifyCode.value.isNullOrBlank() && viewModel.confirmCheck.value == true
-        binding.nextTv.alpha = if (isEnable) 1f else 0.55f
-        binding.nextTv.isEnabled = isEnable
+        binding.nextTv.setCustomEnable(isEnable)
     }
-
-
 
 }

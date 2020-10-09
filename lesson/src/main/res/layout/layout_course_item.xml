@@ -7,7 +7,7 @@
 
         <variable
             name="courseItem"
-            type="com.shuange.lesson.modules.course.bean.CourseLessonItem" />
+            type="com.shuange.lesson.modules.course.bean.StarOwner" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +54,6 @@
             android:layout_marginEnd="3dp"
             android:gravity="center"
             android:textSize="12dp"
-            app:courseState="@{courseItem.state}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/nextIv"
             app:layout_constraintTop_toTopOf="parent"

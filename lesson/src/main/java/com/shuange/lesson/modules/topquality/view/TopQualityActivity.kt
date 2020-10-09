@@ -13,7 +13,6 @@ import com.shuange.lesson.databinding.ActivityTopQualityBinding
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityViewModel
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.bind
-import com.shuange.lesson.utils.extension.setOnSearchListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 /**
@@ -67,9 +66,9 @@ class TopQualityActivity : BaseActivity<ActivityTopQualityBinding, TopQualityVie
     }
 
     private fun initListener() {
-        binding.searchEt.setOnSearchListener {
-            search(it.trim())
-        }
+//        binding.searchEt.setOnSearchListener {
+//            search(it.trim())
+//        }
     }
 
     fun search(text: String) {

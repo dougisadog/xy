@@ -19,7 +19,7 @@ open class BaseViewModel : AndroidViewModel(ContextManager.getContext()) {
     val showLoading = MutableLiveData<Boolean>()
 
     fun startBindLaunch(
-        showLoading: Boolean = true,
+        showLoading: Boolean = false,
         onFinish: EmptyTask = null,
         block: suspend CoroutineScope.() -> Exception?
     ) {

@@ -1,8 +1,10 @@
 package com.shuange.lesson.base
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
@@ -10,6 +12,7 @@ import androidx.lifecycle.Observer
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.utils.AnnotationParser
 import com.shuange.lesson.utils.ToastUtil
+import com.shuange.lesson.view.dialog.CommonDialog
 
 abstract class BaseActivity<BD : ViewDataBinding, VM : BaseViewModel> : FragmentActivity() {
 
@@ -22,6 +25,8 @@ abstract class BaseActivity<BD : ViewDataBinding, VM : BaseViewModel> : Fragment
     open val viewModelId: Int = 0
 
     open var fragmentContainerId: Int? = null
+
+    var mDialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +63,17 @@ abstract class BaseActivity<BD : ViewDataBinding, VM : BaseViewModel> : Fragment
     }
 
     fun showLoading(isShow: Boolean) {
-
+        if (isShow) {
+            if (null == mDialog) {
+                mDialog = Dialog(this).apply {
+                    window?.setBackgroundDrawableResource(android.R.color.transparent)
+                    setContentView(ProgressBar(this@BaseActivity))
+                }
+            }
+            mDialog?.show()
+        } else {
+            mDialog?.dismiss()
+        }
     }
 
     fun showFragment(fragment: BaseFragment<*, *>) {
@@ -78,6 +93,17 @@ abstract class BaseActivity<BD : ViewDataBinding, VM : BaseViewModel> : Fragment
             }
         }
         return super.onKeyDown(keyCode, event)
+    }
+
+    fun showExitDialog() {
+        CommonDialog(this).apply {
+            contentText = "退出app"
+            cancelButtonText = "取消"
+            confirmButtonText = "确认"
+            onClick = {
+                System.exit(0)
+            }
+        }.show()
     }
 
     private fun popBackStack(): Boolean {

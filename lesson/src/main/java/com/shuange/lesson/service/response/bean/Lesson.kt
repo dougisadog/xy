@@ -7,7 +7,6 @@ data class Lesson(
     val lockedStep: Int,
     val modules: List<Module>,
     val name: String,
-    val record: Record,
     val resourceId: Long,
     val resourceType: String,
     val sortNo: Int
@@ -17,7 +16,7 @@ data class Lesson(
     val resourceContent: String = "" //资源内容
     val starNum: Int = 0
     val unitNo: String = "" //单元编号
-
+    var record: Record? = null
     val moduleRecord: ModuleRecord? = null
 }
 

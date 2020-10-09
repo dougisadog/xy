@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -82,9 +83,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
     override fun initView() {
         viewModel.loadData()
         initListener()
-        initViewPager()
         initMenu()
-        initTabIndicator()
         initStreamLessons()
         initTopQuality()
         initTeachers()
@@ -100,6 +99,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
             CourseModulesActivity.start(requireContext(), id.force2Long(), title)
         })
         bindIndicatorToViewPager(binding.indicatorContainerLl, binding.vp)
+        initTabIndicator()
     }
 
     private fun bindIndicatorToViewPager(
@@ -242,5 +242,8 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
     }
 
     override fun initViewObserver() {
+        viewModel.wheelsLoaded.observe(this, Observer {
+            initViewPager()
+        })
     }
 }

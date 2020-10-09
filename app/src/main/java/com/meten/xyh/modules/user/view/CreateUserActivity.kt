@@ -14,6 +14,7 @@ import com.meten.xyh.modules.user.viewmodel.CreateUserViewModel
 import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
 import com.meten.xyh.modules.usersetting.view.InterestActivity
 import com.meten.xyh.modules.usersetting.view.SignatureActivity
+import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
@@ -56,30 +57,6 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
     }
 
     fun initActions() {
-        val actions = arrayListOf<ActionItem>()
-        actions.add(ActionItem().apply {
-            title = "昵称"
-            action = { SignatureActivity.start(this@CreateUserActivity, UserSettingType.NICKNAME) }
-        })
-        actions.add(ActionItem().apply {
-            title = "个性签名"
-            action = { SignatureActivity.start(this@CreateUserActivity, UserSettingType.SIGNATURE) }
-        })
-        actions.add(ActionItem().apply {
-            title = "学习阶段"
-            action = { BaseUserSettingActivity.start(this@CreateUserActivity, UserSettingType.STAGE) }
-        })
-        actions.add(ActionItem().apply {
-            title = "感兴趣的"
-            action =
-                { InterestActivity.start(this@CreateUserActivity) }
-        })
-        actions.add(ActionItem().apply {
-            title = "需提升的"
-            action =
-                { BaseUserSettingActivity.start(this@CreateUserActivity, UserSettingType.OBJECTIVE) }
-        })
-        viewModel.actionItems.addAll(actions)
         with(binding.actionRv) {
             layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
                 this@CreateUserActivity,
@@ -103,6 +80,44 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
         })
     }
 
+    fun buildActionsBySubUser(subUser: SubUser?): ArrayList<ActionItem> {
+        val actions = arrayListOf<ActionItem>()
+        actions.add(ActionItem().apply {
+            title = "昵称"
+            value = subUser?.name ?: ""
+            action = { SignatureActivity.start(this@CreateUserActivity, UserSettingType.NICKNAME) }
+        })
+        actions.add(ActionItem().apply {
+            title = "个性签名"
+            value = ""
+            action = { SignatureActivity.start(this@CreateUserActivity, UserSettingType.SIGNATURE) }
+        })
+        actions.add(ActionItem().apply {
+            title = "学习阶段"
+            value = subUser?.stage ?: ""
+            action =
+                { BaseUserSettingActivity.start(this@CreateUserActivity, UserSettingType.STAGE) }
+        })
+        actions.add(ActionItem().apply {
+            title = "感兴趣的"
+            value = subUser?.interest ?: ""
+            action =
+                { InterestActivity.start(this@CreateUserActivity) }
+        })
+        actions.add(ActionItem().apply {
+            title = "需提升的"
+            value = subUser?.objective ?: ""
+            action =
+                {
+                    BaseUserSettingActivity.start(
+                        this@CreateUserActivity,
+                        UserSettingType.OBJECTIVE
+                    )
+                }
+        })
+        return actions
+    }
+
 
     override fun initViewObserver() {
     }
@@ -111,5 +126,12 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
     override fun onDestroy() {
         super.onDestroy()
         DataCache.newSubUser = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val actions = buildActionsBySubUser(DataCache.newSubUser)
+        viewModel.actionItems.clear()
+        viewModel.actionItems.addAll(actions)
     }
 }

@@ -43,7 +43,6 @@ class TeacherListViewModel : BaseViewModel() {
                 name = "name$i"
                 introduction = "introduction$i"
                 image = baseImg
-                subTitle = "郭老师·美式发音速成课$i"
             })
         }
     }

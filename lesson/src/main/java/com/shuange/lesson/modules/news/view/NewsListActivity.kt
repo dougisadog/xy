@@ -5,6 +5,7 @@ import android.content.Intent
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -57,7 +58,6 @@ class NewsListActivity :
         binding.header.title.text = "英语资讯"
         viewModel.loadData()
         initListener()
-        initViewPager()
         initNews()
     }
 
@@ -130,6 +130,9 @@ class NewsListActivity :
 
 
     override fun initViewObserver() {
+        viewModel.wheelsLoaded.observe(this, Observer {
+            initViewPager()
+        })
     }
 
 

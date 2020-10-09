@@ -9,7 +9,7 @@ import com.shuange.lesson.R
 import kotlinx.android.synthetic.main.common_dialog_layout.*
 
 
-class CommonDialog(context: Context) : Dialog(context, R.style.CustomDialog) {
+class CommonDialog(context: Context, val cancelable: Boolean = true) : Dialog(context, R.style.CustomDialog) {
 
     var titleText: String? = null
 
@@ -27,6 +27,7 @@ class CommonDialog(context: Context) : Dialog(context, R.style.CustomDialog) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.setCancelable(cancelable)
         setContentView(R.layout.common_dialog_layout);
         //按空白处不能取消动画
         setCanceledOnTouchOutside(false);

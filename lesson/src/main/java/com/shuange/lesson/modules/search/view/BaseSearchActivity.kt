@@ -8,6 +8,7 @@ import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityBaseSearchBinding
@@ -17,7 +18,6 @@ import com.shuange.lesson.modules.teacher.view.TeacherListFragment
 import com.shuange.lesson.modules.topquality.view.TopQualityCourseFragment
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.bind
-import com.shuange.lesson.utils.extension.setOnSearchListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 /**
@@ -66,17 +66,17 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
     private fun initViewPager() {
         val fragments = arrayListOf<Fragment>()
         viewModel.pager.forEach {
-            //TODO 搜索
-//            pager.add(Pair(0, "课程"))
-//            pager.add(Pair(1, "直播课程"))
-//            pager.add(Pair(2, "资讯"))
-//            pager.add(Pair(3, "老师"))
-            fragments.add(TopQualityCourseFragment.newInstance(it.first))
-            fragments.add(TopQualityCourseFragment.newInstance(it.first))
-            fragments.add(TeacherListFragment.newInstance())
-            fragments.add(NewsListFragment.newInstance())
-
-
+            when (it.first) {
+                ConfigDef.TYPE_COURSE, ConfigDef.TYPE_STREAM -> {
+                    fragments.add(TopQualityCourseFragment.newInstance(it.first))
+                }
+                ConfigDef.TYPE_TEACHER -> {
+                    fragments.add(TeacherListFragment.newInstance())
+                }
+                ConfigDef.TYPE_ARTICLE -> {
+                    fragments.add(NewsListFragment.newInstance())
+                }
+            }
         }
         fragmentAdapter = BaseFragmentAdapter(this, fragments)
         with(binding.vp) {
@@ -94,9 +94,9 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
     }
 
     private fun initListener() {
-        binding.searchEt.setOnSearchListener {
-            search(it.trim())
-        }
+//        binding.searchEt.setOnSearchListener {
+//            search(it.trim())
+//        }
     }
 
     fun search(text: String) {

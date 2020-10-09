@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
 
     >
 
@@ -31,10 +32,11 @@
             android:ellipsize="end"
             android:gravity="center"
             android:hint="@{signatureViewModel.settingChange.hint}"
+            tools:hint="请输入昵称"
             android:inputType="text"
             android:maxLength="40"
             android:maxLines="1"
-            android:text="@{signatureViewModel.signature}"
+            android:text="@{signatureViewModel.setSettingChange.v}"
             android:textColor="@color/hex_B8B8B8"
             android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/clearIv"

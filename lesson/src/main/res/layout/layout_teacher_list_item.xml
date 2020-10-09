@@ -33,7 +33,7 @@
             android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{teacherBean.subTitle}"
+            android:text="@{teacherBean.name}"
             android:textColor="@color/hex_2B2E35"
             android:textSize="14dp"
             app:layout_constraintBottom_toTopOf="@+id/contentTv"

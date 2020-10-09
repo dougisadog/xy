@@ -30,6 +30,7 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
 
     companion object {
         val httpClient = OkHttpClient()
+        var debug = true
     }
 
     val logTag = "HttpTask"
@@ -508,7 +509,11 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
 
     @Throws(java.lang.Exception::class)
     open fun convert(data: ResponseBody): DataType {
-        return parseResponse(data.string())
+        val text = data.string()
+        if (debug) {
+            Log.e("request ${this::class.java.simpleName}", text)
+        }
+        return parseResponse(text)
     }
 
     open fun parseResponse(data: String): DataType {

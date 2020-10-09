@@ -13,7 +13,6 @@ import com.shuange.lesson.base.adapter.BaseItemAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentNewsListBinding
 import com.shuange.lesson.modules.news.viewmodel.NewListViewModel
-import com.shuange.lesson.utils.ToastUtil
 
 /**
  * 英语资讯
@@ -57,7 +56,7 @@ class NewsListFragment :
         with(binding.newsRv) {
             layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
             newsAdapter.setOnItemClickListener { adapter, view, position ->
-                ToastUtil.show("item click  teacher:${newsAdapter.data[position].title}")
+                NewsDetailActivity.start(requireContext(), newsAdapter.data[position])
             }
             isNestedScrollingEnabled = false
             adapter = newsAdapter

@@ -7,7 +7,6 @@ data class  TeacherBean(
     var name: String = "",
     var introduction: String = "",
     var image: String = "",
-    var subTitle: String = "",
     var detailContent: String = "",
     var id: String = ""
 
@@ -20,9 +19,10 @@ data class  TeacherBean(
         }
 
     fun setTeacher(teacher: Teacher) {
+        id = teacher.id.toString()
         name = teacher.name
-        subTitle = teacher.description
-        introduction = teacher.info
+        introduction = teacher.description
+        detailContent = teacher.info
         image = teacher.imageUrl
     }
 

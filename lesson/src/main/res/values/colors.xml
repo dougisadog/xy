@@ -3,6 +3,8 @@
 
     <color name="transparent">#00FFFFFF</color>
     <color name="white">#FFFFFF</color>
+    <color name="half_white">#8CFFFFFF</color>
+
 
     <color name="hex_FF5337">#FF5337</color>
     <color name="hex_E5E5E5">#E5E5E5</color>
@@ -26,6 +28,7 @@
     <color name="hex_FF3E3E">#FF3E3E</color>
     <color name="hex_FFAD00">#FFAD00</color>
     <color name="hex_30D393">#30D393</color>
+    <color name="hex_7A7A7A">#7A7A7A</color>
 
 
 </resources>

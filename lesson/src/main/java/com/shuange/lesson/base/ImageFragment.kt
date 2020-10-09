@@ -10,7 +10,7 @@ import com.shuange.lesson.R
 import com.shuange.lesson.base.config.IntentKey
 import kotlinx.android.synthetic.main.fragment_image.*
 
-class ImageFragment private constructor() : Fragment() {
+class ImageFragment : Fragment() {
 
     companion object {
         fun newInstance(link: String): ImageFragment {

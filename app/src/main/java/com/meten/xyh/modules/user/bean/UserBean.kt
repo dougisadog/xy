@@ -19,22 +19,18 @@ class UserBean private constructor(val accountId: String) {
 
         fun createBySubUser(subUser: SubUser): UserBean? {
             val userBean = createUserInfo(subUser.name)
-            userBean?.let {
-                it.setSubUserData(subUser)
-            }
+            userBean.setSubUserData(subUser)
             return userBean
         }
     }
 
     fun setSubUserData(subUser: SubUser) {
-        this.let {
-            it.userName = subUser.name
-            headerImage = buildSourceDataByLink(subUser.avatarUrl)
-            it.introduction = subUser.interest
-            it.current = subUser.isCurrent
-            it.userId = subUser.userId.toString()
-            it.subUser = subUser
-        }
+            userName = subUser.name
+            headerImage = subUser.avatarUrl?.let { it -> buildSourceDataByLink(it) }
+            introduction = subUser.interest?:""
+            current = subUser.isCurrent
+            userId = subUser.userId.toString()
+            this.subUser = subUser
     }
 
     var subUser: SubUser? = null

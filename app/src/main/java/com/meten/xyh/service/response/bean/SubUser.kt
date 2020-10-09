@@ -5,18 +5,18 @@ import com.shuange.lesson.utils.RequestClass
 @RequestClass
 class SubUser {
     var id: Long = -1
-    var age: Int = 0
+    var age: Int? = null
     var appInfoId: Long = 0
-    var avatarUrl: String = ""
-    var city: String = ""
+    var avatarUrl: String? = null
+    var city: String? = null
     var gender: String = ""
-    var interest: String = ""
+    var interest: String? = null
     var isCurrent: Boolean = false
     var name: String = ""
-    var objective: String = ""
-    var phone: String = ""
-    var province: String = ""
-    var stage: String = ""
+    var objective: String? = null
+    var phone: String? = null
+    var province: String? = null
+    var stage: String? = null
     var userId: Long = -1
 }
 //description:

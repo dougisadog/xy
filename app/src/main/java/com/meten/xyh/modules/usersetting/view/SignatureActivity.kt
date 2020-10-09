@@ -42,14 +42,14 @@ class SignatureActivity(val subUser: SubUser? = DataCache.newSubUser) : BaseActi
     override fun initParams() {
         super.initParams()
         intent.getIntExtra(IntentKey.SIGNATURE_TYPE_KEY, 0).let {
-            viewModel.settingChange = SignatureViewModel.SettingChange(subUser).apply {
+            viewModel.settingChange.value = SignatureViewModel.SettingChange(subUser).apply {
                 setUserSettingType(UserSettingType.values()[it])
             }
         }
     }
 
     override fun initView() {
-        binding.header.title.text = viewModel.settingChange?.title
+        binding.header.title.text = viewModel.settingChange.value?.title
         binding.header.rightBtn.text = "保存"
         binding.header.rightBtn.visibility = View.VISIBLE
         initListener()
@@ -62,8 +62,9 @@ class SignatureActivity(val subUser: SubUser? = DataCache.newSubUser) : BaseActi
         }
         binding.header.rightBtn.setOnClickListener {
             viewModel.saveSetting()
+            finish()
         }
-        binding.clearIv.rightBtn.setOnClickListener {
+        binding.clearIv.setOnClickListener {
             viewModel.signature.value = ""
         }
 

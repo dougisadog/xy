@@ -1,6 +1,7 @@
 package com.meten.xyh.modules.discovery.viewmodel
 
 import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.base.BaseItemBean
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.enumeration.WheelType
@@ -27,12 +28,14 @@ open class DiscoveryViewModel : BaseViewModel() {
 
     var newsItems = ObservableArrayList<BaseItemBean>()
 
+    var wheelsLoaded = MutableLiveData<Boolean>()
 
     fun loadArticles() {
         startBindLaunch {
             val suspendArticlesResult = ArticlesRecommendApi().suspendExecute()
             suspendArticlesResult?.getResponse()?.body?.forEach {
                 newsItems.add(NewsBean().apply {
+                    id = it.id.toString()
                     title = it.title
                     content = it.subTitle
                     image = it.imageUrl
@@ -67,10 +70,7 @@ open class DiscoveryViewModel : BaseViewModel() {
             val suspendTeacherResult = TeachersRecommendApi().suspendExecute()
             suspendTeacherResult.getResponse()?.body?.forEach {
                 teachers.add(TeacherBean().apply {
-                    name = it.name
-                    introduction = it.description
-                    image = it.imageUrl
-                    subTitle = it.info
+                    setTeacher(it)
                 })
             }
             suspendTeacherResult.exception
@@ -85,11 +85,13 @@ open class DiscoveryViewModel : BaseViewModel() {
         startBindLaunch {
             val suspendResult = WheelsApi(WheelType.LESSON).suspendExecute()
             suspendResult.let {
+                wheels.clear()
                 it.getResponse()?.body?.forEach {
                     wheels.add(
                         BaseItemBean().apply { setWheel(it) })
                 }
             }
+            wheelsLoaded.value = true
             suspendResult.exception
         }
     }
