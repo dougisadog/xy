@@ -8,4 +8,9 @@ class AccountBean {
 
     var xyBalance: Int = 0
 
+    val textBalance:String
+    get() {
+        return xyBalance.toString()
+    }
+
 }

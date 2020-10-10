@@ -9,23 +9,21 @@ import java.io.File
 class UserBean private constructor(val accountId: String) {
 
     companion object {
-        fun createUserInfo(name: String, header: String? = null): UserBean {
+        fun createUserInfo(header: String? = null): UserBean {
             val accountId = LessonDataCache.account?.id
             return UserBean(accountId!!).apply {
-                userName = name
                 headerImage = header?.let { buildSourceDataByLink(it) }
             }
         }
 
         fun createBySubUser(subUser: SubUser): UserBean? {
-            val userBean = createUserInfo(subUser.name)
+            val userBean = createUserInfo()
             userBean.setSubUserData(subUser)
             return userBean
         }
     }
 
     fun setSubUserData(subUser: SubUser) {
-            userName = subUser.name
             headerImage = subUser.avatarUrl?.let { it -> buildSourceDataByLink(it) }
             introduction = subUser.interest?:""
             current = subUser.isCurrent
@@ -33,9 +31,12 @@ class UserBean private constructor(val accountId: String) {
             this.subUser = subUser
     }
 
-    var subUser: SubUser? = null
+    var subUser: SubUser = SubUser()
     var userRecord: UserForAccount? = null
-    var userName: String = ""
+    val userName: String
+    get() {
+        return subUser.name
+    }
 
     var userId: String = ""
     var current = false

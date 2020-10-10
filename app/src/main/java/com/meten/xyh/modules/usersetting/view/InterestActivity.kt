@@ -5,10 +5,11 @@ import android.content.Intent
 import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
+import com.meten.xyh.base.DataCache
+import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivityInterestBinding
 import com.meten.xyh.modules.usersetting.adapter.InterestAdapter
 import com.meten.xyh.modules.usersetting.viewmodel.InterestViewModel
-import com.meten.xyh.service.response.bean.SubUser
 import com.meten.xyh.utils.extension.setCustomEnable
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
@@ -19,12 +20,13 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 /**
  * 请选择您的兴趣爱好
  */
-class InterestActivity(val user: SubUser? = null) :
+class InterestActivity :
     BaseActivity<ActivityInterestBinding, InterestViewModel>() {
 
     companion object {
-        fun start(context: Context) {
+        fun start(context: Context, isCreate: Boolean = false) {
             val i = Intent(context, InterestActivity::class.java)
+            i.putExtra(IntentKey.CREATE_KEY, isCreate)
             context.startActivity(i)
         }
     }
@@ -40,11 +42,18 @@ class InterestActivity(val user: SubUser? = null) :
         )
     }
 
+    var isCreate = false
+
     override val layoutId: Int
         get() = R.layout.activity_interest
     override val viewModelId: Int
         get() = BR.interestViewModel
 
+    override fun initParams() {
+        super.initParams()
+        isCreate = intent.getBooleanExtra(IntentKey.CREATE_KEY, false)
+        viewModel.default = DataCache.generateNewSubUser(isCreate)?.interest
+    }
 
     override fun initView() {
         viewModel.loadData()
@@ -75,7 +84,7 @@ class InterestActivity(val user: SubUser? = null) :
             finish()
         }
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
-            viewModel.saveSetting(user)
+            viewModel.saveSetting(DataCache.generateNewSubUser(isCreate))
             finish()
         })
 

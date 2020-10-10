@@ -1,5 +1,6 @@
 package com.meten.xyh.service.response.bean
 
+import com.shuange.lesson.enumeration.Gender
 import com.shuange.lesson.utils.RequestClass
 
 @RequestClass
@@ -9,7 +10,7 @@ class SubUser {
     var appInfoId: Long = 0
     var avatarUrl: String? = null
     var city: String? = null
-    var gender: String = ""
+    var gender: String = Gender.UNKNOWN.name
     var interest: String? = null
     var isCurrent: Boolean = false
     var name: String = ""

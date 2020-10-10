@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
 
     >
 
@@ -37,13 +36,36 @@
                 android:orientation="vertical">
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/actionRv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    tools:itemCount="7"
-                    tools:listitem="@layout/layout_action_item" />
+                <include
+                    android:id="@+id/titleCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_name}"
+                    app:value="@{createUserViewModel.user.name}" />
+
+                <include
+                    android:id="@+id/signatureCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_signature}"
+                    app:value="@{createUserViewModel.user.name}" />
+
+                <include
+                    android:id="@+id/stageCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_stage}"
+                    app:value="@{createUserViewModel.user.stage}" />
+
+                <include
+                    android:id="@+id/interestCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_interest}"
+                    app:value="@{createUserViewModel.user.interest}" />
+
+                <include
+                    android:id="@+id/objectiveCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_objective}"
+                    app:value="@{createUserViewModel.user.objective}" />
+
             </LinearLayout>
 
 

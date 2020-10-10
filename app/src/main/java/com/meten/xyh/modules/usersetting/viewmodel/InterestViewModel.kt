@@ -1,16 +1,28 @@
 package com.meten.xyh.modules.usersetting.viewmodel
 
 import androidx.databinding.ObservableArrayList
-import com.meten.xyh.base.DataCache
 import com.meten.xyh.modules.usersetting.bean.InterestBean
+import com.meten.xyh.service.api.InterestApi
 import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.viewmodel.BaseViewModel
+import com.shuange.lesson.service.api.base.suspendExecute
 
 open class InterestViewModel : BaseViewModel() {
 
     val interests = ObservableArrayList<InterestBean>()
+
+    var default:String? = null
     fun loadData() {
-        testData()
+        startBindLaunch {
+            val suspendResult = InterestApi().suspendExecute()
+            suspendResult.getResponse()?.body?.forEach {
+                interests.add(InterestBean().apply {
+                    text = it
+                    isSelected = it == default
+                })
+            }
+            suspendResult.exception
+        }
     }
 
     fun getResults(): MutableList<InterestBean> {
@@ -20,10 +32,7 @@ open class InterestViewModel : BaseViewModel() {
     fun saveSetting(
         user: SubUser?
     ) {
-        val targetUser = user ?: DataCache.users.firstOrNull {
-            it.current
-        }?.subUser
-        targetUser?.interest = getInterest()
+        user?.interest = getInterest()
     }
 
     fun getInterest(): String {
@@ -37,14 +46,5 @@ open class InterestViewModel : BaseViewModel() {
         return target.toString()
     }
 
-    //TODO
-    fun testData() {
-        for (i in 0 until 7) {
-            interests.add(InterestBean().apply {
-                text = "旅游英语$i"
-                isSelected = false
-            })
-        }
-    }
 
 }

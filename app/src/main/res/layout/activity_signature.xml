@@ -36,7 +36,7 @@
             android:inputType="text"
             android:maxLength="40"
             android:maxLines="1"
-            android:text="@{signatureViewModel.setSettingChange.v}"
+            android:text="@={signatureViewModel.signature}"
             android:textColor="@color/hex_B8B8B8"
             android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/clearIv"

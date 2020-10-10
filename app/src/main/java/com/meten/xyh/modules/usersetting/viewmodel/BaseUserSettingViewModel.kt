@@ -7,6 +7,8 @@ import com.shuange.lesson.base.viewmodel.BaseViewModel
 
 abstract class BaseUserSettingViewModel : BaseViewModel() {
 
+    var default:String? = null
+
     val type = 0
 
     val userSettingItems = ObservableArrayList<UserSettingBean>()

@@ -1,6 +1,5 @@
 package com.meten.xyh.modules.usersetting.viewmodel
 
-import com.meten.xyh.base.DataCache
 import com.meten.xyh.modules.usersetting.bean.UserSettingBean
 import com.meten.xyh.service.api.ObjectiveApi
 import com.meten.xyh.service.response.bean.SubUser
@@ -11,17 +10,17 @@ open class ObjectiveViewModel : BaseUserSettingViewModel() {
         startBindLaunch {
             val suspendResult = ObjectiveApi().suspendExecute()
             suspendResult.getResponse()?.body?.forEach {
-                userSettingItems.add(UserSettingBean().apply { title = it })
+                userSettingItems.add(UserSettingBean().apply {
+                    title = it
+                    isSelected = it == default
+                })
             }
             suspendResult.exception
         }
     }
 
     override fun saveSetting(text: String, user: SubUser?) {
-        val targetUser = user ?: DataCache.users.firstOrNull {
-            it.current
-        }?.subUser
-        targetUser?.objective = text
+        user?.objective = text
     }
 
 }

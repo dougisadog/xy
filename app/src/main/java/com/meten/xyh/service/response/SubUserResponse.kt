@@ -1,9 +1,9 @@
 package com.meten.xyh.service.response
 
 import com.meten.xyh.service.response.bean.SubUser
-import com.shuange.lesson.service.response.base.BaseListApiResponse
+import com.shuange.lesson.service.response.base.BaseApiResponse
 
-class SubUserResponse : BaseListApiResponse<SubUser>() {
+class SubUserResponse : BaseApiResponse<SubUser>() {
 
 }
 

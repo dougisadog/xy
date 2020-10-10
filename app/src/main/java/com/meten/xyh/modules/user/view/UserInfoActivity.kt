@@ -6,8 +6,6 @@ import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.DataCache
-import com.meten.xyh.base.adapter.ActionAdapter
-import com.meten.xyh.base.bean.ActionItem
 import com.meten.xyh.databinding.ActivityUserInfoBinding
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.user.viewmodel.UserInfoViewModel
@@ -16,6 +14,7 @@ import com.meten.xyh.modules.usersetting.view.InterestActivity
 import com.meten.xyh.modules.usersetting.view.SignatureActivity
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 
@@ -35,12 +34,6 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
         BaseShareModelFactory()
     }
 
-    private val actionAdapter: ActionAdapter by lazy {
-        ActionAdapter(
-            data = viewModel.actionItems
-        )
-    }
-
     override val layoutId: Int
         get() = R.layout.activity_user_info
     override val viewModelId: Int
@@ -50,72 +43,50 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
     override fun initView() {
         binding.header.title.text = "用户信息"
         viewModel.loadData()
-        initActions()
         initListener()
     }
 
-    fun initActions() {
-        with(binding.actionRv) {
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
-                this@UserInfoActivity,
-                androidx.recyclerview.widget.RecyclerView.VERTICAL,
-                false
-            )
-            actionAdapter.setOnItemClickListener { adapter, view, position ->
-                actionAdapter.data[position].action?.invoke()
-            }
-            isNestedScrollingEnabled = false
-            adapter = actionAdapter
-        }
-    }
-
-    fun refreshActionsData() {
-        val user = DataCache.currentUser()
-        val actions = arrayListOf<ActionItem>()
-        actions.add(ActionItem().apply {
-            title = "昵称"
-            value = user?.userName ?: ""
-            action = { SignatureActivity.start(this@UserInfoActivity, UserSettingType.NICKNAME) }
-        })
-        actions.add(ActionItem().apply {
-            title = "个性签名"
-            value = user?.introduction ?: ""
-            action = { SignatureActivity.start(this@UserInfoActivity, UserSettingType.SIGNATURE) }
-        })
-        actions.add(ActionItem().apply {
-            title = "学习阶段"
-            value = user?.subUser?.stage ?: ""
-            action = { BaseUserSettingActivity.start(this@UserInfoActivity, UserSettingType.STAGE) }
-        })
-        actions.add(ActionItem().apply {
-            title = "感兴趣的"
-            value = user?.subUser?.interest ?: ""
-            action =
-                { InterestActivity.start(this@UserInfoActivity) }
-        })
-        actions.add(ActionItem().apply {
-            title = "需提升的"
-            action =
-                { BaseUserSettingActivity.start(this@UserInfoActivity, UserSettingType.OBJECTIVE) }
-        })
-        actions.add(ActionItem().apply {
-            title = "上课提醒手机"
-            value = user?.subUser?.phone ?: ""
-            action = { ChangePhoneActivity.start(this@UserInfoActivity) }
-        })
-        actions.add(ActionItem().apply {
-            title = "登录密码"
-            value = "修改"
-            action = { ChangePasswordActivity.start(this@UserInfoActivity, false) }
-        })
-        viewModel.actionItems.clear()
-        viewModel.actionItems.addAll(actions)
-    }
 
     private fun initListener() {
         binding.header.back.setOnClickListener {
             finish()
         }
+
+        binding.titleCl.root.setOnClickListener(NonDoubleClickListener {
+            SignatureActivity.start(this@UserInfoActivity, UserSettingType.NICKNAME)
+        })
+        binding.signatureCl.root.setOnClickListener(NonDoubleClickListener {
+            SignatureActivity.start(
+                this@UserInfoActivity,
+                UserSettingType.SIGNATURE
+            )
+        })
+        binding.stageCl.root.setOnClickListener(NonDoubleClickListener {
+            BaseUserSettingActivity.start(
+                this@UserInfoActivity,
+                UserSettingType.STAGE,
+                isSetting = true
+            )
+        })
+        binding.interestCl.root.setOnClickListener(NonDoubleClickListener {
+            InterestActivity.start(this@UserInfoActivity)
+        })
+        binding.objectiveCl.root.setOnClickListener(NonDoubleClickListener {
+            BaseUserSettingActivity.start(
+                this@UserInfoActivity,
+                UserSettingType.OBJECTIVE,
+                true
+            )
+        })
+
+        binding.phoneCl.root.setOnClickListener(NonDoubleClickListener {
+            ChangePhoneActivity.start(this@UserInfoActivity)
+        })
+
+        binding.passwordCl.root.setOnClickListener(NonDoubleClickListener {
+            ChangePasswordActivity.start(this@UserInfoActivity, false)
+        })
+
     }
 
 
@@ -124,6 +95,6 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
 
     override fun onResume() {
         super.onResume()
-        refreshActionsData()
+        viewModel.user.value = DataCache.currentUser()?.subUser
     }
 }

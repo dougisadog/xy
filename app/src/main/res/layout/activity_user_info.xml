@@ -29,8 +29,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header"
-            tools:src="@drawable/icon_cancel"
-            app:roundImage="@{userInfoViewModel.headerImg.url}" />
+            app:roundImage="@{userInfoViewModel.headerImg.url}"
+            tools:src="@drawable/icon_cancel" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -38,9 +38,8 @@
             android:layout_marginTop="40dp"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/headerIv"
             app:layout_constraintBottom_toBottomOf="parent"
-            >
+            app:layout_constraintTop_toBottomOf="@+id/headerIv">
 
 
             <LinearLayout
@@ -48,16 +47,49 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <include
+                    android:id="@+id/titleCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_name}"
+                    app:value="@{userInfoViewModel.user.name}" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/actionRv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    tools:itemCount="7"
-                    tools:listitem="@layout/layout_action_item" />
+                <include
+                    android:id="@+id/signatureCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_signature}"
+                    app:value="@{userInfoViewModel.user.name}" />
+
+                <include
+                    android:id="@+id/stageCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_stage}"
+                    app:value="@{userInfoViewModel.user.stage}" />
+
+                <include
+                    android:id="@+id/interestCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_interest}"
+                    app:value="@{userInfoViewModel.user.interest}" />
+
+                <include
+                    android:id="@+id/objectiveCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_objective}"
+                    app:value="@{userInfoViewModel.user.objective}" />
+
+                <include
+                    android:id="@+id/phoneCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_phone}"
+                    app:value="@{userInfoViewModel.user.phone}" />
+
+                <include
+                    android:id="@+id/passwordCl"
+                    layout="@layout/layout_action_item"
+                    app:title="@{@string/label_password}"
+                    app:value="@{@string/label_update}" />
+
             </LinearLayout>
-
 
         </androidx.core.widget.NestedScrollView>
 

@@ -6,12 +6,11 @@ import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.DataCache
 import com.meten.xyh.base.config.IntentKey
-import com.meten.xyh.databinding.ActivityStepBinding
+import com.meten.xyh.databinding.ActivityBaseSettingBinding
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.main.view.MainActivity
 import com.meten.xyh.modules.usersetting.adapter.BaseUserSettingAdapter
 import com.meten.xyh.modules.usersetting.viewmodel.BaseUserSettingViewModel
-import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.view.NonDoubleClickListener
 import kotlin.reflect.KClass
@@ -20,26 +19,37 @@ import kotlin.reflect.KClass
 /**
  * 设定
  */
-abstract class BaseUserSettingActivity<T : BaseUserSettingViewModel>(val user:SubUser? = DataCache.newSubUser) :
-    BaseActivity<ActivityStepBinding, T>() {
+abstract class BaseUserSettingActivity<T : BaseUserSettingViewModel> :
+    BaseActivity<ActivityBaseSettingBinding, T>() {
 
     companion object {
-        fun start(context: Context, type: UserSettingType, isSetting: Boolean = true) {
+        fun start(
+            context: Context,
+            type: UserSettingType,
+            isSetting: Boolean = true,
+            isCreate: Boolean = false
+        ) {
             var targetClass: KClass<*>? = null
             when (type) {
                 UserSettingType.STAGE -> {
                     targetClass = StepActivity::class
                 }
+                UserSettingType.OBJECTIVE -> {
+                    targetClass = ObjectiveActivity::class
+                }
             }
             targetClass?.let {
                 val i = Intent(context, targetClass.java)
                 i.putExtra(IntentKey.SETTING_KEY, isSetting)
+                i.putExtra(IntentKey.CREATE_KEY, isCreate)
                 context.startActivity(i)
             }
         }
     }
 
     var isSetting = false
+
+    var isCreate = false
 
     private val baseUserSettingAdapter: BaseUserSettingAdapter by lazy {
         BaseUserSettingAdapter(
@@ -50,14 +60,17 @@ abstract class BaseUserSettingActivity<T : BaseUserSettingViewModel>(val user:Su
 
 
     override val layoutId: Int
-        get() = R.layout.activity_step
+        get() = R.layout.activity_base_setting
     override val viewModelId: Int
-        get() = BR.stepViewModel
+        get() = BR.baseUserSettingViewModel
 
     override fun initParams() {
         super.initParams()
         intent?.getBooleanExtra(IntentKey.SETTING_KEY, false)?.let {
             isSetting = it
+        }
+        intent?.getBooleanExtra(IntentKey.CREATE_KEY, false)?.let {
+            isCreate = it
         }
     }
 
@@ -87,16 +100,14 @@ abstract class BaseUserSettingActivity<T : BaseUserSettingViewModel>(val user:Su
 
     private fun initListener() {
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
-            if (isSetting) {
-                viewModel.userSettingItems.firstOrNull { it.isSelected }?.let {
-                    viewModel.saveSetting(it.title, user)
-                    finish()
-                }
-
-            } else {
-                MainActivity.start(this)
-                finish()
+            viewModel.userSettingItems.firstOrNull { it.isSelected }?.let {
+                viewModel.saveSetting(it.title, DataCache.generateNewSubUser(isCreate))
             }
+            if (!isSetting) {
+                MainActivity.start(this)
+            }
+            finish()
+
         })
     }
 

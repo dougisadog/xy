@@ -6,8 +6,6 @@ import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.DataCache
-import com.meten.xyh.base.adapter.ActionAdapter
-import com.meten.xyh.base.bean.ActionItem
 import com.meten.xyh.databinding.ActivityCreateUserBinding
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.user.viewmodel.CreateUserViewModel
@@ -27,7 +25,7 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserViewModel>() {
 
     companion object {
-        fun star(context: Context) {
+        fun start(context: Context) {
             val i = Intent(context, CreateUserActivity::class.java)
             context.startActivity(i)
         }
@@ -37,12 +35,6 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
         BaseShareModelFactory()
     }
 
-    private val actionAdapter: ActionAdapter by lazy {
-        ActionAdapter(
-            data = viewModel.actionItems
-        )
-    }
-
     override val layoutId: Int
         get() = R.layout.activity_create_user
     override val viewModelId: Int
@@ -50,74 +42,53 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
 
 
     override fun initView() {
+        DataCache.newSubUser = SubUser()
         binding.header.title.text = "新增用户"
         viewModel.loadData()
-        initActions()
         initListener()
     }
 
-    fun initActions() {
-        with(binding.actionRv) {
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(
-                this@CreateUserActivity,
-                androidx.recyclerview.widget.RecyclerView.VERTICAL,
-                false
-            )
-            actionAdapter.setOnItemClickListener { adapter, view, position ->
-                actionAdapter.data[position].action?.invoke()
-            }
-            isNestedScrollingEnabled = false
-            adapter = actionAdapter
-        }
-    }
 
     private fun initListener() {
         binding.header.back.setOnClickListener {
             finish()
         }
         binding.saveTv.setOnClickListener(NonDoubleClickListener {
-            viewModel.save()
+            viewModel.save {
+                finish()
+            }
+        })
+        binding.titleCl.root.setOnClickListener(NonDoubleClickListener {
+            SignatureActivity.start(this@CreateUserActivity, UserSettingType.NICKNAME, true)
+        })
+        binding.signatureCl.root.setOnClickListener(NonDoubleClickListener {
+            SignatureActivity.start(
+                this@CreateUserActivity,
+                UserSettingType.SIGNATURE,
+                true
+            )
+        })
+        binding.stageCl.root.setOnClickListener(NonDoubleClickListener {
+            BaseUserSettingActivity.start(
+                this@CreateUserActivity,
+                UserSettingType.STAGE,
+                isSetting = true,
+                isCreate = true
+            )
+        })
+        binding.interestCl.root.setOnClickListener(NonDoubleClickListener {
+            InterestActivity.start(this@CreateUserActivity, true)
+        })
+        binding.objectiveCl.root.setOnClickListener(NonDoubleClickListener {
+            BaseUserSettingActivity.start(
+                this@CreateUserActivity,
+                UserSettingType.OBJECTIVE,
+                isSetting = true,
+                isCreate = true
+
+            )
         })
     }
-
-    fun buildActionsBySubUser(subUser: SubUser?): ArrayList<ActionItem> {
-        val actions = arrayListOf<ActionItem>()
-        actions.add(ActionItem().apply {
-            title = "昵称"
-            value = subUser?.name ?: ""
-            action = { SignatureActivity.start(this@CreateUserActivity, UserSettingType.NICKNAME) }
-        })
-        actions.add(ActionItem().apply {
-            title = "个性签名"
-            value = ""
-            action = { SignatureActivity.start(this@CreateUserActivity, UserSettingType.SIGNATURE) }
-        })
-        actions.add(ActionItem().apply {
-            title = "学习阶段"
-            value = subUser?.stage ?: ""
-            action =
-                { BaseUserSettingActivity.start(this@CreateUserActivity, UserSettingType.STAGE) }
-        })
-        actions.add(ActionItem().apply {
-            title = "感兴趣的"
-            value = subUser?.interest ?: ""
-            action =
-                { InterestActivity.start(this@CreateUserActivity) }
-        })
-        actions.add(ActionItem().apply {
-            title = "需提升的"
-            value = subUser?.objective ?: ""
-            action =
-                {
-                    BaseUserSettingActivity.start(
-                        this@CreateUserActivity,
-                        UserSettingType.OBJECTIVE
-                    )
-                }
-        })
-        return actions
-    }
-
 
     override fun initViewObserver() {
     }
@@ -130,8 +101,6 @@ class CreateUserActivity : BaseActivity<ActivityCreateUserBinding, CreateUserVie
 
     override fun onResume() {
         super.onResume()
-        val actions = buildActionsBySubUser(DataCache.newSubUser)
-        viewModel.actionItems.clear()
-        viewModel.actionItems.addAll(actions)
+        viewModel.user.value = DataCache.newSubUser
     }
 }

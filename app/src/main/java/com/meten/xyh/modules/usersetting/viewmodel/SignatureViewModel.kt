@@ -39,6 +39,7 @@ class SignatureViewModel : BaseViewModel() {
                 UserSettingType.SIGNATURE -> {
                     title = "个性签名"
                     hint = "请输入个性签名"
+                    value = user?.name?:""
                     saveTask = { input ->
                         //未知
                         getTargetUser()?.objective = input
@@ -47,6 +48,7 @@ class SignatureViewModel : BaseViewModel() {
                 UserSettingType.NICKNAME -> {
                     title = "修改昵称"
                     hint = "请输入昵称"
+                    value = user?.name?:""
                     saveTask = { input ->
                         getTargetUser()?.name = input
                     }

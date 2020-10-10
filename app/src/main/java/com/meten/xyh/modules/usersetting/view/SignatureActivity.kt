@@ -11,7 +11,6 @@ import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.databinding.ActivitySignatureBinding
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.usersetting.viewmodel.SignatureViewModel
-import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import kotlinx.android.synthetic.main.layout_header.view.*
@@ -20,12 +19,13 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 /**
  * 个性签名/昵称
  */
-class SignatureActivity(val subUser: SubUser? = DataCache.newSubUser) : BaseActivity<ActivitySignatureBinding, SignatureViewModel>() {
+class SignatureActivity : BaseActivity<ActivitySignatureBinding, SignatureViewModel>() {
 
     companion object {
-        fun start(context: Context, type: UserSettingType) {
+        fun start(context: Context, type: UserSettingType, isCreate: Boolean = false) {
             val i = Intent(context, SignatureActivity::class.java)
             i.putExtra(IntentKey.SIGNATURE_TYPE_KEY, type.ordinal)
+            i.putExtra(IntentKey.CREATE_KEY, isCreate)
             context.startActivity(i)
         }
     }
@@ -37,14 +37,17 @@ class SignatureActivity(val subUser: SubUser? = DataCache.newSubUser) : BaseActi
     override val layoutId: Int
         get() = R.layout.activity_signature
     override val viewModelId: Int
-        get() = BR.changeUserViewModel
+        get() = BR.signatureViewModel
 
     override fun initParams() {
         super.initParams()
+        val isCreate = intent.getBooleanExtra(IntentKey.CREATE_KEY, false)
         intent.getIntExtra(IntentKey.SIGNATURE_TYPE_KEY, 0).let {
+            val subUser = DataCache.generateNewSubUser(isCreate)
             viewModel.settingChange.value = SignatureViewModel.SettingChange(subUser).apply {
                 setUserSettingType(UserSettingType.values()[it])
             }
+            viewModel.signature.value = viewModel.settingChange.value?.value
         }
     }
 

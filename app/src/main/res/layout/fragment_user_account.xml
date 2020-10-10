@@ -52,7 +52,7 @@
                     android:scaleType="fitXY"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:roundImageFile="@{userAccountViewModel.account.headerImage}"
+                    app:roundImageFile="@{userAccountViewModel.subUser.headerImage}"
                     tools:src="@drawable/icon_cancel" />
 
                 <TextView
@@ -60,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="@{userAccountViewModel.account.userName}"
+                    android:text="@{userAccountViewModel.subUser.userName}"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toTopOf="@+id/introductionTv"
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:text="@{userAccountViewModel.account.introduction}"
+                    android:text="@{userAccountViewModel.subUser.introduction}"
                     android:textColor="@color/white"
                     android:textSize="14dp"
                     app:layout_constraintBottom_toBottomOf="@+id/accountIv"
@@ -101,7 +101,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="16dp"
                     android:scaleType="matrix"
-                    android:text="希氧币:"
+                    android:text="@{userAccountViewModel.account.textBalance}"
                     android:textColor="@color/hex_F3D1B0"
                     android:textSize="20dp"
                     android:textStyle="bold"

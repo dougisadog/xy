@@ -1,42 +1,42 @@
 package com.meten.xyh.modules.user.viewmodel
 
-import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.base.DataCache
-import com.meten.xyh.base.bean.ActionItem
 import com.meten.xyh.service.api.CurrentUserApi
 import com.meten.xyh.service.api.SubUserEditApi
 import com.meten.xyh.service.response.bean.SubUser
+import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.service.api.base.suspendExecute
 
 class CreateUserViewModel : BaseViewModel() {
 
-    val actionItems = ObservableArrayList<ActionItem>()
-
-    val user: SubUser? = SubUser()
+    val user = MutableLiveData<SubUser>()
 
     fun loadData() {
 
     }
 
-    fun save() {
+    fun save(success:EmptyTask) {
         val user = DataCache.newSubUser
         if (null == user) {
             DataCache.newSubUser = SubUser()
-            save()
+            save(success)
             return
         }
-        startBindLaunch {
+        startBindLaunch(showLoading = true) {
             var exception: Exception? = null
             val result = SubUserEditApi(user).suspendExecute()
             exception = result.exception
-
-            CurrentUserApi().suspendExecute().let {
-                if (null == exception) {
+            if (null != exception) {
+                CurrentUserApi().suspendExecute().let {
                     exception = it.exception
                 }
             }
-            DataCache.newSubUser = null
+            if (null == exception) {
+                DataCache.newSubUser = null
+                success?.invoke()
+            }
             exception
 
         }

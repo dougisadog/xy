@@ -70,7 +70,11 @@ abstract class BaseActivity<BD : ViewDataBinding, VM : BaseViewModel> : Fragment
                     setContentView(ProgressBar(this@BaseActivity))
                 }
             }
-            mDialog?.show()
+            mDialog?.let {
+                if (!it.isShowing) {
+                    it.show()
+                }
+            }
         } else {
             mDialog?.dismiss()
         }

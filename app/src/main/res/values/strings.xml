@@ -3,4 +3,13 @@
     <string name="support_tel">400-806-9911</string>
     <string name="not_support">尚未开放</string>
 
+    <string name="label_name">姓名</string>
+    <string name="label_signature">个性签名</string>
+    <string name="label_stage">学习阶段</string>
+    <string name="label_interest">感兴趣的</string>
+    <string name="label_objective">需要提升的</string>
+    <string name="label_phone">上课提醒手机</string>
+    <string name="label_password">登录密码</string>
+    <string name="label_update">修改</string>
+
 </resources>
