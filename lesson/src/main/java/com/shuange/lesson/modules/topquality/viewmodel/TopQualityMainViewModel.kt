@@ -70,7 +70,7 @@ class TopQualityMainViewModel : BaseViewModel() {
                 LessonPackagesApi().apply {
                     addPageParam("0", page = 1, size = 10)
                 }.suspendExecute()
-            suspendLessonPackagesResult?.getResponse()?.body?.let {
+            suspendLessonPackagesResult.getResponse()?.body?.let {
                 val arr = it
                 arr.sortedBy {
                     it.sortNo

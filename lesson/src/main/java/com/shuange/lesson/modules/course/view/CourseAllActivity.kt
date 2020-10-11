@@ -24,9 +24,9 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 class CourseAllActivity : BaseActivity<ActivityCourseAllBinding, CourseAllViewModel>() {
 
     companion object {
-        fun start(context: Context, defaultType: Int? = null) {
+        fun start(context: Context, defaultType: String? = null) {
             val i = Intent(context, CourseAllActivity::class.java)
-            defaultType?.let {
+            defaultType.let {
                 i.putExtra(IntentKey.COURSE_TYPE, defaultType)
             }
             context.startActivity(i)
@@ -46,10 +46,8 @@ class CourseAllActivity : BaseActivity<ActivityCourseAllBinding, CourseAllViewMo
 
     override fun initParams() {
         super.initParams()
-        intent.getIntExtra(IntentKey.COURSE_TYPE, -1).let {
-            if (it != -1) {
-                viewModel.defaultTypeId = it
-            }
+        intent.getStringExtra(IntentKey.COURSE_TYPE).let {
+            viewModel.defaultTypeId = it
         }
     }
 
@@ -58,6 +56,7 @@ class CourseAllActivity : BaseActivity<ActivityCourseAllBinding, CourseAllViewMo
         viewModel.loadTypes {
             initViewPager()
             initTabIndicator()
+            binding.vp.currentItem = viewModel.getDefaultPageIndex()
         }
         initListener()
     }
@@ -70,7 +69,6 @@ class CourseAllActivity : BaseActivity<ActivityCourseAllBinding, CourseAllViewMo
         fragmentAdapter = BaseFragmentAdapter(this, fragments)
         with(binding.vp) {
             adapter = fragmentAdapter
-            setCurrentItem(viewModel.getDefaultPageIndex())
         }
     }
 

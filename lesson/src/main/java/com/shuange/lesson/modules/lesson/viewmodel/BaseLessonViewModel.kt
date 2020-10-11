@@ -20,6 +20,7 @@ open class BaseLessonViewModel : BaseViewModel() {
                 answer = answer,
                 lessonModuleId = lessonBean.moduleId,
                 lessonId = lessonBean.lessonId,
+                lessonPackageId = lessonBean.lessonPackageId,
                 progressIndex = index,
                 progressTime = 0,
                 questionId = lessonBean.questionsId,

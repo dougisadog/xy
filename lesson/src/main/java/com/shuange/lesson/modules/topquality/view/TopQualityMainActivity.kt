@@ -17,11 +17,12 @@ import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityTopQualityMainBinding
 import com.shuange.lesson.modules.course.adapter.CoursePackageAdapter
+import com.shuange.lesson.modules.course.view.CourseAllActivity
 import com.shuange.lesson.modules.course.view.CourseModulesActivity
-import com.shuange.lesson.modules.course.view.CoursePackagesActivity
 import com.shuange.lesson.modules.search.view.BaseSearchActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityMainViewModel
+import com.shuange.lesson.utils.BusinessUtil
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.force2Long
 import com.shuange.lesson.utils.extension.initAdapter
@@ -80,7 +81,7 @@ class TopQualityMainActivity :
             layoutManager =
                 LinearLayoutManager(this@TopQualityMainActivity, RecyclerView.VERTICAL, false)
             topQualityAdapter.setOnItemClickListener { adapter, view, position ->
-                CoursePackagesActivity.start(context)
+                BusinessUtil.startCourse(context, topQualityAdapter.data[position])
             }
             isNestedScrollingEnabled = false
             adapter = topQualityAdapter
@@ -144,6 +145,9 @@ class TopQualityMainActivity :
 //        }
         binding.searchRl.setOnClickListener(NonDoubleClickListener {
             BaseSearchActivity.start(this, ConfigDef.TYPE_COURSE)
+        })
+        binding.topQualityLl.setOnClickListener(NonDoubleClickListener {
+            CourseAllActivity.start(this)
         })
     }
 

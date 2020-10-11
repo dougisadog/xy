@@ -12,6 +12,7 @@ import com.meten.xyh.modules.user.viewmodel.UserInfoViewModel
 import com.meten.xyh.modules.usersetting.view.BaseUserSettingActivity
 import com.meten.xyh.modules.usersetting.view.InterestActivity
 import com.meten.xyh.modules.usersetting.view.SignatureActivity
+import com.meten.xyh.view.pop.ChangePhonePop
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
@@ -80,7 +81,18 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
         })
 
         binding.phoneCl.root.setOnClickListener(NonDoubleClickListener {
-            ChangePhoneActivity.start(this@UserInfoActivity)
+            ChangePhonePop(this).apply {
+                phonePopCallBack = object : ChangePhonePop.PhonePopCallBack {
+                    override fun onChange() {
+                        ChangePhoneActivity.start(this@UserInfoActivity)
+                    }
+
+                    override fun onDelete() {
+                        viewModel.deletePhone()
+                    }
+
+                }
+            }.show(binding.root)
         })
 
         binding.passwordCl.root.setOnClickListener(NonDoubleClickListener {

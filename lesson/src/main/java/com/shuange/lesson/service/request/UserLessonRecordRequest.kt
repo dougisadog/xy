@@ -8,6 +8,7 @@ class UserLessonRecordRequest(
     val answer: String,
     val lessonModuleId: Long,
     val lessonId: Long,
+    val lessonPackageId: Long,
     val progressIndex: Int,
     val progressTime: Int,
     val questionId: Long,

@@ -5,8 +5,8 @@ import com.meten.xyh.R
 import com.meten.xyh.modules.search.viewmodel.SearchCourseViewModel
 import com.shuange.lesson.base.adapter.BaseListAdapter
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.modules.course.view.CoursePackagesActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
+import com.shuange.lesson.utils.BusinessUtil
 
 
 /**
@@ -31,7 +31,9 @@ class SearchCourseActivity :
     }
 
     override fun onItemClick(id: String) {
-        CoursePackagesActivity.start(this)
+        viewModel.getLessonPackageDetail(id) {
+            BusinessUtil.startCourse(this, it)
+        }
     }
 
 

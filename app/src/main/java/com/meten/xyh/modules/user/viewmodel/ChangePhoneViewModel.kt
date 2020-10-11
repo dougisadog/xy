@@ -5,14 +5,24 @@ import com.meten.xyh.base.viewmodel.VerifyMessageViewModel
 import com.meten.xyh.service.api.ChangeRemindApi
 import com.meten.xyh.service.api.SendVerifyCodeForRemindApi
 import com.meten.xyh.utils.BusinessUtil
+import com.shuange.lesson.service.api.base.suspendExecute
 
 open class ChangePhoneViewModel : VerifyMessageViewModel() {
 
     var phone = MutableLiveData<String>()
 
+    var phoneChanged = MutableLiveData<Boolean>()
+
     fun changePhone() {
         if (checkPhone()) {
-            ChangeRemindApi(phone.value ?: return).execute()
+            val phone = phone.value ?: return
+            startBindLaunch {
+                val suspendResult = ChangeRemindApi(phone).suspendExecute()
+                if (null == suspendResult.exception) {
+                    phoneChanged.value = true
+                }
+                suspendResult.exception
+            }
         }
     }
 

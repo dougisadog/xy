@@ -13,7 +13,7 @@ class TopQualityCourseViewModel : BaseViewModel() {
 
     var searchText = MutableLiveData<String>()
 
-    var courseType:Int? = null
+    var courseType:String? = null
 
     var topQualityItems = ObservableArrayList<CourseBean>()
 
@@ -28,9 +28,12 @@ class TopQualityCourseViewModel : BaseViewModel() {
         onFinished: EmptyTask = null
     ) {
         //TODO 直播课程不参与查询
-        if (courseType == ConfigDef.TYPE_STREAM) return
+        if (null == courseType || courseType == ConfigDef.TYPE_STREAM) return
         startBindLaunch(onFinish = onFinished) {
-            val suspendResult = LessonPackagesApi().apply { addPageParam(startId) } .suspendExecute()
+            val suspendResult = LessonPackagesApi().apply {
+                addPageParam(startId)
+                addCourseType(courseType!!)
+            } .suspendExecute()
             suspendResult.getResponse()?.body?.forEach {
                 topQualityItems.add(CourseBean().apply {
                     setLessonPackages(it)

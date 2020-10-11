@@ -22,6 +22,7 @@ import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.adapter.BaseItemAdapter
 import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.modules.course.view.CourseAllActivity
 import com.shuange.lesson.modules.course.view.CourseModulesActivity
@@ -32,6 +33,7 @@ import com.shuange.lesson.modules.teacher.view.TeacherInfoActivity
 import com.shuange.lesson.modules.teacher.view.TeacherListActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.view.TopQualityActivity
+import com.shuange.lesson.modules.topquality.view.TopQualityMainActivity
 import com.shuange.lesson.utils.BusinessUtil
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.force2Long
@@ -179,26 +181,26 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
             itemsR1.add(MenuItem("每日一句", R.drawable.icon_home_mryj) {
                 TopQualityActivity.start(requireActivity())
             })
-            itemsR1.add(MenuItem("赛培课程", R.drawable.icon_home_lv) {
-                CourseAllActivity.start(requireActivity(), 0)
+            itemsR1.add(MenuItem("赛培课程", R.drawable.icon_home_ss) {
+                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_MATCH)
             })
-            itemsR1.add(MenuItem("教师中心", R.drawable.icon_home_dz) {
+            itemsR1.add(MenuItem("教师中心", R.drawable.icon_home_teacher) {
                 TeacherListActivity.start(requireActivity())
             })
 
 
             val itemsR2 = mutableListOf<MenuItem>()
-            itemsR2.add(MenuItem("幼儿课程", R.drawable.icon_home_mryj) {
-                CourseAllActivity.start(requireActivity(), 1)
+            itemsR2.add(MenuItem("幼儿课程", R.drawable.icon_home_child) {
+                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_CHILD)
             })
-            itemsR2.add(MenuItem("小学课程", R.drawable.icon_home_ss) {
-                CourseAllActivity.start(requireActivity(), 2)
+            itemsR2.add(MenuItem("小学课程", R.drawable.icon_home_primary) {
+                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_PRIMARY)
             })
-            itemsR2.add(MenuItem("高中大学", R.drawable.icon_home_fy) {
-                CourseAllActivity.start(requireActivity(), 3)
+            itemsR2.add(MenuItem("高中大学", R.drawable.icon_home_senior_high) {
+                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_SENIOR_HIGH)
             })
-            itemsR2.add(MenuItem("大学课程", R.drawable.icon_home_fyxl) {
-                CourseAllActivity.start(requireActivity(), 4)
+            itemsR2.add(MenuItem("大学课程", R.drawable.icon_home_college) {
+                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_COLLEGE)
             })
             val page1 = mutableListOf<MenuItem>()
             page1.addAll(itemsR1)
@@ -223,7 +225,7 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
             ToastUtil.show(ContextManager.getContext().getString(R.string.not_support))
         })
         binding.topQualityLl.setOnClickListener(NonDoubleClickListener {
-            CourseAllActivity.start(requireActivity())
+            TopQualityMainActivity.start(requireActivity())
         })
         binding.teacherLl.setOnClickListener(NonDoubleClickListener {
             TeacherListActivity.start(requireActivity())

@@ -83,9 +83,6 @@ abstract class SearchBaseActivity<VM : SearchBaseViewModel> :
         }
     }
 
-    override val viewModel: VM
-        get() = TODO("Not yet implemented")
-
     abstract fun getSearchAdapter(): BaseListAdapter<*>
 
     abstract fun onItemClick(id: String)

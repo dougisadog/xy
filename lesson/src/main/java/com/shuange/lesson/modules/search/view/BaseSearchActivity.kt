@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.layout_header.view.*
 class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchViewModel>() {
 
     companion object {
-        fun start(context: Context, defaultType: Int? = null) {
+        fun start(context: Context, defaultType: String? = null) {
             val i = Intent(context, BaseSearchActivity::class.java)
             defaultType?.let {
                 i.putExtra(IntentKey.SEARCH_TYPE, defaultType)
@@ -48,10 +48,8 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
 
     override fun initParams() {
         super.initParams()
-        intent.getIntExtra(IntentKey.SEARCH_TYPE, -1).let {
-            if (it != -1) {
-                viewModel.defaultTypeId = it
-            }
+        intent.getStringExtra(IntentKey.SEARCH_TYPE).let {
+            viewModel.defaultTypeId = it
         }
     }
 

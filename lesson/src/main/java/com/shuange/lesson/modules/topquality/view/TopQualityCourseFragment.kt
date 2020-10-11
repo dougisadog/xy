@@ -10,19 +10,19 @@ import com.shuange.lesson.base.BaseFragment
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentTopQualityCourseBinding
-import com.shuange.lesson.modules.course.view.CoursePackagesActivity
 import com.shuange.lesson.modules.topquality.adapter.TopQualityAdapter
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityCourseViewModel
+import com.shuange.lesson.utils.BusinessUtil
 
 class TopQualityCourseFragment :
     BaseFragment<FragmentTopQualityCourseBinding, TopQualityCourseViewModel>() {
 
 
     companion object {
-        fun newInstance(courseType: Int): TopQualityCourseFragment {
+        fun newInstance(courseType: String): TopQualityCourseFragment {
             val f = TopQualityCourseFragment()
             Bundle().apply {
-                putInt(IntentKey.COURSE_TYPE, courseType)
+                putString(IntentKey.COURSE_TYPE, courseType)
                 f.arguments = this
             }
             return f
@@ -46,7 +46,7 @@ class TopQualityCourseFragment :
 
     override fun initParams() {
         super.initParams()
-        viewModel.courseType = arguments?.getInt(IntentKey.COURSE_TYPE)
+        viewModel.courseType = arguments?.getString(IntentKey.COURSE_TYPE)
     }
 
     override fun initView() {
@@ -81,7 +81,7 @@ class TopQualityCourseFragment :
         with(binding.rv) {
             layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
             topQualityAdapter.setOnItemClickListener { adapter, view, position ->
-                CoursePackagesActivity.start(requireContext())
+                BusinessUtil.startCourse(requireContext(), topQualityAdapter.data[position])
             }
             adapter = topQualityAdapter
         }

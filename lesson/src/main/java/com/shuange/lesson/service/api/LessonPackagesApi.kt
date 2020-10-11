@@ -17,4 +17,9 @@ class LessonPackagesApi : BaseTokenApi<LessonPackagesResponse>() {
     fun search(text: String) {
         addQuery("lessonPackageName.like", text)
     }
+
+    //from LessonDataCache.types
+    fun addCourseType(type: String) {
+        addQuery("lessonType.equals", type)
+    }
 }

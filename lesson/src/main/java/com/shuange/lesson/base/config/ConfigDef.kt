@@ -23,12 +23,27 @@ object ConfigDef {
     var RECHARGE_CLASS = "RechargeActivity"
 
 
-    const val TYPE_TEACHER = 10000
-    const val TYPE_ARTICLE = 10001
-    const val TYPE_COURSE = 10002
-    const val TYPE_STREAM = 10003
+    const val TYPE_TEACHER = "10000"
+    const val TYPE_ARTICLE = "10001"
+    const val TYPE_COURSE = "10002"
+    const val TYPE_STREAM = "10003"
 
 
+    //TODO
+    //赛培课程
+    const val COURSE_TYPE_MATCH = "0"
+
+    //幼儿课程
+    const val COURSE_TYPE_CHILD = "1"
+
+    //小学课程
+    const val COURSE_TYPE_PRIMARY = "2"
+
+    //高中大学
+    const val COURSE_TYPE_SENIOR_HIGH = "3"
+
+    //大学课程
+    const val COURSE_TYPE_COLLEGE = "4"
 
 
 }

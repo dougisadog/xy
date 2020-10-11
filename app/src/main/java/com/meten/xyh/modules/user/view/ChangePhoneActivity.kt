@@ -3,6 +3,7 @@ package com.meten.xyh.modules.user.view
 import android.content.Context
 import android.content.Intent
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityChangePhoneBinding
@@ -57,6 +58,9 @@ class ChangePhoneActivity : BaseActivity<ActivityChangePhoneBinding, ChangePhone
 
     override fun initViewObserver() {
         BusinessUtil.addVerifyListener(viewModel.remainTime, this, binding.verifyCodeTv)
+        viewModel.phoneChanged.observe(this, Observer {
+            finish()
+        })
     }
 
 }

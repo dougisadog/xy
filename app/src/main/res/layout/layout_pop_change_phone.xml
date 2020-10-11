@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+
+    <TextView
+        android:id="@+id/changeTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="23dp"
+        android:paddingBottom="23dp"
+        android:text="修改开课提醒手机"
+        android:textColor="@color/hex_2B2E35"
+        android:textSize="18dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/hex_EEEEEE" />
+
+    <TextView
+        android:id="@+id/deleteTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="23dp"
+        android:paddingBottom="23dp"
+        android:text="删除开课提醒手机"
+        android:textColor="@color/hex_2B2E35"
+        android:textSize="18dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/hex_EEEEEE" />
+
+    <TextView
+        android:id="@+id/cancelTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="33dp"
+        android:paddingBottom="33dp"
+        android:text="取消"
+        android:textColor="@color/hex_2B2E35"
+        android:textSize="18dp" />
+
+</LinearLayout>

@@ -8,9 +8,9 @@ class BaseSearchViewModel : BaseViewModel() {
 
     var searchText = MutableLiveData<String>()
 
-    var defaultTypeId: Int? = null
+    var defaultTypeId: String? = null
 
-    val pager = mutableListOf<Pair<Int, String>>()
+    val pager = mutableListOf<Pair<String, String>>()
 
     init {
         pager.add(Pair(ConfigDef.TYPE_COURSE, "课程"))
