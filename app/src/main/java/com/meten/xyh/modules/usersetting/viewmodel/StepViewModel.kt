@@ -21,6 +21,7 @@ open class StepViewModel : BaseUserSettingViewModel() {
 
     override fun saveSetting(text: String, user: SubUser?) {
         user?.stage = text
+        requestSave(user)
     }
 
 }

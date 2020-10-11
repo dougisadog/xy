@@ -38,7 +38,6 @@ class CreateUserViewModel : BaseViewModel() {
                 success?.invoke()
             }
             exception
-
         }
     }
 }

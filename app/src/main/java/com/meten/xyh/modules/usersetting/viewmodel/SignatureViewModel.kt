@@ -3,8 +3,10 @@ package com.meten.xyh.modules.usersetting.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.base.DataCache
 import com.meten.xyh.enumeration.UserSettingType
+import com.meten.xyh.service.api.SubUserEditApi
 import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.viewmodel.BaseViewModel
+import com.shuange.lesson.service.api.base.suspendExecute
 
 class SignatureViewModel : BaseViewModel() {
 
@@ -12,10 +14,30 @@ class SignatureViewModel : BaseViewModel() {
 
     val signature = MutableLiveData<String>()
 
+    val settingUpdated = MutableLiveData<Boolean>()
+
     fun saveSetting() {
         signature.value?.trim().let { signatrueText ->
             if (!signatrueText.isNullOrBlank()) {
-                settingChange.value?.saveTask?.invoke(signatrueText)
+                settingChange.value?.let {
+                    it.saveTask?.invoke(signatrueText)
+                    it.user?.let {
+                        if (-1L == it.id) {
+                            startBindLaunch(showLoading = true) {
+                                var exception: Exception? = null
+                                val result = SubUserEditApi(it).suspendExecute()
+                                exception = result.exception
+                                if (null == exception) {
+                                    settingUpdated.value = true
+                                }
+                                exception
+                            }
+                        } else {
+                            settingUpdated.value = true
+                        }
+                    }
+                }
+
             }
         }
     }

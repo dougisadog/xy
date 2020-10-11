@@ -127,4 +127,10 @@ abstract class BaseActivity<BD : ViewDataBinding, VM : BaseViewModel> : Fragment
         }
         return false
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        showLoading(false)
+        mDialog = null
+    }
 }

@@ -2,6 +2,7 @@ package com.meten.xyh.modules.usersetting.view
 
 import android.content.Context
 import android.content.Intent
+import androidx.lifecycle.Observer
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.DataCache
@@ -103,16 +104,20 @@ abstract class BaseUserSettingActivity<T : BaseUserSettingViewModel> :
             viewModel.userSettingItems.firstOrNull { it.isSelected }?.let {
                 viewModel.saveSetting(it.title, DataCache.generateNewSubUser(isCreate))
             }
-            if (!isSetting) {
-                MainActivity.start(this)
-            }
-            finish()
 
         })
     }
 
 
     override fun initViewObserver() {
+        if (!isCreate) {
+            viewModel.settingUpdated.observe(this, Observer {
+                if (!isSetting) {
+                    MainActivity.start(this)
+                }
+                finish()
+            })
+        }
     }
 
 

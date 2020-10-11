@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.DataCache
@@ -39,9 +40,11 @@ class SignatureActivity : BaseActivity<ActivitySignatureBinding, SignatureViewMo
     override val viewModelId: Int
         get() = BR.signatureViewModel
 
+    var isCreate = false
+
     override fun initParams() {
         super.initParams()
-        val isCreate = intent.getBooleanExtra(IntentKey.CREATE_KEY, false)
+        isCreate = intent.getBooleanExtra(IntentKey.CREATE_KEY, false)
         intent.getIntExtra(IntentKey.SIGNATURE_TYPE_KEY, 0).let {
             val subUser = DataCache.generateNewSubUser(isCreate)
             viewModel.settingChange.value = SignatureViewModel.SettingChange(subUser).apply {
@@ -75,6 +78,11 @@ class SignatureActivity : BaseActivity<ActivitySignatureBinding, SignatureViewMo
 
 
     override fun initViewObserver() {
+        if (!isCreate) {
+            viewModel.settingUpdated.observe(this, Observer {
+                finish()
+            })
+        }
     }
 
 }

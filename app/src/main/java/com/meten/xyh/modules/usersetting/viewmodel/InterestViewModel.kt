@@ -1,8 +1,10 @@
 package com.meten.xyh.modules.usersetting.viewmodel
 
 import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.modules.usersetting.bean.InterestBean
 import com.meten.xyh.service.api.InterestApi
+import com.meten.xyh.service.api.SubUserEditApi
 import com.meten.xyh.service.response.bean.SubUser
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.service.api.base.suspendExecute
@@ -11,7 +13,9 @@ open class InterestViewModel : BaseViewModel() {
 
     val interests = ObservableArrayList<InterestBean>()
 
-    var default:String? = null
+    val settingUpdated = MutableLiveData<Boolean>()
+
+    var default: String? = null
     fun loadData() {
         startBindLaunch {
             val suspendResult = InterestApi().suspendExecute()
@@ -32,7 +36,22 @@ open class InterestViewModel : BaseViewModel() {
     fun saveSetting(
         user: SubUser?
     ) {
-        user?.interest = getInterest()
+        user?.let {
+            it.interest = getInterest()
+            if (-1L == it.id) {
+                startBindLaunch(showLoading = true) {
+                    var exception: Exception? = null
+                    val result = SubUserEditApi(user).suspendExecute()
+                    exception = result.exception
+                    if (null == exception) {
+                        settingUpdated.value = true
+                    }
+                    exception
+                }
+            } else {
+                settingUpdated.value = true
+            }
+        }
     }
 
     fun getInterest(): String {

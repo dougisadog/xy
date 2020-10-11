@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="355dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_dialog"
+    android:paddingTop="18dp"
+    android:paddingBottom="30dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="礼包兑换码"
+        android:textColor="@color/black"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/giftCodeEt"
+        style="@style/edit_search"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:background="@drawable/bg_input_boarder"
+        android:hint="请输入兑换码"
+        android:imeOptions="actionDone"
+        android:paddingStart="12dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/hex_979797"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/cancelTv"
+        android:layout_width="128dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_base_cancel_btn"
+        android:gravity="center"
+        android:text="残忍拒绝"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/confirmTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <TextView
+        android:id="@+id/confirmTv"
+        android:layout_width="128dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_base_confirm_btn"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/cancelTv"
+        app:layout_constraintTop_toBottomOf="@+id/giftCodeEt" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

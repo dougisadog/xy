@@ -3,6 +3,7 @@ package com.meten.xyh.modules.usersetting.view
 import android.content.Context
 import android.content.Intent
 import androidx.activity.viewModels
+import androidx.lifecycle.Observer
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.base.DataCache
@@ -85,12 +86,17 @@ class InterestActivity :
         }
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
             viewModel.saveSetting(DataCache.generateNewSubUser(isCreate))
-            finish()
+
         })
 
     }
 
     override fun initViewObserver() {
+        if (!isCreate) {
+            viewModel.settingUpdated.observe(this, Observer {
+                finish()
+            })
+        }
     }
 
 

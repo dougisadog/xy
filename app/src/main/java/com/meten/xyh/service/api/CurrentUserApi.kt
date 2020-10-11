@@ -21,7 +21,7 @@ class CurrentUserApi() : BaseTokenApi<UserResponse>() {
         result.body?.let { user ->
             DataCache.users.clear()
             //TODO 没有头像信息
-            DataCache.users.add(UserBean.createUserInfo("")?.apply {
+            DataCache.users.add(UserBean.createUserInfo("").apply {
                 userRecord = user
                 current = true
             })

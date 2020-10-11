@@ -21,6 +21,7 @@ open class ObjectiveViewModel : BaseUserSettingViewModel() {
 
     override fun saveSetting(text: String, user: SubUser?) {
         user?.objective = text
+        requestSave(user)
     }
 
 }

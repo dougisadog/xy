@@ -6,12 +6,10 @@ import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityChangeUserBinding
-import com.meten.xyh.databinding.ActivityCreateUserBinding
 import com.meten.xyh.modules.user.adapter.UserAdapter
 import com.meten.xyh.modules.user.viewmodel.ChangeUserViewModel
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
-import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 
 
@@ -56,11 +54,12 @@ class ChangeUserActivity : BaseActivity<ActivityChangeUserBinding, ChangeUserVie
                 false
             )
             userAdapter.setOnItemClickListener { adapter, view, position ->
-                userAdapter.data.forEachIndexed { index, user ->
-                    user.current = index == position
+                viewModel.saveUser {
+                    userAdapter.data.forEachIndexed { index, user ->
+                        user.current = index == position
+                    }
+                    userAdapter.notifyDataSetChanged()
                 }
-                viewModel.saveUser()
-                userAdapter.notifyDataSetChanged()
             }
             isNestedScrollingEnabled = false
             adapter = userAdapter
