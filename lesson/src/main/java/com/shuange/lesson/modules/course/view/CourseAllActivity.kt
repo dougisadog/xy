@@ -56,7 +56,7 @@ class CourseAllActivity : BaseActivity<ActivityCourseAllBinding, CourseAllViewMo
         viewModel.loadTypes {
             initViewPager()
             initTabIndicator()
-            binding.vp.currentItem = viewModel.getDefaultPageIndex()
+            binding.vp.setCurrentItem(viewModel.getDefaultPageIndex(), false)
         }
         initListener()
     }

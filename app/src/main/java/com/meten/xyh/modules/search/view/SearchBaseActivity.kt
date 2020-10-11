@@ -18,7 +18,7 @@ import kotlin.reflect.KClass
 
 
 /**
- * 搜索
+ * TODO 弃用 搜索
  */
 abstract class SearchBaseActivity<VM : SearchBaseViewModel> :
     BaseActivity<ActivitySearchBaseBinding, VM>() {

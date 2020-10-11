@@ -18,6 +18,7 @@ import com.shuange.lesson.modules.teacher.view.TeacherListFragment
 import com.shuange.lesson.modules.topquality.view.TopQualityCourseFragment
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.bind
+import com.shuange.lesson.utils.extension.setOnSearchListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 /**
@@ -58,6 +59,8 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
         viewModel.loadData()
         initViewPager()
         initTabIndicator()
+        binding.vp.setCurrentItem(viewModel.getDefaultPageIndex(), false)
+
         initListener()
     }
 
@@ -79,7 +82,6 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
         fragmentAdapter = BaseFragmentAdapter(this, fragments)
         with(binding.vp) {
             adapter = fragmentAdapter
-            setCurrentItem(viewModel.getDefaultPageIndex())
         }
     }
 
@@ -92,9 +94,12 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
     }
 
     private fun initListener() {
-//        binding.searchEt.setOnSearchListener {
-//            search(it.trim())
-//        }
+        binding.searchEt.setOnSearchListener {
+            search(it.trim())
+        }
+        binding.header.back.setOnClickListener {
+            finish()
+        }
     }
 
     fun search(text: String) {

@@ -28,6 +28,7 @@ import com.shuange.lesson.modules.course.view.CourseAllActivity
 import com.shuange.lesson.modules.course.view.CourseModulesActivity
 import com.shuange.lesson.modules.news.view.NewsDetailActivity
 import com.shuange.lesson.modules.news.view.NewsListActivity
+import com.shuange.lesson.modules.search.view.BaseSearchActivity
 import com.shuange.lesson.modules.teacher.adapter.TeacherAdapter
 import com.shuange.lesson.modules.teacher.view.TeacherInfoActivity
 import com.shuange.lesson.modules.teacher.view.TeacherListActivity
@@ -38,7 +39,6 @@ import com.shuange.lesson.utils.BusinessUtil
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.force2Long
 import com.shuange.lesson.utils.extension.initAdapter
-import com.shuange.lesson.utils.extension.setOnSearchListener
 import com.shuange.lesson.view.NonDoubleClickListener
 import corelib.util.ContextManager
 import corelib.util.DeviceUtils
@@ -233,9 +233,13 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
         binding.newsLl.setOnClickListener(NonDoubleClickListener {
             NewsListActivity.start(requireContext())
         })
-        binding.searchEt.setOnSearchListener {
-            search(it.trim())
-        }
+//        binding.searchEt.setOnSearchListener {
+//            search(it.trim())
+//        }
+        binding.searchRl.setOnClickListener(NonDoubleClickListener {
+            BaseSearchActivity.start(requireContext())
+        })
+
 
     }
 

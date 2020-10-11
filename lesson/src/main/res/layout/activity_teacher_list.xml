@@ -35,9 +35,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@+id/searchIv"
-                android:hint="搜索课程和词汇"
-                android:text="@={teacherListViewModel.searchText}" />
-
+                android:text="@string/search_hint"
+                 />
+<!--            android:text="@={teacherListViewModel.searchText}"-->
             <ImageView
                 android:id="@+id/searchIv"
                 style="@style/edit_search_ic"

@@ -34,8 +34,9 @@
                 style="@style/edit_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
                 android:layout_toEndOf="@+id/searchIv"
-                android:hint="搜索课程和词汇" />
+                android:text="@string/search_hint" />
 
             <ImageView
                 android:id="@+id/searchIv"

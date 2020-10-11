@@ -29,14 +29,14 @@
             app:layout_constraintTop_toBottomOf="@+id/header">
 
 
-            <TextView
+            <EditText
                 android:id="@+id/searchEt"
-                style="@style/edit_search"
+                style="@style/real_edit_search"
                 android:enabled="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_toEndOf="@+id/searchIv"
-                android:hint="搜索课程和词汇"
+                android:hint="@string/search_hint"
                 android:text="@{baseSearchViewModel.searchText}" />
 
             <ImageView

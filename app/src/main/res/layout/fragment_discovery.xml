@@ -23,6 +23,7 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/searchRl"
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:paddingStart="16dp"
@@ -36,7 +37,7 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/icon_home_qh" />
 
-                <EditText
+                <TextView
                     android:id="@+id/searchEt"
                     style="@style/edit_search"
                     android:layout_width="match_parent"
@@ -44,13 +45,14 @@
                     android:layout_marginStart="5dp"
                     android:layout_toStartOf="@+id/searchIv"
                     android:layout_toEndOf="@+id/accountIv"
-                    android:hint="你的名字是什么…"
+                    android:text="@string/search_hint"
                     android:textSize="20dp" />
 
                 <ImageView
                     android:id="@+id/searchIv"
                     style="@style/edit_search_ic"
                     android:src="@drawable/icon_home_fdss"
+                    android:layout_alignParentEnd="true"
                     />
             </RelativeLayout>
 
