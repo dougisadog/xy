@@ -29,6 +29,8 @@ class QuestionBean(
 
     var score: Double? = null
 
+    var isSaved = false
+
     fun setLesson(lesson: Lesson) {
         questionsId = lesson.id
         text = lesson.description

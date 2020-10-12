@@ -15,6 +15,7 @@ open class BaseLessonViewModel : BaseViewModel() {
 
     fun saveLessonProcess(index: Int, answer: String, score: Int) {
         val lessonBean = questionBean ?: return
+        if (lessonBean.isSaved) return
         startBindLaunch {
             val request = UserLessonRecordRequest(
                 answer = answer,
@@ -27,6 +28,9 @@ open class BaseLessonViewModel : BaseViewModel() {
                 score = score
             )
             val suspendResult = UserLessonRecordApi(request).suspendExecute()
+            if (null == suspendResult.exception) {
+                questionBean?.isSaved = true
+            }
             suspendResult.exception
         }
     }

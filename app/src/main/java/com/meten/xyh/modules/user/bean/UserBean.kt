@@ -27,7 +27,7 @@ class UserBean private constructor(val accountId: String) {
             headerImage = subUser.avatarUrl?.let { it -> buildSourceDataByLink(it) }
             introduction = subUser.interest?:""
             current = subUser.isCurrent
-            userId = subUser.userId.toString()
+            userId = subUser.id.toString()
             this.subUser = subUser
     }
 

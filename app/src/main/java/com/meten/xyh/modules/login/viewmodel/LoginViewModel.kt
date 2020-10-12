@@ -2,9 +2,11 @@ package com.meten.xyh.modules.login.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.base.viewmodel.VerifyMessageViewModel
-import com.meten.xyh.service.api.*
+import com.meten.xyh.service.api.CurrentAccountInfoApi
+import com.meten.xyh.service.api.CurrentUserApi
+import com.meten.xyh.service.api.LoginApi
+import com.meten.xyh.service.api.SendVerifyCodeApi
 import com.meten.xyh.service.request.LoginRequest
-import com.meten.xyh.service.request.RegisterRequest
 import com.meten.xyh.service.response.AccountResponse
 import com.meten.xyh.service.response.UserResponse
 import com.meten.xyh.utils.BusinessUtil
@@ -19,11 +21,18 @@ import kotlinx.coroutines.awaitAll
 
 open class LoginViewModel : VerifyMessageViewModel() {
 
+    var title = MutableLiveData<String>()
+
+    var changeTypeName = MutableLiveData<String>()
+
     var username = MutableLiveData<String>()
 
     var password = MutableLiveData<String>()
 
     var confirmCheck = MutableLiveData<Boolean>()
+
+    var isVerifyMode = MutableLiveData<Boolean>(false)
+
 
     init {
         username.value = "18341134983"
@@ -31,46 +40,51 @@ open class LoginViewModel : VerifyMessageViewModel() {
 
     }
 
-    fun testLogin(onSuccess: EmptyTask) {
-//        startBindLaunch {
-//            val request = InitRequest("dougisadog")
-//            val suspendResult = InitApi(request).suspendExecute()
-//            LessonDataCache.token = suspendResult.getResponse()?.id_token ?: ""
-//            onSuccess?.invoke()
-//            suspendResult.exception
-//        }
-        login(onSuccess)
+    fun login(onSuccess: EmptyTask) {
+        val username = username.value
+        if (username.isNullOrBlank()) {
+            error.value = "手机号不能为空"
+            return
+        }
+        if (isVerifyMode.value == true) {
+            val verifyCode = verifyCode.value
+            if (verifyCode.isNullOrBlank()) {
+                error.value = "验证码不能为空"
+                return
+            }
+            loginByVerifyCode(username, verifyCode, onSuccess)
+        } else {
+            val password = password.value
+            if (password.isNullOrBlank()) {
+                error.value = "密码不能为空"
+                return
+            }
+            loginByPassword(username, password, onSuccess)
+        }
+
     }
 
-    fun login(onSuccess: EmptyTask) {
+    fun loginByVerifyCode(login: String, verifyCode: String, onSuccess: EmptyTask) {
+        //注册
+//        val suspendRegisterResult =
+//            RegisterApi(RegisterRequest(username, password)).suspendExecute()
+//        exception = suspendRegisterResult.exception
+        loadUserData(onSuccess)
+    }
+
+    fun loginByPassword(login: String, password: String, onSuccess: EmptyTask) {
         showLoading.value = true
         startBindLaunch {
-            var exception: Exception?
-            val username = username.value ?: ""
-            val password = password.value ?: ""
-
-//            var suspendLoginResult =
-//                LoginApi(LoginRequest(username, password)).suspendExecute()
-//            exception = suspendLoginResult.exception
-            //未登录
-            exception = java.lang.Exception("")
-            if (null != exception) {
-                //注册
-                val suspendRegisterResult =
-                    RegisterApi(RegisterRequest(username, password)).suspendExecute()
-                exception = suspendRegisterResult.exception
-                //登录
-                if (null == exception) {
-                    suspendRegisterResult.getResponse()?.body?.let {
-                        val suspendLoginResult =
-                            LoginApi(LoginRequest(username, password)).suspendExecute()
-                    }
-                    exception = suspendRegisterResult.exception
-                }
+            var exception: Exception? = null
+            val suspendLoginResult =
+                LoginApi(LoginRequest(login, password)).suspendExecute()
+            exception = suspendLoginResult.exception
+            //登录
+            if (null == exception) {
+                loadUserData(onSuccess)
             }
-            loadUserData(onSuccess)
 //            onSuccess?.invoke()
-            exception
+            suspendLoginResult.exception
         }
     }
 
@@ -78,7 +92,7 @@ open class LoginViewModel : VerifyMessageViewModel() {
      * 获取账户信息和当期用户
      */
     fun loadUserData(onSuccess: EmptyTask) {
-        startBindLaunch(onFinish = {showLoading.value = false}) {
+        startBindLaunch(onFinish = { showLoading.value = false }) {
             val tasks = arrayListOf(
                 async { CurrentAccountInfoApi().suspendExecute() },
                 async { CurrentUserApi().suspendExecute() },
@@ -94,7 +108,7 @@ open class LoginViewModel : VerifyMessageViewModel() {
                 it.getResponse()?.body?.let { acocunt ->
                     LessonDataCache.account = AccountBean().apply {
                         id = acocunt.id.toString()
-                        phone = acocunt.phone?:""
+                        phone = acocunt.phone ?: ""
                         xyBalance = acocunt.money
                     }
                     accountValid = true

@@ -42,6 +42,9 @@ open class LessonViewModel : BaseViewModel() {
     //课程加载进度
     var targetIndex = 0
 
+    //最新进度
+    var newestSavedIndex = 0
+
     fun loadData() {
         life.value = 8
 //        getLessons()

@@ -46,26 +46,42 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     private fun initListener() {
         binding.nextTv.setOnClickListener(NonDoubleClickListener {
-            viewModel.testLogin {
-//            viewModel.login {
+            viewModel.login {
                 BaseUserSettingActivity.start(this, UserSettingType.STAGE, false)
                 finish()
             }
         })
-        binding.verifyCodeTv.setOnClickListener(NonDoubleClickListener {
+        binding.verifyInput.verifyCodeTv.setOnClickListener(NonDoubleClickListener {
             sendVerifyMessage()
+        })
+        binding.changeTypeTv.setOnClickListener(NonDoubleClickListener {
+            viewModel.isVerifyMode.value = !(viewModel.isVerifyMode.value ?: false)
+        })
+        binding.forgetPwdTv.setOnClickListener(NonDoubleClickListener {
+            //忘记密码
+            ForgetPasswordActivity.start(this)
         })
     }
 
     private fun sendVerifyMessage() {
         if (viewModel.checkPhone()) {
-            binding.verifyCodeTv.isEnabled = false
+            binding.verifyInput.verifyCodeTv.isEnabled = false
             viewModel.sendVerifyCode()
         }
     }
 
 
     override fun initViewObserver() {
+        viewModel.isVerifyMode.observe(this, Observer {
+            if (it == true) {
+                viewModel.title.value = "手机快捷登录/注册"
+                viewModel.changeTypeName.value = "使用密码登录"
+            } else {
+                viewModel.title.value = "手机账号登录"
+                viewModel.changeTypeName.value = "使用手机快捷登录"
+
+            }
+        })
         viewModel.username.observe(this, Observer {
             checkLogin()
         })
@@ -75,7 +91,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         viewModel.confirmCheck.observe(this, Observer {
             checkLogin()
         })
-        BusinessUtil.addVerifyListener(viewModel.remainTime, this, binding.verifyCodeTv)
+        BusinessUtil.addVerifyListener(viewModel.remainTime, this, binding.verifyInput.verifyCodeTv)
     }
 
     private fun checkLogin() {

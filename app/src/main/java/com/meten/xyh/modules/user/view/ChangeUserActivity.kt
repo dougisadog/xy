@@ -54,7 +54,8 @@ class ChangeUserActivity : BaseActivity<ActivityChangeUserBinding, ChangeUserVie
                 false
             )
             userAdapter.setOnItemClickListener { adapter, view, position ->
-                viewModel.saveUser {
+                val subUser = userAdapter.data[position].subUser
+                viewModel.saveUser(subUser) {
                     userAdapter.data.forEachIndexed { index, user ->
                         user.current = index == position
                     }

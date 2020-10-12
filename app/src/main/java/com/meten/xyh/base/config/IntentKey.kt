@@ -18,10 +18,6 @@ object IntentKey {
 
     const val ORDER_STATE = "ORDER_STATE"
 
-
-
-
-
-
+    const val PHONE_KEY = "PHONE_KEY"
 
 }
