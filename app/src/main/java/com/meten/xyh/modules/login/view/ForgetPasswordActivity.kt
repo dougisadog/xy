@@ -2,6 +2,7 @@ package com.meten.xyh.modules.login.view
 
 import android.content.Context
 import android.content.Intent
+import android.text.InputType
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.meten.xyh.modules.login.viewmodel.ForgetPasswordViewModel
@@ -22,6 +23,11 @@ class ForgetPasswordActivity : SingleInputActivity<ForgetPasswordViewModel>() {
 
     override val viewModel: ForgetPasswordViewModel by viewModels {
         BaseShareModelFactory()
+    }
+
+    override fun initView() {
+        super.initView()
+        binding.inputEt.inputType = InputType.TYPE_CLASS_PHONE
     }
 
     override fun initViewObserver() {

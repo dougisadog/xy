@@ -2,6 +2,7 @@ package com.meten.xyh.modules.login.view
 
 import android.content.Context
 import android.content.Intent
+import android.text.InputType
 import androidx.activity.viewModels
 import com.meten.xyh.base.config.IntentKey
 import com.meten.xyh.modules.login.viewmodel.SetNewPasswordViewModel
@@ -28,5 +29,10 @@ class SetNewPasswordActivity : SingleInputActivity<SetNewPasswordViewModel>() {
     override fun initParams() {
         super.initParams()
         viewModel.username.value = intent.getStringExtra(IntentKey.PHONE_KEY)
+    }
+
+    override fun initView() {
+        super.initView()
+        binding.inputEt.inputType = InputType.TYPE_CLASS_TEXT
     }
 }

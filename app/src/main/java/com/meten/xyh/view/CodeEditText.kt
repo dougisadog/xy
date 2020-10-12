@@ -141,7 +141,7 @@ class CodeEditText(context: Context, attrs: AttributeSet?) :
         val count = canvas.saveCount
         canvas.save()
         for (i in 0 until mMaxLength) {
-            mStrokeDrawable!!.bounds = mRect
+            mStrokeDrawable.bounds = mRect
             mStrokeDrawable.state = intArrayOf(android.R.attr.state_enabled)
             mStrokeDrawable.draw(canvas)
             val dx = mRect.right + mStrokePadding.toFloat()

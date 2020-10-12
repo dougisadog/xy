@@ -44,7 +44,7 @@
                 android:layout_marginTop="40dp"
                 android:background="@color/white"
                 android:hint="@{singleInputViewModel.hint}"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:padding="13dp"
                 android:text="@={singleInputViewModel.input}"
                 android:textColor="@color/hex_2D2D2D"

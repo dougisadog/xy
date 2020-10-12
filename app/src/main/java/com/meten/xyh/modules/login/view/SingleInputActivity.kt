@@ -36,6 +36,7 @@ abstract class SingleInputActivity<VM : SingleInputViewModel> :
     override fun initView() {
         viewModel.initValue()
         binding.header.title.text = ""
+        binding.nextTv.setCustomEnable(false)
         initListener()
     }
 

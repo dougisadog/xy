@@ -8,8 +8,8 @@ open class SetNewPasswordViewModel : SingleInputViewModel() {
 
     override fun initValue() {
         title.value = "设置新密码"
-        hint.value = "请输入您的手机号"
-        button.value = "发送验证码"
+        hint.value = "密码至少8位字母/数字组合"
+        button.value = "完成"
     }
 
     override fun confirm(text: String) {
