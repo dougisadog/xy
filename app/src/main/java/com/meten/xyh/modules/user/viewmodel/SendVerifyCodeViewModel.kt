@@ -9,14 +9,16 @@ open class SendVerifyCodeViewModel : VerifyMessageViewModel() {
 
     val phone = MutableLiveData<String>()
 
-    fun verifyCode(onSuccess:EmptyTask) {
+    fun verifyCode(onSuccess: EmptyTask) {
         val code = verifyCode.value ?: return
         onSuccess?.invoke()
     }
 
-    override fun sendMessage() {
+    override fun sendMessage(onSuccess: EmptyTask) {
         val phone = phone.value ?: return
-        SendVerifyCodeApi(phone).execute()
+        SendVerifyCodeApi(phone).execute {
+            onSuccess?.invoke()
+        }
     }
 
 }

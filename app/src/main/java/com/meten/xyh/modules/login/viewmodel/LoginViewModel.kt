@@ -128,9 +128,11 @@ open class LoginViewModel : VerifyMessageViewModel() {
         }
     }
 
-    override fun sendMessage() {
+    override fun sendMessage(onSuccess: EmptyTask) {
         val phone = username.value ?: return
-        SendVerifyCodeApi(phone).execute()
+        SendVerifyCodeApi(phone).execute {
+            onSuccess?.invoke()
+        }
     }
 
     fun checkPhone(): Boolean {

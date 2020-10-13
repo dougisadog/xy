@@ -11,5 +11,6 @@
     <string name="label_phone">上课提醒手机</string>
     <string name="label_password">登录密码</string>
     <string name="label_update">修改</string>
+    <string name="text_resend">重新发送</string>
 
 </resources>

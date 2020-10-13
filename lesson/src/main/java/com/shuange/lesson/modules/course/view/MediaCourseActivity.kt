@@ -96,15 +96,36 @@ class MediaCourseActivity : BaseActivity<ActivityVideoCourseBinding, VideoCourse
             binding.videoVv.player?.release()
             resetVideo()
         })
+        viewModel.buyCourse.observe(this, Observer {
+            val price = viewModel.courseBean?.price ?: return@Observer
+            showPurchaseDialog(price)
+        })
+        viewModel.courseRefresh.observe(this, Observer {
+
+        })
+    }
+
+    fun showPurchaseDialog(price: Int) {
+        CommonDialog(this).apply {
+            contentText = "确定花费${price}希氧币购买次课程吗？"
+            cancelButtonText = "残忍拒绝"
+            confirmButtonText = "确认购买"
+            onClick = {
+                viewModel.buyCourse()
+            }
+        }.show()
     }
 
     fun showRechargeDialog() {
         CommonDialog(this).apply {
-            contentText = "确定花费100希氧币购买次课程吗？"
+            contentText = "您的希氧币不足，确定去充值吗？"
             cancelButtonText = "残忍拒绝"
             confirmButtonText = "去充值"
             onClick = {
-                ActivityUtil.startOutsideActivity(this@MediaCourseActivity, ConfigDef.RECHARGE_CLASS)
+                ActivityUtil.startOutsideActivity(
+                    this@MediaCourseActivity,
+                    ConfigDef.RECHARGE_CLASS
+                )
             }
         }.show()
     }

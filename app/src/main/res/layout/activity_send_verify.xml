@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="重新发送"
+                android:text="@string/text_resend"
                 android:textColor="@color/hex_FF0000"
                 android:textSize="14dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,10 +60,14 @@
 
             <com.meten.xyh.view.CodeEditText
                 android:id="@+id/verifyInput"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:digits="1234567890"
+                android:inputType="number"
                 app:strokeBackground="@drawable/bg_verify_item"
                 android:layout_marginTop="46dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/phoneLabelTv" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

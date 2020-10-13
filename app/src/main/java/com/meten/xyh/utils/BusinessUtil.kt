@@ -1,5 +1,6 @@
 package com.meten.xyh.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -39,6 +40,7 @@ object BusinessUtil {
     /**
      * 添加验证码60s监听
      */
+    @SuppressLint("SetTextI18n")
     fun addVerifyListener(
         remainTime: MutableLiveData<Int>,
         lifecycleOwner: LifecycleOwner,
@@ -47,7 +49,7 @@ object BusinessUtil {
         remainTime.observe(lifecycleOwner, Observer {
             if (null == it) return@Observer
             if (it >= 0) {
-                verifyCodeTv.text = "重新发送(${it}S)"
+                verifyCodeTv.text = "${ContextManager.getContext().getString(R.string.text_resend)}(${it}S)"
             } else {
                 verifyCodeTv.text = ContextManager.getContext().getString(R.string.get_verify_code)
                 verifyCodeTv.isEnabled = true

@@ -33,6 +33,10 @@ enum class InputType(val text: String) {
     WRITE("WRITE")
 }
 
+enum class PurchaseType(val text: String) {
+    LESSON("LESSON"), LIVE("LIVE")
+}
+
 enum class WheelType(val text: String) {
     ARTICLE("ARTICLE"), LESSON("LESSON"), TEACHER("TEACHER"), SHORT_VIDEO("SHORT_VIDEO"), LIVE("LIVE")
 }

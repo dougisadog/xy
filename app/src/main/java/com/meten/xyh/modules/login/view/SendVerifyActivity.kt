@@ -13,6 +13,7 @@ import com.meten.xyh.view.CodeEditText
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
+import corelib.util.ContextManager
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 
@@ -47,6 +48,7 @@ class SendVerifyActivity : BaseActivity<ActivitySendVerifyBinding, SendVerifyVie
     override fun initView() {
         binding.header.title.text = ""
         initListener()
+        viewModel.sendVerifyCode()
     }
 
     private fun initListener() {
@@ -60,7 +62,9 @@ class SendVerifyActivity : BaseActivity<ActivitySendVerifyBinding, SendVerifyVie
             }
         })
         binding.resendTv.setOnClickListener(NonDoubleClickListener {
-            viewModel.sendMessage()
+            viewModel.sendVerifyCode {
+                binding.resendTv.isEnabled = false
+            }
         })
     }
 
@@ -70,6 +74,16 @@ class SendVerifyActivity : BaseActivity<ActivitySendVerifyBinding, SendVerifyVie
             if (it == true) {
                 SetNewPasswordActivity.start(this, viewModel.username.value ?: "")
             }
+        })
+        viewModel.remainTime.observe(this, Observer {
+            var baseText = ContextManager.getContext().getString(R.string.text_resend)
+            if (null != it) {
+                baseText += "(${it}S)"
+            }
+            else {
+                binding.resendTv.isEnabled = true
+            }
+            binding.resendTv.text = baseText
         })
     }
 

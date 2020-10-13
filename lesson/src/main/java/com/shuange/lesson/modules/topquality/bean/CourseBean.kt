@@ -13,6 +13,7 @@ import java.io.Serializable
  */
 open class CourseBean : BaseItemBean(), PagerItem, Serializable {
 
+    //课程lessonPackageId
     var courseId = ""
 
     var price = 0

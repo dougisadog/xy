@@ -66,13 +66,13 @@ class DraggingCourseFragment(
                 false
             )
             draggingCourseListAdapter.setOnItemClickListener { adapter, view, position ->
-                val isFree = draggingCourseListAdapter.data[position].isFree
+                val data = draggingCourseListAdapter.data[position]
+                val isFree = data.isFree
 //                com.shuange.lesson.utils.ToastUtil.show("item click  topQuality:${topQualityAdapter.data[position].title}")
                 if (isFree == true) {
                     videoCourseViewModel.resetMedia(position)
-                }
-                else {
-                    videoCourseViewModel.buyCourse()
+                } else {
+                    videoCourseViewModel.buyCourse.value = data.id
                 }
             }
 //            isNestedScrollingEnabled = false

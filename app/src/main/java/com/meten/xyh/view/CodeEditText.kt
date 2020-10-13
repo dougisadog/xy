@@ -11,6 +11,7 @@ import android.util.AttributeSet
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.AppCompatEditText
 import com.meten.xyh.R
+import com.meten.xyh.utils.extension.toPx
 
 
 /**
@@ -29,13 +30,13 @@ class CodeEditText(context: Context, attrs: AttributeSet?) :
     private var mMaxLength = 4
 
     // 边框宽度
-    private var mStrokeWidth = 0
+    private var mStrokeWidth = 52.toPx()
 
     // 边框高度
-    private var mStrokeHeight = 0
+    private var mStrokeHeight = 70.toPx()
 
     // 边框之间的距离
-    private var mStrokePadding = 20
+    private var mStrokePadding = 20.toPx()
     private val mRect = Rect()
 
     /**
@@ -135,7 +136,7 @@ class CodeEditText(context: Context, attrs: AttributeSet?) :
     private fun drawStrokeBackground(canvas: Canvas) {
         // 绘制方框背景颜色
         mRect.left = 0
-        mRect.top = 0
+        mRect.top = (height - mStrokeHeight)/2
         mRect.right = mStrokeWidth
         mRect.bottom = mStrokeHeight
         val count = canvas.saveCount

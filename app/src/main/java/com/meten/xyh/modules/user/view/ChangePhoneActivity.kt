@@ -51,7 +51,11 @@ class ChangePhoneActivity : BaseActivity<ActivityChangePhoneBinding, ChangePhone
             viewModel.changePhone()
         })
         binding.verifyCodeTv.setOnClickListener(NonDoubleClickListener {
-            viewModel.sendVerifyMessage()
+            if (viewModel.checkPhone()) {
+                viewModel.sendVerifyCode {
+                    binding.verifyCodeTv.isEnabled = false
+                }
+            }
         })
 
     }

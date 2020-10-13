@@ -3,6 +3,7 @@ package com.meten.xyh.modules.login.viewmodel
 import androidx.lifecycle.MutableLiveData
 import com.meten.xyh.base.viewmodel.VerifyMessageViewModel
 import com.meten.xyh.service.api.SendVerifyCodeApi
+import com.shuange.lesson.EmptyTask
 
 open class SendVerifyViewModel : VerifyMessageViewModel() {
 
@@ -11,9 +12,11 @@ open class SendVerifyViewModel : VerifyMessageViewModel() {
 
     var verified = MutableLiveData<Boolean>()
 
-    override fun sendMessage() {
+    override fun sendMessage(onSuccess:EmptyTask) {
         val phone = username.value ?: return
-        SendVerifyCodeApi(phone).execute()
+        SendVerifyCodeApi(phone).execute {
+            onSuccess?.invoke()
+        }
     }
 
     fun verify() {

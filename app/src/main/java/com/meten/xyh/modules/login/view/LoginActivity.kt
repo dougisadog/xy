@@ -14,6 +14,7 @@ import com.meten.xyh.utils.BusinessUtil
 import com.meten.xyh.utils.extension.setCustomEnable
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
+import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.view.NonDoubleClickListener
 
 
@@ -61,12 +62,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
             //忘记密码
             ForgetPasswordActivity.start(this)
         })
+
+        binding.contractTv.setOnClickListener(NonDoubleClickListener {
+            ToastUtil.show("用户协议")
+        })
+        binding.privacyTv.setOnClickListener(NonDoubleClickListener {
+            ToastUtil.show("隐私政策")
+        })
     }
 
     private fun sendVerifyMessage() {
         if (viewModel.checkPhone()) {
-            binding.verifyInput.verifyCodeTv.isEnabled = false
-            viewModel.sendVerifyCode()
+            viewModel.sendVerifyCode {
+                binding.verifyInput.verifyCodeTv.isEnabled = false
+            }
         }
     }
 

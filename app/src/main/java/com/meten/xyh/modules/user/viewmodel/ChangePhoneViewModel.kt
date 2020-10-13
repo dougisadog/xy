@@ -5,6 +5,7 @@ import com.meten.xyh.base.viewmodel.VerifyMessageViewModel
 import com.meten.xyh.service.api.ChangeRemindApi
 import com.meten.xyh.service.api.SendVerifyCodeForRemindApi
 import com.meten.xyh.utils.BusinessUtil
+import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.service.api.base.suspendExecute
 
 open class ChangePhoneViewModel : VerifyMessageViewModel() {
@@ -26,12 +27,6 @@ open class ChangePhoneViewModel : VerifyMessageViewModel() {
         }
     }
 
-    fun sendVerifyMessage() {
-        if (checkPhone()) {
-            sendVerifyCode()
-        }
-    }
-
     fun checkPhone(): Boolean {
         val phoneText = phone.value
         if (phoneText.isNullOrBlank()) {
@@ -47,8 +42,10 @@ open class ChangePhoneViewModel : VerifyMessageViewModel() {
         }
     }
 
-    override fun sendMessage() {
+    override fun sendMessage(onSuccess: EmptyTask) {
         val phone = phone.value ?: return
-        SendVerifyCodeForRemindApi(phone).execute()
+        SendVerifyCodeForRemindApi(phone).execute {
+            onSuccess?.invoke()
+        }
     }
 }
