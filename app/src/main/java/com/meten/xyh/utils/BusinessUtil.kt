@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.meten.xyh.R
 import corelib.util.ContextManager
+import java.util.*
 
 object BusinessUtil {
 
@@ -74,6 +75,8 @@ object BusinessUtil {
 }
 
 fun main(args: Array<String>) {
+    var noncestr = UUID.randomUUID()
+    var timestamp = Calendar.getInstance().timeInMillis
     val re = BusinessUtil.checkValidPwd("123a")
 
 }
