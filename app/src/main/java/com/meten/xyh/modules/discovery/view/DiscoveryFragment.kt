@@ -19,10 +19,10 @@ import com.meten.xyh.modules.discovery.bean.MenuItem
 import com.meten.xyh.modules.discovery.viewmodel.DiscoveryViewModel
 import com.meten.xyh.modules.search.view.SearchActivity
 import com.shuange.lesson.base.BaseFragment
+import com.shuange.lesson.base.LessonDataCache
 import com.shuange.lesson.base.adapter.BaseItemAdapter
 import com.shuange.lesson.base.adapter.RecyclePagerAdapter
 import com.shuange.lesson.base.adapter.registerRecycleOnPageChangeCallback
-import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.modules.course.view.CourseAllActivity
 import com.shuange.lesson.modules.course.view.CourseModulesActivity
@@ -175,32 +175,48 @@ class DiscoveryFragment : BaseFragment<FragmentDiscoveryBinding, DiscoveryViewMo
     private fun initMenu() {
         with(binding.menuVp) {
             val itemsR1 = mutableListOf<MenuItem>()
+            val lessonTypes = LessonDataCache.types
             itemsR1.add(MenuItem("直播课程", R.drawable.icon_home_zb) {
                 ToastUtil.show(ContextManager.getContext().getString(R.string.not_support))
             })
             itemsR1.add(MenuItem("每日一句", R.drawable.icon_home_mryj) {
                 TopQualityActivity.start(requireActivity())
             })
-            itemsR1.add(MenuItem("赛培课程", R.drawable.icon_home_ss) {
-                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_MATCH)
+
+            val type0 = lessonTypes.firstOrNull()
+            itemsR1.add(MenuItem(type0?.name ?: "赛培课程", R.drawable.icon_home_ss) {
+                type0?.value.let {
+                    CourseAllActivity.start(requireActivity(), it)
+                }
             })
             itemsR1.add(MenuItem("教师中心", R.drawable.icon_home_teacher) {
                 TeacherListActivity.start(requireActivity())
             })
-
-
             val itemsR2 = mutableListOf<MenuItem>()
-            itemsR2.add(MenuItem("幼儿课程", R.drawable.icon_home_child) {
-                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_CHILD)
+
+            val type1 = lessonTypes.getOrNull(1)
+            itemsR2.add(MenuItem(type1?.name ?: "幼儿课程", R.drawable.icon_home_child) {
+                type1?.value.let {
+                    CourseAllActivity.start(requireActivity(), it)
+                }
             })
-            itemsR2.add(MenuItem("小学课程", R.drawable.icon_home_primary) {
-                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_PRIMARY)
+            val type2 = lessonTypes.getOrNull(2)
+            itemsR2.add(MenuItem(type2?.name ?: "小学课程", R.drawable.icon_home_primary) {
+                type2?.value.let {
+                    CourseAllActivity.start(requireActivity(), it)
+                }
             })
-            itemsR2.add(MenuItem("高中大学", R.drawable.icon_home_senior_high) {
-                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_SENIOR_HIGH)
+            val type3 = lessonTypes.getOrNull(3)
+            itemsR2.add(MenuItem(type3?.name ?: "高中大学", R.drawable.icon_home_senior_high) {
+                type3?.value.let {
+                    CourseAllActivity.start(requireActivity(), it)
+                }
             })
+            val type4 = lessonTypes.getOrNull(4)
             itemsR2.add(MenuItem("大学课程", R.drawable.icon_home_college) {
-                CourseAllActivity.start(requireActivity(), ConfigDef.COURSE_TYPE_COLLEGE)
+                type4?.value.let {
+                    CourseAllActivity.start(requireActivity(), it)
+                }
             })
             val page1 = mutableListOf<MenuItem>()
             page1.addAll(itemsR1)

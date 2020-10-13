@@ -1,7 +1,7 @@
 package com.shuange.lesson.modules.course.viewmodel
 
 import com.shuange.lesson.EmptyTask
-import com.shuange.lesson.base.config.ConfigDef
+import com.shuange.lesson.base.LessonDataCache
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 
 class CourseAllViewModel : BaseViewModel() {
@@ -24,11 +24,10 @@ class CourseAllViewModel : BaseViewModel() {
     }
 
     fun loadTypes(onSuccess: EmptyTask) {
-        pager.add(Pair(ConfigDef.COURSE_TYPE_MATCH, "赛培课程"))
-        pager.add(Pair(ConfigDef.COURSE_TYPE_CHILD, "幼儿课程"))
-        pager.add(Pair(ConfigDef.COURSE_TYPE_PRIMARY, "小学课程"))
-        pager.add(Pair(ConfigDef.COURSE_TYPE_SENIOR_HIGH, "高中大学"))
-        pager.add(Pair(ConfigDef.COURSE_TYPE_COLLEGE, "大学课程"))
+        val source = LessonDataCache.types.mapIndexed { index, pairLessonType ->
+            Pair(pairLessonType.value ?: "", pairLessonType.name ?: "")
+        }
+        pager.addAll(source)
         onSuccess?.invoke()
     }
 

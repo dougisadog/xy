@@ -43,6 +43,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
     override fun initView() {
         initListener()
+        checkLoginButton()
     }
 
     private fun initListener() {
@@ -92,20 +93,23 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
             }
         })
         viewModel.username.observe(this, Observer {
-            checkLogin()
+            checkLoginButton()
         })
         viewModel.verifyCode.observe(this, Observer {
-            checkLogin()
+            checkLoginButton()
         })
         viewModel.confirmCheck.observe(this, Observer {
-            checkLogin()
+            checkLoginButton()
         })
         BusinessUtil.addVerifyListener(viewModel.remainTime, this, binding.verifyInput.verifyCodeTv)
     }
 
-    private fun checkLogin() {
-        val isEnable =
-            !viewModel.username.value.isNullOrBlank() && !viewModel.verifyCode.value.isNullOrBlank() && viewModel.confirmCheck.value == true
+    private fun checkLoginButton() {
+        val isVerifyMode = viewModel.isVerifyMode.value ?: return
+        var isEnable =
+            !viewModel.username.value.isNullOrBlank() && viewModel.confirmCheck.value == true
+        isEnable =
+            isEnable && !(if (isVerifyMode) viewModel.verifyCode else viewModel.password).value.isNullOrBlank()
         binding.nextTv.setCustomEnable(isEnable)
     }
 

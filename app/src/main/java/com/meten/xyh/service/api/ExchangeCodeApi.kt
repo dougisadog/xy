@@ -1,14 +1,14 @@
 package com.meten.xyh.service.api
 
 import com.meten.xyh.service.response.ExchangeCodeResponse
-import com.shuange.lesson.service.api.base.BaseApi
+import com.shuange.lesson.service.api.base.BaseTokenApi
 import corelib.http.PostType
 import kotlin.reflect.KClass
 
 /**
  * 兑换课程
  */
-class ExchangeCodeApi(val code: String) : BaseApi<ExchangeCodeResponse>() {
+class ExchangeCodeApi(val code: String) : BaseTokenApi<ExchangeCodeResponse>() {
 
     init {
         post(PostType.JSON)

@@ -39,11 +39,13 @@
             <include
                 android:id="@+id/verifyInput"
                 layout="@layout/layout_verify_login"
+                app:visible="@{loginViewModel.isVerifyMode}"
                 app:loginViewModel="@{loginViewModel}" />
 
             <include
                 android:id="@+id/passwordInput"
                 layout="@layout/layout_password_login"
+                app:visible="@{!loginViewModel.isVerifyMode}"
                 app:loginViewModel="@{loginViewModel}" />
 
         </FrameLayout>

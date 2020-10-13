@@ -59,7 +59,7 @@
             android:layout_marginTop="20dp"
             android:background="@color/white"
             android:hint="请输入短信验证码"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:padding="13dp"
             android:text="@={loginViewModel.verifyCode}"
             android:textColor="@color/hex_2D2D2D"

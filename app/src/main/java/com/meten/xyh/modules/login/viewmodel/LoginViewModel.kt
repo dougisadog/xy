@@ -70,6 +70,19 @@ open class LoginViewModel : VerifyMessageViewModel() {
 //            RegisterApi(RegisterRequest(username, password)).suspendExecute()
 //        exception = suspendRegisterResult.exception
         loadUserData(onSuccess)
+        showLoading.value = true
+        startBindLaunch {
+            var exception: Exception? = null
+            val suspendLoginResult =
+                LoginApi(LoginRequest(login, "").apply { token = verifyCode }).suspendExecute()
+            exception = suspendLoginResult.exception
+            //登录
+            if (null == exception) {
+                loadUserData(onSuccess)
+            }
+//            onSuccess?.invoke()
+            suspendLoginResult.exception
+        }
     }
 
     fun loginByPassword(login: String, password: String, onSuccess: EmptyTask) {

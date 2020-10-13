@@ -1,6 +1,7 @@
 package com.shuange.lesson.base
 
 import com.shuange.lesson.base.bean.AccountBean
+import com.shuange.lesson.service.response.bean.PairLessonType
 
 object LessonDataCache {
 
@@ -12,5 +13,5 @@ object LessonDataCache {
         return requireNotNull(account)
     }
 
-    var types = mutableListOf<String>()
+    var types = mutableListOf<PairLessonType>()
 }

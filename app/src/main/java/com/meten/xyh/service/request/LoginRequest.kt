@@ -8,4 +8,5 @@ class LoginRequest(var login: String, var password: String = "888888") {
     var rememberMe = false
     val appId: String = ConfigDef.APP_ID
     val secret: String = ConfigDef.APP_SECRET
+    var token:String = ""
 }
