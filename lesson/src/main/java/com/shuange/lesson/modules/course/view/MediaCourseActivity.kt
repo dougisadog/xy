@@ -43,6 +43,8 @@ class MediaCourseActivity : BaseActivity<ActivityVideoCourseBinding, VideoCourse
     override val viewModelId: Int
         get() = BR.videoCourseViewModel
 
+    var draggingCourseFragment: DraggingCourseFragment? = null
+
 
     override fun initParams() {
         super.initParams()
@@ -54,11 +56,19 @@ class MediaCourseActivity : BaseActivity<ActivityVideoCourseBinding, VideoCourse
     override fun initView() {
         viewModel.loadData()
         initListeners()
-        initDraggingCourses()
+        switchDraggingCourses()
     }
 
-    fun initDraggingCourses() {
-        DraggingCourseFragment(viewModel.draggingCourses).show(supportFragmentManager, "dialog")
+    private fun switchDraggingCourses() {
+        if (null == draggingCourseFragment) {
+            draggingCourseFragment = DraggingCourseFragment(viewModel.draggingCourses)
+        }
+        val f = draggingCourseFragment ?: return
+        if (f.isAdded) {
+            f.dismiss()
+        } else {
+            f.show(supportFragmentManager, "dialog")
+        }
     }
 
     private fun resetVideo() {
@@ -80,11 +90,14 @@ class MediaCourseActivity : BaseActivity<ActivityVideoCourseBinding, VideoCourse
 
     private fun initListeners() {
         binding.buyTv.setOnClickListener(NonDoubleClickListener {
-
+            viewModel.buyCourse.value = viewModel.draggingCourses.firstOrNull()?.id ?: "0"
         })
         binding.backIv.setOnClickListener {
             finish()
         }
+        binding.listIv.setOnClickListener(NonDoubleClickListener {
+            switchDraggingCourses()
+        })
     }
 
 
@@ -135,4 +148,21 @@ class MediaCourseActivity : BaseActivity<ActivityVideoCourseBinding, VideoCourse
         binding.videoVv.player?.release()
     }
 
+    override fun onPause() {
+        super.onPause()
+        binding.videoVv.player?.let {
+            if (it.isPlaying) {
+                it.pause()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.videoVv.player?.let {
+            if (!it.isPlaying) {
+                it.play()
+            }
+        }
+    }
 }

@@ -47,6 +47,11 @@ open class CourseBean : BaseItemBean(), PagerItem, Serializable {
     //0 绿 1 黄 限时免费 2直播付费 3已购
     var freeType: Int? = FREE_TYPE_GREEN
 
+    val isFree:Boolean
+    get() {
+        return freeType == FREE_TYPE_ORANGE
+    }
+
     companion object {
         const val FREE_TYPE_GREEN = 0
         const val FREE_TYPE_ORANGE = 1

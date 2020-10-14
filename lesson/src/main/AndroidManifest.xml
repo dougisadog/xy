@@ -13,6 +13,7 @@
         <activity android:name=".modules.media.view.VideoGalleryActivity" />
 
         <activity android:name=".modules.topquality.view.TopQualityActivity" />
+        <activity android:name=".modules.topquality.view.TopQualityMainActivity" />
         <activity android:name=".modules.topquality.view.CollectionActivity" />
         <activity android:name=".modules.unit.view.UnitActivity" />
 
@@ -29,6 +30,7 @@
 
         <activity android:name=".modules.news.view.NewsListActivity" />
         <activity android:name=".modules.news.view.NewsDetailActivity" />
+
         <activity android:name=".modules.search.view.BaseSearchActivity" />
 
     </application>

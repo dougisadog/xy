@@ -40,14 +40,26 @@
                 app:layout_constraintStart_toStartOf="@+id/videoVv"
                 app:layout_constraintTop_toTopOf="@+id/videoVv" />
 
+
+            <ImageView
+                android:id="@+id/listIv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/icon_cancel"
+                app:layout_constraintTop_toTopOf="@+id/buyTv"
+                app:layout_constraintBottom_toBottomOf="@+id/buyTv"
+                app:layout_constraintStart_toStartOf="parent"
+                />
             <TextView
                 android:id="@+id/buyTv"
                 style="@style/bottom_button"
+                android:layout_width="0dp"
                 android:layout_marginTop="16dp"
                 android:text="花费10元购买全部课程"
+                app:visible="@{!videoCourseViewModel.courseBean.isFree}"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/listIv"
                 app:layout_constraintTop_toBottomOf="@+id/videoVv" />
 
             <TextView

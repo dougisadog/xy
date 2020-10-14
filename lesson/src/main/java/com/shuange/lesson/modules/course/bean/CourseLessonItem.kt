@@ -33,7 +33,7 @@ open class CourseLessonItem : StarOwner() {
     fun setLesson(lesson: Lesson) {
         lessonId = lesson.id
         name = lesson.name
-        courseType = lesson.lessonType
+        courseType = lesson.lessonMode
         //TODO
         stars = lesson.starNum
         when (lessonType) {

@@ -16,7 +16,7 @@ class RechargeApi(val money: Int, val type: PayType) : BaseTokenApi<OrderRespons
     }
 
     override val path: String
-        get() = "/api/v1.0/coach/recharge-records"
+        get() = "/api/v1.0/recharge-records"
     override val resultClass: KClass<OrderResponse>
         get() = OrderResponse::class
 

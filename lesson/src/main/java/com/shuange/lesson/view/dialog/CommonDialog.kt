@@ -63,11 +63,9 @@ class CommonDialog(context: Context, val cancelable: Boolean = true) : Dialog(co
         cancelButtonText?.let {
             cancelTv.text = it
             cancelTv.visibility = View.VISIBLE
-            onCancel?.let {
-                cancelTv.setOnClickListener {
-                    onCancel?.invoke()
-                    dismiss()
-                }
+            cancelTv.setOnClickListener {
+                onCancel?.invoke()
+                dismiss()
             }
         }
 

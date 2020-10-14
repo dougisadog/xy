@@ -33,6 +33,9 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
             }
             context.startActivity(i)
         }
+
+        //是否可以手动切题
+        const val DEBUG = true
     }
 
     override val viewModel: LessonViewModel by viewModels {
@@ -76,27 +79,31 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
         with(binding.vp) {
             adapter = lessonAdapter
             offscreenPageLimit = viewModel.lessons.size
-            isUserInputEnabled = false
-            setOnTouchListener { v, event ->
-                when (event.action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        beginFakeDrag()
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        Log.e("touch move", "lastX:$lastX event.x:${event.x}")
-                        val offset = event.x - lastX
-                        //在最新进度左侧，或者 左滑
-                        if (offset > 0 || viewModel.newestSavedIndex > currentItem) {
-                            //方向左侧滑动
-                            fakeDragBy(offset)
+            if (DEBUG) {
+                isUserInputEnabled = true
+            } else {
+                isUserInputEnabled = false
+                setOnTouchListener { v, event ->
+                    when (event.action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            beginFakeDrag()
+                        }
+                        MotionEvent.ACTION_MOVE -> {
+                            Log.e("touch move", "lastX:$lastX event.x:${event.x}")
+                            val offset = event.x - lastX
+                            //在最新进度左侧，或者 左滑
+                            if (offset > 0 || viewModel.newestSavedIndex > currentItem) {
+                                //方向左侧滑动
+                                fakeDragBy(offset)
+                            }
+                        }
+                        MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                            endFakeDrag()
                         }
                     }
-                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                        endFakeDrag()
-                    }
+                    lastX = event.x
+                    true
                 }
-                lastX = event.x
-                true
             }
         }
     }

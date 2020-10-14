@@ -46,22 +46,27 @@ open class VideoCourseViewModel : BaseViewModel() {
         startBindLaunch {
             val suspendResult = LessonPackagesDetailApi(lessonPackageId).suspendExecute()
             suspendResult.getResponse()?.body?.let {
+                content.value = it.description
                 val source = it.lessons
                 source.sortedBy { it.sortNo }
                 val needResetCourseSource = courses.size == 0
+                draggingCourses.clear()
                 source.forEachIndexed { index, lesson ->
                     //课程拉取一次后不再刷新
                     if (needResetCourseSource) {
                         courses.add(CourseLessonItem().apply {
                             setLesson(lesson)
                         })
+                        if (courses.size > 0) {
+                            resetMedia(0)
+                        }
                     }
-                    draggingCourses.clear()
                     draggingCourses.add(DraggingCourseBean().apply {
                         this.title = lesson.name
                         this.isFree =
                             index == 0 || courseBean.freeType == CourseBean.FREE_TYPE_ORANGE
                     })
+
                 }
             }
             suspendResult.exception

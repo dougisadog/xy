@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import com.shuange.lesson.R
 import com.shuange.lesson.enumeration.LessonPackageType
 import com.shuange.lesson.modules.course.view.CourseLessonsActivity
+import com.shuange.lesson.modules.course.view.MediaCourseActivity
 import com.shuange.lesson.modules.topquality.bean.CourseBean
 
 object BusinessUtil {
@@ -52,7 +53,7 @@ object BusinessUtil {
                 CourseLessonsActivity.start(courseBean, context)
             }
             LessonPackageType.VIDEO -> {
-//                MediaCourseActivity.start(courseBean, context)
+                MediaCourseActivity.start(courseBean, context)
             }
         }
     }

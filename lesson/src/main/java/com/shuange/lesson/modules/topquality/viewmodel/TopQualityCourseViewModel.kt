@@ -13,7 +13,7 @@ class TopQualityCourseViewModel : BaseViewModel() {
 
     var searchText = MutableLiveData<String>()
 
-    var courseType:String? = null
+    var courseType: String? = null
 
     var topQualityItems = ObservableArrayList<CourseBean>()
 
@@ -33,7 +33,10 @@ class TopQualityCourseViewModel : BaseViewModel() {
             val suspendResult = LessonPackagesApi().apply {
                 addPageParam(startId)
                 addCourseType(courseType!!)
-            } .suspendExecute()
+            }.suspendExecute()
+            if (startId == "0") {
+                topQualityItems.clear()
+            }
             suspendResult.getResponse()?.body?.forEach {
                 topQualityItems.add(CourseBean().apply {
                     setLessonPackages(it)
