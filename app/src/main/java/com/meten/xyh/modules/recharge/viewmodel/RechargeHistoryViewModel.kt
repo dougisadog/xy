@@ -20,10 +20,15 @@ class RechargeHistoryViewModel : BaseViewModel() {
     ) {
         startBindLaunch(onFinish = onFinished) {
             val suspendResult = RechargeHistoryApi().apply { addPageParam(startId) } .suspendExecute()
-            suspendResult.getResponse()?.body?.forEach {
-                rechargeHistoryItems.add(RechargeHistoryBean().apply {
-                    setRecharge(it)
-                })
+            suspendResult.getResponse()?.body?.let {
+                if (startId == "0") {
+                    rechargeHistoryItems.clear()
+                }
+                it.forEach {
+                    rechargeHistoryItems.add(RechargeHistoryBean().apply {
+                        setRecharge(it)
+                    })
+                }
             }
             suspendResult.exception
         }

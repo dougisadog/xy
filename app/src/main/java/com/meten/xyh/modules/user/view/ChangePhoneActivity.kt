@@ -9,6 +9,7 @@ import com.meten.xyh.R
 import com.meten.xyh.databinding.ActivityChangePhoneBinding
 import com.meten.xyh.modules.user.viewmodel.ChangePhoneViewModel
 import com.meten.xyh.utils.BusinessUtil
+import com.meten.xyh.utils.extension.setCustomEnable
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.view.NonDoubleClickListener
@@ -65,6 +66,18 @@ class ChangePhoneActivity : BaseActivity<ActivityChangePhoneBinding, ChangePhone
         viewModel.phoneChanged.observe(this, Observer {
             finish()
         })
+        viewModel.phone.observe(this, Observer {
+            checkButton()
+        })
+        viewModel.verifyCode.observe(this, Observer {
+            checkButton()
+        })
+    }
+
+    private fun checkButton() {
+        val isEnable =
+            !viewModel.phone.value.isNullOrBlank() && !viewModel.verifyCode.value.isNullOrBlank()
+        binding.nextTv.setCustomEnable(isEnable)
     }
 
 }

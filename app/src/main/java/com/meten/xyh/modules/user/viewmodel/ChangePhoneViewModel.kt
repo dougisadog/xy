@@ -17,8 +17,9 @@ open class ChangePhoneViewModel : VerifyMessageViewModel() {
     fun changePhone() {
         if (checkPhone()) {
             val phone = phone.value ?: return
+            val verifyCode = verifyCode.value ?: return
             startBindLaunch {
-                val suspendResult = ChangeRemindApi(phone).suspendExecute()
+                val suspendResult = ChangeRemindApi(phone, verifyCode).suspendExecute()
                 if (null == suspendResult.exception) {
                     phoneChanged.value = true
                 }

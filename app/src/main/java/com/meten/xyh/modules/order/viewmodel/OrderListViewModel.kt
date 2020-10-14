@@ -25,11 +25,17 @@ class OrderListViewModel : BaseViewModel() {
     ) {
         startBindLaunch(onFinish = onFinished) {
             val suspendResult = OrdersApi().apply {
-                addPageParam(startId, page) } .suspendExecute()
-            suspendResult.getResponse()?.body?.forEach {
-                orders.add(OrderBean().apply {
-                    setOrder(it)
-                })
+                addPageParam(startId, page)
+            }.suspendExecute()
+            suspendResult.getResponse()?.body?.let {
+                if (startId == "0") {
+                    orders.clear()
+                }
+                it.forEach {
+                    orders.add(OrderBean().apply {
+                        setOrder(it)
+                    })
+                }
             }
             suspendResult.exception
         }

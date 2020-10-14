@@ -98,6 +98,7 @@
         <TextView
             android:id="@+id/nextTv"
             style="@style/bottom_button"
+            android:enabled="false"
             android:layout_marginTop="60dp"
             android:text="确定"
             android:textColor="@color/white"

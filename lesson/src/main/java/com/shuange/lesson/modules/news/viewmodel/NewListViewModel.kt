@@ -65,14 +65,19 @@ class NewListViewModel : BaseViewModel() {
                 if (null == exception) {
                     it.exception
                 }
-                it.getResponse()?.body?.forEach {
-                    newsItems.add(NewsBean().apply {
-                        id = it.id.toString()
-                        title = it.title
-                        content = it.subTitle
-                        image = it.imageUrl
-                    })
+                it.getResponse()?.body?.let {
+                    if (startId == "0") {
+                        newsItems.clear()
+                    }
+                    it.forEach {
+                        newsItems.add(NewsBean().apply {
+                            id = it.id.toString()
+                            title = it.title
+                            content = it.subTitle
+                            image = it.imageUrl
+                        })
 
+                    }
                 }
             }
             exception

@@ -29,21 +29,4 @@ object ConfigDef {
     const val TYPE_STREAM = "10003"
 
 
-    //TODO
-    //赛培课程
-    const val COURSE_TYPE_MATCH = "0"
-
-    //幼儿课程
-    const val COURSE_TYPE_CHILD = "1"
-
-    //小学课程
-    const val COURSE_TYPE_PRIMARY = "2"
-
-    //高中大学
-    const val COURSE_TYPE_SENIOR_HIGH = "3"
-
-    //大学课程
-    const val COURSE_TYPE_COLLEGE = "4"
-
-
 }

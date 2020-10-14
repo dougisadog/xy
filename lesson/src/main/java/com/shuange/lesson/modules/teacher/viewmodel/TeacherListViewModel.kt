@@ -24,11 +24,16 @@ class TeacherListViewModel : BaseViewModel() {
         onFinished: EmptyTask = null
     ) {
         startBindLaunch(onFinish = onFinished) {
-            val suspendResult = TeachersApi().apply { addPageParam(startId) } .suspendExecute()
-            suspendResult.getResponse()?.body?.forEach {
-                teachers.add(TeacherBean().apply {
-                    setTeacher(it)
-                })
+            val suspendResult = TeachersApi().apply { addPageParam(startId) }.suspendExecute()
+            suspendResult.getResponse()?.body?.let {
+                if (startId == "0") {
+                    teachers.clear()
+                }
+                it.forEach {
+                    teachers.add(TeacherBean().apply {
+                        setTeacher(it)
+                    })
+                }
             }
             suspendResult.exception
         }

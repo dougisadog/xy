@@ -37,10 +37,15 @@ class TopQualityCourseViewModel : BaseViewModel() {
             if (startId == "0") {
                 topQualityItems.clear()
             }
-            suspendResult.getResponse()?.body?.forEach {
-                topQualityItems.add(CourseBean().apply {
-                    setLessonPackages(it)
-                })
+            suspendResult.getResponse()?.body?.let {
+                if (startId == "0") {
+                    topQualityItems.clear()
+                }
+                it.forEach {
+                    topQualityItems.add(CourseBean().apply {
+                        setLessonPackages(it)
+                    })
+                }
             }
             suspendResult.exception
         }
