@@ -94,7 +94,6 @@
                 android:text="@{rechargeHistoryDetailViewModel.item.xyValue}"
                 android:textColor="@color/hex_FF4C4C"
                 android:textSize="32dp"
-                app:layout_constraintBottom_toBottomOf="@+id/rechargeContentTv"
                 app:layout_constraintEnd_toEndOf="@+id/xyValueCl"
                 app:layout_constraintStart_toStartOf="@+id/xyValueCl"
                 app:layout_constraintTop_toBottomOf="@+id/xyValueCl"

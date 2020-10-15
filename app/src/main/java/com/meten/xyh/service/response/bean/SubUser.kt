@@ -1,10 +1,11 @@
 package com.meten.xyh.service.response.bean
 
+import com.shuange.lesson.Storable
 import com.shuange.lesson.enumeration.Gender
 import com.shuange.lesson.utils.RequestClass
 
 @RequestClass
-class SubUser {
+class SubUser: Storable {
     var id: Long = -1
     var age: Int? = null
     var appInfoId: Long = 0

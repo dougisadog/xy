@@ -1,5 +1,7 @@
 package com.shuange.lesson.service.response
 
-class InitResponse {
+import com.shuange.lesson.Storable
+
+class InitResponse:Storable {
     var id_token = ""
 }

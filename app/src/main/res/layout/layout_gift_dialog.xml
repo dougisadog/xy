@@ -54,7 +54,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toStartOf="@+id/confirmTv"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/content" />
+         />
 
     <TextView
         android:id="@+id/confirmTv"

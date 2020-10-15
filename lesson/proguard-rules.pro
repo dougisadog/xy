@@ -21,17 +21,13 @@
 #-renamesourcefileattribute SourceFile
 
 -ignorewarnings
--libraryjars libs/YoudaoBase_v2.0.0.jar
--libraryjars libs/YoudaoVoiceRecognize_v2.0.0.jar
 
--keep class com.youdao.sdk.ydtranslate.** { *;}
--keep class com.youdao.voicerecognize.online.** { *;}
+-keep class * extends com.shuange.lesson.Storable
+-keepclassmembers class * extends com.shuange.lesson.Storable {*;}
 
--keep public class cn.jzvd.JZMediaSystem {*; }
--keep public class cn.jzvd.demo.CustomMedia.CustomMedia {*; }
--keep public class cn.jzvd.demo.CustomMedia.JZMediaIjk {*; }
--keep public class cn.jzvd.demo.CustomMedia.JZMediaSystemAssertFolder {*; }
-
--keep class tv.danmaku.ijk.media.player.** {*; }
--dontwarn tv.danmaku.ijk.media.player.*
--keep interface tv.danmaku.ijk.media.player.** { *; }
+-keep class com.chad.library.adapter.** {*;}
+-keep public class * extends com.chad.library.adapter.base.BaseQuickAdapter
+-keep public class * extends com.chad.library.adapter.base.BaseViewHolder
+-keepclassmembers  class **$** extends com.chad.library.adapter.base.BaseViewHolder {
+     <init>(...);
+}

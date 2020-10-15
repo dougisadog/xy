@@ -4,7 +4,6 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import com.google.gson.GsonBuilder
-import com.sbi.base.mylibrary.BuildConfig
 import corelib.TimeInterval
 import corelib.VoidFunction
 import corelib.extension.append
@@ -148,6 +147,7 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
         //java.io.IOException: unexpected end of stream
         requestBuilder.addHeader("Connection", "close")
         for ((key, value) in headers) {
+            Log.e("header", "$key : $value")
             requestBuilder.addHeader(key, value)
         }
         if (null != auth) {
@@ -198,11 +198,11 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
                 SSLContext.getDefault().socketFactory,
                 DefaultSetting.trustManager
             )
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             val logInterceptor = HttpLoggingInterceptor()
             logInterceptor.level = HttpLoggingInterceptor.Level.BASIC
             builder.addInterceptor(logInterceptor)
-        }
+//        }
         return builder
     }
 

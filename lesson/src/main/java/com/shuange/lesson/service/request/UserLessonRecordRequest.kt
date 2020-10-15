@@ -1,5 +1,6 @@
 package com.shuange.lesson.service.request
 
+import com.shuange.lesson.Storable
 import com.shuange.lesson.utils.RequestClass
 
 
@@ -13,4 +14,4 @@ class UserLessonRecordRequest(
     val progressTime: Int,
     val questionId: Long,
     val score: Int
-)
+): Storable
