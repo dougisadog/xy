@@ -14,6 +14,7 @@ import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.LessonDataCache
 import com.shuange.lesson.base.bean.AccountBean
 import com.shuange.lesson.service.api.LessonTypesApi
+import com.shuange.lesson.service.api.ShortVideoTypesApi
 import com.shuange.lesson.service.api.base.suspendExecute
 import com.shuange.lesson.service.response.base.SuspendResponse
 import kotlinx.coroutines.async
@@ -109,7 +110,8 @@ open class LoginViewModel : VerifyMessageViewModel() {
             val tasks = arrayListOf(
                 async { CurrentAccountInfoApi().suspendExecute() },
                 async { CurrentUserApi().suspendExecute() },
-                async { LessonTypesApi().suspendExecute() }
+                async { LessonTypesApi().suspendExecute() },
+                async { ShortVideoTypesApi().suspendExecute() }
             )
             val results = tasks.awaitAll()
             var exception: Exception? = null

@@ -2,6 +2,7 @@ package com.shuange.lesson.base
 
 import com.shuange.lesson.base.bean.AccountBean
 import com.shuange.lesson.service.response.bean.PairLessonType
+import com.shuange.lesson.service.response.bean.ShortVideoType
 
 object LessonDataCache {
 
@@ -14,4 +15,7 @@ object LessonDataCache {
     }
 
     var types = mutableListOf<PairLessonType>()
+
+    var shortVideoTypes = mutableListOf<ShortVideoType>()
+
 }

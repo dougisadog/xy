@@ -14,4 +14,8 @@ class ShortVideosApi() : BaseTokenApi<ShortVideosResponse>() {
     override val resultClass: KClass<ShortVideosResponse>
         get() = ShortVideosResponse::class
 
+    fun addShortVideo(type: String) {
+        addQuery("videoType.equals", type)
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.shuange.lesson.modules.topquality.bean
 
 import com.shuange.lesson.base.PagerItem
+import com.shuange.lesson.service.response.bean.ShortVideo
 import java.io.Serializable
 
 class GalleryItem : Serializable, PagerItem {
@@ -16,5 +17,11 @@ class GalleryItem : Serializable, PagerItem {
 
     override fun getItemId(): String {
         return gid
+    }
+
+    fun setShortVideo(shortVideo: ShortVideo) {
+        gid = shortVideo.id.toString()
+        pic = shortVideo.imageUrl
+        hearts = shortVideo.hits
     }
 }

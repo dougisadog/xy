@@ -14,6 +14,7 @@ import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
+import com.shuange.lesson.base.config.AppConfig
 import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
@@ -33,9 +34,6 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
             }
             context.startActivity(i)
         }
-
-        //是否可以手动切题
-        const val DEBUG = true
     }
 
     override val viewModel: LessonViewModel by viewModels {
@@ -79,7 +77,7 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
         with(binding.vp) {
             adapter = lessonAdapter
             offscreenPageLimit = viewModel.lessons.size
-            if (DEBUG) {
+            if (AppConfig.DEBUG) {
                 isUserInputEnabled = true
             } else {
                 isUserInputEnabled = false

@@ -10,10 +10,12 @@ import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
+import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityVideoGalleryBinding
 import com.shuange.lesson.modules.media.adapter.VideoGalleryAdapter
 import com.shuange.lesson.modules.media.viewmodel.VideoGalleryViewModel
+import corelib.extension.indexOrNull
 
 
 /**
@@ -23,8 +25,9 @@ class VideoGalleryActivity :
     BaseActivity<ActivityVideoGalleryBinding, VideoGalleryViewModel>() {
 
     companion object {
-        fun start(context: Context) {
+        fun start(context: Context, defaultId: String) {
             val i = Intent(context, VideoGalleryActivity::class.java)
+            i.putExtra(IntentKey.SHORT_VIDEO_KEY, defaultId)
             context.startActivity(i)
         }
 
@@ -48,6 +51,11 @@ class VideoGalleryActivity :
         )
     }
 
+    override fun initParams() {
+        super.initParams()
+        viewModel.defaultId = intent.getStringExtra(IntentKey.SHORT_VIDEO_KEY)
+    }
+
     override fun initView() {
         media = MediaController(this).apply {
             setPadding(0, 0, 0, 100)
@@ -68,6 +76,8 @@ class VideoGalleryActivity :
                 viewModel.hit(videoData.id)
             }
             adapter = videoGalleryAdapter
+            val position = viewModel.videoData.indexOrNull { it.id == viewModel.defaultId } ?: 0
+            scrollToPosition(position)
         }
     }
 

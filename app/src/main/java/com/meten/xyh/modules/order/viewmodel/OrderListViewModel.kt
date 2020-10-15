@@ -39,7 +39,7 @@ class OrderListViewModel : BaseViewModel() {
             }
             suspendResult.exception
         }
-        testData()
+//        testData()
     }
 
     fun testData() {

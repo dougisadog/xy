@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.activity.viewModels
 import com.meten.xyh.BR
 import com.meten.xyh.R
-import com.meten.xyh.base.DataCache
 import com.meten.xyh.databinding.ActivityUserInfoBinding
 import com.meten.xyh.enumeration.UserSettingType
 import com.meten.xyh.modules.user.viewmodel.UserInfoViewModel
@@ -107,6 +106,6 @@ class UserInfoActivity : BaseActivity<ActivityUserInfoBinding, UserInfoViewModel
 
     override fun onResume() {
         super.onResume()
-        viewModel.user.value = DataCache.currentUser()?.subUser
+        viewModel.loadCurrentUser()
     }
 }

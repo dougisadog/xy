@@ -16,7 +16,7 @@ class ChangeRemindApi(val phone: String, val verifyCode: String) :
     }
 
     override val path: String
-        get() = "/api/v1.0/users/remind-phone/$phone/token"
+        get() = "/api/v1.0/users/remind-phone"
     override val resultClass: KClass<BaseTextApiResponse>
         get() = BaseTextApiResponse::class
 

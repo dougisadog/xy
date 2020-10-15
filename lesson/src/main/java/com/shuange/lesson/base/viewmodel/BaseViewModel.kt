@@ -4,6 +4,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.shuange.lesson.EmptyTask
+import com.shuange.lesson.base.config.AppConfig
 import com.shuange.lesson.utils.ToastUtil
 import corelib.util.ContextManager
 import corelib.util.Log
@@ -28,32 +29,40 @@ open class BaseViewModel : AndroidViewModel(ContextManager.getContext()) {
             viewModel.showLoading.value = true
         }
         viewModelScope.launch(Dispatchers.Main) {
-            //TODO 测试不catch
-//            kotlin.runCatching {
+            if (AppConfig.DEBUG) {
                 supervisorScope {
-                    var error: Throwable? = null
-                    val result = kotlin.runCatching {
-                        error = block.invoke(this)
-                    }
-                    error = error ?: result.exceptionOrNull()
-                    error?.let {
-                        var message = it.message?:""
-                        Log.e("error", message)
-                        if (message.isBlank()) {
-                            message = "未知错误"
-                        }
-                        ToastUtil.show(message)
-                    }
-                    when (error) {
-
-                    }
-
+                    handleError(this, block)
                 }
-//            }
+            } else {
+                kotlin.runCatching {
+                    supervisorScope {
+                        handleError(this, block)
+                    }
+                }
+            }
             if (showLoading) {
                 viewModel.showLoading.value = true
             }
             onFinish?.invoke()
+        }
+    }
+
+    private suspend fun handleError(scope: CoroutineScope, block: suspend CoroutineScope.() -> Exception?) {
+        var error: Throwable? = null
+        val result = kotlin.runCatching {
+            error = block.invoke(scope)
+        }
+        error = error ?: result.exceptionOrNull()
+        error?.let {
+            var message = it.message ?: ""
+            Log.e("error", message)
+            if (message.isBlank()) {
+                message = "未知错误"
+            }
+            ToastUtil.show(message)
+        }
+        when (error) {
+
         }
     }
 }

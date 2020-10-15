@@ -35,13 +35,21 @@ abstract class BaseApi<DataType : Any> : HttpTask<DataType>() {
 
     override fun handleError(type: HttpTaskError, result: DataType?, response: ResponseInfo) {
         //预处理400逻辑错误
-        if (type == HttpTaskError.StatusCode && response.response?.code == 400) {
-            var message = response.error?.message
-            try {
-                message = Gson().fromJson(message, LogicErrorResponse::class.java).message ?: ""
-            } catch (e: Exception) {
+        if (type == HttpTaskError.StatusCode) {
+            when (response.response?.code) {
+                400 -> {
+                    var message = response.error?.message
+                    try {
+                        message =
+                            Gson().fromJson(message, LogicErrorResponse::class.java).message ?: ""
+                    } catch (e: Exception) {
+                    }
+                    response.error = IOException(message)
+                }
+                500 -> {
+                    response.error = IOException("系统错误")
+                }
             }
-            response.error = IOException(message)
         }
         super.handleError(type, result, response)
     }

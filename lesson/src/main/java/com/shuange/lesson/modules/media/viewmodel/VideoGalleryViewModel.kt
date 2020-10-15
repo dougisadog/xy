@@ -4,11 +4,12 @@ import androidx.databinding.ObservableArrayList
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.modules.media.bean.VideoData
 import com.shuange.lesson.modules.topquality.bean.GalleryItem
+import com.shuange.lesson.modules.topquality.view.GalleryFragment
 import com.shuange.lesson.service.api.ShortVideoHitApi
-import com.shuange.lesson.service.api.ShortVideosApi
-import com.shuange.lesson.service.api.base.suspendExecute
 
 open class VideoGalleryViewModel : BaseViewModel() {
+
+    var defaultId:String? = null
 
     var videoData = ObservableArrayList<VideoData>()
 
@@ -17,24 +18,30 @@ open class VideoGalleryViewModel : BaseViewModel() {
     }
 
     fun getVideos() {
-        startBindLaunch {
-            val videoId = videoData.lastOrNull()?.id ?: 0
-            val suspendResult = ShortVideosApi().suspendExecute()
-            val sourceData = mutableListOf<VideoData>()
-            suspendResult.getResponse()?.body?.forEach {
-                sourceData.add(VideoData().apply {
-                    id = it.id.toString()
-                    text = it.description
-                    setVideo(it.imageUrl)
-                    val gi = GalleryItem()
-                    gi.hearts = it.hits
-                    gi.pic = it.imageUrl
-                    galleryItem = gi
-                })
-            }
-            suspendResult.exception
-        }
+        videoData.clear()
+        videoData.addAll(GalleryFragment.currentVideos)
+//        startBindLaunch {
+//            val videoId = videoData.lastOrNull()?.id ?: 0
+//            val suspendResult = ShortVideosApi().suspendExecute()
+//            val sourceData = mutableListOf<VideoData>()
+//            suspendResult.getResponse()?.body?.forEach {
+//                sourceData.add(VideoData().apply {
+//                    id = it.id.toString()
+//                    text = it.description
+//                    setVideo(it.imageUrl)
+//                    val gi = GalleryItem()
+//                    gi.hearts = it.hits
+//                    gi.pic = it.imageUrl
+//                    galleryItem = gi
+//                })
+//            }
+//            suspendResult.exception
+//        }
+//        testData() {
+    }
 
+    fun testData() {
+        videoData.clear()
         val test = mutableListOf<VideoData>()
         for (i in 0 until 7) {
             val data = VideoData()

@@ -16,12 +16,12 @@ import com.shuange.lesson.utils.extension.bind
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 /**
- * "每日一句
+ * 每日一句
  */
 class TopQualityActivity : BaseActivity<ActivityTopQualityBinding, TopQualityViewModel>() {
 
     companion object {
-        fun start(context:Context) {
+        fun start(context: Context) {
             val i = Intent(context, TopQualityActivity::class.java)
             context.startActivity(i)
         }
@@ -43,16 +43,17 @@ class TopQualityActivity : BaseActivity<ActivityTopQualityBinding, TopQualityVie
         binding.header.title.text = "每日一句"
         viewModel.loadData()
         initListener()
-        initViewPager()
-        initTabIndicator()
+        viewModel.loadTypes {
+            initViewPager()
+            initTabIndicator()
+        }
     }
 
     private fun initViewPager() {
         val fragments = arrayListOf<Fragment>()
-        fragments.add(GalleryFragment())
-        fragments.add(GalleryFragment())
-        fragments.add(GalleryFragment())
-        fragments.add(GalleryFragment())
+        viewModel.pager.forEach {
+            fragments.add(GalleryFragment.newInstance(it.first))
+        }
         fragmentAdapter = BaseFragmentAdapter(this, fragments)
         with(binding.vp) {
             adapter = fragmentAdapter
@@ -61,7 +62,7 @@ class TopQualityActivity : BaseActivity<ActivityTopQualityBinding, TopQualityVie
 
     private fun initTabIndicator() {
 //        binding.tabTl.init(binding.vp, viewModel.pager)
-        binding.indicators.bind(binding.vp, viewModel.pager)
+        binding.indicators.bind(binding.vp, viewModel.pager.map { it.second }.toMutableList())
 
     }
 
@@ -69,6 +70,9 @@ class TopQualityActivity : BaseActivity<ActivityTopQualityBinding, TopQualityVie
 //        binding.searchEt.setOnSearchListener {
 //            search(it.trim())
 //        }
+        binding.header.back.setOnClickListener {
+            finish()
+        }
     }
 
     fun search(text: String) {
