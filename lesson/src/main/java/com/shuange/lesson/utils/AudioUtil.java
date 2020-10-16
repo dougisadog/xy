@@ -1,16 +1,11 @@
 package com.shuange.lesson.utils;
 
-import android.util.Log;
-
-import com.youdao.sdk.common.Constants;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 
 public class AudioUtil {
 
-    public static final int AUDIO_FREQUENCY = Constants.RATE_16000;
+    public static final int AUDIO_FREQUENCY = 16000;
     private static final String TAG = "AudioUtil";
 
 
