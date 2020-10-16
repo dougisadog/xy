@@ -8,11 +8,13 @@ import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseActivity
 import com.shuange.lesson.base.adapter.BaseFragmentAdapter
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.ActivityTopQualityBinding
+import com.shuange.lesson.modules.search.view.BaseSearchActivity
 import com.shuange.lesson.modules.topquality.viewmodel.TopQualityViewModel
-import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.bind
+import com.shuange.lesson.view.NonDoubleClickListener
 import kotlinx.android.synthetic.main.layout_header.view.*
 
 /**
@@ -67,16 +69,15 @@ class TopQualityActivity : BaseActivity<ActivityTopQualityBinding, TopQualityVie
     }
 
     private fun initListener() {
-//        binding.searchEt.setOnSearchListener {
-//            search(it.trim())
-//        }
+        binding.searchRl.setOnClickListener(NonDoubleClickListener {
+            BaseSearchActivity.start(this, ConfigDef.TYPE_TOP_QUALITY)
+        })
         binding.header.back.setOnClickListener {
             finish()
         }
     }
 
     fun search(text: String) {
-        ToastUtil.show(text)
     }
 
     override fun initViewObserver() {

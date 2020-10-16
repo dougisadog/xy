@@ -17,6 +17,8 @@ class BaseSearchViewModel : BaseViewModel() {
         pager.add(Pair(ConfigDef.TYPE_STREAM, "直播课程"))
         pager.add(Pair(ConfigDef.TYPE_ARTICLE, "资讯"))
         pager.add(Pair(ConfigDef.TYPE_TEACHER, "老师"))
+        pager.add(Pair(ConfigDef.TYPE_TOP_QUALITY, "每日一句"))
+
     }
 
     fun getDefaultPageIndex(): Int {

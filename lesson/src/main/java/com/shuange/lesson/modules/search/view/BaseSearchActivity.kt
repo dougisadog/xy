@@ -15,6 +15,7 @@ import com.shuange.lesson.databinding.ActivityBaseSearchBinding
 import com.shuange.lesson.modules.news.view.NewsListFragment
 import com.shuange.lesson.modules.search.viewmodel.BaseSearchViewModel
 import com.shuange.lesson.modules.teacher.view.TeacherListFragment
+import com.shuange.lesson.modules.topquality.view.GalleryFragment
 import com.shuange.lesson.modules.topquality.view.TopQualityCourseFragment
 import com.shuange.lesson.utils.ToastUtil
 import com.shuange.lesson.utils.extension.bind
@@ -76,6 +77,9 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
                 }
                 ConfigDef.TYPE_ARTICLE -> {
                     fragments.add(NewsListFragment.newInstance())
+                }
+                ConfigDef.TYPE_TOP_QUALITY -> {
+                    fragments.add(GalleryFragment.newInstance(null))
                 }
             }
         }

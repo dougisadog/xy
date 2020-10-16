@@ -22,7 +22,7 @@ class GalleryFragment :
     BaseFragment<FragmentGalleryBinding, GalleryViewModel>() {
 
     companion object {
-        fun newInstance(shortVideoType: String): GalleryFragment {
+        fun newInstance(shortVideoType: String?): GalleryFragment {
             val f = GalleryFragment()
             Bundle().apply {
                 putString(IntentKey.SHORT_VIDEO_TYPE, shortVideoType)
@@ -33,6 +33,14 @@ class GalleryFragment :
 
         var currentVideos = mutableListOf<VideoData>()
     }
+
+    override val viewModel: GalleryViewModel by viewModels {
+        BaseShareModelFactory()
+    }
+    override val layoutId: Int
+        get() = R.layout.fragment_gallery
+    override val viewModelId: Int
+        get() = BR.galleryViewModel
 
     private val galleryAdapter: GalleryAdapter by lazy {
         GalleryAdapter(
@@ -88,13 +96,11 @@ class GalleryFragment :
         }
     }
 
-    override val viewModel: GalleryViewModel by viewModels {
-        BaseShareModelFactory()
+
+    fun search(text: String) {
+        viewModel.searchText.value = text
+        viewModel.loadGalleries("0")
     }
-    override val layoutId: Int
-        get() = R.layout.fragment_gallery
-    override val viewModelId: Int
-        get() = BR.galleryViewModel
 
     override fun onDestroy() {
         super.onDestroy()

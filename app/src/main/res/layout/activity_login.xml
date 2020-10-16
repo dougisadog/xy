@@ -59,7 +59,7 @@
             android:textColor="@color/hex_2D2D2D"
             android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="@+id/inputContainerFl"
-            app:layout_constraintTop_toBottomOf="@+id/inputContainerFl"
+            app:layout_constraintTop_toBottomOf="@+id/confirmCheckLl"
             tools:text="使用密码登录" />
 
         <TextView
@@ -146,11 +146,11 @@
         <TextView
             android:id="@+id/nextTv"
             style="@style/bottom_button"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="20dp"
             android:enabled="false"
             android:text="进入希氧"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@+id/confirmCheckLl" />
+            app:layout_constraintTop_toBottomOf="@+id/forgetPwdTv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

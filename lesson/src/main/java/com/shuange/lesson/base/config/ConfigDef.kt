@@ -25,6 +25,8 @@ object ConfigDef {
     const val TYPE_ARTICLE = "10001"
     const val TYPE_COURSE = "10002"
     const val TYPE_STREAM = "10003"
+    const val TYPE_TOP_QUALITY = "10004" //每日一句 短视频
+
 
 
 }

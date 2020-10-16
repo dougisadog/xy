@@ -17,5 +17,8 @@ class ShortVideosApi() : BaseTokenApi<ShortVideosResponse>() {
     fun addShortVideo(type: String) {
         addQuery("videoType.equals", type)
     }
+    fun search(type: String) {
+        addQuery("videoTitle.like", type)
+    }
 
 }

@@ -7,6 +7,7 @@ import com.scwang.smart.refresh.layout.listener.OnRefreshLoadMoreListener
 import com.shuange.lesson.BR
 import com.shuange.lesson.R
 import com.shuange.lesson.base.BaseFragment
+import com.shuange.lesson.base.config.ConfigDef
 import com.shuange.lesson.base.config.IntentKey
 import com.shuange.lesson.base.viewmodel.BaseShareModelFactory
 import com.shuange.lesson.databinding.FragmentTopQualityCourseBinding
@@ -46,7 +47,10 @@ class TopQualityCourseFragment :
 
     override fun initParams() {
         super.initParams()
-        viewModel.courseType = arguments?.getString(IntentKey.COURSE_TYPE)
+        val localType = arguments?.getString(IntentKey.COURSE_TYPE)
+        if (localType == ConfigDef.TYPE_COURSE) {
+            viewModel.courseType = null
+        }
     }
 
     override fun initView() {

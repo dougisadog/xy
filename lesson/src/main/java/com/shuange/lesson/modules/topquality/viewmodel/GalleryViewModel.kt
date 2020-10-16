@@ -1,6 +1,7 @@
 package com.shuange.lesson.modules.topquality.viewmodel
 
 import androidx.databinding.ObservableArrayList
+import androidx.lifecycle.MutableLiveData
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.base.viewmodel.BaseViewModel
 import com.shuange.lesson.modules.media.bean.VideoData
@@ -11,6 +12,7 @@ import com.shuange.lesson.service.api.base.suspendExecute
 
 class GalleryViewModel : BaseViewModel() {
 
+    val searchText = MutableLiveData<String>()
     var shortVideoType: String? = null
 
     val galleryItems = ObservableArrayList<GalleryItem>()
@@ -28,7 +30,12 @@ class GalleryViewModel : BaseViewModel() {
         startBindLaunch(onFinish = onFinished) {
             val suspendResult = ShortVideosApi().apply {
                 addPageParam(startId)
-                addShortVideo(shortVideoType ?: "")
+                searchText.value?.let {
+                    search(it)
+                }
+                shortVideoType?.let {
+                    addShortVideo(it)
+                }
             }.suspendExecute()
             suspendResult.getResponse()?.body?.let {
                 if (startId == "0") {
