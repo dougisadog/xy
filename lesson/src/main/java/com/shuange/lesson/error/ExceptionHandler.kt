@@ -14,9 +14,8 @@ class ExceptionHandler(private val previousHandler: Thread.UncaughtExceptionHand
 
     companion object {
         fun getLogDic(): String? {
-            //storage/emulated/0/Android/data/com.meten.xyh/cache/log/
-            val externalCacheDir = ContextManager.getContext().externalCacheDir ?: return null
-            val dic = externalCacheDir.absolutePath + File.separator + "log" + File.separator
+            //Android/data/com.meten.xyh/files/log
+            val dic = ContextManager.getContext().getExternalFilesDir("log")?.absolutePath ?: return null
             try {
                 if (!File(dic).exists()) {
                     File(dic).mkdirs()
@@ -41,7 +40,7 @@ class ExceptionHandler(private val previousHandler: Thread.UncaughtExceptionHand
                 return
             }
             val filename = UUID.randomUUID().toString()
-            val path = logDir + File.separator + filename + ".log"
+            val path = logDir + File.separator + filename + ".txt"
             val write = BufferedWriter(FileWriter(path))
             ApkInfo.toString()
             write.write(

@@ -21,9 +21,6 @@ open class LessonApp : Application() {
         if (AppConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
-        if (1/0 ==1) {
-            return
-        }
     }
 
     private fun initRealm() {
