@@ -3,14 +3,10 @@ package com.shuange.lesson.utils
 import android.media.AudioFormat
 import android.media.AudioRecord
 import android.media.MediaRecorder
-import android.os.Handler
 import com.shuange.lesson.EmptyTask
 import com.shuange.lesson.utils.AudioUtil.AUDIO_FREQUENCY
 import com.shuange.lesson.utils.AudioUtil.generateWavFileHeader
-import com.shuange.lesson.youdao.YoudaoParser
-import com.youdao.sdk.common.Constants
 import corelib.util.Log
-import kotlinx.android.synthetic.main.layout_title.view.*
 import java.io.File
 import java.io.FileOutputStream
 import java.io.RandomAccessFile
@@ -69,17 +65,6 @@ class RecordManager private constructor() {
         audioRecord.stop()
         audioRecord.release()
     }
-
-    fun startMatcherRecord(filePath: String, target:String, matcher: (PhraseMatcher)->Unit) {
-        startRecord(filePath) {
-            val base64 =
-                Base64Util.encodeFileToBase64Binary(filePath)?:return@startRecord
-            YoudaoParser.parseResult(base64, target) {
-                matcher.invoke(it)
-            }
-        }
-    }
-
 
     fun startRecord(filePath: String, recordDone: EmptyTask) {
         when (recordingState) {
