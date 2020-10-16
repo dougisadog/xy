@@ -57,7 +57,7 @@
                     android:id="@+id/signatureCl"
                     layout="@layout/layout_action_item"
                     app:title="@{@string/label_signature}"
-                    app:value="@{userInfoViewModel.user.name}" />
+                    app:value="@{userInfoViewModel.user.signature}" />
 
                 <include
                     android:id="@+id/stageCl"

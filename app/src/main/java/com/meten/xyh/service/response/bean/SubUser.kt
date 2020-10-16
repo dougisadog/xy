@@ -9,6 +9,7 @@ class SubUser: Storable {
     var id: Long = -1
     var age: Int? = null
     var appInfoId: Long = 0
+    var signature: String? = null
     var avatarUrl: String? = null
     var city: String? = null
     var gender: String = Gender.UNKNOWN.name

@@ -64,7 +64,7 @@ class SignatureViewModel : BaseViewModel() {
                     value = user?.name?:""
                     saveTask = { input ->
                         //未知
-                        getTargetUser()?.objective = input
+                        getTargetUser()?.signature = input
                     }
                 }
                 UserSettingType.NICKNAME -> {
