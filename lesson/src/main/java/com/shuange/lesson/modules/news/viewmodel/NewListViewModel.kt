@@ -57,7 +57,13 @@ class NewListViewModel : BaseViewModel() {
             val exception: Exception? = null
             val tasks = arrayListOf(
                 async {
-                    ArticlesApi().apply { addPageParam(startId) }.suspendExecute()
+                    ArticlesApi().apply {
+                        searchText.value?.let {
+                            search(it)
+                        }
+                        addPageParam(startId)
+
+                    }.suspendExecute()
                 }
             )
             val suspendResults = tasks.awaitAll()

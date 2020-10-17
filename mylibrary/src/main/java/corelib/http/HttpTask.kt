@@ -321,7 +321,9 @@ abstract class HttpTask<DataType : Any> : TaskStateListener {
         afterProcess = null
         resumeProcessList.clear()
         handler.removeCallbacks(invokeAfterProcess)
-        handler.removeCallbacks(invokeSuccessProcess!!)
+        invokeSuccessProcess?.let {
+            handler.removeCallbacks(it)
+        }
         state = TaskState.CANCEL
     }
 

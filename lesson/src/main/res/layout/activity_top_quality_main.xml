@@ -68,7 +68,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginTop="20dp"
-                        android:background="@color/hex_3AD08F"
                         app:layout_constraintDimensionRatio="h,343:140"
                         app:layout_constraintTop_toTopOf="parent" />
 

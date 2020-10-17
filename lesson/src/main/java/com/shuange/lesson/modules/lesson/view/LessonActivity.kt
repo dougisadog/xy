@@ -64,8 +64,9 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
         viewModel.loadData()
         viewModel.getLessonsData {
             initLessons()
-            initListener()
+            initPagerAction()
         }
+        initListener()
     }
 
     var lastX = 0f
@@ -106,7 +107,7 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
         }
     }
 
-    private fun initListener() {
+    private fun initPagerAction() {
         binding.progressPb.max = viewModel.lessons.size
         binding.vp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -116,6 +117,10 @@ class LessonActivity : BaseActivity<ActivityLessonBinding, LessonViewModel>() {
             }
 
         })
+    }
+
+    private fun initListener() {
+
         binding.closeIv.setOnClickListener {
             finish()
         }

@@ -1,11 +1,11 @@
 package com.shuange.lesson.utils.extension
 
-import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 
 fun EditText.setOnSearchListener(onSearch: (String) -> Unit) {
     setOnEditorActionListener { v, actionId, event ->
-        if (event.keyCode == KeyEvent.KEYCODE_ENTER) {
+        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
             onSearch.invoke(text.toString())
         }
         true

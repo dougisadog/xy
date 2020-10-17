@@ -10,7 +10,7 @@ import com.shuange.lesson.service.api.base.suspendExecute
 
 class SignatureViewModel : BaseViewModel() {
 
-    var settingChange =  MutableLiveData<SettingChange>()
+    var settingChange = MutableLiveData<SettingChange>()
 
     val signature = MutableLiveData<String>()
 
@@ -61,7 +61,7 @@ class SignatureViewModel : BaseViewModel() {
                 UserSettingType.SIGNATURE -> {
                     title = "个性签名"
                     hint = "请输入个性签名"
-                    value = user?.name?:""
+                    value = user?.name ?: "向阳而生"
                     saveTask = { input ->
                         //未知
                         getTargetUser()?.signature = input
@@ -70,7 +70,7 @@ class SignatureViewModel : BaseViewModel() {
                 UserSettingType.NICKNAME -> {
                     title = "修改昵称"
                     hint = "请输入昵称"
-                    value = user?.name?:""
+                    value = user?.name ?: ""
                     saveTask = { input ->
                         getTargetUser()?.name = input
                     }

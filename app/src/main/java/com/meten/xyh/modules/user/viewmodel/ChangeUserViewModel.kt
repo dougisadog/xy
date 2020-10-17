@@ -21,7 +21,7 @@ class ChangeUserViewModel : BaseViewModel() {
     }
 
     fun getUser() {
-        startBindLaunch {
+        startBindLaunch(showLoading = true) {
             val suspendResult = SubUsersApi().suspendExecute()
             suspendResult.getResponse()?.body?.let {
                 users.clear()

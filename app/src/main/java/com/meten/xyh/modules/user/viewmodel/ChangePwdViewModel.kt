@@ -27,7 +27,7 @@ open class ChangePwdViewModel : BaseViewModel() {
             error.value = "原密码不能为空"
             return false
         }
-        val verifyPwdText = pwd.value
+        val verifyPwdText = newPwd.value
         if (verifyPwdText.isNullOrBlank()) {
             error.value = "新密码不能为空"
             return false
@@ -36,12 +36,12 @@ open class ChangePwdViewModel : BaseViewModel() {
             error.value = "原密码新密码不能相同"
             return false
         }
-        val origin = BusinessUtil.checkValidPwd(pwd.value ?: "")
+        val origin = BusinessUtil.checkValidPwd(pwdText)
         if (!origin.first) {
             error.value = origin.second
             return false
         }
-        val verify = BusinessUtil.checkValidPwd(pwd.value ?: "")
+        val verify = BusinessUtil.checkValidPwd(verifyPwdText)
         if (!verify.first) {
             error.value = verify.second
             return false

@@ -70,6 +70,9 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         binding.privacyTv.setOnClickListener(NonDoubleClickListener {
             ToastUtil.show("隐私政策")
         })
+        binding.confirmCheckLl.setOnClickListener {
+            viewModel.confirmCheck.value = !viewModel.confirmCheck.value!!
+        }
     }
 
     private fun sendVerifyMessage() {

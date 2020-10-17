@@ -17,7 +17,7 @@ import com.shuange.lesson.modules.search.viewmodel.BaseSearchViewModel
 import com.shuange.lesson.modules.teacher.view.TeacherListFragment
 import com.shuange.lesson.modules.topquality.view.GalleryFragment
 import com.shuange.lesson.modules.topquality.view.TopQualityCourseFragment
-import com.shuange.lesson.utils.ToastUtil
+import com.shuange.lesson.utils.KeyboardUitls
 import com.shuange.lesson.utils.extension.bind
 import com.shuange.lesson.utils.extension.setOnSearchListener
 import kotlinx.android.synthetic.main.layout_header.view.*
@@ -108,7 +108,7 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
 
     fun search(text: String) {
         val currentFragment = fragmentAdapter.fragments[binding.vp.currentItem]
-        val searchText = viewModel.searchText.value ?: ""
+        val searchText = text
         when (currentFragment) {
             is TopQualityCourseFragment -> {
                 currentFragment.search(searchText)
@@ -120,8 +120,7 @@ class BaseSearchActivity : BaseActivity<ActivityBaseSearchBinding, BaseSearchVie
                 currentFragment.search(searchText)
             }
         }
-
-        ToastUtil.show(text)
+        KeyboardUitls.hideKeyboard(this)
     }
 
     override fun initViewObserver() {
