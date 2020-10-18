@@ -29,8 +29,6 @@ import javax.net.ssl.X509TrustManager
 
 /**
  * HTTPS Trust cert
- *
- * @author kymjs (http://www.kymjs.com/) on 9/23/15.
  */
 class HTTPSTrustManager : X509TrustManager {
 
